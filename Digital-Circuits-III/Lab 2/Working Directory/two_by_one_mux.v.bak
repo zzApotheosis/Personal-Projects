@@ -1,0 +1,18 @@
+/* two_by_one_mux
+two to one mux
+Scott, Steven
+03/02/17*/
+
+module mux_2_1(m_out, x_in, y_in, sel);
+
+output m_out; // declaring outputs
+input x_in,y_in,sel; // declaring inputs
+wire selnot,wx,wy;//delaring wires
+
+//instantiating primitve verilog gates
+not(selnot,sel);
+and(wx,x_in,selnot);
+and(wy,y_in,sel);
+or(m_out,wx,wy);
+
+endmodule

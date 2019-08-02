@@ -1,0 +1,21 @@
+|AndGate
+FG <= GateLevelAND:inst.Fg
+A => GateLevelAND:inst.Ag
+A => VerilogAND:inst1.Av
+B => GateLevelAND:inst.Bg
+B => VerilogAND:inst1.Bv
+FV <= VerilogAND:inst1.Fv
+
+
+|AndGate|GateLevelAND:inst
+Fg <= inst.DB_MAX_OUTPUT_PORT_TYPE
+Ag => inst.IN0
+Bg => inst.IN1
+
+
+|AndGate|VerilogAND:inst1
+Fv <= comb.DB_MAX_OUTPUT_PORT_TYPE
+Av => comb.IN0
+Bv => comb.IN1
+
+

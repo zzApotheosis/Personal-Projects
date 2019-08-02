@@ -1,0 +1,7 @@
+
+Memory Summary:
+    Program space        used   DADh (  3501) of 1FFF8h bytes   (  2.7%)
+    Data space           used    92h (   146) of   F40h bytes   (  3.7%)
+    Configuration bits   used     3h (     3) of     3h words   (100.0%)
+    Data stack space     used     0h (     0) of   E8Ah bytes   (  0.0%)
+

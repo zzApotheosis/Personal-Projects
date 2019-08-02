@@ -1,0 +1,20 @@
+Analysis & Synthesis Status : Successful - Thu Mar 09 21:20:43 2017
+Quartus II 32-bit Version : 11.1 Build 259 01/25/2012 SP 2 SJ Web Edition
+Revision Name : top_seven_seg_decoder
+Top-level Entity Name : sev_seg_decoder
+Family : Cyclone V
+Logic utilization : N/A
+    Combinational ALUTs : 7
+    Memory ALUTs : 0
+    Dedicated logic registers : 0
+Total registers : 0
+Total pins : 11
+Total virtual pins : 0
+Total block memory bits : 0
+DSP Blocks : 0
+Total HSSI RX PCSs : 0
+Total HSSI PMA RX Deserializers : 0
+Total HSSI TX PCSs : 0
+Total HSSI PMA TX Serializers : 0
+Total PLLs : 0
+Total DLLs : 0

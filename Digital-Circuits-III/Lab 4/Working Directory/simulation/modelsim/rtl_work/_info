@@ -1,0 +1,45 @@
+m255
+K3
+13
+cModel Technology
+Z0 dE:\Digital Circuits III\Lab 4\Working Directory\simulation\modelsim
+vstimulus_counter
+!i10b 1
+!s100 k9Tk:^n:zd?Xle@lBK4Nh1
+IbS>C_@L8SK@02S6?7_RSW3
+V`X1ORmZ@eM8Kcn@b3<T@M1
+Z1 dE:\Digital Circuits III\Lab 4\Working Directory\simulation\modelsim
+w0
+Z2 8E:/Digital Circuits III/Lab 4/Working Directory/eight_bit_counter.v
+Z3 FE:/Digital Circuits III/Lab 4/Working Directory/eight_bit_counter.v
+L0 68
+Z4 OV;L;10.1d;51
+r1
+!s85 0
+31
+Z5 !s108 1489638742.189000
+Z6 !s107 E:/Digital Circuits III/Lab 4/Working Directory/eight_bit_counter.v|
+Z7 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+E:/Digital Circuits III/Lab 4/Working Directory|E:/Digital Circuits III/Lab 4/Working Directory/eight_bit_counter.v|
+!s101 -O0
+Z8 o-vlog01compat -work work -O0
+Z9 !s92 -vlog01compat -work work {+incdir+E:/Digital Circuits III/Lab 4/Working Directory} -O0
+vt_ff
+!i10b 1
+!s100 RhD98:GJWY?TQjXOlh`cO0
+IZ5Z_<kT^4oJ`:MI4VO[iB3
+VY=KJG6@AznMh<=b@529Di2
+R1
+w0
+R2
+R3
+L0 46
+R4
+r1
+!s85 0
+31
+R5
+R6
+R7
+!s101 -O0
+R8
+R9

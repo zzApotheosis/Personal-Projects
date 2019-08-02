@@ -1,0 +1,20 @@
+This program calculates savings amounts using methods.
+
+Enter the gross pay: Okay
+Please enter a value greater than 0.
+Enter the gross pay: 10000
+Enter the savings rate %: I don't save! Just kidding
+Please enter a value greater than 0.
+Enter the savings rate %: 10
+Enter the IRA rate %: 0
+Please enter a value greater than 0.
+Enter the IRA rate %: 10
+
+Gross pay:..............................$10,000.00
+Savings rate %:..............................10.00%
+Savings amount:..........................$1,000.00
+IRA rate %:..................................10.00%
+IRA investment amount:...................$1,000.00
+Total of savings and IRA amounts:........$2,000.00
+
+Process finished with exit code 0

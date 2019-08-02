@@ -1,0 +1,5 @@
+/*
+ * Title: Dual Seven Segment Display
+ * This module accepts a 4-bit input, and properly converts
+ * the input to a 14-bit dual seven segment display.
+ */

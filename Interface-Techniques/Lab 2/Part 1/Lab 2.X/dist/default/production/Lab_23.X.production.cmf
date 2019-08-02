@@ -1,0 +1,1110 @@
+%CMF
+# %PSECTS Section
+# For each object file, details of its psects are enumerated here.
+# The begining of the section is indicated by %PSECTS.  The first
+# line indicates the name of the first object file, e.g.
+#    $foo.obj
+# Each line that follows describes a psect in that object file, until
+# the next object file.  The lines that describe a psect have the
+# format:
+#    <psect name> <class name> <space> <link address> <load addresses> <length> <delta>
+# All addresses and the length are given in unqualified hexadecimal
+# in delta units.  Any other numeric values are decimal.
+%PSECTS
+$dist/default/production\Lab_23.X.production.obj
+cinit CODE 0 186C 186C 5C 1
+text0 CODE 0 144A 144A 150 1
+text1 CODE 0 1028 1028 234 1
+text2 CODE 0 17AA 17AA 62 1
+text3 CODE 0 16CC 16CC 78 1
+text4 CODE 0 1B9E 1B9E 18 1
+text5 CODE 0 159A 159A A2 1
+text6 CODE 0 180C 180C 60 1
+text7 CODE 0 1A68 1A68 36 1
+text8 CODE 0 1BFA 1BFA 14 1
+text9 CODE 0 19EC 19EC 40 1
+text10 CODE 0 1B66 1B66 1C 1
+text11 CODE 0 1744 1744 66 1
+text12 CODE 0 1AD0 1AD0 2A 1
+text13 CODE 0 1C52 1C52 C 1
+text14 CODE 0 1C0E 1C0E 12 1
+text15 CODE 0 1B82 1B82 1C 1
+text16 CODE 0 1C8A 1C8A 2 1
+text17 CODE 0 1C76 1C76 A 1
+text18 CODE 0 191A 191A 4A 1
+text19 CODE 0 1AFA 1AFA 28 1
+text20 CODE 0 1BB6 1BB6 18 1
+text21 CODE 0 1C42 1C42 10 1
+text22 CODE 0 1C5E 1C5E C 1
+text24 CODE 0 125C 125C 1EE 1
+text25 CODE 0 19AA 19AA 42 1
+text26 CODE 0 18C8 18C8 52 1
+text27 CODE 0 1C20 1C20 12 1
+text28 CODE 0 163C 163C 90 1
+text29 CODE 0 1A9E 1A9E 32 1
+text30 CODE 0 1BCE 1BCE 16 1
+text31 CODE 0 1964 1964 46 1
+text32 CODE 0 1B48 1B48 1E 1
+text33 CODE 0 1BE4 1BE4 16 1
+text34 CODE 0 1C8C 1C8C 2 1
+text35 CODE 0 1C80 1C80 A 1
+text36 CODE 0 1A2C 1A2C 3C 1
+text37 CODE 0 1B22 1B22 26 1
+idataCOMRAM CODE 0 1C6A 1C6A B 1
+cstackCOMRAM COMRAM 1 1 1 2D 1
+cstackBANK0 BANK0 1 84 84 22 1
+temp COMRAM 1 3C 3C 1 1
+bssBANK0 BANK0 1 60 60 24 1
+intcode CODE 0 8 8 118 1
+smallconst SMALLCONST 0 1000 1000 28 1
+idataBANK0 CODE 0 1C32 1C32 10 1
+dataBANK0 BANK0 1 A6 A6 10 1
+dataCOMRAM COMRAM 1 2E 2E B 1
+bssCOMRAM COMRAM 1 39 39 3 1
+$C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.obj
+reset_vec CODE 0 0 0 4 1
+end_init CODE 0 120 120 4 1
+config CONFIG 0 1FFF8 1FFF8 6 1
+# %UNUSED Section
+# This section enumerates the unused ranges of each CLASS. Each entry
+# is described on a single line as follows:
+#    <class name> <range> <delta>
+# Addresses given in the range are in hexadecimal and units of delta.
+%UNUSED
+RAM B6-F3F 1
+SFR F5A-FFF 1
+BANK0 B6-FF 1
+BANK1 100-1FF 1
+BANK2 200-2FF 1
+BANK3 300-3FF 1
+BANK4 400-4FF 1
+BANK5 500-5FF 1
+BANK6 600-6FF 1
+BANK7 700-7FF 1
+BANK8 800-8FF 1
+BANK9 900-9FF 1
+CONST 4-7 1
+CONST 124-FFF 1
+CONST 1C75-1C75 1
+CONST 1C8E-1FFF7 1
+STACK B6-F3F 1
+SMALLCONST 1C75-1C75 1
+SMALLCONST 1C8E-1FFF7 1
+CODE 4-7 1
+CODE 124-FFF 1
+CODE 1C75-1C75 1
+CODE 1C8E-1FFF7 1
+BANK10 A00-AFF 1
+BANK11 B00-BFF 1
+BANK12 C00-CFF 1
+BANK13 D00-DFF 1
+BANK14 E00-EFF 1
+BANK15 F00-F3F 1
+BIGRAM 3D-5F 1
+BIGRAM B6-F3F 1
+COMRAM 3D-5F 1
+MEDIUMCONST 1C75-1C75 1
+MEDIUMCONST 1C8E-FFFF 1
+MEDIUMCONST 11000-1FFF7 1
+# %LINETAB Section
+# This section enumerates the file/line to address mappings.
+# The beginning of the section is indicated by %LINETAB.
+# The first line indicates the name of the first object file, e.g.
+#   $foo.obj
+# Each line that follows describes a single mapping until the next
+# object file.  Mappings have the following format:
+#    <address> <psect name> <class name> ><line number>:<file name>
+# The address is absolute and given given in unqualified hex 
+# in delta units of the psect. All mappings within an object file
+# are in ascending order of addresses.
+# All other numeric values are in decimal.
+%LINETAB
+$dist/default/production\Lab_23.X.production.obj
+8 intcode CODE >122:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+8 intcode CODE >136:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+42 intcode CODE >139:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+46 intcode CODE >157:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+48 intcode CODE >158:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+4E intcode CODE >159:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+50 intcode CODE >160:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+52 intcode CODE >161:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+54 intcode CODE >162:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+5A intcode CODE >163:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+60 intcode CODE >164:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+66 intcode CODE >166:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+7E intcode CODE >167:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+90 intcode CODE >166:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+9E intcode CODE >170:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+A0 intcode CODE >171:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+B0 intcode CODE >191:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+CC intcode CODE >192:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+D2 intcode CODE >193:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+E2 intcode CODE >194:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+E4 intcode CODE >196:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1B22 text37 CODE >320:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B24 text37 CODE >321:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B26 text37 CODE >322:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B2A text37 CODE >323:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B2E text37 CODE >324:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B30 text37 CODE >325:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B34 text37 CODE >326:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B38 text37 CODE >327:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B3A text37 CODE >328:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B3E text37 CODE >329:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B42 text37 CODE >330:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B44 text37 CODE >331:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B46 text37 CODE >332:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A2C text36 CODE >260:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A2E text36 CODE >261:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A32 text36 CODE >262:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A38 text36 CODE >263:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A3C text36 CODE >265:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A46 text36 CODE >266:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A50 text36 CODE >267:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A5C text36 CODE >268:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A66 text36 CODE >269:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1C80 text35 CODE >247:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1C80 text35 CODE >249:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1C88 text35 CODE >251:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1C8C text34 CODE >235:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1C8C text34 CODE >239:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1BE4 text33 CODE >187:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1BE6 text33 CODE >188:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1BEA text33 CODE >189:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1BF4 text33 CODE >190:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1BF8 text33 CODE >191:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B48 text32 CODE >225:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B4A text32 CODE >227:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B4E text32 CODE >228:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B56 text32 CODE >229:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B58 text32 CODE >230:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B62 text32 CODE >232:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1964 text31 CODE >96:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1964 text31 CODE >98:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+198C text31 CODE >101:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+19A0 text31 CODE >102:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+19A8 text31 CODE >103:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1BCE text30 CODE >197:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1BD0 text30 CODE >198:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1BD4 text30 CODE >199:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1BDE text30 CODE >200:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1BE2 text30 CODE >201:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A9E text29 CODE >80:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1AA0 text29 CODE >81:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1AA4 text29 CODE >82:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1AAC text29 CODE >85:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1ABE text29 CODE >86:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1AC0 text29 CODE >87:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1AC6 text29 CODE >88:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1AC8 text29 CODE >86:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+163C text28 CODE >59:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+163C text28 CODE >60:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1644 text28 CODE >63:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1656 text28 CODE >64:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1658 text28 CODE >65:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1668 text28 CODE >66:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+166A text28 CODE >67:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1672 text28 CODE >68:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1676 text28 CODE >71:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1696 text28 CODE >72:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+16A8 text28 CODE >73:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+16AA text28 CODE >74:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+16B8 text28 CODE >76:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+16BC text28 CODE >64:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1C20 text27 CODE >81:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1C22 text27 CODE >84:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1C26 text27 CODE >85:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1C2A text27 CODE >86:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1C2C text27 CODE >87:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1C30 text27 CODE >89:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+18C8 text26 CODE >8:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+18C8 text26 CODE >14:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+18D0 text26 CODE >15:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+18D8 text26 CODE >16:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+18DC text26 CODE >17:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+18DE text26 CODE >18:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+18E4 text26 CODE >19:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+18E6 text26 CODE >17:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+18EA text26 CODE >22:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+18F0 text26 CODE >23:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+18FC text26 CODE >24:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+1904 text26 CODE >25:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+1906 text26 CODE >27:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+190C text26 CODE >28:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+1910 text26 CODE >29:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+1910 text26 CODE >30:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+1918 text26 CODE >31:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+19AA text25 CODE >8:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+19AA text25 CODE >13:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+19B2 text25 CODE >14:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+19B6 text25 CODE >15:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+19B8 text25 CODE >16:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+19BE text25 CODE >17:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+19C0 text25 CODE >15:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+19C4 text25 CODE >20:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+19D0 text25 CODE >21:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+19D8 text25 CODE >22:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+19DE text25 CODE >23:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+19E2 text25 CODE >24:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+19E2 text25 CODE >25:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+19EA text25 CODE >26:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+125C text24 CODE >492:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+125C text24 CODE >533:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1264 text24 CODE >536:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1266 text24 CODE >538:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+126E text24 CODE >541:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+127E text24 CODE >542:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1280 text24 CODE >548:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1284 text24 CODE >635:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1286 text24 CODE >734:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+129E text24 CODE >740:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+12A6 text24 CODE >741:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+12AE text24 CODE >777:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+12B0 text24 CODE >778:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+12E4 text24 CODE >777:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+130E text24 CODE >635:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1340 text24 CODE >1259:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1358 text24 CODE >1261:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+135C text24 CODE >1262:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1360 text24 CODE >1263:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1368 text24 CODE >1305:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1374 text24 CODE >1306:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+139A text24 CODE >1305:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+139E text24 CODE >1438:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+13AA text24 CODE >1439:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+13BA text24 CODE >1472:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+13BE text24 CODE >1474:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+13C0 text24 CODE >1489:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1408 text24 CODE >1524:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1418 text24 CODE >1474:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1420 text24 CODE >536:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+143C text24 CODE >1538:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1C5E text22 CODE >107:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1C5E text22 CODE >110:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1C60 text22 CODE >115:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1C62 text22 CODE >116:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1C64 text22 CODE >118:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1C66 text22 CODE >121:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1C68 text22 CODE >122:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1C42 text21 CODE >124:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1C42 text21 CODE >129:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1C44 text21 CODE >130:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1C46 text21 CODE >131:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1C4E text21 CODE >132:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1C50 text21 CODE >133:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1BB6 text20 CODE >91:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1BB6 text20 CODE >93:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1BBA text20 CODE >94:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1BBE text20 CODE >98:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1BC2 text20 CODE >99:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1BC4 text20 CODE >101:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1BC8 text20 CODE >102:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1BCA text20 CODE >103:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1BCC text20 CODE >105:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1AFA text19 CODE >320:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1AFE text19 CODE >321:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B00 text19 CODE >322:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B04 text19 CODE >323:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B08 text19 CODE >324:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B0A text19 CODE >325:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B0E text19 CODE >326:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B12 text19 CODE >327:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B14 text19 CODE >328:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B18 text19 CODE >329:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B1C text19 CODE >330:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B1E text19 CODE >331:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B20 text19 CODE >332:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+191A text18 CODE >260:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+191E text18 CODE >261:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1924 text18 CODE >262:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+192E text18 CODE >263:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1934 text18 CODE >265:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+193E text18 CODE >266:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1948 text18 CODE >267:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1958 text18 CODE >268:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1962 text18 CODE >269:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1C76 text17 CODE >247:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1C76 text17 CODE >249:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1C7E text17 CODE >251:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1C8A text16 CODE >235:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1C8A text16 CODE >239:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B82 text15 CODE >187:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B86 text15 CODE >188:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B8A text15 CODE >189:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B98 text15 CODE >190:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B9C text15 CODE >191:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1C0E text14 CODE >241:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1C0E text14 CODE >243:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1C1E text14 CODE >245:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1C52 text13 CODE >47:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1C52 text13 CODE >48:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1C58 text13 CODE >49:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1C5C text13 CODE >50:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1AD0 text12 CODE >225:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1AD4 text12 CODE >227:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1ADA text12 CODE >228:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1AE4 text12 CODE >229:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1AE6 text12 CODE >230:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1AF4 text12 CODE >232:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1744 text11 CODE >96:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1744 text11 CODE >98:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+177C text11 CODE >101:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+179E text11 CODE >102:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+17A8 text11 CODE >103:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B66 text10 CODE >197:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B6A text10 CODE >198:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B6E text10 CODE >199:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B7C text10 CODE >200:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B80 text10 CODE >201:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+19EC text9 CODE >80:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+19F0 text9 CODE >81:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+19F6 text9 CODE >82:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A00 text9 CODE >85:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A16 text9 CODE >86:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A18 text9 CODE >87:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A1E text9 CODE >88:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A22 text9 CODE >86:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1BFA text8 CODE >193:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1BFE text8 CODE >194:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1C0C text8 CODE >195:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A68 text7 CODE >287:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A68 text7 CODE >288:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A6A text7 CODE >289:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A6C text7 CODE >304:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A6E text7 CODE >305:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A70 text7 CODE >307:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A74 text7 CODE >308:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A76 text7 CODE >309:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A78 text7 CODE >310:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A84 text7 CODE >311:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A90 text7 CODE >312:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1A9C text7 CODE >314:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+180C text6 CODE >24:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+180C text6 CODE >25:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1812 text6 CODE >26:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1816 text6 CODE >27:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1826 text6 CODE >37:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+182E text6 CODE >38:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1836 text6 CODE >39:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+183C text6 CODE >40:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1844 text6 CODE >41:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+184A text6 CODE >42:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+185C text6 CODE >43:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1862 text6 CODE >44:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+186A text6 CODE >45:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+159A text5 CODE >59:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+159A text5 CODE >60:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+15A4 text5 CODE >63:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+15BA text5 CODE >64:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+15BC text5 CODE >65:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+15CC text5 CODE >66:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+15D0 text5 CODE >67:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+15DA text5 CODE >68:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+15E0 text5 CODE >71:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1600 text5 CODE >72:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1616 text5 CODE >73:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1618 text5 CODE >74:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1626 text5 CODE >76:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+162C text5 CODE >64:C:\Users\jtwogoo1\Desktop\Lab 23.X\LCD.c
+1B9E text4 CODE >81:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1BA2 text4 CODE >84:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1BA6 text4 CODE >85:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1BAA text4 CODE >86:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1BAC text4 CODE >87:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1BB0 text4 CODE >88:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1BB4 text4 CODE >89:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+16CC text3 CODE >8:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+16CC text3 CODE >14:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+16D6 text3 CODE >15:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+16E2 text3 CODE >16:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+16E8 text3 CODE >17:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+16EA text3 CODE >18:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+16F2 text3 CODE >19:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+16F6 text3 CODE >17:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+16FC text3 CODE >22:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+1704 text3 CODE >23:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+1718 text3 CODE >24:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+1728 text3 CODE >25:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+172C text3 CODE >27:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+1734 text3 CODE >28:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+173A text3 CODE >29:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+173A text3 CODE >30:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+1742 text3 CODE >31:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwdiv.c
+17AA text2 CODE >8:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+17AA text2 CODE >13:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+17B6 text2 CODE >14:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+17BC text2 CODE >15:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+17BE text2 CODE >16:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+17C6 text2 CODE >17:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+17CA text2 CODE >15:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+17D0 text2 CODE >20:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+17E4 text2 CODE >21:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+17F4 text2 CODE >22:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+17FC text2 CODE >23:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+1802 text2 CODE >24:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+1802 text2 CODE >25:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+180A text2 CODE >26:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\lwmod.c
+1028 text1 CODE >492:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1028 text1 CODE >533:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1034 text1 CODE >536:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1036 text1 CODE >538:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1040 text1 CODE >541:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1052 text1 CODE >542:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1054 text1 CODE >548:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+105A text1 CODE >635:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+105C text1 CODE >734:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1076 text1 CODE >740:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1082 text1 CODE >741:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+108E text1 CODE >777:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1090 text1 CODE >778:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+10C8 text1 CODE >777:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+10F2 text1 CODE >635:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1128 text1 CODE >1259:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1142 text1 CODE >1261:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1148 text1 CODE >1262:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+114E text1 CODE >1263:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1158 text1 CODE >1305:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1168 text1 CODE >1306:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1194 text1 CODE >1305:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+119A text1 CODE >1438:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+11A8 text1 CODE >1439:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+11BA text1 CODE >1472:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+11BE text1 CODE >1474:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+11C0 text1 CODE >1489:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1210 text1 CODE >1524:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+1222 text1 CODE >1474:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+122E text1 CODE >536:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+124E text1 CODE >1538:C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\doprnt.c
+144A text0 CODE >37:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+144A text0 CODE >40:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1454 text0 CODE >41:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1456 text0 CODE >42:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+145A text0 CODE >43:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+145E text0 CODE >44:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1462 text0 CODE >45:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1466 text0 CODE >48:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1468 text0 CODE >49:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+146E text0 CODE >50:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1474 text0 CODE >51:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+147A text0 CODE >52:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+149A text0 CODE >53:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+14B2 text0 CODE >52:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+14C6 text0 CODE >55:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+14C8 text0 CODE >65:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+14F0 text0 CODE >66:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+14F6 text0 CODE >67:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+150C text0 CODE >69:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1510 text0 CODE >73:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1534 text0 CODE >74:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+153A text0 CODE >75:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1550 text0 CODE >76:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1592 text0 CODE >77:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+1598 text0 CODE >71:C:\Users\jtwogoo1\Desktop\Lab 23.X\SPI.c
+186C cinit CODE >1269:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+186C cinit CODE >1271:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+186C cinit CODE >1274:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+186C cinit CODE >1319:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+1870 cinit CODE >1320:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+1872 cinit CODE >1321:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+1872 cinit CODE >1322:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+1874 cinit CODE >1323:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+1876 cinit CODE >1324:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+1878 cinit CODE >1327:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+187A cinit CODE >1328:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+187C cinit CODE >1329:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+187E cinit CODE >1334:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+1880 cinit CODE >1335:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+1882 cinit CODE >1336:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+1884 cinit CODE >1337:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+1886 cinit CODE >1338:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+1888 cinit CODE >1339:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+188A cinit CODE >1340:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+188E cinit CODE >1341:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+1892 cinit CODE >1342:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+1892 cinit CODE >1343:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+1894 cinit CODE >1344:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+1898 cinit CODE >1345:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+189A cinit CODE >1346:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+189C cinit CODE >1347:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+189E cinit CODE >1351:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+18A0 cinit CODE >1352:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+18A2 cinit CODE >1353:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+18A4 cinit CODE >1354:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+18A6 cinit CODE >1355:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+18A8 cinit CODE >1356:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+18AA cinit CODE >1357:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+18AE cinit CODE >1358:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+18B2 cinit CODE >1359:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+18B2 cinit CODE >1360:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+18B4 cinit CODE >1361:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+18B8 cinit CODE >1362:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+18BA cinit CODE >1363:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+18BC cinit CODE >1364:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+18BE cinit CODE >1370:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+18BE cinit CODE >1372:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+18C0 cinit CODE >1373:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+18C2 cinit CODE >1374:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+18C4 cinit CODE >1375:C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.
+# %SYMTAB Section
+# An enumeration of all symbols in the program.
+# The beginning of the section is indicated by %SYMTAB.
+# Each line describes a single symbol as follows:
+#    <label> <value> [-]<load-adj> <class> <space> <psect> <file-name>
+# The value and load-adj are both in unqualified hexadecimal.
+# All other numeric values are in decimal.  The load-adj is the
+# quantity one needs to add to the symbol value in order to obtain the load
+# address of the symbol.  This value may be signed. If the symbol
+# was defined in a psect then <psect> will be "-". File-name
+# is the name of the object file in which the symbol was defined.
+%SYMTAB
+__end_of_LCDWriteByte 1964 0 CODE 0 text18 dist/default/production\Lab_23.X.production.obj
+__end_of_LCDWriteData 1B82 0 CODE 0 text10 dist/default/production\Lab_23.X.production.obj
+__end_of_LCDWriteLine 163C 0 CODE 0 text5 dist/default/production\Lab_23.X.production.obj
+___lwmod@counter 8F 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+__LdataBANK0 0 0 ABS 0 dataBANK0 dist/default/production\Lab_23.X.production.obj
+__Lmediumconst 0 0 MEDIUMCONST 0 mediumconst dist/default/production\Lab_23.X.production.obj
+__Hspace_0 1FFFE 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__Hspace_1 B6 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__Hspace_2 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__HidataBANK0 0 0 ABS 0 idataBANK0 dist/default/production\Lab_23.X.production.obj
+__end_ofi2_LCDSetPos 19AA 0 CODE 0 text31 dist/default/production\Lab_23.X.production.obj
+LCDWriteByte@comFlags 88 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+_SSP1STATbits FC7 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__Hibigdata 0 0 CODE 0 ibigdata dist/default/production\Lab_23.X.production.obj
+__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.obj
+__end_ofi2_SPIReadWrite 1C32 0 CODE 0 text27 dist/default/production\Lab_23.X.production.obj
+_LCDCommand 1B82 0 CODE 0 text15 dist/default/production\Lab_23.X.production.obj
+__size_ofi2_calculateBase 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+_rx 39 0 COMRAM 1 bssCOMRAM dist/default/production\Lab_23.X.production.obj
+main@i A0 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+__Lsmallconst 1000 0 SMALLCONST 0 smallconst dist/default/production\Lab_23.X.production.obj
+_LATD F8C 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+___sp 0 0 STACK 2 stack C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.obj
+_flag 3B 0 COMRAM 1 bssCOMRAM dist/default/production\Lab_23.X.production.obj
+_main 144A 0 CODE 0 text0 dist/default/production\Lab_23.X.production.obj
+_wait 1C8A 0 CODE 0 text16 dist/default/production\Lab_23.X.production.obj
+btemp 3C 0 COMRAM 1 temp dist/default/production\Lab_23.X.production.obj
+__size_ofi2_shortDelay 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+start 120 0 CODE 0 init C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.obj
+i2___lwdiv@quotient 5 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+i2sprintf@ap 16 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+i2sprintf@cp 18 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+i2sprintf@sp D 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+__size_of_main 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__size_of_wait 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__size_of___lwdiv 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__size_of___lwmod 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+i2_wait 1C8C 0 CODE 0 text34 dist/default/production\Lab_23.X.production.obj
+__CFG_WDTEN$OFF 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__HbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/production\Lab_23.X.production.obj
+i2___lwmod@dividend 8 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+__size_ofi2_WriteRegister 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__size_of_LCDInit 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+i2LCDClearLine@c F 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+_LCDClear 1C52 0 CODE 0 text13 dist/default/production\Lab_23.X.production.obj
+__size_ofi2_LCDClearLine 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__LidataBANK0 0 0 ABS 0 idataBANK0 dist/default/production\Lab_23.X.production.obj
+__Hpowerup 120 0 CODE 0 powerup dist/default/production\Lab_23.X.production.obj
+__size_ofi2_LCDWriteByte 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__size_ofi2_LCDWriteData 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__size_ofi2_LCDWriteLine 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+i2sprintf@flag 14 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+i2sprintf@prec 15 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+__HdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/production\Lab_23.X.production.obj
+__end_ofi2_shortDelay 1C8A 0 CODE 0 text35 dist/default/production\Lab_23.X.production.obj
+__end_of_LCDClear 1C5E 0 CODE 0 text13 dist/default/production\Lab_23.X.production.obj
+i2SPIReadWrite@byte 1 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+__accesstop 60 0 ABS 0 - C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.obj
+intlevel0 0 0 CODE 0 text C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.obj
+intlevel1 0 0 CODE 0 text C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.obj
+intlevel2 0 0 CODE 0 text C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.obj
+intlevel3 0 0 CODE 0 text C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.obj
+__LbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/production\Lab_23.X.production.obj
+i2calculateBase@base 1 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+i2calculateBase@line 2 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+__LnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/production\Lab_23.X.production.obj
+i2sprintf@val 1A 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+__Hifardata 0 0 CODE 0 ifardata dist/default/production\Lab_23.X.production.obj
+__Hclrtext 0 0 ABS 0 clrtext dist/default/production\Lab_23.X.production.obj
+__end_of_LCDCommand 1B9E 0 CODE 0 text15 dist/default/production\Lab_23.X.production.obj
+__size_ofi2_wait 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__pidataCOMRAM 1C6A 0 CODE 0 idataCOMRAM dist/default/production\Lab_23.X.production.obj
+___inthi_sp 0 0 STACK 2 stack C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.obj
+___intlo_sp 0 0 STACK 2 stack C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.obj
+_SPIReadWrite 1B9E 0 CODE 0 text4 dist/default/production\Lab_23.X.production.obj
+__LdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/production\Lab_23.X.production.obj
+__size_of_LCDInitPort 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+i2___lwmod@divisor A 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+__Hintcode_body 0 0 ABS 0 intcode_body dist/default/production\Lab_23.X.production.obj
+__Lintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/production\Lab_23.X.production.obj
+__size_of_sprintf 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__Hmediumconst 0 0 MEDIUMCONST 0 mediumconst dist/default/production\Lab_23.X.production.obj
+__size_of_HighIsr 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__Hintcodelo 120 0 CODE 0 intcodelo dist/default/production\Lab_23.X.production.obj
+___lwmod@divisor 8D 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+__end_of___lwdiv 1744 0 CODE 0 text3 dist/default/production\Lab_23.X.production.obj
+__end_of___lwmod 180C 0 CODE 0 text2 dist/default/production\Lab_23.X.production.obj
+_calculateBase 1AD0 0 CODE 0 text12 dist/default/production\Lab_23.X.production.obj
+i2WriteRegister@b 1 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+__end_of_longDelay 1C20 0 CODE 0 text14 dist/default/production\Lab_23.X.production.obj
+_OSCTUNEbits F9B 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__end_of_LCDInit 186C 0 CODE 0 text6 dist/default/production\Lab_23.X.production.obj
+_dpowers 1001 0 SMALLCONST 0 smallconst dist/default/production\Lab_23.X.production.obj
+__size_of_longDelay 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+?i2___lwdiv 1 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+?i2___lwmod 8 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+__CFG_FOSC$HSPLL 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__size_ofi2_LCDSetPos 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+___lwdiv@quotient 89 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+__LidataCOMRAM 0 0 ABS 0 idataCOMRAM dist/default/production\Lab_23.X.production.obj
+_ConfigPeriph 1C42 0 CODE 0 text21 dist/default/production\Lab_23.X.production.obj
+__end_of_LCDSetPos 17AA 0 CODE 0 text11 dist/default/production\Lab_23.X.production.obj
+__size_of_SPIReadWrite 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+_INTCON2bits FF1 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+___lwmod@dividend 8B 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+__size_of_LCDSetPos 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__Lintcodelo 120 0 CODE 0 intcodelo dist/default/production\Lab_23.X.production.obj
+_WriteRegister 1AFA 0 CODE 0 text19 dist/default/production\Lab_23.X.production.obj
+start_initialization 186C 0 CODE 0 cinit dist/default/production\Lab_23.X.production.obj
+LCDWriteByte@rs 86 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+__HnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/production\Lab_23.X.production.obj
+_longDelay 1C0E 0 CODE 0 text14 dist/default/production\Lab_23.X.production.obj
+_TRISAbits F92 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+_TRISCbits F94 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+_LCDInitCommand 1BFA 0 CODE 0 text8 dist/default/production\Lab_23.X.production.obj
+_shortDelay 1C76 0 CODE 0 text17 dist/default/production\Lab_23.X.production.obj
+___rparam_used 1 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+i2LCDWriteByte@comFlags 5 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+SPIReadWrite@byte 84 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+_LCDSetPos 1744 0 CODE 0 text11 dist/default/production\Lab_23.X.production.obj
+__pcstackBANK0 84 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+_SSPBUF FC9 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+i2LCDSetPos@col 9 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+i2LCDSetPos@pos C 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+i2LCDSetPos@row 7 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+__end_of_SPIReadWrite 1BB6 0 CODE 0 text4 dist/default/production\Lab_23.X.production.obj
+i2sprintf@c 1C 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+i2sprintf@f F 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+LCDWriteByte@c 87 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+i2___lwdiv@counter 7 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+i2WriteRegister@reg 2 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+LCDWriteData@c 89 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+__size_of_ConfigPeriph 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__Hbank0 0 0 ABS 0 bank0 dist/default/production\Lab_23.X.production.obj
+__Hbank1 0 0 ABS 0 bank1 dist/default/production\Lab_23.X.production.obj
+__Hbank2 0 0 ABS 0 bank2 dist/default/production\Lab_23.X.production.obj
+__Hbank3 0 0 ABS 0 bank3 dist/default/production\Lab_23.X.production.obj
+__Hbank4 0 0 ABS 0 bank4 dist/default/production\Lab_23.X.production.obj
+__Hbank5 0 0 ABS 0 bank5 dist/default/production\Lab_23.X.production.obj
+__Hbank6 0 0 ABS 0 bank6 dist/default/production\Lab_23.X.production.obj
+__Hbank7 0 0 ABS 0 bank7 dist/default/production\Lab_23.X.production.obj
+__Hbank8 0 0 ABS 0 bank8 dist/default/production\Lab_23.X.production.obj
+__Hbank9 0 0 ABS 0 bank9 dist/default/production\Lab_23.X.production.obj
+__Hcinit 0 0 ABS 0 cinit dist/default/production\Lab_23.X.production.obj
+__Hconst 0 0 CODE 0 const dist/default/production\Lab_23.X.production.obj
+__Hidata 0 0 CODE 0 idata dist/default/production\Lab_23.X.production.obj
+__Hidloc 0 0 IDLOC 0 idloc dist/default/production\Lab_23.X.production.obj
+__Hnvbit 0 0 COMRAM 1 nvbit dist/default/production\Lab_23.X.production.obj
+__Hparam 0 0 COMRAM 1 rparam dist/default/production\Lab_23.X.production.obj
+__Hrdata 0 0 COMRAM 1 rdata dist/default/production\Lab_23.X.production.obj
+__Hstack 0 0 STACK 2 stack dist/default/production\Lab_23.X.production.obj
+__Htext0 0 0 ABS 0 text0 dist/default/production\Lab_23.X.production.obj
+__Htext1 0 0 ABS 0 text1 dist/default/production\Lab_23.X.production.obj
+__Htext2 0 0 ABS 0 text2 dist/default/production\Lab_23.X.production.obj
+__Htext3 0 0 ABS 0 text3 dist/default/production\Lab_23.X.production.obj
+__Htext4 0 0 ABS 0 text4 dist/default/production\Lab_23.X.production.obj
+__Htext5 0 0 ABS 0 text5 dist/default/production\Lab_23.X.production.obj
+__Htext6 0 0 ABS 0 text6 dist/default/production\Lab_23.X.production.obj
+__Htext7 0 0 ABS 0 text7 dist/default/production\Lab_23.X.production.obj
+__Htext8 0 0 ABS 0 text8 dist/default/production\Lab_23.X.production.obj
+__Htext9 0 0 ABS 0 text9 dist/default/production\Lab_23.X.production.obj
+___lwdiv@counter 88 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+__Ljflash_buffer 1F800 0 CODE 0 jflash_buffer dist/default/production\Lab_23.X.production.obj
+__Hbank10 0 0 ABS 0 bank10 dist/default/production\Lab_23.X.production.obj
+__Hbank11 0 0 ABS 0 bank11 dist/default/production\Lab_23.X.production.obj
+__Hbank12 0 0 ABS 0 bank12 dist/default/production\Lab_23.X.production.obj
+__Hbank13 0 0 ABS 0 bank13 dist/default/production\Lab_23.X.production.obj
+__Hbank14 0 0 ABS 0 bank14 dist/default/production\Lab_23.X.production.obj
+__Hbank15 0 0 ABS 0 bank15 dist/default/production\Lab_23.X.production.obj
+__Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\Lab_23.X.production.obj
+__Hbigram 0 0 ABS 0 bigram dist/default/production\Lab_23.X.production.obj
+__smallconst 1000 0 SMALLCONST 0 smallconst C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.obj
+__end_of_sprintf 125C 0 CODE 0 text1 dist/default/production\Lab_23.X.production.obj
+__end_of_HighIsr 120 0 CODE 0 intcode dist/default/production\Lab_23.X.production.obj
+__Hcomram 0 0 ABS 0 comram dist/default/production\Lab_23.X.production.obj
+__Hconfig 1FFFE 0 CONFIG 0 config dist/default/production\Lab_23.X.production.obj
+LCDCommand@command 89 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+LCDInit@functionSet 8B 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+__Lbank0 0 0 ABS 0 bank0 dist/default/production\Lab_23.X.production.obj
+__Lbank1 0 0 ABS 0 bank1 dist/default/production\Lab_23.X.production.obj
+__Lbank2 0 0 ABS 0 bank2 dist/default/production\Lab_23.X.production.obj
+__Lbank3 0 0 ABS 0 bank3 dist/default/production\Lab_23.X.production.obj
+__Lbank4 0 0 ABS 0 bank4 dist/default/production\Lab_23.X.production.obj
+__Lbank5 0 0 ABS 0 bank5 dist/default/production\Lab_23.X.production.obj
+__Lbank6 0 0 ABS 0 bank6 dist/default/production\Lab_23.X.production.obj
+__Lbank7 0 0 ABS 0 bank7 dist/default/production\Lab_23.X.production.obj
+__Lbank8 0 0 ABS 0 bank8 dist/default/production\Lab_23.X.production.obj
+__Lbank9 0 0 ABS 0 bank9 dist/default/production\Lab_23.X.production.obj
+__Lcinit 0 0 ABS 0 cinit dist/default/production\Lab_23.X.production.obj
+__Lconst 0 0 CODE 0 const dist/default/production\Lab_23.X.production.obj
+__Lidata 0 0 CODE 0 idata dist/default/production\Lab_23.X.production.obj
+__Lidloc 0 0 IDLOC 0 idloc dist/default/production\Lab_23.X.production.obj
+__Lnvbit 0 0 COMRAM 1 nvbit dist/default/production\Lab_23.X.production.obj
+__Lparam 0 0 COMRAM 1 rparam dist/default/production\Lab_23.X.production.obj
+_line1str 62 0 BANK0 1 bssBANK0 dist/default/production\Lab_23.X.production.obj
+_line2str 73 0 BANK0 1 bssBANK0 dist/default/production\Lab_23.X.production.obj
+__Lrdata 0 0 COMRAM 1 rdata dist/default/production\Lab_23.X.production.obj
+__Lstack 0 0 STACK 2 stack dist/default/production\Lab_23.X.production.obj
+__Ltext0 0 0 ABS 0 text0 dist/default/production\Lab_23.X.production.obj
+__Ltext1 0 0 ABS 0 text1 dist/default/production\Lab_23.X.production.obj
+__Ltext2 0 0 ABS 0 text2 dist/default/production\Lab_23.X.production.obj
+__Ltext3 0 0 ABS 0 text3 dist/default/production\Lab_23.X.production.obj
+__Ltext4 0 0 ABS 0 text4 dist/default/production\Lab_23.X.production.obj
+__Ltext5 0 0 ABS 0 text5 dist/default/production\Lab_23.X.production.obj
+__Ltext6 0 0 ABS 0 text6 dist/default/production\Lab_23.X.production.obj
+__Ltext7 0 0 ABS 0 text7 dist/default/production\Lab_23.X.production.obj
+__Ltext8 0 0 ABS 0 text8 dist/default/production\Lab_23.X.production.obj
+__Ltext9 0 0 ABS 0 text9 dist/default/production\Lab_23.X.production.obj
+__Hfarbss 0 0 FARRAM 0 farbss dist/default/production\Lab_23.X.production.obj
+?i2_sprintf D 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+__end_of_ConfigPeriph 1C52 0 CODE 0 text21 dist/default/production\Lab_23.X.production.obj
+__Lintcode_body 0 0 ABS 0 intcode_body dist/default/production\Lab_23.X.production.obj
+__end_of_LCDInitCommand 1C0E 0 CODE 0 text8 dist/default/production\Lab_23.X.production.obj
+__size_of_calculateBase 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+_INTCONbits FF2 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__Habs1 0 0 ABS 0 abs1 dist/default/production\Lab_23.X.production.obj
+__Hdata 0 0 ABS 0 data dist/default/production\Lab_23.X.production.obj
+__Hinit 120 0 CODE 0 init dist/default/production\Lab_23.X.production.obj
+__Hrbit 0 0 COMRAM 1 rbit dist/default/production\Lab_23.X.production.obj
+__Hrbss 0 0 COMRAM 1 rbss dist/default/production\Lab_23.X.production.obj
+__Htemp 3D 0 COMRAM 1 temp dist/default/production\Lab_23.X.production.obj
+__Htext 0 0 ABS 0 text dist/default/production\Lab_23.X.production.obj
+__Labs1 0 0 ABS 0 abs1 dist/default/production\Lab_23.X.production.obj
+__Ldata 0 0 ABS 0 data dist/default/production\Lab_23.X.production.obj
+__Linit 120 0 CODE 0 init dist/default/production\Lab_23.X.production.obj
+__Lrbit 0 0 COMRAM 1 rbit dist/default/production\Lab_23.X.production.obj
+__Lrbss 0 0 COMRAM 1 rbss dist/default/production\Lab_23.X.production.obj
+__Ltemp 3C 0 COMRAM 1 temp dist/default/production\Lab_23.X.production.obj
+__Ltext 0 0 ABS 0 text dist/default/production\Lab_23.X.production.obj
+__CFG_XINST$OFF 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__size_ofi2_SPIReadWrite 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+_ConfigInterrupts 1C5E 0 CODE 0 text22 dist/default/production\Lab_23.X.production.obj
+__end_of_shortDelay 1C80 0 CODE 0 text17 dist/default/production\Lab_23.X.production.obj
+__LcstackBANK0 0 0 ABS 0 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+int$flags 3C 0 COMRAM 1 temp dist/default/production\Lab_23.X.production.obj
+__HcstackCOMRAM 0 0 ABS 0 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+i2LCDWriteLine@line 10 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+__Hintret 0 0 ABS 0 intret dist/default/production\Lab_23.X.production.obj
+__size_of_LCDCommand 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__Hirdata 0 0 CODE 0 irdata dist/default/production\Lab_23.X.production.obj
+__size_of_InitPins 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__S0 1FFFE 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__S1 B6 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__S2 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+_str 2E 0 COMRAM 1 dataCOMRAM dist/default/production\Lab_23.X.production.obj
+__Hjflash_buffer 1F800 0 CODE 0 jflash_buffer dist/default/production\Lab_23.X.production.obj
+LCDClearLine@c 91 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+__size_of_WriteRegister 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+i2___lwdiv@dividend 1 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+__HidataCOMRAM 0 0 ABS 0 idataCOMRAM dist/default/production\Lab_23.X.production.obj
+__Lbigdata 0 0 BIGRAM 1 bigdata dist/default/production\Lab_23.X.production.obj
+__Hnvrram 0 0 COMRAM 1 nvrram dist/default/production\Lab_23.X.production.obj
+sprintf@val 9D 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+i2LCDClearLine@line E 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+_LCDInitPort 1A68 0 CODE 0 text7 dist/default/production\Lab_23.X.production.obj
+__end_of_calculateBase 1AFA 0 CODE 0 text12 dist/default/production\Lab_23.X.production.obj
+i2_LCDClearLine 1A9E 0 CODE 0 text29 dist/default/production\Lab_23.X.production.obj
+HighIsr@i 2C 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+__Lintentry 0 0 ABS 0 intentry dist/default/production\Lab_23.X.production.obj
+i2_LCDWriteByte 1A2C 0 CODE 0 text36 dist/default/production\Lab_23.X.production.obj
+i2_LCDWriteData 1BCE 0 CODE 0 text30 dist/default/production\Lab_23.X.production.obj
+i2_LCDWriteLine 163C 0 CODE 0 text28 dist/default/production\Lab_23.X.production.obj
+__Hramtop 1000 0 RAM 0 ramtop dist/default/production\Lab_23.X.production.obj
+__Hrparam 0 0 COMRAM 1 rparam dist/default/production\Lab_23.X.production.obj
+__pdataBANK0 A6 0 BANK0 1 dataBANK0 dist/default/production\Lab_23.X.production.obj
+__activetblptr 3 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__Hstruct 0 0 COMRAM 1 struct dist/default/production\Lab_23.X.production.obj
+i2SPIReadWrite@r 2 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+__LbssBANK0 0 0 ABS 0 bssBANK0 dist/default/production\Lab_23.X.production.obj
+__Htext10 0 0 ABS 0 text10 dist/default/production\Lab_23.X.production.obj
+__Htext11 0 0 ABS 0 text11 dist/default/production\Lab_23.X.production.obj
+__Htext12 0 0 ABS 0 text12 dist/default/production\Lab_23.X.production.obj
+__Htext13 0 0 ABS 0 text13 dist/default/production\Lab_23.X.production.obj
+__Htext14 0 0 ABS 0 text14 dist/default/production\Lab_23.X.production.obj
+__Htext15 0 0 ABS 0 text15 dist/default/production\Lab_23.X.production.obj
+__Htext16 0 0 ABS 0 text16 dist/default/production\Lab_23.X.production.obj
+__Htext17 0 0 ABS 0 text17 dist/default/production\Lab_23.X.production.obj
+__Htext18 0 0 ABS 0 text18 dist/default/production\Lab_23.X.production.obj
+__Htext19 0 0 ABS 0 text19 dist/default/production\Lab_23.X.production.obj
+__Htext20 0 0 ABS 0 text20 dist/default/production\Lab_23.X.production.obj
+__Htext21 0 0 ABS 0 text21 dist/default/production\Lab_23.X.production.obj
+__Htext22 0 0 ABS 0 text22 dist/default/production\Lab_23.X.production.obj
+__Htext24 0 0 ABS 0 text24 dist/default/production\Lab_23.X.production.obj
+__Htext25 0 0 ABS 0 text25 dist/default/production\Lab_23.X.production.obj
+__Htext26 0 0 ABS 0 text26 dist/default/production\Lab_23.X.production.obj
+__Htext27 0 0 ABS 0 text27 dist/default/production\Lab_23.X.production.obj
+__Htext28 0 0 ABS 0 text28 dist/default/production\Lab_23.X.production.obj
+__Htext29 0 0 ABS 0 text29 dist/default/production\Lab_23.X.production.obj
+__Htext30 0 0 ABS 0 text30 dist/default/production\Lab_23.X.production.obj
+__Htext31 0 0 ABS 0 text31 dist/default/production\Lab_23.X.production.obj
+__Htext32 0 0 ABS 0 text32 dist/default/production\Lab_23.X.production.obj
+__Htext33 0 0 ABS 0 text33 dist/default/production\Lab_23.X.production.obj
+__Htext34 0 0 ABS 0 text34 dist/default/production\Lab_23.X.production.obj
+__Htext35 0 0 ABS 0 text35 dist/default/production\Lab_23.X.production.obj
+__Htext36 0 0 ABS 0 text36 dist/default/production\Lab_23.X.production.obj
+__Htext37 0 0 ABS 0 text37 dist/default/production\Lab_23.X.production.obj
+calculateBase@base 84 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+calculateBase@line 85 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+__end_of_WriteRegister 1B22 0 CODE 0 text19 dist/default/production\Lab_23.X.production.obj
+WriteRegister@reg 85 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+sprintf@flag 97 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+sprintf@prec 98 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+_InitPins 1BB6 0 CODE 0 text20 dist/default/production\Lab_23.X.production.obj
+__ptext10 1B66 0 CODE 0 text10 dist/default/production\Lab_23.X.production.obj
+__ptext11 1744 0 CODE 0 text11 dist/default/production\Lab_23.X.production.obj
+__ptext12 1AD0 0 CODE 0 text12 dist/default/production\Lab_23.X.production.obj
+__ptext13 1C52 0 CODE 0 text13 dist/default/production\Lab_23.X.production.obj
+__ptext14 1C0E 0 CODE 0 text14 dist/default/production\Lab_23.X.production.obj
+__ptext15 1B82 0 CODE 0 text15 dist/default/production\Lab_23.X.production.obj
+__ptext16 1C8A 0 CODE 0 text16 dist/default/production\Lab_23.X.production.obj
+__ptext17 1C76 0 CODE 0 text17 dist/default/production\Lab_23.X.production.obj
+__ptext18 191A 0 CODE 0 text18 dist/default/production\Lab_23.X.production.obj
+__ptext19 1AFA 0 CODE 0 text19 dist/default/production\Lab_23.X.production.obj
+__ptext20 1BB6 0 CODE 0 text20 dist/default/production\Lab_23.X.production.obj
+__ptext21 1C42 0 CODE 0 text21 dist/default/production\Lab_23.X.production.obj
+__ptext22 1C5E 0 CODE 0 text22 dist/default/production\Lab_23.X.production.obj
+__ptext24 125C 0 CODE 0 text24 dist/default/production\Lab_23.X.production.obj
+__ptext25 19AA 0 CODE 0 text25 dist/default/production\Lab_23.X.production.obj
+__ptext26 18C8 0 CODE 0 text26 dist/default/production\Lab_23.X.production.obj
+__ptext27 1C20 0 CODE 0 text27 dist/default/production\Lab_23.X.production.obj
+__ptext28 163C 0 CODE 0 text28 dist/default/production\Lab_23.X.production.obj
+__ptext29 1A9E 0 CODE 0 text29 dist/default/production\Lab_23.X.production.obj
+__ptext30 1BCE 0 CODE 0 text30 dist/default/production\Lab_23.X.production.obj
+__ptext31 1964 0 CODE 0 text31 dist/default/production\Lab_23.X.production.obj
+__ptext32 1B48 0 CODE 0 text32 dist/default/production\Lab_23.X.production.obj
+__ptext33 1BE4 0 CODE 0 text33 dist/default/production\Lab_23.X.production.obj
+__ptext34 1C8C 0 CODE 0 text34 dist/default/production\Lab_23.X.production.obj
+__ptext35 1C80 0 CODE 0 text35 dist/default/production\Lab_23.X.production.obj
+__ptext36 1A2C 0 CODE 0 text36 dist/default/production\Lab_23.X.production.obj
+__ptext37 1B22 0 CODE 0 text37 dist/default/production\Lab_23.X.production.obj
+i2_LCDSetPos 1964 0 CODE 0 text31 dist/default/production\Lab_23.X.production.obj
+___lwdiv 16CC 0 CODE 0 text3 dist/default/production\Lab_23.X.production.obj
+___lwmod 17AA 0 CODE 0 text2 dist/default/production\Lab_23.X.production.obj
+__Lbank10 0 0 ABS 0 bank10 dist/default/production\Lab_23.X.production.obj
+__Lbank11 0 0 ABS 0 bank11 dist/default/production\Lab_23.X.production.obj
+__Lbank12 0 0 ABS 0 bank12 dist/default/production\Lab_23.X.production.obj
+__Lbank13 0 0 ABS 0 bank13 dist/default/production\Lab_23.X.production.obj
+__Lbank14 0 0 ABS 0 bank14 dist/default/production\Lab_23.X.production.obj
+__Lbank15 0 0 ABS 0 bank15 dist/default/production\Lab_23.X.production.obj
+i2___lwdiv@divisor 3 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+__Lbigbss 0 0 BIGRAM 1 bigbss dist/default/production\Lab_23.X.production.obj
+__Lbigram 0 0 ABS 0 bigram dist/default/production\Lab_23.X.production.obj
+__Lcomram 0 0 ABS 0 comram dist/default/production\Lab_23.X.production.obj
+__Lconfig 1FFF8 0 CONFIG 0 config dist/default/production\Lab_23.X.production.obj
+__end_of_InitPins 1BCE 0 CODE 0 text20 dist/default/production\Lab_23.X.production.obj
+_LCDInit 180C 0 CODE 0 text6 dist/default/production\Lab_23.X.production.obj
+_LATAbits F89 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+LCDSetPos@col 8C 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+LCDSetPos@pos 8F 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+LCDSetPos@row 8A 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+__end_of_ConfigInterrupts 1C6A 0 CODE 0 text22 dist/default/production\Lab_23.X.production.obj
+__Lfarbss 0 0 FARRAM 0 farbss dist/default/production\Lab_23.X.production.obj
+___lwdiv@divisor 86 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+i2_LCDCommand 1BE4 0 CODE 0 text33 dist/default/production\Lab_23.X.production.obj
+__Lfardata 0 0 FARRAM 0 fardata dist/default/production\Lab_23.X.production.obj
+__end_ofi2_LCDClearLine 1AD0 0 CODE 0 text29 dist/default/production\Lab_23.X.production.obj
+__size_of_ConfigInterrupts 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__end_ofi2_LCDWriteByte 1A68 0 CODE 0 text36 dist/default/production\Lab_23.X.production.obj
+__end_ofi2_LCDWriteData 1BE4 0 CODE 0 text30 dist/default/production\Lab_23.X.production.obj
+__end_ofi2_LCDWriteLine 16CC 0 CODE 0 text28 dist/default/production\Lab_23.X.production.obj
+stackhi F3F 0 ABS 0 - C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.obj
+stacklo B6 0 ABS 0 - C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.obj
+__Lintcode 8 0 CODE 0 intcode dist/default/production\Lab_23.X.production.obj
+__Lintret 0 0 ABS 0 intret dist/default/production\Lab_23.X.production.obj
+__Lirdata 0 0 CODE 0 irdata dist/default/production\Lab_23.X.production.obj
+__end_ofi2___lwdiv 191A 0 CODE 0 text26 dist/default/production\Lab_23.X.production.obj
+__end_ofi2___lwmod 19EC 0 CODE 0 text25 dist/default/production\Lab_23.X.production.obj
+__Lspace_0 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__Lspace_1 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__Lspace_2 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__pbssCOMRAM 39 0 COMRAM 1 bssCOMRAM dist/default/production\Lab_23.X.production.obj
+__size_ofi2___lwdiv 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__size_ofi2___lwmod 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+LCDWriteLine@line 93 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+__HcstackBANK0 0 0 ABS 0 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+_PIR1bits F9E 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__Lend_init 120 0 CODE 0 end_init dist/default/production\Lab_23.X.production.obj
+__LcstackCOMRAM 0 0 ABS 0 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+end_of_initialization 18BE 0 CODE 0 cinit dist/default/production\Lab_23.X.production.obj
+__Lnvrram 0 0 COMRAM 1 nvrram dist/default/production\Lab_23.X.production.obj
+__Hintentry 0 0 ABS 0 intentry dist/default/production\Lab_23.X.production.obj
+_RCONbits FD0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__end_ofi2_calculateBase 1B66 0 CODE 0 text32 dist/default/production\Lab_23.X.production.obj
+___lwdiv@dividend 84 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+?___lwdiv 84 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+?___lwmod 8B 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+i2___lwdiv 18C8 0 CODE 0 text26 dist/default/production\Lab_23.X.production.obj
+i2___lwmod 19AA 0 CODE 0 text25 dist/default/production\Lab_23.X.production.obj
+__Hreset_vec 4 0 CODE 0 reset_vec dist/default/production\Lab_23.X.production.obj
+main@i_1277 A4 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+__size_ofi2_LCDCommand 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__HbssBANK0 0 0 ABS 0 bssBANK0 dist/default/production\Lab_23.X.production.obj
+LCDClearLine@line 92 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+__Lramtop 1000 0 RAM 0 ramtop dist/default/production\Lab_23.X.production.obj
+__Lrparam 0 0 COMRAM 1 rparam dist/default/production\Lab_23.X.production.obj
+__pcinit 186C 0 CODE 0 cinit dist/default/production\Lab_23.X.production.obj
+__ptext0 144A 0 CODE 0 text0 dist/default/production\Lab_23.X.production.obj
+__ptext1 1028 0 CODE 0 text1 dist/default/production\Lab_23.X.production.obj
+__ptext2 17AA 0 CODE 0 text2 dist/default/production\Lab_23.X.production.obj
+__ptext3 16CC 0 CODE 0 text3 dist/default/production\Lab_23.X.production.obj
+__ptext4 1B9E 0 CODE 0 text4 dist/default/production\Lab_23.X.production.obj
+__ptext5 159A 0 CODE 0 text5 dist/default/production\Lab_23.X.production.obj
+__ptext6 180C 0 CODE 0 text6 dist/default/production\Lab_23.X.production.obj
+__ptext7 1A68 0 CODE 0 text7 dist/default/production\Lab_23.X.production.obj
+__ptext8 1BFA 0 CODE 0 text8 dist/default/production\Lab_23.X.production.obj
+__ptext9 19EC 0 CODE 0 text9 dist/default/production\Lab_23.X.production.obj
+__Lstruct 0 0 COMRAM 1 struct dist/default/production\Lab_23.X.production.obj
+__Ltext10 0 0 ABS 0 text10 dist/default/production\Lab_23.X.production.obj
+__Ltext11 0 0 ABS 0 text11 dist/default/production\Lab_23.X.production.obj
+__Ltext12 0 0 ABS 0 text12 dist/default/production\Lab_23.X.production.obj
+__Ltext13 0 0 ABS 0 text13 dist/default/production\Lab_23.X.production.obj
+__Ltext14 0 0 ABS 0 text14 dist/default/production\Lab_23.X.production.obj
+__Ltext15 0 0 ABS 0 text15 dist/default/production\Lab_23.X.production.obj
+__Ltext16 0 0 ABS 0 text16 dist/default/production\Lab_23.X.production.obj
+__Ltext17 0 0 ABS 0 text17 dist/default/production\Lab_23.X.production.obj
+__Ltext18 0 0 ABS 0 text18 dist/default/production\Lab_23.X.production.obj
+__Ltext19 0 0 ABS 0 text19 dist/default/production\Lab_23.X.production.obj
+__Ltext20 0 0 ABS 0 text20 dist/default/production\Lab_23.X.production.obj
+__Ltext21 0 0 ABS 0 text21 dist/default/production\Lab_23.X.production.obj
+__Ltext22 0 0 ABS 0 text22 dist/default/production\Lab_23.X.production.obj
+__Ltext24 0 0 ABS 0 text24 dist/default/production\Lab_23.X.production.obj
+__Ltext25 0 0 ABS 0 text25 dist/default/production\Lab_23.X.production.obj
+__Ltext26 0 0 ABS 0 text26 dist/default/production\Lab_23.X.production.obj
+__Ltext27 0 0 ABS 0 text27 dist/default/production\Lab_23.X.production.obj
+__Ltext28 0 0 ABS 0 text28 dist/default/production\Lab_23.X.production.obj
+__Ltext29 0 0 ABS 0 text29 dist/default/production\Lab_23.X.production.obj
+__Ltext30 0 0 ABS 0 text30 dist/default/production\Lab_23.X.production.obj
+__Ltext31 0 0 ABS 0 text31 dist/default/production\Lab_23.X.production.obj
+__Ltext32 0 0 ABS 0 text32 dist/default/production\Lab_23.X.production.obj
+__Ltext33 0 0 ABS 0 text33 dist/default/production\Lab_23.X.production.obj
+__Ltext34 0 0 ABS 0 text34 dist/default/production\Lab_23.X.production.obj
+__Ltext35 0 0 ABS 0 text35 dist/default/production\Lab_23.X.production.obj
+__Ltext36 0 0 ABS 0 text36 dist/default/production\Lab_23.X.production.obj
+__Ltext37 0 0 ABS 0 text37 dist/default/production\Lab_23.X.production.obj
+__end_ofi2_WriteRegister 1B48 0 CODE 0 text37 dist/default/production\Lab_23.X.production.obj
+WriteRegister@b 84 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+__size_of_shortDelay 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__ramtop 1000 0 RAM 0 ramtop C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.obj
+_sprintf 1028 0 CODE 0 text1 dist/default/production\Lab_23.X.production.obj
+_HighIsr 8 0 CODE 0 intcode dist/default/production\Lab_23.X.production.obj
+__Lpowerup 120 0 CODE 0 powerup dist/default/production\Lab_23.X.production.obj
+i2LCDWriteByte@rs 3 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+i2LCDWriteLine@str E 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+sprintf@ap 99 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+sprintf@cp 9B 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+sprintf@sp 90 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+__psmallconst 1000 0 SMALLCONST 0 smallconst dist/default/production\Lab_23.X.production.obj
+__end_ofi2_wait 1C8E 0 CODE 0 text34 dist/default/production\Lab_23.X.production.obj
+__Lreset_vec 0 0 CODE 0 reset_vec dist/default/production\Lab_23.X.production.obj
+__end_ofi2_LCDCommand 1BFA 0 CODE 0 text33 dist/default/production\Lab_23.X.production.obj
+_LCDClearLine 19EC 0 CODE 0 text9 dist/default/production\Lab_23.X.production.obj
+___param_bank 10 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__Hbigdata 0 0 BIGRAM 1 bigdata dist/default/production\Lab_23.X.production.obj
+__end_of__initialization 18BE 0 CODE 0 cinit dist/default/production\Lab_23.X.production.obj
+LCDWriteLine@str 91 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+_LCDWriteByte 191A 0 CODE 0 text18 dist/default/production\Lab_23.X.production.obj
+_LCDWriteData 1B66 0 CODE 0 text10 dist/default/production\Lab_23.X.production.obj
+_LCDWriteLine 159A 0 CODE 0 text5 dist/default/production\Lab_23.X.production.obj
+__Libigdata 0 0 CODE 0 ibigdata dist/default/production\Lab_23.X.production.obj
+__pidataBANK0 1C32 0 CODE 0 idataBANK0 dist/default/production\Lab_23.X.production.obj
+i2_calculateBase 1B48 0 CODE 0 text32 dist/default/production\Lab_23.X.production.obj
+__Lclrtext 0 0 ABS 0 clrtext dist/default/production\Lab_23.X.production.obj
+_SSP1CON1bits FC6 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__end_ofi2_sprintf 144A 0 CODE 0 text24 dist/default/production\Lab_23.X.production.obj
+__size_ofi2_sprintf 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__pcstackCOMRAM 1 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+__size_of_LCDInitCommand 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+_SSP1BUF FC9 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+_SSPCON1 FC6 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__Hend_init 124 0 CODE 0 end_init dist/default/production\Lab_23.X.production.obj
+i2_WriteRegister 1B22 0 CODE 0 text37 dist/default/production\Lab_23.X.production.obj
+sprintf@c 9F 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+sprintf@f 92 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+__end_of_main 159A 0 CODE 0 text0 dist/default/production\Lab_23.X.production.obj
+__end_of_wait 1C8C 0 CODE 0 text16 dist/default/production\Lab_23.X.production.obj
+__pintcode 8 0 CODE 0 intcode dist/default/production\Lab_23.X.production.obj
+__end_of_dpowers 100B 0 SMALLCONST 0 smallconst dist/default/production\Lab_23.X.production.obj
+?_sprintf 90 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+i2_SPIReadWrite 1C20 0 CODE 0 text27 dist/default/production\Lab_23.X.production.obj
+_SSPIF 7CF3 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+_TRISB F93 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+_TRISC F94 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+_TRISD F95 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__HRAM 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__Hbss 0 0 RAM 1 bss dist/default/production\Lab_23.X.production.obj
+__Hram 0 0 ABS 0 ram dist/default/production\Lab_23.X.production.obj
+__Hsfr 0 0 ABS 0 sfr dist/default/production\Lab_23.X.production.obj
+__LRAM 1 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__Lbss 0 0 RAM 1 bss dist/default/production\Lab_23.X.production.obj
+__Lram 0 0 ABS 0 ram dist/default/production\Lab_23.X.production.obj
+__Lsfr 0 0 ABS 0 sfr dist/default/production\Lab_23.X.production.obj
+i2_sprintf 125C 0 CODE 0 text24 dist/default/production\Lab_23.X.production.obj
+_count 60 0 BANK0 1 bssBANK0 dist/default/production\Lab_23.X.production.obj
+_rdStr A6 0 BANK0 1 dataBANK0 dist/default/production\Lab_23.X.production.obj
+__size_of_LCDClearLine 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+___extmem_base 20000 0 ABS 0 - C:\Users\jtwogoo1\AppData\Local\Temp\s7dc.obj
+_SSPSTATbits FC7 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__end_of_LCDInitPort 1A9E 0 CODE 0 text7 dist/default/production\Lab_23.X.production.obj
+__size_of_LCDWriteByte 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__size_of_LCDWriteData 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__size_of_LCDWriteLine 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+__HdataBANK0 0 0 ABS 0 dataBANK0 dist/default/production\Lab_23.X.production.obj
+__initialization 186C 0 CODE 0 cinit dist/default/production\Lab_23.X.production.obj
+__pbssBANK0 60 0 BANK0 1 bssBANK0 dist/default/production\Lab_23.X.production.obj
+__pdataCOMRAM 2E 0 COMRAM 1 dataCOMRAM dist/default/production\Lab_23.X.production.obj
+i2LCDWriteByte@c 4 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+i2_shortDelay 1C80 0 CODE 0 text35 dist/default/production\Lab_23.X.production.obj
+i2___lwmod@counter C 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+__Hfardata 0 0 FARRAM 0 fardata dist/default/production\Lab_23.X.production.obj
+__Hsmallconst 1028 0 SMALLCONST 0 smallconst dist/default/production\Lab_23.X.production.obj
+__size_of_LCDClear 0 0 ABS 0 - dist/default/production\Lab_23.X.production.obj
+i2LCDWriteData@c 6 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+__Lifardata 0 0 CODE 0 ifardata dist/default/production\Lab_23.X.production.obj
+SPIReadWrite@r 85 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+i2LCDCommand@command 6 0 COMRAM 1 cstackCOMRAM dist/default/production\Lab_23.X.production.obj
+__Hintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/production\Lab_23.X.production.obj
+__Hintcode 120 0 CODE 0 intcode dist/default/production\Lab_23.X.production.obj
+__end_of_LCDClearLine 1A2C 0 CODE 0 text9 dist/default/production\Lab_23.X.production.obj
+LCDInitCommand@command 89 0 BANK0 1 cstackBANK0 dist/default/production\Lab_23.X.production.obj
+# %SPLITSTAB Section
+# This section enumerates all the psect splits performed by the assembler.
+# The beginning of the section is indicated by %SPLITSTAB.
+# Each line is a record a particular split, where the parent psect is on
+# the left and the child on the right.  Note that a child psect is always
+# split form the top of the parent psect. All splits from a given parent
+# are listed in the order in which they occurred.
+%SPLITSTAB
+# %DABS Section
+# This section contains a table of all usuage of the assember
+# directive DABS in the program. Each line has the following format:
+#   <name> <space> <address> <size>
+# If the DABS was originally labelled then that shall be <name>,
+# otherwise name will be "-".  The <space> number is in decimal.
+# <address> and <size> are in byte units as unqaulified hexadecimal
+%DABS
+# %SEGMENTS Section
+# This sections enumerates the segments of the program.  Each segment
+# is described on a single line as follows:
+#    <name> <space> <link address> <file address> <size> <delta>
+# Addresses and size are in unqualified hexadecimal.  The link address
+# and size are in units of delta. The file address is in units of bytes.
+# All other numeric quantities are in decimal.
+%SEGMENTS
+text1 0 1028 1028 C4D 1
+text17 0 1C76 1C76 18 1
+cstackCOMRAM 1 1 1 3C 1
+reset_vec 0 0 0 4 1
+bssBANK0 1 60 60 56 1
+intcode 0 8 8 11C 1
+smallconst 0 1000 1000 28 1
+config 0 1FFF8 1FFF8 6 1

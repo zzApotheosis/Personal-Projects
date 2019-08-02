@@ -1,0 +1,65 @@
+# Reading C:/altera/13.1/modelsim_ase/tcl/vsim/pref.tcl 
+# do two_by_one_mux_run_msim_rtl_verilog.do 
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Copying C:\altera\13.1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# ** Warning: Copied C:\altera\13.1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini.
+#          Updated modelsim.ini.
+# 
+# vlog -vlog01compat -work work +incdir+E:/Digital\ Circuist\ III/Lab\ 2 {E:/Digital Circuist III/Lab 2/two_by_one_mux.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module two_by_one_mux
+# -- Compiling module mux_tb
+# 
+# Top level modules:
+# 	mux_tb
+# 
+vsim work.mux_tb
+# vsim work.mux_tb 
+# Loading work.mux_tb
+# Loading work.two_by_one_mux
+run
+#                    0x_in=0,y_in=0,sel=0,---m_out=0
+# 
+#                   20x_in=0,y_in=1,sel=0,---m_out=0
+# 
+#                   30x_in=1,y_in=0,sel=0,---m_out=1
+# 
+#                   40x_in=1,y_in=1,sel=0,---m_out=1
+# 
+#                   50x_in=0,y_in=0,sel=1,---m_out=0
+# 
+#                   60x_in=0,y_in=1,sel=1,---m_out=1
+# 
+#                   70x_in=1,y_in=0,sel=1,---m_out=0
+# 
+#                   80x_in=1,y_in=1,sel=1,---m_out=1
+# 
+add wave -position end  sim:/mux_tb/local_x_in
+add wave -position end  sim:/mux_tb/local_y_in
+add wave -position end  sim:/mux_tb/local_sel
+add wave -position end  sim:/mux_tb/local_m_out
+restart -f
+run
+#                    0x_in=0,y_in=0,sel=0,---m_out=0
+# 
+#                   20x_in=0,y_in=1,sel=0,---m_out=0
+# 
+#                   30x_in=1,y_in=0,sel=0,---m_out=1
+# 
+#                   40x_in=1,y_in=1,sel=0,---m_out=1
+# 
+#                   50x_in=0,y_in=0,sel=1,---m_out=0
+# 
+#                   60x_in=0,y_in=1,sel=1,---m_out=1
+# 
+#                   70x_in=1,y_in=0,sel=1,---m_out=0
+# 
+#                   80x_in=1,y_in=1,sel=1,---m_out=1
+# 
+# WARNING: No extended dataflow license exists
+quit

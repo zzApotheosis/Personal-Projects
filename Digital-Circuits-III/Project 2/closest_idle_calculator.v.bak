@@ -1,0 +1,8 @@
+/*
+ * Title: Closest Idle Floor Calculator
+ * This calculates the closest floor to idle at in case
+ * there are no current floor requests.
+ *
+ * Author: Steven Jennings
+ * Date: 2 May 2017
+ */

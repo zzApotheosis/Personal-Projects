@@ -1,0 +1,44 @@
+|sev_seg_decoder
+bin_in[0] => led_out.IN1
+bin_in[0] => led_out.IN1
+bin_in[0] => led_out.IN1
+bin_in[0] => led_out.IN1
+bin_in[0] => led_out.IN1
+bin_in[0] => led_out.IN0
+bin_in[0] => led_out.IN1
+bin_in[0] => led_out.IN1
+bin_in[0] => led_out.IN1
+bin_in[0] => led_out.IN1
+bin_in[0] => led_out.IN1
+bin_in[0] => led_out.IN1
+bin_in[0] => led_out.IN1
+bin_in[0] => led_out.IN1
+bin_in[0] => led_out.IN1
+bin_in[0] => led_out.IN1
+bin_in[0] => led_out.IN1
+bin_in[1] => led_out.IN0
+bin_in[1] => led_out.IN1
+bin_in[1] => led_out.IN0
+bin_in[1] => led_out.IN1
+bin_in[1] => led_out.IN1
+bin_in[1] => led_out.IN0
+bin_in[1] => led_out.IN1
+bin_in[1] => led_out.IN1
+bin_in[1] => led_out.IN1
+bin_in[1] => led_out.IN1
+bin_in[1] => led_out.IN0
+bin_in[2] => led_out.IN1
+bin_in[2] => led_out.IN0
+bin_in[2] => led_out.IN0
+bin_in[2] => led_out.IN0
+bin_in[2] => led_out.IN1
+bin_in[2] => led_out.IN0
+bin_in[3] => led_out.IN1
+bin_in[3] => led_out.IN1
+bin_in[3] => led_out.IN1
+bin_in[3] => led_out.IN1
+bin_in[3] => led_out.IN1
+bin_in[3] => led_out.IN1
+bin_in[3] => led_out.IN1
+
+

@@ -1,0 +1,39 @@
+/*
+ * Title: Creating Behavioral Module and Test Bench
+ * This is a behavioral model design for 
+ *
+ * Authors: Steven Jennings, Scott Allen
+ * Date: 15 March 2017
+ */
+
+module TFF(Q, Qnot, T, clk, clr);
+	//I/O declaration
+	output Q, Qnot;
+	input T, clk, clr;
+	wire w0, w1, wq, wqnot;
+	
+	assign w0 = clk & T;
+	assign w1 = clk & T;
+	assign wq = Q;
+	assign wqnot = Qnot;
+	assign Q = ~(w0 & wqnot);
+	assign Qnot = ~(w1 & wq & clr);
+endmodule
+
+module counter8_bit(q7, q6, q5, q4, q3, q2, q1, q0, en, clk, clr);
+	//I/O declaration
+	output q7, q6, q5, q4, q3, q2, q1, q0;
+	input en, clk, clr;
+	
+	assign
+	
+	//Instantiating T Flip Flops
+	TFF t7(w7, en, clk, clr);
+	TFF t6(w6, en, clk, clr);
+	TFF t5(w5, en, clk, clr);
+	TFF t4(w4, en, clk, clr);
+	TFF t3(w3, en, clk, clr);
+	TFF t2(w2, en, clk, clr);
+	TFF t1(w1, en, clk, clr);
+	TFF t0(w0, en, clk, clr);
+endmodule

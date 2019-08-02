@@ -1,0 +1,64 @@
+Homework 2 - 14 September 2016
+
+1.1.1a ( 0 + 15 ) / 2 = 7
+1.1.1b 2.0e-6 * 100000000.1 = 200.0000002
+1.1.1c true && false || true && true = true
+
+1.1.2a (1 + 2.236)/2 = 1.618
+1.1.2b 1 + 2 + 3 + 4.0 = 10.0
+1.1.2c 4.1 >= 4 = true
+1.1.2d 1 + 2 + "3" = 33 (First 3 is an evaluated integer, second 3 is a string)
+
+1.1.4a "then" is not necessary.
+1.1.4b There should be parentheses around "a > b" like so: (a > b)
+1.1.4c Nothing wrong here.
+1.1.4d Including an else statement requires curly brackets around the body of the if statement. Also, there should be a semicolon after "c = 0"
+
+1.1.6
+0
+1
+1
+2
+3
+5
+8
+13
+21
+34
+55
+89
+144
+233
+377
+610
+
+1.1.7a 3.00009
+1.1.7b 499500
+1.1.7c 10*N
+
+1.1.8a b
+1.1.8b bc
+1.1.8c e
+
+1.1.12
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+What a WASTE of memory!
+
+1.3.3 The following sequences could not occur: b, c, d, e, f, g, h
+
+1.4.5a N + 1 => ~ N
+1.4.5b 1 + 1/N => ~ 1
+1.4.5c (1 + 1/N)(1 + 2/N) => ~ 1
+1.4.5d 2N^3 - 15N^2 + N => ~ 2N^3
+1.4.5e lg(2N)/lg(N) => ~ lg(2N)
+1.4.5f lg(N^2 + 1)/lg(N) => ~ lg(N^2)
+1.4.5g (N^100)/(2^N) => ~ 1/(2^N)

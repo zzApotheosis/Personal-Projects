@@ -1,0 +1,1692 @@
+[p LITE_MODE AUTOSTATIC LFSROK EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F47J53 ]
+[d frameptr 4065 ]
+"217 C:\Users\jtwogoo1\Desktop/usb_lab/mouse.c
+[e E10210 . `uc
+DETACHED_STATE 0
+ATTACHED_STATE 1
+POWERED_STATE 2
+DEFAULT_STATE 4
+ADR_PENDING_STATE 8
+ADDRESS_STATE 16
+CONFIGURED_STATE 32
+]
+"320
+[e E3 _BOOL `uc
+FALSE 0
+TRUE 1
+]
+"818
+[e E9982 . `ui
+EVENT_NONE 0
+EVENT_DEVICE_STACK_BASE 1
+EVENT_HOST_STACK_BASE 100
+EVENT_HUB_ATTACH 101
+EVENT_STALL 102
+EVENT_VBUS_SES_REQUEST 103
+EVENT_VBUS_OVERCURRENT 104
+EVENT_VBUS_REQUEST_POWER 105
+EVENT_VBUS_RELEASE_POWER 106
+EVENT_VBUS_POWER_AVAILABLE 107
+EVENT_UNSUPPORTED_DEVICE 108
+EVENT_CANNOT_ENUMERATE 109
+EVENT_CLIENT_INIT_ERROR 110
+EVENT_OUT_OF_MEMORY 111
+EVENT_UNSPECIFIED_ERROR 112
+EVENT_DETACH 113
+EVENT_TRANSFER 114
+EVENT_SOF 115
+EVENT_RESUME 116
+EVENT_SUSPEND 117
+EVENT_RESET 118
+EVENT_DATA_ISOC_READ 119
+EVENT_DATA_ISOC_WRITE 120
+EVENT_OVERRIDE_CLIENT_DRIVER_SELECTION 121
+EVENT_1MS 122
+EVENT_GENERIC_BASE 400
+EVENT_MSD_BASE 500
+EVENT_HID_BASE 600
+EVENT_PRINTER_BASE 700
+EVENT_CDC_BASE 800
+EVENT_CHARGER_BASE 900
+EVENT_AUDIO_BASE 1000
+EVENT_USER_BASE 10000
+EVENT_BUS_ERROR 32767
+]
+[e E10219 . `uc
+EVENT_CONFIGURED 1
+EVENT_SET_DESCRIPTOR 2
+EVENT_EP0_REQUEST 3
+EVENT_ATTACH 4
+EVENT_TRANSFER_TERMINATED 5
+]
+"279 C:\Users\jtwogoo1\Desktop/usb_lab/usb_device.c
+[e E10210 . `uc
+DETACHED_STATE 0
+ATTACHED_STATE 1
+POWERED_STATE 2
+DEFAULT_STATE 4
+ADR_PENDING_STATE 8
+ADDRESS_STATE 16
+CONFIGURED_STATE 32
+]
+"291
+[e E3 _BOOL `uc
+FALSE 0
+TRUE 1
+]
+"881
+[e E9982 . `ui
+EVENT_NONE 0
+EVENT_DEVICE_STACK_BASE 1
+EVENT_HOST_STACK_BASE 100
+EVENT_HUB_ATTACH 101
+EVENT_STALL 102
+EVENT_VBUS_SES_REQUEST 103
+EVENT_VBUS_OVERCURRENT 104
+EVENT_VBUS_REQUEST_POWER 105
+EVENT_VBUS_RELEASE_POWER 106
+EVENT_VBUS_POWER_AVAILABLE 107
+EVENT_UNSUPPORTED_DEVICE 108
+EVENT_CANNOT_ENUMERATE 109
+EVENT_CLIENT_INIT_ERROR 110
+EVENT_OUT_OF_MEMORY 111
+EVENT_UNSPECIFIED_ERROR 112
+EVENT_DETACH 113
+EVENT_TRANSFER 114
+EVENT_SOF 115
+EVENT_RESUME 116
+EVENT_SUSPEND 117
+EVENT_RESET 118
+EVENT_DATA_ISOC_READ 119
+EVENT_DATA_ISOC_WRITE 120
+EVENT_OVERRIDE_CLIENT_DRIVER_SELECTION 121
+EVENT_1MS 122
+EVENT_GENERIC_BASE 400
+EVENT_MSD_BASE 500
+EVENT_HID_BASE 600
+EVENT_PRINTER_BASE 700
+EVENT_CDC_BASE 800
+EVENT_CHARGER_BASE 900
+EVENT_AUDIO_BASE 1000
+EVENT_USER_BASE 10000
+EVENT_BUS_ERROR 32767
+]
+"2174
+[e E10219 . `uc
+EVENT_CONFIGURED 1
+EVENT_SET_DESCRIPTOR 2
+EVENT_EP0_REQUEST 3
+EVENT_ATTACH 4
+EVENT_TRANSFER_TERMINATED 5
+]
+"24 C:\Users\jtwogoo1\Desktop/usb_lab/LCD.c
+[v _LCDInit LCDInit `(v  1 e 0 0 ]
+"59
+[v _LCDWriteLine LCDWriteLine `(v  1 e 0 0 ]
+"80
+[v _LCDClearLine LCDClearLine `(v  1 e 0 0 ]
+"96
+[v _LCDSetPos LCDSetPos `(v  1 e 0 0 ]
+"133
+[v _LCDReadLine LCDReadLine `(v  1 e 0 0 ]
+"187
+[v _LCDCommand LCDCommand `(v  1 e 0 0 ]
+"193
+[v _LCDInitCommand LCDInitCommand `(v  1 e 0 0 ]
+"197
+[v _LCDWriteData LCDWriteData `(v  1 e 0 0 ]
+"209
+[v _LCDReadData LCDReadData `(uc  1 e 1 0 ]
+"217
+[v _LCDGetAC LCDGetAC `(uc  1 e 1 0 ]
+"225
+[v _calculateBase calculateBase `(uc  1 e 1 0 ]
+"235
+[v _wait wait `(v  1 e 0 0 ]
+"241
+[v _longDelay longDelay `(v  1 e 0 0 ]
+"247
+[v _shortDelay shortDelay `(v  1 e 0 0 ]
+"260
+[v _LCDWriteByte LCDWriteByte `(v  1 e 0 0 ]
+"271
+[v _LCDReadByte LCDReadByte `(uc  1 e 1 0 ]
+"287
+[v _LCDInitPort LCDInitPort `(v  1 e 0 0 ]
+"320
+[v _WriteRegister WriteRegister `(v  1 e 0 0 ]
+"69 C:\Users\jtwogoo1\Desktop/usb_lab/mouse.c
+[v _YourHighPriorityISRCode YourHighPriorityISRCode `II(v  1 e 0 0 ]
+"77
+[v _YourLowPriorityISRCode YourLowPriorityISRCode `IIL(v  1 e 0 0 ]
+"99
+[v _main main `(v  1 e 0 0 ]
+"136
+[v _InitializeSystem InitializeSystem `(v  1 s 0 InitializeSystem ]
+"173
+[v _UserInit UserInit `(v  1 e 0 0 ]
+"213
+[v _ProcessIO ProcessIO `(v  1 e 0 0 ]
+"247
+[v _Emulate_Mouse Emulate_Mouse `(v  1 e 0 0 ]
+"297
+[v _ReadPot ReadPot `(i  1 e 2 0 ]
+"372
+[v _BlinkUSBStatus BlinkUSBStatus `(v  1 e 0 0 ]
+"460
+[v _USBCBSuspend USBCBSuspend `(v  1 e 0 0 ]
+"509
+[v _USBCBWakeFromSuspend USBCBWakeFromSuspend `(v  1 e 0 0 ]
+"538
+[v _USBCB_SOF_Handler USBCB_SOF_Handler `(v  1 e 0 0 ]
+"560
+[v _USBCBErrorHandler USBCBErrorHandler `(v  1 e 0 0 ]
+"609
+[v _USBCBCheckOtherReq USBCBCheckOtherReq `(v  1 e 0 0 ]
+"632
+[v _USBCBStdSetDscHandler USBCBStdSetDscHandler `(v  1 e 0 0 ]
+"656
+[v _USBCBInitEP USBCBInitEP `(v  1 e 0 0 ]
+"817
+[v _USER_USB_CALLBACK_EVENT_HANDLER USER_USB_CALLBACK_EVENT_HANDLER `(E3  1 e 1 0 ]
+"460 C:\Users\jtwogoo1\Desktop/usb_lab/usb_device.c
+[v _USBDeviceInit USBDeviceInit `(v  1 e 0 0 ]
+[v i2_USBDeviceInit USBDeviceInit `(v  1 e 0 0 ]
+"654
+[v _USBDeviceTasks USBDeviceTasks `(v  1 e 0 0 ]
+"1049
+[v _USBEnableEndpoint USBEnableEndpoint `(v  1 e 0 0 ]
+"1166
+[v _USBTransferOnePacket USBTransferOnePacket `(*.39v  1 e 2 0 ]
+"1519
+[v _USBDeviceAttach USBDeviceAttach `(v  1 e 0 0 ]
+"1583
+[v _USBCtrlEPAllowStatusStage USBCtrlEPAllowStatusStage `(v  1 e 0 0 ]
+"1653
+[v _USBCtrlEPAllowDataStage USBCtrlEPAllowDataStage `(v  1 e 0 0 ]
+"1706
+[v _USBConfigureEndpoint USBConfigureEndpoint `(v  1 s 0 USBConfigureEndpoint ]
+"1779
+[v _USBCtrlEPServiceComplete USBCtrlEPServiceComplete `(v  1 s 0 USBCtrlEPServiceComplete ]
+"1931
+[v _USBCtrlTrfTxService USBCtrlTrfTxService `(v  1 s 0 USBCtrlTrfTxService ]
+"2012
+[v _USBCtrlTrfRxService USBCtrlTrfRxService `(v  1 s 0 USBCtrlTrfRxService ]
+"2125
+[v _USBStdSetCfgHandler USBStdSetCfgHandler `(v  1 s 0 USBStdSetCfgHandler ]
+"2200
+[v _USBStdGetDscHandler USBStdGetDscHandler `(v  1 s 0 USBStdGetDscHandler ]
+"2276
+[v _USBStdGetStatusHandler USBStdGetStatusHandler `(v  1 s 0 USBStdGetStatusHandler ]
+"2349
+[v _USBStallHandler USBStallHandler `(v  1 s 0 USBStallHandler ]
+"2392
+[v _USBSuspend USBSuspend `(v  1 s 0 USBSuspend ]
+"2449
+[v _USBWakeFromSuspend USBWakeFromSuspend `(v  1 s 0 USBWakeFromSuspend ]
+"2516
+[v _USBCtrlEPService USBCtrlEPService `(v  1 s 0 USBCtrlEPService ]
+"2616
+[v _USBCtrlTrfSetupHandler USBCtrlTrfSetupHandler `(v  1 s 0 USBCtrlTrfSetupHandler ]
+"2688
+[v _USBCtrlTrfOutHandler USBCtrlTrfOutHandler `(v  1 s 0 USBCtrlTrfOutHandler ]
+"2741
+[v _USBCtrlTrfInHandler USBCtrlTrfInHandler `(v  1 s 0 USBCtrlTrfInHandler ]
+"2832
+[v _USBCheckStdRequest USBCheckStdRequest `(v  1 s 0 USBCheckStdRequest ]
+"2900
+[v _USBStdFeatureReqHandler USBStdFeatureReqHandler `(v  1 s 0 USBStdFeatureReqHandler ]
+"169 C:\Users\jtwogoo1\Desktop/usb_lab/usb_function_hid.c
+[v _USBCheckHIDRequest USBCheckHIDRequest `(v  1 e 0 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"86 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"54 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 3 0 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\ftmul.c
+[v ___ftmul __ftmul `(f  1 e 3 0 ]
+"20 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\ftsub.c
+[v ___ftsub __ftsub `(f  1 e 3 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\memset.c
+[v _memset memset `(*.39v  1 e 2 0 ]
+[v i2_memset memset `(*.39v  1 e 2 0 ]
+"10 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 3 0 ]
+"245
+[v ___flsub __flsub `(d  1 e 3 0 ]
+"11 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 3 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 3 0 ]
+"15 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"48 C:\Users\jtwogoo1\Desktop/usb_lab/mouse.c
+[v _hid_report_in hid_report_in `[3]uc  1 e 3 0 ]
+"51
+[v _old_sw2 old_sw2 `uc  1 e 1 0 ]
+[v _old_sw3 old_sw3 `uc  1 e 1 0 ]
+"52
+[v _buffer buffer `[3]uc  1 e 3 0 ]
+"53
+[v _lastTransmission lastTransmission `*.39VEv  1 e 2 0 ]
+"245
+[v _state state `i  1 e 2 0 ]
+[s S1522 _USB_DEVICE_DESCRIPTOR 18 `uc 1 bLength 1 0 `uc 1 bDescriptorType 1 1 `us 1 bcdUSB 2 2 `uc 1 bDeviceClass 1 4 `uc 1 bDeviceSubClass 1 5 `uc 1 bDeviceProtocol 1 6 `uc 1 bMaxPacketSize0 1 7 `us 1 idVendor 2 8 `us 1 idProduct 2 10 `us 1 bcdDevice 2 12 `uc 1 iManufacturer 1 14 `uc 1 iProduct 1 15 `uc 1 iSerialNumber 1 16 `uc 1 bNumConfigurations 1 17 ]
+"163 C:\Users\jtwogoo1\Desktop/usb_lab/usb_descriptors.c
+[v _device_dsc device_dsc `CS1522  1 e 18 0 ]
+"182
+[v _configDescriptor1 configDescriptor1 `C[34]uc  1 e 34 0 ]
+[s S1537 . 4 `uc 1 bLength 1 0 `uc 1 bDscType 1 1 `[1]us 1 string 2 2 ]
+"224
+[v _sd000 sd000 `CS1537  1 e 4 0 ]
+[s S1541 . 52 `uc 1 bLength 1 0 `uc 1 bDscType 1 1 `[25]us 1 string 50 2 ]
+"229
+[v _sd001 sd001 `CS1541  1 e 52 0 ]
+[s S1545 . 26 `uc 1 bLength 1 0 `uc 1 bDscType 1 1 `[12]us 1 string 24 2 ]
+"236
+[v _sd002 sd002 `CS1545  1 e 26 0 ]
+[s S1549 . 50 `[50]uc 1 report 50 0 ]
+"242
+[v _hid_rpt01 hid_rpt01 `CS1549  1 e 50 0 ]
+"271
+[v _USB_CD_Ptr USB_CD_Ptr `C[1]*.32Cuc  1 e 2 0 ]
+"277
+[v _USB_SD_Ptr USB_SD_Ptr `C[3]*.32Cuc  1 e 6 0 ]
+"279 C:\Users\jtwogoo1\Desktop/usb_lab/usb_device.c
+[v _USBDeviceState USBDeviceState `VEE10210  1 e 1 0 ]
+"280
+[v _USBActiveConfiguration USBActiveConfiguration `VEuc  1 e 1 0 ]
+"281
+[v _USBAlternateInterface USBAlternateInterface `VE[1]uc  1 e 1 0 ]
+[s S1096 . 1 `uc 1 BC8 1 0 :1:0 
+`uc 1 BC9 1 0 :1:1 
+`uc 1 BSTALL 1 0 :1:2 
+`uc 1 DTSEN 1 0 :1:3 
+`uc 1 INCDIS 1 0 :1:4 
+`uc 1 KEN 1 0 :1:5 
+`uc 1 DTS 1 0 :1:6 
+`uc 1 UOWN 1 0 :1:7 
+]
+"282
+[s S1105 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 PID0 1 0 :1:2 
+`uc 1 PID1 1 0 :1:3 
+`uc 1 PID2 1 0 :1:4 
+`uc 1 PID3 1 0 :1:5 
+`uc 1 . 1 0 :1:6 
+]
+[s S1112 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 PID 1 0 :4:2 
+`uc 1 . 1 0 :2:6 
+]
+[u S1116 _BD_STAT 1 `uc 1 Val 1 0 `S1096 1 . 1 0 `S1105 1 . 1 0 `S1112 1 . 1 0 ]
+[s S1121 . 4 `S1116 1 STAT 1 0 `uc 1 CNT 1 1 `uc 1 ADRL 1 2 `uc 1 ADRH 1 3 ]
+[s S1126 . 4 `uc 1 . 1 0 :8:0 
+`uc 1 . 1 1 :8:0 
+`us 1 ADR 2 2 ]
+[u S1130 __BDT 4 `S1121 1 . 4 0 `S1126 1 . 4 0 `ul 1 Val 4 0 `[4]uc 1 v 4 0 ]
+[v _pBDTEntryEP0OutCurrent pBDTEntryEP0OutCurrent `*.39VES1130  1 e 2 0 ]
+"283
+[v _pBDTEntryEP0OutNext pBDTEntryEP0OutNext `*.39VES1130  1 e 2 0 ]
+"284
+[v _pBDTEntryOut pBDTEntryOut `[2]*.39VES1130  1 e 4 0 ]
+"285
+[v _pBDTEntryIn pBDTEntryIn `[2]*.39VES1130  1 e 4 0 ]
+"286
+[v _shortPacketStatus shortPacketStatus `VEuc  1 e 1 0 ]
+"287
+[v _controlTransferState controlTransferState `VEuc  1 e 1 0 ]
+[u S1636 . 3 `*.2uc 1 bRam 3 0 `*.2Cuc 1 bRom 3 0 `*.2us 1 wRam 3 0 `*.2Cus 1 wRom 3 0 ]
+"288
+[s S1641 . 1 `uc 1 ctrl_trf_mem 1 0 :1:0 
+`uc 1 reserved 1 0 :5:1 
+`uc 1 includeZero 1 0 :1:6 
+`uc 1 busy 1 0 :1:7 
+]
+[u S1646 . 1 `S1641 1 bits 1 0 `uc 1 Val 1 0 ]
+[s S1649 . 2 `uc 1 LB 1 0 `uc 1 HB 1 1 ]
+[s S1652 . 2 `uc 1 b0 1 0 :1:0 
+`uc 1 b1 1 0 :1:1 
+`uc 1 b2 1 0 :1:2 
+`uc 1 b3 1 0 :1:3 
+`uc 1 b4 1 0 :1:4 
+`uc 1 b5 1 0 :1:5 
+`uc 1 b6 1 0 :1:6 
+`uc 1 b7 1 0 :1:7 
+`uc 1 b8 1 1 :1:0 
+`uc 1 b9 1 1 :1:1 
+`uc 1 b10 1 1 :1:2 
+`uc 1 b11 1 1 :1:3 
+`uc 1 b12 1 1 :1:4 
+`uc 1 b13 1 1 :1:5 
+`uc 1 b14 1 1 :1:6 
+`uc 1 b15 1 1 :1:7 
+]
+[u S1669 . 2 `us 1 Val 2 0 `[2]uc 1 v 2 0 `S1649 1 byte 2 0 `S1652 1 bits 2 0 ]
+[s S1674 . 6 `S1636 1 pSrc 3 0 `S1646 1 info 1 3 `S1669 1 wCount 2 4 ]
+[v _inPipes inPipes `VE[1]S1674  1 e 6 0 ]
+[u S1678 . 3 `*.2uc 1 bRam 3 0 `*.2us 1 wRam 3 0 ]
+"289
+[s S1681 . 1 `uc 1 reserved 1 0 :7:0 
+`uc 1 busy 1 0 :1:7 
+]
+[u S1684 . 1 `S1681 1 bits 1 0 `uc 1 Val 1 0 ]
+[s S1688 . 9 `S1678 1 pDst 3 0 `S1684 1 info 1 3 `S1669 1 wCount 2 4 `*.37(v 1 pFunc 3 6 ]
+[v _outPipes outPipes `VE[1]S1688  1 e 9 0 ]
+"290
+[v _pDst pDst `*.39VEuc  1 e 2 0 ]
+"291
+[v _RemoteWakeup RemoteWakeup `VEE3  1 e 1 0 ]
+"292
+[v _USBBusIsSuspended USBBusIsSuspended `VEE3  1 e 1 0 ]
+[s S1696 . 1 `uc 1 filler1 1 0 :1:0 
+`uc 1 ping_pong 1 0 :1:1 
+`uc 1 direction 1 0 :1:2 
+`uc 1 endpoint_number 1 0 :4:3 
+]
+"293
+[u S1701 __USTAT 1 `S1696 1 . 1 0 `uc 1 Val 1 0 ]
+[v _USTATcopy USTATcopy `VES1701  1 e 1 0 ]
+"294
+[v _endpoint_number endpoint_number `VEuc  1 e 1 0 ]
+"295
+[v _BothEP0OutUOWNsSet BothEP0OutUOWNsSet `VEE3  1 e 1 0 ]
+[s S1704 . 1 `uc 1 ping_pong_state 1 0 :1:0 
+`uc 1 transfer_terminated 1 0 :1:1 
+]
+"296
+[u S1707 . 1 `S1704 1 bits 1 0 `uc 1 Val 1 0 ]
+[v _ep_data_in ep_data_in `VE[2]S1707  1 e 2 0 ]
+"297
+[v _ep_data_out ep_data_out `VE[2]S1707  1 e 2 0 ]
+"298
+[v _USBStatusStageTimeoutCounter USBStatusStageTimeoutCounter `VEuc  1 e 1 0 ]
+"299
+[v _USBDeferStatusStagePacket USBDeferStatusStagePacket `VEE3  1 e 1 0 ]
+"300
+[v _USBStatusStageEnabledFlag1 USBStatusStageEnabledFlag1 `VEE3  1 e 1 0 ]
+"301
+[v _USBStatusStageEnabledFlag2 USBStatusStageEnabledFlag2 `VEE3  1 e 1 0 ]
+"302
+[v _USBDeferINDataStagePackets USBDeferINDataStagePackets `VEE3  1 e 1 0 ]
+"303
+[v _USBDeferOUTDataStagePackets USBDeferOUTDataStagePackets `VEE3  1 e 1 0 ]
+"323
+[v _BDT BDT `VE[8]S1130  1 e 32 @3328 ]
+[s S1710 . 8 `uc 1 bmRequestType 1 0 `uc 1 bRequest 1 1 `us 1 wValue 2 2 `us 1 wIndex 2 4 `us 1 wLength 2 6 ]
+"328
+[s S1716 . 8 `uc 1 . 1 0 :8:0 
+`uc 1 . 1 1 :8:0 
+`S1669 1 W_Value 2 2 `S1669 1 W_Index 2 4 `S1669 1 W_Length 2 6 ]
+[s S1722 . 8 `uc 1 Recipient 1 0 :5:0 
+`uc 1 RequestType 1 0 :2:5 
+`uc 1 DataDir 1 0 :1:7 
+`uc 1 . 1 1 :8:0 
+`uc 1 bFeature 1 2 `uc 1 . 1 3 :8:0 
+`uc 1 . 1 4 :8:0 
+`uc 1 . 1 5 :8:0 
+`uc 1 . 1 6 :8:0 
+`uc 1 . 1 7 :8:0 
+]
+[s S1733 . 1 `uc 1 recipient 1 0 :5:0 
+`uc 1 type 1 0 :2:5 
+`uc 1 direction 1 0 :1:7 
+]
+[u S1737 . 1 `uc 1 bmRequestType 1 0 `S1733 1 . 1 0 ]
+[s S1740 . 1 `S1737 1 requestInfo 1 0 ]
+[s S1742 . 8 `uc 1 . 1 0 :8:0 
+`uc 1 . 1 1 :8:0 
+`uc 1 bDscIndex 1 2 `uc 1 bDescriptorType 1 3 `us 1 wLangID 2 4 `uc 1 . 1 6 :8:0 
+`uc 1 . 1 7 :8:0 
+]
+[s S1750 . 1 `uc 1 b0 1 0 :1:0 
+`uc 1 b1 1 0 :1:1 
+`uc 1 b2 1 0 :1:2 
+`uc 1 b3 1 0 :1:3 
+`uc 1 b4 1 0 :1:4 
+`uc 1 b5 1 0 :1:5 
+`uc 1 b6 1 0 :1:6 
+`uc 1 b7 1 0 :1:7 
+]
+[u S1759 . 1 `uc 1 Val 1 0 `S1750 1 bits 1 0 ]
+[s S1762 . 8 `uc 1 . 1 0 :8:0 
+`uc 1 . 1 1 :8:0 
+`S1759 1 bDevADR 1 2 `uc 1 bDevADRH 1 3 `uc 1 . 1 4 :8:0 
+`uc 1 . 1 5 :8:0 
+`uc 1 . 1 6 :8:0 
+`uc 1 . 1 7 :8:0 
+]
+[s S1771 . 8 `uc 1 . 1 0 :8:0 
+`uc 1 . 1 1 :8:0 
+`uc 1 bConfigurationValue 1 2 `uc 1 bCfgRSD 1 3 `uc 1 . 1 4 :8:0 
+`uc 1 . 1 5 :8:0 
+`uc 1 . 1 6 :8:0 
+`uc 1 . 1 7 :8:0 
+]
+[s S1780 . 8 `uc 1 . 1 0 :8:0 
+`uc 1 . 1 1 :8:0 
+`uc 1 bAltID 1 2 `uc 1 bAltID_H 1 3 `uc 1 bIntfID 1 4 `uc 1 bIntfID_H 1 5 `uc 1 . 1 6 :8:0 
+`uc 1 . 1 7 :8:0 
+]
+[s S1789 . 8 `uc 1 . 1 0 :8:0 
+`uc 1 . 1 1 :8:0 
+`uc 1 . 1 2 :8:0 
+`uc 1 . 1 3 :8:0 
+`uc 1 bEPID 1 4 `uc 1 bEPID_H 1 5 `uc 1 . 1 6 :8:0 
+`uc 1 . 1 7 :8:0 
+]
+[s S1798 . 8 `uc 1 . 1 0 :8:0 
+`uc 1 . 1 1 :8:0 
+`uc 1 . 1 2 :8:0 
+`uc 1 . 1 3 :8:0 
+`uc 1 EPNum 1 4 :4:0 
+`uc 1 . 1 4 :3:4 
+`uc 1 EPDir 1 4 :1:7 
+`uc 1 . 1 5 :8:0 
+`uc 1 . 1 6 :8:0 
+`uc 1 . 1 7 :8:0 
+]
+[u S1809 . 8 `S1710 1 . 8 0 `S1716 1 . 8 0 `S1722 1 . 8 0 `S1740 1 . 1 0 `S1742 1 . 8 0 `S1762 1 . 8 0 `S1771 1 . 8 0 `S1780 1 . 8 0 `S1789 1 . 8 0 `S1798 1 . 8 0 ]
+[v _SetupPkt SetupPkt `VES1809  1 e 8 0 ]
+"329
+[v _CtrlTrfData CtrlTrfData `VE[8]uc  1 e 8 0 ]
+"115 C:\Users\jtwogoo1\Desktop/usb_lab/usb_function_hid.c
+[v _idle_rate idle_rate `uc  1 e 1 0 ]
+"116
+[v _active_protocol active_protocol `uc  1 e 1 0 ]
+[s S191 . 1 `uc 1 IOLOCK 1 0 :1:0 
+]
+"1102 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f47j53.h
+[u S193 . 1 `S191 1 . 1 0 ]
+[v _PPSCONbits PPSCONbits `VES193  1 e 1 @3775 ]
+"1123
+[v _RPOR2 RPOR2 `VEuc  1 e 1 @3778 ]
+"1135
+[v _RPOR4 RPOR4 `VEuc  1 e 1 @3780 ]
+"3070
+[v _UEP0 UEP0 `VEuc  1 e 1 @3878 ]
+[s S2226 . 1 `uc 1 EPSTALL 1 0 :1:0 
+`uc 1 EPINEN 1 0 :1:1 
+`uc 1 EPOUTEN 1 0 :1:2 
+`uc 1 EPCONDIS 1 0 :1:3 
+`uc 1 EPHSHK 1 0 :1:4 
+]
+"3122
+[s S2232 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 EP0CONDIS 1 0 :1:3 
+]
+[s S2235 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 EP0HSHK 1 0 :1:4 
+]
+[s S2238 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 EP0INEN 1 0 :1:1 
+]
+[s S2241 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 EP0OUTEN 1 0 :1:2 
+]
+[s S2244 . 1 `uc 1 EP0STALL 1 0 :1:0 
+]
+[s S2246 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 EPCONDIS0 1 0 :1:3 
+]
+[s S2249 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 EPHSHK0 1 0 :1:4 
+]
+[s S2252 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 EPINEN0 1 0 :1:1 
+]
+[s S2255 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 EPOUTEN0 1 0 :1:2 
+]
+[s S2258 . 1 `uc 1 EPSTALL0 1 0 :1:0 
+]
+[u S2260 . 1 `S2226 1 . 1 0 `S2232 1 . 1 0 `S2235 1 . 1 0 `S2238 1 . 1 0 `S2241 1 . 1 0 `S2244 1 . 1 0 `S2246 1 . 1 0 `S2249 1 . 1 0 `S2252 1 . 1 0 `S2255 1 . 1 0 `S2258 1 . 1 0 ]
+[v _UEP0bits UEP0bits `VES2260  1 e 1 @3878 ]
+"3201
+[v _UEP1 UEP1 `VEuc  1 e 1 @3879 ]
+"4814
+[v _UIE UIE `VEuc  1 e 1 @3894 ]
+[s S1886 . 1 `uc 1 URSTIE 1 0 :1:0 
+`uc 1 UERRIE 1 0 :1:1 
+`uc 1 ACTVIE 1 0 :1:2 
+`uc 1 TRNIE 1 0 :1:3 
+`uc 1 IDLEIE 1 0 :1:4 
+`uc 1 STALLIE 1 0 :1:5 
+`uc 1 SOFIE 1 0 :1:6 
+]
+"4830
+[u S1894 . 1 `S1886 1 . 1 0 ]
+[v _UIEbits UIEbits `VES1894  1 e 1 @3894 ]
+"4869
+[v _UEIE UEIE `VEuc  1 e 1 @3895 ]
+"4919
+[v _UADDR UADDR `VEuc  1 e 1 @3896 ]
+"4982
+[v _UCFG UCFG `VEuc  1 e 1 @3897 ]
+"5689
+[v _ANCON0 ANCON0 `VEuc  1 e 1 @3912 ]
+[s S890 . 1 `uc 1 PCFG0 1 0 :1:0 
+`uc 1 PCFG1 1 0 :1:1 
+`uc 1 PCFG2 1 0 :1:2 
+`uc 1 PCFG3 1 0 :1:3 
+`uc 1 PCFG4 1 0 :1:4 
+`uc 1 PCFG5 1 0 :1:5 
+`uc 1 PCFG6 1 0 :1:6 
+`uc 1 PCFG7 1 0 :1:7 
+]
+"5706
+[u S899 . 1 `S890 1 . 1 0 ]
+[v _ANCON0bits ANCON0bits `VES899  1 e 1 @3912 ]
+"5750
+[v _ANCON1 ANCON1 `VEuc  1 e 1 @3913 ]
+"6941
+[v _UIR UIR `VEuc  1 e 1 @3938 ]
+[s S1867 . 1 `uc 1 URSTIF 1 0 :1:0 
+`uc 1 UERRIF 1 0 :1:1 
+`uc 1 ACTVIF 1 0 :1:2 
+`uc 1 TRNIF 1 0 :1:3 
+`uc 1 IDLEIF 1 0 :1:4 
+`uc 1 STALLIF 1 0 :1:5 
+`uc 1 SOFIF 1 0 :1:6 
+]
+"6957
+[u S1875 . 1 `S1867 1 . 1 0 ]
+[v _UIRbits UIRbits `VES1875  1 e 1 @3938 ]
+"6996
+[v _UEIR UEIR `VEuc  1 e 1 @3939 ]
+"7046
+[v _USTAT USTAT `VEuc  1 e 1 @3940 ]
+"7105
+[v _UCON UCON `VEuc  1 e 1 @3941 ]
+[s S925 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 SUSPND 1 0 :1:1 
+`uc 1 RESUME 1 0 :1:2 
+`uc 1 USBEN 1 0 :1:3 
+`uc 1 PKTDIS 1 0 :1:4 
+`uc 1 SE0 1 0 :1:5 
+`uc 1 PPBRST 1 0 :1:6 
+]
+"7121
+[u S933 . 1 `S925 1 . 1 0 ]
+[v _UCONbits UCONbits `VES933  1 e 1 @3941 ]
+"7660
+[v _SSP2CON1 SSP2CON1 `VEuc  1 e 1 @3954 ]
+[s S297 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R_NOT_W 1 0 :1:2 
+]
+"7920
+[s S300 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 D_NOT_A 1 0 :1:5 
+]
+[s S303 . 1 `uc 1 BF 1 0 :1:0 
+`uc 1 UA 1 0 :1:1 
+`uc 1 R_nW 1 0 :1:2 
+`uc 1 S 1 0 :1:3 
+`uc 1 P 1 0 :1:4 
+`uc 1 D_nA 1 0 :1:5 
+`uc 1 CKE 1 0 :1:6 
+`uc 1 SMP 1 0 :1:7 
+]
+[s S312 . 1 `uc 1 BF2 1 0 :1:0 
+]
+[s S314 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 CKE2 1 0 :1:6 
+]
+[s S317 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 DA2 1 0 :1:5 
+]
+[s S320 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 DATA_ADDRESS2 1 0 :1:5 
+]
+[s S323 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 D_A2 1 0 :1:5 
+]
+[s S326 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 D_nA2 1 0 :1:5 
+]
+[s S329 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 I2C_DAT2 1 0 :1:5 
+]
+[s S332 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 I2C_READ2 1 0 :1:2 
+]
+[s S335 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 I2C_START2 1 0 :1:3 
+]
+[s S338 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 I2C_STOP2 1 0 :1:4 
+]
+[s S341 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 P2 1 0 :1:4 
+]
+[s S344 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 READ_WRITE2 1 0 :1:2 
+]
+[s S347 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 RW2 1 0 :1:2 
+]
+[s S350 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R_W2 1 0 :1:2 
+]
+[s S353 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R_nW2 1 0 :1:2 
+]
+[s S356 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 S2 1 0 :1:3 
+]
+[s S359 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 SMP2 1 0 :1:7 
+]
+[s S362 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 START2 1 0 :1:3 
+]
+[s S365 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 STOP2 1 0 :1:4 
+]
+[s S368 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 UA2 1 0 :1:1 
+]
+[s S371 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 nA2 1 0 :1:5 
+]
+[s S374 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 nADDRESS2 1 0 :1:5 
+]
+[s S377 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 nW2 1 0 :1:2 
+]
+[s S380 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 nWRITE2 1 0 :1:2 
+]
+[u S383 . 1 `S297 1 . 1 0 `S300 1 . 1 0 `S303 1 . 1 0 `S312 1 . 1 0 `S314 1 . 1 0 `S317 1 . 1 0 `S320 1 . 1 0 `S323 1 . 1 0 `S326 1 . 1 0 `S329 1 . 1 0 `S332 1 . 1 0 `S335 1 . 1 0 `S338 1 . 1 0 `S341 1 . 1 0 `S344 1 . 1 0 `S347 1 . 1 0 `S350 1 . 1 0 `S353 1 . 1 0 `S356 1 . 1 0 `S359 1 . 1 0 `S362 1 . 1 0 `S365 1 . 1 0 `S368 1 . 1 0 `S371 1 . 1 0 `S374 1 . 1 0 `S377 1 . 1 0 `S380 1 . 1 0 ]
+[v _SSP2STATbits SSP2STATbits `VES383  1 e 1 @3955 ]
+"8245
+[v _SSP2BUF SSP2BUF `VEuc  1 e 1 @3957 ]
+[s S948 . 1 `uc 1 RA0 1 0 :1:0 
+`uc 1 RA1 1 0 :1:1 
+`uc 1 RA2 1 0 :1:2 
+`uc 1 RA3 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 RA5 1 0 :1:5 
+`uc 1 RA6 1 0 :1:6 
+`uc 1 RA7 1 0 :1:7 
+]
+"9406
+[s S957 . 1 `uc 1 AN0 1 0 :1:0 
+`uc 1 AN1 1 0 :1:1 
+`uc 1 AN2 1 0 :1:2 
+`uc 1 AN3 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 AN4 1 0 :1:5 
+`uc 1 OSC2 1 0 :1:6 
+`uc 1 OSC1 1 0 :1:7 
+]
+[s S966 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 NOT_SS1 1 0 :1:5 
+]
+[s S969 . 1 `uc 1 C1INA 1 0 :1:0 
+`uc 1 C2INA 1 0 :1:1 
+`uc 1 VREF_MINUS 1 0 :1:2 
+`uc 1 VREF_PLUS 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 nSS1 1 0 :1:5 
+`uc 1 CLKO 1 0 :1:6 
+`uc 1 CLKI 1 0 :1:7 
+]
+[s S978 . 1 `uc 1 PMA6 1 0 :1:0 
+`uc 1 PMA7 1 0 :1:1 
+`uc 1 CVREF 1 0 :1:2 
+`uc 1 C1INB 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 HLVDIN 1 0 :1:5 
+]
+[s S985 . 1 `uc 1 RP0 1 0 :1:0 
+`uc 1 RP1 1 0 :1:1 
+`uc 1 C2INB 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 RCV 1 0 :1:5 
+]
+[s S991 . 1 `uc 1 ULPWU 1 0 :1:0 
+`uc 1 VBG 1 0 :1:1 
+`uc 1 C1IND 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 RP2 1 0 :1:5 
+]
+[s S997 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 C3INB 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 C1INC 1 0 :1:5 
+]
+[s S1002 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 LVDIN 1 0 :1:5 
+]
+[s S1005 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 RA4 1 0 :1:4 
+]
+[s S1008 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 RJPU 1 0 :1:7 
+]
+[s S1011 . 1 `uc 1 ULPWUIN 1 0 :1:0 
+]
+[u S1013 . 1 `S948 1 . 1 0 `S957 1 . 1 0 `S966 1 . 1 0 `S969 1 . 1 0 `S978 1 . 1 0 `S985 1 . 1 0 `S991 1 . 1 0 `S997 1 . 1 0 `S1002 1 . 1 0 `S1005 1 . 1 0 `S1008 1 . 1 0 `S1011 1 . 1 0 ]
+[v _PORTAbits PORTAbits `VES1013  1 e 1 @3968 ]
+[s S737 . 1 `uc 1 RB0 1 0 :1:0 
+`uc 1 RB1 1 0 :1:1 
+`uc 1 RB2 1 0 :1:2 
+`uc 1 RB3 1 0 :1:3 
+`uc 1 RB4 1 0 :1:4 
+`uc 1 RB5 1 0 :1:5 
+`uc 1 RB6 1 0 :1:6 
+`uc 1 RB7 1 0 :1:7 
+]
+"9696
+[s S746 . 1 `uc 1 AN12 1 0 :1:0 
+`uc 1 AN10 1 0 :1:1 
+`uc 1 AN8 1 0 :1:2 
+`uc 1 AN9 1 0 :1:3 
+`uc 1 PMA1 1 0 :1:4 
+`uc 1 PMA0 1 0 :1:5 
+`uc 1 KBI2 1 0 :1:6 
+`uc 1 KBI3 1 0 :1:7 
+]
+[s S755 . 1 `uc 1 INT0 1 0 :1:0 
+`uc 1 PMPBE 1 0 :1:1 
+`uc 1 CTED1 1 0 :1:2 
+`uc 1 CTED2 1 0 :1:3 
+`uc 1 KBI0 1 0 :1:4 
+`uc 1 KBI1 1 0 :1:5 
+`uc 1 PGC 1 0 :1:6 
+`uc 1 PGD 1 0 :1:7 
+]
+[s S764 . 1 `uc 1 RP3 1 0 :1:0 
+`uc 1 RTCC 1 0 :1:1 
+`uc 1 PMA3 1 0 :1:2 
+`uc 1 PMA2 1 0 :1:3 
+`uc 1 SCK1 1 0 :1:4 
+`uc 1 SDI1 1 0 :1:5 
+`uc 1 RP9 1 0 :1:6 
+`uc 1 RP10 1 0 :1:7 
+]
+[s S773 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 RP4 1 0 :1:1 
+`uc 1 VMO 1 0 :1:2 
+`uc 1 VPO 1 0 :1:3 
+`uc 1 SCL1 1 0 :1:4 
+`uc 1 SDA1 1 0 :1:5 
+]
+[s S780 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 REFO 1 0 :1:2 
+`uc 1 RP6 1 0 :1:3 
+`uc 1 RP7 1 0 :1:4 
+`uc 1 RP8 1 0 :1:5 
+]
+[s S786 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 C3INC 1 0 :1:1 
+`uc 1 RP5 1 0 :1:2 
+`uc 1 C3INA 1 0 :1:3 
+`uc 1 CCP4 1 0 :1:4 
+`uc 1 CCP5 1 0 :1:5 
+`uc 1 CCP6 1 0 :1:6 
+`uc 1 CCP7 1 0 :1:7 
+]
+[s S795 . 1 `uc 1 C3IND 1 0 :1:0 
+`uc 1 PMBE 1 0 :1:1 
+`uc 1 C2INC 1 0 :1:2 
+]
+[s S799 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 CCP2_PA2 1 0 :1:3 
+]
+[u S802 . 1 `S737 1 . 1 0 `S746 1 . 1 0 `S755 1 . 1 0 `S764 1 . 1 0 `S773 1 . 1 0 `S780 1 . 1 0 `S786 1 . 1 0 `S795 1 . 1 0 `S799 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES802  1 e 1 @3969 ]
+[s S115 . 1 `uc 1 LATA0 1 0 :1:0 
+`uc 1 LATA1 1 0 :1:1 
+`uc 1 LATA2 1 0 :1:2 
+`uc 1 LATA3 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 LATA5 1 0 :1:5 
+`uc 1 LATA6 1 0 :1:6 
+`uc 1 LATA7 1 0 :1:7 
+]
+"10986
+[s S124 . 1 `uc 1 LA0 1 0 :1:0 
+]
+[s S126 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 LA1 1 0 :1:1 
+]
+[s S129 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 LA2 1 0 :1:2 
+]
+[s S132 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 LA3 1 0 :1:3 
+]
+[s S135 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 LA4 1 0 :1:4 
+]
+[s S138 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 LA5 1 0 :1:5 
+]
+[s S141 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 LA6 1 0 :1:6 
+]
+[s S144 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 LA7 1 0 :1:7 
+]
+[u S147 . 1 `S115 1 . 1 0 `S124 1 . 1 0 `S126 1 . 1 0 `S129 1 . 1 0 `S132 1 . 1 0 `S135 1 . 1 0 `S138 1 . 1 0 `S141 1 . 1 0 `S144 1 . 1 0 ]
+[v _LATAbits LATAbits `VES147  1 e 1 @3977 ]
+[s S221 . 1 `uc 1 LATB0 1 0 :1:0 
+`uc 1 LATB1 1 0 :1:1 
+`uc 1 LATB2 1 0 :1:2 
+`uc 1 LATB3 1 0 :1:3 
+`uc 1 LATB4 1 0 :1:4 
+`uc 1 LATB5 1 0 :1:5 
+`uc 1 LATB6 1 0 :1:6 
+`uc 1 LATB7 1 0 :1:7 
+]
+"11113
+[s S230 . 1 `uc 1 LB0 1 0 :1:0 
+]
+[s S232 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 LB1 1 0 :1:1 
+]
+[s S235 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 LB2 1 0 :1:2 
+]
+[s S238 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 LB3 1 0 :1:3 
+]
+[s S241 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 LB4 1 0 :1:4 
+]
+[s S244 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 LB5 1 0 :1:5 
+]
+[s S247 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 LB6 1 0 :1:6 
+]
+[s S250 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 LB7 1 0 :1:7 
+]
+[u S253 . 1 `S221 1 . 1 0 `S230 1 . 1 0 `S232 1 . 1 0 `S235 1 . 1 0 `S238 1 . 1 0 `S241 1 . 1 0 `S244 1 . 1 0 `S247 1 . 1 0 `S250 1 . 1 0 ]
+[v _LATBbits LATBbits `VES253  1 e 1 @3978 ]
+"11444
+[v _LATE LATE `VEuc  1 e 1 @3981 ]
+[s S1229 . 1 `uc 1 LATE0 1 0 :1:0 
+`uc 1 LATE1 1 0 :1:1 
+`uc 1 LATE2 1 0 :1:2 
+]
+"11487
+[s S1233 . 1 `uc 1 LE0 1 0 :1:0 
+]
+[s S1235 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 LE1 1 0 :1:1 
+]
+[s S1238 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 LE2 1 0 :1:2 
+]
+[s S1241 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 LE3 1 0 :1:3 
+]
+[s S1244 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 LE4 1 0 :1:4 
+]
+[s S1247 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 LE5 1 0 :1:5 
+]
+[s S1250 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 LE6 1 0 :1:6 
+]
+[s S1253 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 LE7 1 0 :1:7 
+]
+[u S1256 . 1 `S1229 1 . 1 0 `S1233 1 . 1 0 `S1235 1 . 1 0 `S1238 1 . 1 0 `S1241 1 . 1 0 `S1244 1 . 1 0 `S1247 1 . 1 0 `S1250 1 . 1 0 `S1253 1 . 1 0 ]
+[v _LATEbits LATEbits `VES1256  1 e 1 @3981 ]
+[s S94 . 1 `uc 1 TRISA0 1 0 :1:0 
+`uc 1 TRISA1 1 0 :1:1 
+`uc 1 TRISA2 1 0 :1:2 
+`uc 1 TRISA3 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 TRISA5 1 0 :1:5 
+`uc 1 TRISA6 1 0 :1:6 
+`uc 1 TRISA7 1 0 :1:7 
+]
+"11803
+[u S103 . 1 `S94 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES103  1 e 1 @3986 ]
+[s S200 . 1 `uc 1 TRISB0 1 0 :1:0 
+`uc 1 TRISB1 1 0 :1:1 
+`uc 1 TRISB2 1 0 :1:2 
+`uc 1 TRISB3 1 0 :1:3 
+`uc 1 TRISB4 1 0 :1:4 
+`uc 1 TRISB5 1 0 :1:5 
+`uc 1 TRISB6 1 0 :1:6 
+`uc 1 TRISB7 1 0 :1:7 
+]
+"11859
+[u S209 . 1 `S200 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES209  1 e 1 @3987 ]
+[s S690 . 1 `uc 1 TRISC0 1 0 :1:0 
+`uc 1 TRISC1 1 0 :1:1 
+`uc 1 TRISC2 1 0 :1:2 
+`uc 1 . 1 0 :3:3 
+`uc 1 TRISC6 1 0 :1:6 
+`uc 1 TRISC7 1 0 :1:7 
+]
+"11922
+[s S697 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 TRISC3 1 0 :1:3 
+]
+[u S700 . 1 `S690 1 . 1 0 `S697 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES700  1 e 1 @3988 ]
+"12017
+[v _TRISE TRISE `VEuc  1 e 1 @3990 ]
+[s S662 . 1 `uc 1 TUN 1 0 :6:0 
+`uc 1 PLLEN 1 0 :1:6 
+`uc 1 INTSRC 1 0 :1:7 
+]
+"12408
+[s S666 . 1 `uc 1 TUN0 1 0 :1:0 
+`uc 1 TUN1 1 0 :1:1 
+`uc 1 TUN2 1 0 :1:2 
+`uc 1 TUN3 1 0 :1:3 
+`uc 1 TUN4 1 0 :1:4 
+`uc 1 TUN5 1 0 :1:5 
+]
+[u S673 . 1 `S662 1 . 1 0 `S666 1 . 1 0 ]
+[v _OSCTUNEbits OSCTUNEbits `VES673  1 e 1 @3995 ]
+[s S1306 . 1 `uc 1 CCP2IE 1 0 :1:0 
+`uc 1 TMR3IE 1 0 :1:1 
+`uc 1 LVDIE 1 0 :1:2 
+`uc 1 BCL1IE 1 0 :1:3 
+`uc 1 USBIE 1 0 :1:4 
+`uc 1 CM1IE 1 0 :1:5 
+`uc 1 CM2IE 1 0 :1:6 
+`uc 1 OSCFIE 1 0 :1:7 
+]
+"12893
+[s S1315 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 HLVDIE 1 0 :1:2 
+`uc 1 BCLIE 1 0 :1:3 
+]
+[s S1319 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 CMIE 1 0 :1:6 
+]
+[u S1322 . 1 `S1306 1 . 1 0 `S1315 1 . 1 0 `S1319 1 . 1 0 ]
+[v _PIE2bits PIE2bits `VES1322  1 e 1 @4000 ]
+[s S1909 . 1 `uc 1 CCP2IF 1 0 :1:0 
+`uc 1 TMR3IF 1 0 :1:1 
+`uc 1 LVDIF 1 0 :1:2 
+`uc 1 BCL1IF 1 0 :1:3 
+`uc 1 USBIF 1 0 :1:4 
+`uc 1 CM1IF 1 0 :1:5 
+`uc 1 CM2IF 1 0 :1:6 
+`uc 1 OSCFIF 1 0 :1:7 
+]
+"12978
+[s S1918 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 HLVDIF 1 0 :1:2 
+`uc 1 BCLIF 1 0 :1:3 
+]
+[s S1922 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 CMIF 1 0 :1:6 
+]
+[u S1925 . 1 `S1909 1 . 1 0 `S1918 1 . 1 0 `S1922 1 . 1 0 ]
+[v _PIR2bits PIR2bits `VES1925  1 e 1 @4001 ]
+[s S2082 . 1 `uc 1 CCP2IP 1 0 :1:0 
+`uc 1 TMR3IP 1 0 :1:1 
+`uc 1 LVDIP 1 0 :1:2 
+`uc 1 BCL1IP 1 0 :1:3 
+`uc 1 USBIP 1 0 :1:4 
+`uc 1 CM1IP 1 0 :1:5 
+`uc 1 CM2IP 1 0 :1:6 
+`uc 1 OSCFIP 1 0 :1:7 
+]
+"13063
+[s S2091 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 HLVDIP 1 0 :1:2 
+`uc 1 BCLIP 1 0 :1:3 
+]
+[s S2095 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 CMIP 1 0 :1:6 
+]
+[u S2098 . 1 `S2082 1 . 1 0 `S2091 1 . 1 0 `S2095 1 . 1 0 ]
+[v _IPR2bits IPR2bits `VES2098  1 e 1 @4002 ]
+"13447
+[v _EECON2 EECON2 `VEuc  1 e 1 @4007 ]
+"15895
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
+"15997
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @4034 ]
+[s S1143 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_NOT_DONE 1 0 :1:1 
+]
+"16048
+[s S1146 . 1 `uc 1 ADON 1 0 :1:0 
+`uc 1 GO_nDONE 1 0 :1:1 
+`uc 1 CHS 1 0 :4:2 
+`uc 1 VCFG 1 0 :2:6 
+]
+[s S1151 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_DONE 1 0 :1:1 
+`uc 1 CHS0 1 0 :1:2 
+`uc 1 CHS1 1 0 :1:3 
+`uc 1 CHS2 1 0 :1:4 
+`uc 1 CHS3 1 0 :1:5 
+`uc 1 VCFG0 1 0 :1:6 
+`uc 1 VCFG1 1 0 :1:7 
+]
+[s S1160 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 DONE 1 0 :1:1 
+]
+[s S1163 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO 1 0 :1:1 
+]
+[s S1166 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 NOT_DONE 1 0 :1:1 
+]
+[s S1169 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 nDONE 1 0 :1:1 
+]
+[s S1172 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 ADCAL 1 0 :1:7 
+]
+[s S1175 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GODONE 1 0 :1:1 
+]
+[u S1178 . 1 `S1143 1 . 1 0 `S1146 1 . 1 0 `S1151 1 . 1 0 `S1160 1 . 1 0 `S1163 1 . 1 0 `S1166 1 . 1 0 `S1169 1 . 1 0 `S1172 1 . 1 0 `S1175 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES1178  1 e 1 @4034 ]
+"16142
+[v _ADRES ADRES `VEus  1 e 2 @4035 ]
+[s S2006 . 1 `uc 1 NOT_BOR 1 0 :1:0 
+]
+"18369
+[s S2008 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 NOT_POR 1 0 :1:1 
+]
+[s S2011 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_PD 1 0 :1:2 
+]
+[s S2014 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 NOT_TO 1 0 :1:3 
+]
+[s S2017 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 NOT_RI 1 0 :1:4 
+]
+[s S2020 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 NOT_CM 1 0 :1:5 
+]
+[s S2023 . 1 `uc 1 nBOR 1 0 :1:0 
+`uc 1 nPOR 1 0 :1:1 
+`uc 1 nPD 1 0 :1:2 
+`uc 1 nTO 1 0 :1:3 
+`uc 1 nRI 1 0 :1:4 
+`uc 1 nCM 1 0 :1:5 
+`uc 1 . 1 0 :1:6 
+`uc 1 IPEN 1 0 :1:7 
+]
+[s S2032 . 1 `uc 1 BOR 1 0 :1:0 
+`uc 1 POR 1 0 :1:1 
+`uc 1 PD 1 0 :1:2 
+`uc 1 TO 1 0 :1:3 
+`uc 1 RI 1 0 :1:4 
+`uc 1 CM 1 0 :1:5 
+]
+[u S2039 . 1 `S2006 1 . 1 0 `S2008 1 . 1 0 `S2011 1 . 1 0 `S2014 1 . 1 0 `S2017 1 . 1 0 `S2020 1 . 1 0 `S2023 1 . 1 0 `S2032 1 . 1 0 ]
+[v _RCONbits RCONbits `VES2039  1 e 1 @4048 ]
+[s S632 . 1 `uc 1 SCS 1 0 :2:0 
+`uc 1 FLTS 1 0 :1:2 
+`uc 1 OSTS 1 0 :1:3 
+`uc 1 IRCF 1 0 :3:4 
+`uc 1 IDLEN 1 0 :1:7 
+]
+"19110
+[s S638 . 1 `uc 1 SCS0 1 0 :1:0 
+`uc 1 SCS1 1 0 :1:1 
+`uc 1 . 1 0 :2:2 
+`uc 1 IRCF0 1 0 :1:4 
+`uc 1 IRCF1 1 0 :1:5 
+`uc 1 IRCF2 1 0 :1:6 
+]
+[u S645 . 1 `S632 1 . 1 0 `S638 1 . 1 0 ]
+[v _OSCCONbits OSCCONbits `VES645  1 e 1 @4051 ]
+[s S2119 . 1 `uc 1 RBIF 1 0 :1:0 
+`uc 1 INT0IF 1 0 :1:1 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 RBIE 1 0 :1:3 
+`uc 1 INT0IE 1 0 :1:4 
+`uc 1 TMR0IE 1 0 :1:5 
+`uc 1 PEIE_GIEL 1 0 :1:6 
+`uc 1 GIE_GIEH 1 0 :1:7 
+]
+"20008
+[s S2128 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 INT0F 1 0 :1:1 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 INT0E 1 0 :1:4 
+`uc 1 T0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+[s S2137 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 GIEL 1 0 :1:6 
+`uc 1 GIEH 1 0 :1:7 
+]
+[u S2154 . 1 `S2119 1 . 1 0 `S2128 1 . 1 0 `S2137 1 . 1 0 `S2128 1 . 1 0 `S2137 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES2154  1 e 1 @4082 ]
+"21545
+[v _GODONE GODONE `VEb  1 e 0 @32273 ]
+"22723
+[v _SSP2IF SSP2IF `VEb  1 e 0 @32039 ]
+"99 C:\Users\jtwogoo1\Desktop/usb_lab/mouse.c
+[v _main main `(v  1 e 0 0 ]
+{
+"114
+} 0
+"1519 C:\Users\jtwogoo1\Desktop/usb_lab/usb_device.c
+[v _USBDeviceAttach USBDeviceAttach `(v  1 e 0 0 ]
+{
+"1549
+} 0
+"213 C:\Users\jtwogoo1\Desktop/usb_lab/mouse.c
+[v _ProcessIO ProcessIO `(v  1 e 0 0 ]
+{
+"221
+} 0
+"247
+[v _Emulate_Mouse Emulate_Mouse `(v  1 e 0 0 ]
+{
+"295
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+{
+"11
+[v ___awdiv@quotient quotient `i  1 a 2 22 ]
+"12
+[v ___awdiv@sign sign `uc  1 a 1 21 ]
+[v ___awdiv@counter counter `uc  1 a 1 20 ]
+"8
+[v ___awdiv@dividend dividend `i  1 p 2 16 ]
+[v ___awdiv@divisor divisor `i  1 p 2 18 ]
+"42
+} 0
+"1166 C:\Users\jtwogoo1\Desktop/usb_lab/usb_device.c
+[v _USBTransferOnePacket USBTransferOnePacket `(*.39v  1 e 2 0 ]
+{
+[v USBTransferOnePacket@ep ep `uc  1 a 1 wreg ]
+[s S1096 . 1 `uc 1 BC8 1 0 :1:0 
+`uc 1 BC9 1 0 :1:1 
+`uc 1 BSTALL 1 0 :1:2 
+`uc 1 DTSEN 1 0 :1:3 
+`uc 1 INCDIS 1 0 :1:4 
+`uc 1 KEN 1 0 :1:5 
+`uc 1 DTS 1 0 :1:6 
+`uc 1 UOWN 1 0 :1:7 
+]
+"1168
+[s S1105 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 PID0 1 0 :1:2 
+`uc 1 PID1 1 0 :1:3 
+`uc 1 PID2 1 0 :1:4 
+`uc 1 PID3 1 0 :1:5 
+`uc 1 . 1 0 :1:6 
+]
+[s S1112 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 PID 1 0 :4:2 
+`uc 1 . 1 0 :2:6 
+]
+[u S1116 _BD_STAT 1 `uc 1 Val 1 0 `S1096 1 . 1 0 `S1105 1 . 1 0 `S1112 1 . 1 0 ]
+[s S1121 . 4 `S1116 1 STAT 1 0 `uc 1 CNT 1 1 `uc 1 ADRL 1 2 `uc 1 ADRH 1 3 ]
+[s S1126 . 4 `uc 1 . 1 0 :8:0 
+`uc 1 . 1 1 :8:0 
+`us 1 ADR 2 2 ]
+[u S1130 __BDT 4 `S1121 1 . 4 0 `S1126 1 . 4 0 `ul 1 Val 4 0 `[4]uc 1 v 4 0 ]
+[v USBTransferOnePacket@handle handle `*.39VES1130  1 a 2 19 ]
+"1166
+[v USBTransferOnePacket@ep ep `uc  1 a 1 wreg ]
+[v USBTransferOnePacket@dir dir `uc  1 p 1 14 ]
+[v USBTransferOnePacket@data data `*.39uc  1 p 2 15 ]
+[v USBTransferOnePacket@len len `uc  1 p 1 17 ]
+"1171
+[v USBTransferOnePacket@ep ep `uc  1 a 1 18 ]
+"1217
+} 0
+"297 C:\Users\jtwogoo1\Desktop/usb_lab/mouse.c
+[v _ReadPot ReadPot `(i  1 e 2 0 ]
+{
+"302
+} 0
+"372
+[v _BlinkUSBStatus BlinkUSBStatus `(v  1 e 0 0 ]
+{
+"373
+[v BlinkUSBStatus@led_count led_count `us  1 s 2 led_count ]
+"418
+} 0
+"59 C:\Users\jtwogoo1\Desktop/usb_lab/LCD.c
+[v _LCDWriteLine LCDWriteLine `(v  1 e 0 0 ]
+{
+[v LCDWriteLine@str str `*.34Cuc  1 p 2 27 ]
+[v LCDWriteLine@line line `uc  1 p 1 29 ]
+"78
+} 0
+"197
+[v _LCDWriteData LCDWriteData `(v  1 e 0 0 ]
+{
+[v LCDWriteData@c c `uc  1 a 1 wreg ]
+[v LCDWriteData@c c `uc  1 a 1 wreg ]
+[v LCDWriteData@c c `uc  1 a 1 19 ]
+"201
+} 0
+"96
+[v _LCDSetPos LCDSetPos `(v  1 e 0 0 ]
+{
+"97
+[v LCDSetPos@pos pos `i  1 a 2 25 ]
+"96
+[v LCDSetPos@row row `i  1 p 2 20 ]
+[v LCDSetPos@col col `i  1 p 2 22 ]
+"103
+} 0
+"225
+[v _calculateBase calculateBase `(uc  1 e 1 0 ]
+{
+[v calculateBase@line line `uc  1 a 1 wreg ]
+"226
+[v calculateBase@base base `uc  1 a 1 14 ]
+"225
+[v calculateBase@line line `uc  1 a 1 wreg ]
+"227
+[v calculateBase@line line `uc  1 a 1 15 ]
+"233
+} 0
+"187
+[v _LCDCommand LCDCommand `(v  1 e 0 0 ]
+{
+[v LCDCommand@command command `uc  1 a 1 wreg ]
+[v LCDCommand@command command `uc  1 a 1 wreg ]
+[v LCDCommand@command command `uc  1 a 1 19 ]
+"191
+} 0
+"235
+[v _wait wait `(v  1 e 0 0 ]
+{
+"239
+} 0
+"247
+[v _shortDelay shortDelay `(v  1 e 0 0 ]
+{
+"251
+} 0
+"136 C:\Users\jtwogoo1\Desktop/usb_lab/mouse.c
+[v _InitializeSystem InitializeSystem `(v  1 s 0 InitializeSystem ]
+{
+"139
+[v InitializeSystem@pll_startup_counter pll_startup_counter `ui  1 a 2 23 ]
+"154
+} 0
+"173
+[v _UserInit UserInit `(v  1 e 0 0 ]
+{
+"194
+} 0
+"460 C:\Users\jtwogoo1\Desktop/usb_lab/usb_device.c
+[v _USBDeviceInit USBDeviceInit `(v  1 e 0 0 ]
+{
+"462
+[v USBDeviceInit@i i `uc  1 a 1 22 ]
+"546
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\memset.c
+[v _memset memset `(*.39v  1 e 2 0 ]
+{
+"15
+[v memset@p p `*.39uc  1 a 2 20 ]
+"8
+[v memset@p1 p1 `*.39v  1 p 2 14 ]
+[v memset@c c `i  1 p 2 16 ]
+[v memset@n n `ui  1 p 2 18 ]
+"22
+} 0
+"24 C:\Users\jtwogoo1\Desktop/usb_lab/LCD.c
+[v _LCDInit LCDInit `(v  1 e 0 0 ]
+{
+"25
+[v LCDInit@functionSet functionSet `uc  1 a 1 21 ]
+"45
+} 0
+"287
+[v _LCDInitPort LCDInitPort `(v  1 e 0 0 ]
+{
+"314
+} 0
+"193
+[v _LCDInitCommand LCDInitCommand `(v  1 e 0 0 ]
+{
+[v LCDInitCommand@command command `uc  1 a 1 wreg ]
+[v LCDInitCommand@command command `uc  1 a 1 wreg ]
+[v LCDInitCommand@command command `uc  1 a 1 19 ]
+"195
+} 0
+"260
+[v _LCDWriteByte LCDWriteByte `(v  1 e 0 0 ]
+{
+[v LCDWriteByte@c c `uc  1 a 1 wreg ]
+"261
+[v LCDWriteByte@comFlags comFlags `uc  1 a 1 18 ]
+"260
+[v LCDWriteByte@c c `uc  1 a 1 wreg ]
+[v LCDWriteByte@rs rs `uc  1 p 1 16 ]
+[v LCDWriteByte@c c `uc  1 a 1 17 ]
+"269
+} 0
+"320
+[v _WriteRegister WriteRegister `(v  1 e 0 0 ]
+{
+[v WriteRegister@reg reg `uc  1 a 1 wreg ]
+[v WriteRegister@reg reg `uc  1 a 1 wreg ]
+[v WriteRegister@b b `uc  1 p 1 14 ]
+[v WriteRegister@reg reg `uc  1 a 1 15 ]
+"332
+} 0
+"77 C:\Users\jtwogoo1\Desktop/usb_lab/mouse.c
+[v _YourLowPriorityISRCode YourLowPriorityISRCode `IIL(v  1 e 0 0 ]
+{
+"79
+} 0
+"69
+[v _YourHighPriorityISRCode YourHighPriorityISRCode `II(v  1 e 0 0 ]
+{
+"75
+} 0
+"654 C:\Users\jtwogoo1\Desktop/usb_lab/usb_device.c
+[v _USBDeviceTasks USBDeviceTasks `(v  1 e 0 0 ]
+{
+"664
+[v USBDeviceTasks@i i `uc  1 a 1 46 ]
+"998
+} 0
+"460
+[v i2_USBDeviceInit USBDeviceInit `(v  1 e 0 0 ]
+{
+[v i2USBDeviceInit@i USBDeviceInit `uc  1 a 1 25 ]
+"546
+} 0
+"2449
+[v _USBWakeFromSuspend USBWakeFromSuspend `(v  1 s 0 USBWakeFromSuspend ]
+{
+"2493
+} 0
+"2392
+[v _USBSuspend USBSuspend `(v  1 s 0 USBSuspend ]
+{
+"2432
+} 0
+"2349
+[v _USBStallHandler USBStallHandler `(v  1 s 0 USBStallHandler ]
+{
+"2374
+} 0
+"2516
+[v _USBCtrlEPService USBCtrlEPService `(v  1 s 0 USBCtrlEPService ]
+{
+"2545
+[v USBCtrlEPService@setup_cnt setup_cnt `uc  1 a 1 45 ]
+"2574
+} 0
+"2616
+[v _USBCtrlTrfSetupHandler USBCtrlTrfSetupHandler `(v  1 s 0 USBCtrlTrfSetupHandler ]
+{
+"2665
+} 0
+"1779
+[v _USBCtrlEPServiceComplete USBCtrlEPServiceComplete `(v  1 s 0 USBCtrlEPServiceComplete ]
+{
+"1908
+} 0
+"1653
+[v _USBCtrlEPAllowDataStage USBCtrlEPAllowDataStage `(v  1 e 0 0 ]
+{
+"1681
+} 0
+"2832
+[v _USBCheckStdRequest USBCheckStdRequest `(v  1 s 0 USBCheckStdRequest ]
+{
+"2879
+} 0
+"2125
+[v _USBStdSetCfgHandler USBStdSetCfgHandler `(v  1 s 0 USBStdSetCfgHandler ]
+{
+"2127
+[v USBStdSetCfgHandler@i i `uc  1 a 1 37 ]
+"2181
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v1.35\sources\common\memset.c
+[v i2_memset memset `(*.39v  1 e 2 0 ]
+{
+[v i2memset@p memset `*.39uc  1 a 2 23 ]
+[v i2memset@p1 p1 `*.39v  1 p 2 17 ]
+[v i2memset@c c `i  1 p 2 19 ]
+[v i2memset@n n `ui  1 p 2 21 ]
+"22
+} 0
+"2276 C:\Users\jtwogoo1\Desktop/usb_lab/usb_device.c
+[v _USBStdGetStatusHandler USBStdGetStatusHandler `(v  1 s 0 USBStdGetStatusHandler ]
+{
+[s S1096 . 1 `uc 1 BC8 1 0 :1:0 
+`uc 1 BC9 1 0 :1:1 
+`uc 1 BSTALL 1 0 :1:2 
+`uc 1 DTSEN 1 0 :1:3 
+`uc 1 INCDIS 1 0 :1:4 
+`uc 1 KEN 1 0 :1:5 
+`uc 1 DTS 1 0 :1:6 
+`uc 1 UOWN 1 0 :1:7 
+]
+"2308
+[s S1105 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 PID0 1 0 :1:2 
+`uc 1 PID1 1 0 :1:3 
+`uc 1 PID2 1 0 :1:4 
+`uc 1 PID3 1 0 :1:5 
+`uc 1 . 1 0 :1:6 
+]
+[s S1112 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 PID 1 0 :4:2 
+`uc 1 . 1 0 :2:6 
+]
+[u S1116 _BD_STAT 1 `uc 1 Val 1 0 `S1096 1 . 1 0 `S1105 1 . 1 0 `S1112 1 . 1 0 ]
+[s S1121 . 4 `S1116 1 STAT 1 0 `uc 1 CNT 1 1 `uc 1 ADRL 1 2 `uc 1 ADRH 1 3 ]
+[s S1126 . 4 `uc 1 . 1 0 :8:0 
+`uc 1 . 1 1 :8:0 
+`us 1 ADR 2 2 ]
+[u S1130 __BDT 4 `S1121 1 . 4 0 `S1126 1 . 4 0 `ul 1 Val 4 0 `[4]uc 1 v 4 0 ]
+[v USBStdGetStatusHandler@p p `*.39S1130  1 a 2 18 ]
+"2331
+} 0
+"2200
+[v _USBStdGetDscHandler USBStdGetDscHandler `(v  1 s 0 USBStdGetDscHandler ]
+{
+"2259
+} 0
+"2900
+[v _USBStdFeatureReqHandler USBStdFeatureReqHandler `(v  1 s 0 USBStdFeatureReqHandler ]
+{
+[s S1096 . 1 `uc 1 BC8 1 0 :1:0 
+`uc 1 BC9 1 0 :1:1 
+`uc 1 BSTALL 1 0 :1:2 
+`uc 1 DTSEN 1 0 :1:3 
+`uc 1 INCDIS 1 0 :1:4 
+`uc 1 KEN 1 0 :1:5 
+`uc 1 DTS 1 0 :1:6 
+`uc 1 UOWN 1 0 :1:7 
+]
+"2902
+[s S1105 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 PID0 1 0 :1:2 
+`uc 1 PID1 1 0 :1:3 
+`uc 1 PID2 1 0 :1:4 
+`uc 1 PID3 1 0 :1:5 
+`uc 1 . 1 0 :1:6 
+]
+[s S1112 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 PID 1 0 :4:2 
+`uc 1 . 1 0 :2:6 
+]
+[u S1116 _BD_STAT 1 `uc 1 Val 1 0 `S1096 1 . 1 0 `S1105 1 . 1 0 `S1112 1 . 1 0 ]
+[s S1121 . 4 `S1116 1 STAT 1 0 `uc 1 CNT 1 1 `uc 1 ADRL 1 2 `uc 1 ADRH 1 3 ]
+[s S1126 . 4 `uc 1 . 1 0 :8:0 
+`uc 1 . 1 1 :8:0 
+`us 1 ADR 2 2 ]
+[u S1130 __BDT 4 `S1121 1 . 4 0 `S1126 1 . 4 0 `ul 1 Val 4 0 `[4]uc 1 v 4 0 ]
+[v USBStdFeatureReqHandler@p p `*.39S1130  1 a 2 41 ]
+"2907
+[v USBStdFeatureReqHandler@pUEP pUEP `*.39uc  1 a 2 38 ]
+[s S1704 . 1 `uc 1 ping_pong_state 1 0 :1:0 
+`uc 1 transfer_terminated 1 0 :1:1 
+]
+"2903
+[u S1707 . 1 `S1704 1 bits 1 0 `uc 1 Val 1 0 ]
+[v USBStdFeatureReqHandler@current_ep_data current_ep_data `S1707  1 a 1 40 ]
+"3125
+} 0
+"817 C:\Users\jtwogoo1\Desktop/usb_lab/mouse.c
+[v _USER_USB_CALLBACK_EVENT_HANDLER USER_USB_CALLBACK_EVENT_HANDLER `(E3  1 e 1 0 ]
+{
+[v USER_USB_CALLBACK_EVENT_HANDLER@event event `i  1 p 2 29 ]
+[v USER_USB_CALLBACK_EVENT_HANDLER@pdata pdata `*.39v  1 p 2 31 ]
+[v USER_USB_CALLBACK_EVENT_HANDLER@size size `us  1 p 2 33 ]
+"857
+} 0
+"538
+[v _USBCB_SOF_Handler USBCB_SOF_Handler `(v  1 e 0 0 ]
+{
+"541
+} 0
+"509
+[v _USBCBWakeFromSuspend USBCBWakeFromSuspend `(v  1 e 0 0 ]
+{
+"518
+} 0
+"460
+[v _USBCBSuspend USBCBSuspend `(v  1 e 0 0 ]
+{
+"486
+} 0
+"632
+[v _USBCBStdSetDscHandler USBCBStdSetDscHandler `(v  1 e 0 0 ]
+{
+"634
+} 0
+"656
+[v _USBCBInitEP USBCBInitEP `(v  1 e 0 0 ]
+{
+"659
+} 0
+"1049 C:\Users\jtwogoo1\Desktop/usb_lab/usb_device.c
+[v _USBEnableEndpoint USBEnableEndpoint `(v  1 e 0 0 ]
+{
+[v USBEnableEndpoint@ep ep `uc  1 a 1 wreg ]
+"1051
+[v USBEnableEndpoint@p p `*.39uc  1 a 2 26 ]
+"1049
+[v USBEnableEndpoint@ep ep `uc  1 a 1 wreg ]
+[v USBEnableEndpoint@options options `uc  1 p 1 25 ]
+"1055
+[v USBEnableEndpoint@ep ep `uc  1 a 1 28 ]
+"1073
+} 0
+"1706
+[v _USBConfigureEndpoint USBConfigureEndpoint `(v  1 s 0 USBConfigureEndpoint ]
+{
+[v USBConfigureEndpoint@EPNum EPNum `uc  1 a 1 wreg ]
+[s S1096 . 1 `uc 1 BC8 1 0 :1:0 
+`uc 1 BC9 1 0 :1:1 
+`uc 1 BSTALL 1 0 :1:2 
+`uc 1 DTSEN 1 0 :1:3 
+`uc 1 INCDIS 1 0 :1:4 
+`uc 1 KEN 1 0 :1:5 
+`uc 1 DTS 1 0 :1:6 
+`uc 1 UOWN 1 0 :1:7 
+]
+"1708
+[s S1105 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 PID0 1 0 :1:2 
+`uc 1 PID1 1 0 :1:3 
+`uc 1 PID2 1 0 :1:4 
+`uc 1 PID3 1 0 :1:5 
+`uc 1 . 1 0 :1:6 
+]
+[s S1112 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 PID 1 0 :4:2 
+`uc 1 . 1 0 :2:6 
+]
+[u S1116 _BD_STAT 1 `uc 1 Val 1 0 `S1096 1 . 1 0 `S1105 1 . 1 0 `S1112 1 . 1 0 ]
+[s S1121 . 4 `S1116 1 STAT 1 0 `uc 1 CNT 1 1 `uc 1 ADRL 1 2 `uc 1 ADRH 1 3 ]
+[s S1126 . 4 `uc 1 . 1 0 :8:0 
+`uc 1 . 1 1 :8:0 
+`us 1 ADR 2 2 ]
+[u S1130 __BDT 4 `S1121 1 . 4 0 `S1126 1 . 4 0 `ul 1 Val 4 0 `[4]uc 1 v 4 0 ]
+[v USBConfigureEndpoint@handle handle `*.39VES1130  1 a 2 23 ]
+"1706
+[v USBConfigureEndpoint@EPNum EPNum `uc  1 a 1 wreg ]
+[v USBConfigureEndpoint@direction direction `uc  1 p 1 17 ]
+"1712
+[v USBConfigureEndpoint@EPNum EPNum `uc  1 a 1 22 ]
+"1748
+} 0
+"560 C:\Users\jtwogoo1\Desktop/usb_lab/mouse.c
+[v _USBCBErrorHandler USBCBErrorHandler `(v  1 e 0 0 ]
+{
+"579
+} 0
+"609
+[v _USBCBCheckOtherReq USBCBCheckOtherReq `(v  1 e 0 0 ]
+{
+"611
+} 0
+"169 C:\Users\jtwogoo1\Desktop/usb_lab/usb_function_hid.c
+[v _USBCheckHIDRequest USBCheckHIDRequest `(v  1 e 0 0 ]
+{
+"256
+} 0
+"2688 C:\Users\jtwogoo1\Desktop/usb_lab/usb_device.c
+[v _USBCtrlTrfOutHandler USBCtrlTrfOutHandler `(v  1 s 0 USBCtrlTrfOutHandler ]
+{
+"2716
+} 0
+"2012
+[v _USBCtrlTrfRxService USBCtrlTrfRxService `(v  1 s 0 USBCtrlTrfRxService ]
+{
+"2014
+[v USBCtrlTrfRxService@byteToRead byteToRead `uc  1 a 1 20 ]
+"2015
+[v USBCtrlTrfRxService@i i `uc  1 a 1 19 ]
+"2104
+} 0
+"1583
+[v _USBCtrlEPAllowStatusStage USBCtrlEPAllowStatusStage `(v  1 e 0 0 ]
+{
+"1624
+} 0
+"2741
+[v _USBCtrlTrfInHandler USBCtrlTrfInHandler `(v  1 s 0 USBCtrlTrfInHandler ]
+{
+"2743
+[v USBCtrlTrfInHandler@lastDTS lastDTS `uc  1 a 1 20 ]
+"2813
+} 0
+"1931
+[v _USBCtrlTrfTxService USBCtrlTrfTxService `(v  1 s 0 USBCtrlTrfTxService ]
+{
+"1933
+[v USBCtrlTrfTxService@byteToSend byteToSend `uc  1 a 1 19 ]
+"1985
+} 0

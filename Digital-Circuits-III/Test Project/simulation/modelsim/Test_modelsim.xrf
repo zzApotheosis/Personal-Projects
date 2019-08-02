@@ -1,0 +1,8 @@
+vendor_name = ModelSim
+source_file = 1, E:/Digital Circuits III/Test Project/Test.v
+source_file = 1, E:/Digital Circuits III/Test Project/output_files/Chain1.cdf
+source_file = 1, E:/Digital Circuits III/Test Project/db/Test.cbx.xml
+design_name = Test
+instance = comp, \out~output , out~output, Test, 1
+instance = comp, \in~input , in~input, Test, 1
+instance = comp, \~QUARTUS_CREATED_GND~I , ~QUARTUS_CREATED_GND~I, Test, 1

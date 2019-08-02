@@ -1,0 +1,156 @@
+# Reading C:/altera/13.1/modelsim_ase/tcl/vsim/pref.tcl 
+# do top_seven_seg_decoder_run_msim_rtl_verilog.do 
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Copying C:\altera\13.1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# ** Warning: Copied C:\altera\13.1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini.
+#          Updated modelsim.ini.
+# 
+# vlog -vlog01compat -work work +incdir+E:/Digital\ Circuits\ III/Lab\ 3/Working\ Directory {E:/Digital Circuits III/Lab 3/Working Directory/sev_seg_decoder.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module sev_seg_decoder
+# -- Compiling module stimulus_seven_seg
+# 
+# Top level modules:
+# 	stimulus_seven_seg
+# 
+vsim work.stimulus_seven_seg
+# vsim work.stimulus_seven_seg 
+# Loading work.stimulus_seven_seg
+# Loading work.sev_seg_decoder
+add wave -position end  sim:/stimulus_seven_seg/bin_in[3]
+add wave -position end  sim:/stimulus_seven_seg/bin_in[2]
+add wave -position end  sim:/stimulus_seven_seg/bin_in[1]
+add wave -position end  sim:/stimulus_seven_seg/bin_in[0]
+add wave -position end  sim:/stimulus_seven_seg/led_out[6]
+add wave -position end  sim:/stimulus_seven_seg/led_out[5]
+add wave -position end  sim:/stimulus_seven_seg/led_out[4]
+add wave -position end  sim:/stimulus_seven_seg/led_out[3]
+add wave -position end  sim:/stimulus_seven_seg/led_out[2]
+add wave -position end  sim:/stimulus_seven_seg/led_out[1]
+add wave -position end  sim:/stimulus_seven_seg/led_out[0]
+run
+# At time                    0 binary input = 0000 and hex output = 40
+# 
+# At time                    5 binary input = 0001 and hex output = 79
+# 
+# At time                   15 binary input = 0010 and hex output = 24
+# 
+# At time                   25 binary input = 0011 and hex output = 30
+# 
+# At time                   35 binary input = 0100 and hex output = 19
+# 
+# At time                   45 binary input = 0101 and hex output = 12
+# 
+# At time                   55 binary input = 0110 and hex output = 02
+# 
+# At time                   65 binary input = 0111 and hex output = 78
+# 
+# At time                   75 binary input = 1000 and hex output = 00
+# 
+# At time                   85 binary input = 1001 and hex output = 18
+# 
+# At time                   95 binary input = 1010 and hex output = 08
+# 
+run
+# At time                  105 binary input = 1011 and hex output = 03
+# 
+# At time                  115 binary input = 1100 and hex output = 46
+# 
+# At time                  125 binary input = 1101 and hex output = 21
+# 
+# At time                  135 binary input = 1110 and hex output = 06
+# 
+# At time                  145 binary input = 1111 and hex output = 0e
+# 
+# At time                  155 binary input = 0000 and hex output = 40
+# 
+# Break in Module stimulus_seven_seg at E:/Digital Circuits III/Lab 3/Working Directory/sev_seg_decoder.v line 61
+run
+# At time                  165 binary input = 0001 and hex output = 79
+# 
+# At time                  175 binary input = 0010 and hex output = 24
+# 
+# At time                  185 binary input = 0011 and hex output = 30
+# 
+# At time                  195 binary input = 0100 and hex output = 19
+# 
+# At time                  205 binary input = 0101 and hex output = 12
+# 
+# At time                  215 binary input = 0110 and hex output = 02
+# 
+# At time                  225 binary input = 0111 and hex output = 78
+# 
+# At time                  235 binary input = 1000 and hex output = 00
+# 
+# At time                  245 binary input = 1001 and hex output = 18
+# 
+# At time                  255 binary input = 1010 and hex output = 08
+# 
+run
+# At time                  265 binary input = 1011 and hex output = 03
+# 
+# At time                  275 binary input = 1100 and hex output = 46
+# 
+# At time                  285 binary input = 1101 and hex output = 21
+# 
+# At time                  295 binary input = 1110 and hex output = 06
+# 
+# At time                  305 binary input = 1111 and hex output = 0e
+# 
+# At time                  315 binary input = 0000 and hex output = 40
+# 
+# At time                  325 binary input = 0001 and hex output = 79
+# 
+# At time                  335 binary input = 0010 and hex output = 24
+# 
+# At time                  345 binary input = 0011 and hex output = 30
+# 
+# At time                  355 binary input = 0100 and hex output = 19
+# 
+run
+# At time                  365 binary input = 0101 and hex output = 12
+# 
+# At time                  375 binary input = 0110 and hex output = 02
+# 
+# At time                  385 binary input = 0111 and hex output = 78
+# 
+# At time                  395 binary input = 1000 and hex output = 00
+# 
+# At time                  405 binary input = 1001 and hex output = 18
+# 
+# At time                  415 binary input = 1010 and hex output = 08
+# 
+# At time                  425 binary input = 1011 and hex output = 03
+# 
+# At time                  435 binary input = 1100 and hex output = 46
+# 
+# At time                  445 binary input = 1101 and hex output = 21
+# 
+# At time                  455 binary input = 1110 and hex output = 06
+# 
+run
+# At time                  465 binary input = 1111 and hex output = 0e
+# 
+# At time                  475 binary input = 0000 and hex output = 40
+# 
+# At time                  485 binary input = 0001 and hex output = 79
+# 
+# At time                  495 binary input = 0010 and hex output = 24
+# 
+# At time                  505 binary input = 0011 and hex output = 30
+# 
+# At time                  515 binary input = 0100 and hex output = 19
+# 
+# At time                  525 binary input = 0101 and hex output = 12
+# 
+# At time                  535 binary input = 0110 and hex output = 02
+# 
+# At time                  545 binary input = 0111 and hex output = 78
+# 
+# At time                  555 binary input = 1000 and hex output = 00
+# 
