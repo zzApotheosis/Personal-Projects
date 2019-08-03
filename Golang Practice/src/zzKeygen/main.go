@@ -3,10 +3,11 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"github.com/atotto/clipboard" // For Linux/Unix-like systems, either xclip or xsel must be installed
-	"jenningsUtil"
+	util "jenningsUtil"
 	"os"
 	"strconv"
+
+	"github.com/atotto/clipboard" // For Linux/Unix-like systems, either xclip or xsel must be installed
 )
 
 func main() {

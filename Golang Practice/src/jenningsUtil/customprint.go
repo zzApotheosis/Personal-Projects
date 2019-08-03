@@ -8,12 +8,12 @@ import (
 
 func Println(a ...interface{}) (n int, err error) {
 	var hour, min, sec int = time.Now().Clock()
-	return fmt.Println(prefixTimeFormat(hour, min, sec)+" <] ", strings.Trim(fmt.Sprint(a), "[]"))
+	return fmt.Println(prefixTimeFormat(hour, min, sec)+" <] ", strings.Trim(fmt.Sprint(a...), "[]"))
 }
 
 func Print(a ...interface{}) (n int, err error) {
 	var hour, min, sec int = time.Now().Clock()
-	return fmt.Print(prefixTimeFormat(hour, min, sec)+" <] ", strings.Trim(fmt.Sprint(a), "[]"))
+	return fmt.Print(prefixTimeFormat(hour, min, sec)+" <] ", strings.Trim(fmt.Sprint(a...), "[]"))
 }
 
 // TODO

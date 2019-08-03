@@ -13,10 +13,10 @@ import (
 )
 
 const (
-	SymbolsSet   = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
 	LowercaseSet = "abcdefghijklmnopqrstuvwxyz"
 	UppercaseSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	NumbersSet   = "0123456789"
+	SymbolsSet   = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
 )
 
 func SetSeedAsString(in string) {
