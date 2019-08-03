@@ -6,6 +6,7 @@ import (
 	"os/exec"
 )
 
+// TerminalClear yeet
 func TerminalClear() {
 	// Clear terminal
 	switch GetOS() {

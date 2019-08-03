@@ -12,6 +12,7 @@ import (
 	mrand "math/rand"
 )
 
+// Is this good enough? Why does Golint complain about not having comments?
 const (
 	LowercaseSet = "abcdefghijklmnopqrstuvwxyz"
 	UppercaseSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -19,6 +20,7 @@ const (
 	SymbolsSet   = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
 )
 
+// SetSeedAsString yeet
 func SetSeedAsString(in string) {
 	h := md5.New()
 	io.WriteString(h, in)
@@ -27,10 +29,12 @@ func SetSeedAsString(in string) {
 	mrand.Seed(int64(seed))
 }
 
+// RandomInt yeet
 func RandomInt(min, max int) int {
 	return min + mrand.Intn(max-min)
 }
 
+// RandomString yeet
 func RandomString(length int, set string, s int) string {
 	// Check validity of charset selection
 	if len(set) != 4 {
@@ -55,7 +59,7 @@ func RandomString(length int, set string, s int) string {
 	}
 
 	// Create character set
-	var charset string = ""
+	var charset string
 	if set[0] == '1' { // Symbols
 		charset += SymbolsSet
 	}
@@ -84,6 +88,7 @@ func RandomString(length int, set string, s int) string {
 	return string(bytes)
 }
 
+// OneLineKeygen yeet
 func OneLineKeygen(cs string, l, s int) string {
 	// Check validity of sequence length
 	if l <= 0 { // Return if sequence length is invalid
@@ -98,7 +103,7 @@ func OneLineKeygen(cs string, l, s int) string {
 	return RandomString(l, cs, s)
 }
 
-// Encrypt string to base64 crypto using AES
+// StrEncrypt Encrypt string to base64 crypto using AES
 func StrEncrypt(key []byte, text string) string {
 	// key := []byte(keyText)
 	plaintext := []byte(text)
@@ -123,7 +128,7 @@ func StrEncrypt(key []byte, text string) string {
 	return base64.URLEncoding.EncodeToString(ciphertext)
 }
 
-// Decrypt from base64 to decrypted string
+// StrDecrypt Decrypt from base64 to decrypted string
 func StrDecrypt(key []byte, cryptoText string) string {
 	ciphertext, _ := base64.URLEncoding.DecodeString(cryptoText)
 

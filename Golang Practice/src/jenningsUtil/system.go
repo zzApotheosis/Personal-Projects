@@ -6,13 +6,16 @@ import (
 	"os"
 	"os/exec"
 	"runtime"
-	_ "syscall"
+	_ "syscall" // yeet, just to make golint stfu
 )
 
+// GetOS yeet
 func GetOS() string {
 	return runtime.GOOS
 }
 
+// Command yeet
+// The Windows block of code should be commented out
 func Command(in string) (status int, err error) {
 	switch GetOS() {
 	//	case "windows":
