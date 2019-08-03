@@ -19,7 +19,7 @@ func main() {
 
 	// Create variables
 	scanner := bufio.NewScanner(os.Stdin)
-	var input, output, offset, data, charset string
+	var input, output, offset, fullseed, charset string
 	var length, shift int
 
 	// Fetch input
@@ -40,7 +40,7 @@ func main() {
 	offset = scanner.Text()
 
 	// Combining "Seed" and Offset
-	data = input + offset
+	fullseed = input + offset
 
 	// Sequence length
 	fmt.Print("Sequence length: ")
@@ -72,15 +72,15 @@ func main() {
 
 	// Character Set (Symbols, lowercase letters, uppercase letters, numbers)
 	fmt.Print("\nEnter character set as a 4-bit binary number, where each bit ")
-	fmt.Print("represents a boolean value for SYMBOLS, LOWERCASE LETTERS, ")
-	fmt.Print("UPPERCASE LETTERS, and NUMBERS in that order. A value of 0000 ")
-	fmt.Print("will exit the program.")
+	fmt.Print("represents a boolean value for lowercase letters, ")
+	fmt.Print("uppercase letters, numbers, and symbols in that order. ")
+	fmt.Print("A value of 0000 will exit the program.")
 	fmt.Print("\n\nEnter desired character set: ")
 	scanner.Scan()
 	charset = scanner.Text()
 
-	// Perform encryption
-	util.SetSeedAsString(data)
+	// Process data; Generate key
+	util.SetSeedAsString(fullseed)
 	output = util.RandomString(length, charset, shift)
 	fmt.Print("\nOutput: ")
 	fmt.Print(output)

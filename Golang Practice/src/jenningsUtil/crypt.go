@@ -13,11 +13,13 @@ import (
 )
 
 // Is this good enough? Why does Golint complain about not having comments?
+// TODO: Implement file I/O to create a default character set file with these
+// characters, and have the program use the character
 const (
 	LowercaseSet = "abcdefghijklmnopqrstuvwxyz"
 	UppercaseSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	NumbersSet   = "0123456789"
-	SymbolsSet   = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
+	SymbolsSet   = " `~!@#$%^&*()-_=+[{]}\\|;:'\",<.>/?"
 )
 
 // SetSeedAsString yeet
@@ -38,15 +40,17 @@ func RandomInt(min, max int) int {
 func RandomString(length int, set string, s int) string {
 	// Check validity of charset selection
 	if len(set) != 4 {
-		fmt.Println("Charset must have a length of 4.")
+		fmt.Println("WARNING: Invalid character set.")
 		return ""
 	}
 	for i := 0; i < len(set); i++ {
 		if set[i] != '0' && set[i] != '1' {
-			fmt.Println("An element in the charset is not a valid binary digit.")
+			fmt.Println("WARNING: An element in the charset is not a",
+				"valid binary digit.")
 			return ""
 		}
 	}
+
 	// Return early if "set" parameter is "0000"
 	if set == "0000" {
 		return ""
@@ -60,17 +64,17 @@ func RandomString(length int, set string, s int) string {
 
 	// Create character set
 	var charset string
-	if set[0] == '1' { // Symbols
-		charset += SymbolsSet
-	}
-	if set[1] == '1' {
+	if set[0] == '1' {
 		charset += LowercaseSet
 	}
-	if set[2] == '1' {
+	if set[1] == '1' {
 		charset += UppercaseSet
 	}
-	if set[3] == '1' {
+	if set[2] == '1' {
 		charset += NumbersSet
+	}
+	if set[3] == '1' {
+		charset += SymbolsSet
 	}
 
 	// Perform shift
