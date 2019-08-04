@@ -12,6 +12,10 @@
  * go build -ldflags "-H windowsgui"
  *
  * I'm guessing the -H means "hide".
+ *
+ * Note for Linux systems: This program only works with the Xorg display server
+ * as far as I know. On Wayland, it cannot capture the desktop. It will still
+ * write png files, but they'll be blank.
  */
 
 package main
