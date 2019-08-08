@@ -6,43 +6,35 @@ import (
 	"github.com/micmonay/keybd_event"
 	util "jenningsUtil"
 	"time"
-	"reflect"
+	_ "reflect"
 )
 
 func main() {
-	kb, err := keybd_event.NewKeyBonding(); util.Check(err)
-	fmt.Println(reflect.TypeOf(kb).String())
-
-	// Important pause for Linux systems
+	// Initially prepares /dev/uinput for writing
 	if util.GetOS() == "linux" {
-		time.Sleep(2 * time.Second)
+		keybd_event.NewKeyBonding()
+		time.Sleep(1 * time.Second)
 	}
-
-	// kb.SetKeys(keybd_event.VK_A, keybd_event.VK_B, keybd_event.VK_X)
-
-	// kb.HasSHIFT(true)
-
-	// err = kb.Launching()
-	// util.Check(err)
-
-	// testEvent([]byte{1, 2, 3, 4})
-
-	KBString(&kb, "Test,yeet")
-	KBString(&kb, "Test, yeet")
-	KBString(&kb, "Test, yeet? WTF?")
+	time.Sleep(3 * time.Second) // Give user time to switch applications
+	KBString("Test, yeet? WTF?")
 }
 
 func SlowKBString(k *keybd_event.KeyBonding, data string) {
 
 }
 
-func KBString(k *keybd_event.KeyBonding, data string) {
+func KBString(data string) {
 	for _, e := range data {
-		writeKBEvent(k, e)
+		writeKBEvent(e)
+		if util.GetOS() == "linux" {
+			// I guess /dev/uinput needs time between each write to function properly
+			time.Sleep(5 * time.Millisecond)
+		}
 	}
 }
 
-func writeKBEvent(k *keybd_event.KeyBonding, x rune) {
+func writeKBEvent(x rune) {
+	k, _ := keybd_event.NewKeyBonding()
 	doShift, key := getKey(x)
 	k.HasSHIFT(doShift)
 	k.SetKeys(key)
@@ -50,7 +42,6 @@ func writeKBEvent(k *keybd_event.KeyBonding, x rune) {
 }
 
 func getKey(x rune) (bool, int) {
-	fmt.Println(x)
 	switch x {
 	case 'a':
 		return false, keybd_event.VK_A
