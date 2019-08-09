@@ -1,186 +1,100 @@
+/*
+ * I'm developing this program to autospam random crap on
+ * Town of Salem LUL
+ */
+
 package main
 
 import (
 	"fmt"
 	_ "github.com/atotto/clipboard"
 	"github.com/micmonay/keybd_event"
+	"os"
+	"log"
+	"bufio"
 	util "jenningsUtil"
-	"time"
 	_ "reflect"
+	"io"
+	"time"
+)
+
+const (
+	limit int = 117
 )
 
 func main() {
-	// Initially prepares /dev/uinput for writing
-	if util.GetOS() == "linux" {
-		keybd_event.NewKeyBonding()
-		time.Sleep(1 * time.Second)
+	kb, err := keybd_event.NewKeyBonding()
+	util.Check(err)
+	time.Sleep(3 * time.Second) // Give user time to switch applications, this also gives /dev/uinput time to prepare for writing
+	// KBString(&kb, "|")
+	TOSautopaster(&kb, "./input.txt")
+}
+
+func TOSautopaster(k *keybd_event.KeyBonding, sourceFilePath string) {
+	// Check if file exists
+	if !util.FileExists(sourceFilePath) {
+		panic(fmt.Sprintf("%s FILE DOES NOT EXIST!", sourceFilePath))
 	}
-	time.Sleep(3 * time.Second) // Give user time to switch applications
-	KBString("Test, yeet? WTF?")
-}
 
-func SlowKBString(k *keybd_event.KeyBonding, data string) {
+	// Set variables
 
-}
 
-func KBString(data string) {
-	for _, e := range data {
-		writeKBEvent(e)
-		if util.GetOS() == "linux" {
-			// I guess /dev/uinput needs time between each write to function properly
-			time.Sleep(5 * time.Millisecond)
+	// Read source file
+	sourceFile, err := os.Open(sourceFilePath); defer sourceFile.Close(); util.Check(err)
+	r := bufio.NewReader(sourceFile)
+
+	// Read rune by rune
+	for {
+		for i := 0; i < limit; i++ {
+			if c, _, err := r.ReadRune(); err != nil {
+				if err == io.EOF {
+					break
+				} else {
+					log.Fatal(err)
+				}
+			} else {
+				// fmt.Printf("%q [%d]\n", string(c), sz)
+				writeKBEvent(k, c)
+				if util.GetOS() == "linux" {
+					time.Sleep(10 * time.Millisecond)
+				}
+			}
+		}
+
+		// BETTER GET THIS BEAUTY IN THE CHAT!!!!!!!!!!!!!!!!!!!
+		pressEnter(k)
+
+		// Delay 1 second to prevent spam detection
+		time.Sleep(1 * time.Second)
+
+		// Break if there's no more in the input file
+		if r.Buffered() == 0 {
+			break
 		}
 	}
 }
 
-func writeKBEvent(x rune) {
-	k, _ := keybd_event.NewKeyBonding()
+func KBString(k *keybd_event.KeyBonding, data string) {
+	for _, e := range data {
+		writeKBEvent(k, e)
+		if util.GetOS() == "linux" {
+			// I guess /dev/uinput needs time between each write to function properly
+			time.Sleep(10 * time.Millisecond)
+		}
+	}
+}
+
+func writeKBEvent(k *keybd_event.KeyBonding, x rune) {
 	doShift, key := getKey(x)
 	k.HasSHIFT(doShift)
 	k.SetKeys(key)
 	util.Check(k.Launching())
 }
 
-func getKey(x rune) (bool, int) {
-	switch x {
-	case 'a':
-		return false, keybd_event.VK_A
-	case 'A':
-		return true, keybd_event.VK_A
-	case 'b':
-		return false, keybd_event.VK_B
-	case 'B':
-		return true, keybd_event.VK_B
-	case 'c':
-		return false, keybd_event.VK_C
-	case 'C':
-		return true, keybd_event.VK_C
-	case 'd':
-		return false, keybd_event.VK_D
-	case 'D':
-		return true, keybd_event.VK_D
-	case 'e':
-		return false, keybd_event.VK_E
-	case 'E':
-		return true, keybd_event.VK_E
-	case 'f':
-		return false, keybd_event.VK_F
-	case 'F':
-		return true, keybd_event.VK_F
-	case 'g':
-		return false, keybd_event.VK_G
-	case 'G':
-		return true, keybd_event.VK_G
-	case 'h':
-		return false, keybd_event.VK_H
-	case 'H':
-		return true, keybd_event.VK_H
-	case 'i':
-		return false, keybd_event.VK_I
-	case 'I':
-		return true, keybd_event.VK_I
-	case 'j':
-		return false, keybd_event.VK_J
-	case 'J':
-		return true, keybd_event.VK_J
-	case 'k':
-		return false, keybd_event.VK_K
-	case 'K':
-		return true, keybd_event.VK_K
-	case 'l':
-		return false, keybd_event.VK_L
-	case 'L':
-		return true, keybd_event.VK_L
-	case 'm':
-		return false, keybd_event.VK_M
-	case 'M':
-		return true, keybd_event.VK_M
-	case 'n':
-		return false, keybd_event.VK_N
-	case 'N':
-		return true, keybd_event.VK_N
-	case 'o':
-		return false, keybd_event.VK_O
-	case 'O':
-		return true, keybd_event.VK_O
-	case 'p':
-		return false, keybd_event.VK_P
-	case 'P':
-		return true, keybd_event.VK_P
-	case 'q':
-		return false, keybd_event.VK_Q
-	case 'Q':
-		return true, keybd_event.VK_Q
-	case 'r':
-		return false, keybd_event.VK_R
-	case 'R':
-		return true, keybd_event.VK_R
-	case 's':
-		return false, keybd_event.VK_S
-	case 'S':
-		return true, keybd_event.VK_S
-	case 't':
-		return false, keybd_event.VK_T
-	case 'T':
-		return true, keybd_event.VK_T
-	case 'u':
-		return false, keybd_event.VK_U
-	case 'U':
-		return true, keybd_event.VK_U
-	case 'v':
-		return false, keybd_event.VK_V
-	case 'V':
-		return true, keybd_event.VK_V
-	case 'w':
-		return false, keybd_event.VK_W
-	case 'W':
-		return true, keybd_event.VK_W
-	case 'x':
-		return false, keybd_event.VK_X
-	case 'X':
-		return true, keybd_event.VK_X
-	case 'y':
-		return false, keybd_event.VK_Y
-	case 'Y':
-		return true, keybd_event.VK_Y
-	case 'z':
-		return false, keybd_event.VK_Z
-	case 'Z':
-		return true, keybd_event.VK_Z
-	case '1':
-		return false, keybd_event.VK_1
-	case '2':
-		return false, keybd_event.VK_2
-	case '3':
-		return false, keybd_event.VK_3
-	case '4':
-		return false, keybd_event.VK_4
-	case '5':
-		return false, keybd_event.VK_5
-	case '6':
-		return false, keybd_event.VK_6
-	case '7':
-		return false, keybd_event.VK_7
-	case '8':
-		return false, keybd_event.VK_8
-	case '9':
-		return false, keybd_event.VK_9
-	case '0':
-		return false, keybd_event.VK_0
-	case ' ':
-		return false, keybd_event.VK_SPACE
-	case '?':
-		return true, keybd_event.VK_SP11
-	case '!':
-		return true, keybd_event.VK_1
-	case ',':
-		return false, keybd_event.VK_SP9
-	case '.':
-		return false, keybd_event.VK_SP10
-	default:
-		fmt.Println("WARNING: INVALID RUNE!")
-	}
-	return false, -1
+func pressEnter(k *keybd_event.KeyBonding) {
+	k.HasSHIFT(false)
+	k.SetKeys(keybd_event.VK_ENTER)
+	util.Check(k.Launching())
 }
 
 func testEvent(x []byte) {
