@@ -1,20 +1,22 @@
 /*
  * I'm developing this program to autospam random crap on
  * Town of Salem LUL
+ *
+ * TODO: Implement variable time delay and character limit per enterkey
  */
 
 package main
 
 import (
+	"bufio"
 	"fmt"
 	_ "github.com/atotto/clipboard"
 	"github.com/micmonay/keybd_event"
-	"os"
-	"log"
-	"bufio"
-	util "jenningsUtil"
-	_ "reflect"
 	"io"
+	util "jenningsUtil"
+	"log"
+	"os"
+	_ "reflect"
 	"time"
 )
 
@@ -38,9 +40,10 @@ func TOSautopaster(k *keybd_event.KeyBonding, sourceFilePath string) {
 
 	// Set variables
 
-
 	// Read source file
-	sourceFile, err := os.Open(sourceFilePath); defer sourceFile.Close(); util.Check(err)
+	sourceFile, err := os.Open(sourceFilePath)
+	defer sourceFile.Close()
+	util.Check(err)
 	r := bufio.NewReader(sourceFile)
 
 	// Read rune by rune
