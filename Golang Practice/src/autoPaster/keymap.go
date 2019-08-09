@@ -196,7 +196,7 @@ func getKey(x rune) (bool, int) {
 	case '	':
 		return false, keybd_event.VK_TAB
 	case '\n':
-    return false, keybd_event.VK_ENTER
+    // return false, keybd_event.VK_ENTER
 	default:
 		fmt.Println("WARNING: INVALID RUNE!")
 	}

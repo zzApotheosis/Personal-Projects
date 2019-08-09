@@ -64,8 +64,8 @@ func TOSautopaster(k *keybd_event.KeyBonding, sourceFilePath string) {
 		// BETTER GET THIS BEAUTY IN THE CHAT!!!!!!!!!!!!!!!!!!!
 		pressEnter(k)
 
-		// Delay 1 second to prevent spam detection
-		time.Sleep(1 * time.Second)
+		// Delay to prevent spam detection
+		time.Sleep(3 * time.Second)
 
 		// Break if there's no more in the input file
 		if r.Buffered() == 0 {
