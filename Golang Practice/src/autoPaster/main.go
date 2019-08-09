@@ -2,7 +2,6 @@
  * I'm developing this program to autospam random crap on
  * Town of Salem LUL
  *
- * TODO: Implement variable time delay and character limit per enterkey
  */
 
 package main
@@ -16,39 +15,64 @@ import (
 	util "jenningsUtil"
 	"log"
 	"os"
+	"strconv"
 	_ "reflect"
 	"time"
 )
+
+type config struct {
+	sourceFilePath string
+	msdelay int
+	keystrokelimit int
+}
 
 const (
 	limit int = 117
 )
 
 func main() {
+	explain()
 	kb, err := keybd_event.NewKeyBonding()
+	conf := config{"./input.txt", 5000, 117} // Default values
+	getInput(&conf)
 	util.Check(err)
 	time.Sleep(3 * time.Second) // Give user time to switch applications, this also gives /dev/uinput time to prepare for writing
 	// KBString(&kb, "|")
-	TOSautopaster(&kb, "./input.txt")
+	TOSautopaster(&kb, &conf)
 }
 
-func TOSautopaster(k *keybd_event.KeyBonding, sourceFilePath string) {
+func getInput(v *config) {
+	// Variables, structs
+	s := bufio.NewScanner(os.Stdin); var err error
+
+	fmt.Printf("Input delay between entries in milliseconds [%d]: ", v.msdelay); s.Scan()
+	if s.Text() != "" {
+		v.msdelay, err = strconv.Atoi(s.Text()); util.Check(err)
+	}
+
+	fmt.Printf("Input the number of characters to include in each entry [%d]: ", v.keystrokelimit); s.Scan()
+	if s.Text() != "" {
+		v.keystrokelimit, err = strconv.Atoi(s.Text()); util.Check(err)
+	}
+}
+
+func TOSautopaster(k *keybd_event.KeyBonding, conf *config) {
 	// Check if file exists
-	if !util.FileExists(sourceFilePath) {
-		panic(fmt.Sprintf("%s FILE DOES NOT EXIST!", sourceFilePath))
+	if !util.FileExists(conf.sourceFilePath) {
+		panic(fmt.Sprintf("%s FILE DOES NOT EXIST!", conf.sourceFilePath))
 	}
 
 	// Set variables
 
 	// Read source file
-	sourceFile, err := os.Open(sourceFilePath)
+	sourceFile, err := os.Open(conf.sourceFilePath)
 	defer sourceFile.Close()
 	util.Check(err)
 	r := bufio.NewReader(sourceFile)
 
-	// Read rune by rune
+	// Begin the epicness; I've already pissed people off by reciting the Constitution on Town of Salem
 	for {
-		for i := 0; i < limit; i++ {
+		for i := 0; i < conf.keystrokelimit; i++ {
 			if c, _, err := r.ReadRune(); err != nil {
 				if err == io.EOF {
 					break
@@ -68,7 +92,7 @@ func TOSautopaster(k *keybd_event.KeyBonding, sourceFilePath string) {
 		pressEnter(k)
 
 		// Delay to prevent spam detection
-		time.Sleep(3 * time.Second)
+		time.Sleep(time.Duration(conf.msdelay) * time.Millisecond)
 
 		// Break if there's no more in the input file
 		if r.Buffered() == 0 {

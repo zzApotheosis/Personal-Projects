@@ -14,6 +14,7 @@ import (
 	"time"
 )
 
+/*
 func main() {
 	fmt.Println("This is a test! Hello world! :D")
 
@@ -43,7 +44,7 @@ func main() {
 	temp6 := 1337.0 / 69
 	fmt.Println(temp6)
 }
-
+*/
 /*
 func main() {
 	// Check for existence of key.txt
