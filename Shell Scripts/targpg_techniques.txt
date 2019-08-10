@@ -1,0 +1,5 @@
+To encrypt:
+tar -czv <files and directories> | gpg -se -r "zzApotheosis@gmail.com" -o <archivefile.tar.gz.gpg>
+
+To decrypt:
+gpg -d <archivefile.tar.gz.gpg> | tar -xzv
