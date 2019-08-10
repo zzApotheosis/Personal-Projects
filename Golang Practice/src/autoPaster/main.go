@@ -1,7 +1,6 @@
 /*
  * I'm developing this program to autospam random crap on
  * Town of Salem LUL
- *
  */
 
 package main
@@ -33,9 +32,12 @@ const (
 func main() {
 	explain()
 	kb, err := keybd_event.NewKeyBonding()
-	conf := config{"./input.txt", 5000, 117} // Default values
+	conf := config{"./input.txt", 2500, 130} // Default values
 	getInput(&conf)
 	util.Check(err)
+	s := bufio.NewScanner(os.Stdin)
+	fmt.Println("PRESS ENTER TO YEET!!!")
+	s.Scan()
 	time.Sleep(3 * time.Second) // Give user time to switch applications, this also gives /dev/uinput time to prepare for writing
 	// KBString(&kb, "|")
 	TOSautopaster(&kb, &conf)
