@@ -51,7 +51,7 @@ fi
 if [[ $1 == "lock" ]]; then
 	tar -cz $2 | gpg -se --cipher-algo $3 -r $4 -o encrypted_archive.tar.gz.gpg
 	if [[ $? -eq 0 ]]; then
-		rm -r $2; # Gotta make sure it gets deleted, even it it's a directory
+		rm -r $2; # Gotta make sure it gets deleted, even if it's a directory
 	else
 		echo "WARNING: UNSUCCESSFUL EXECUTION. CHECK YOUR FILES!"
 	fi
