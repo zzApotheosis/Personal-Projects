@@ -40,7 +40,7 @@ TARGET="$(pwd)/$2"
 if [[ $1 == "unlock" ]]; then
 	gpg -d $2 | tar -xz
 	if [[ $? -eq 0 ]]; then
-		rm $2
+		rm $2; # No need for -r because it's a single archive file
 	else
 		echo "WARNING: UNSUCCESSFUL EXECUTION. CHECK YOUR FILES!"
 	fi
@@ -51,7 +51,7 @@ fi
 if [[ $1 == "lock" ]]; then
 	tar -cz $2 | gpg -se --cipher-algo $3 -r $4 -o encrypted_archive.tar.gz.gpg
 	if [[ $? -eq 0 ]]; then
-		rm -r $2
+		rm -r $2; # Gotta make sure it gets deleted, even it it's a directory
 	else
 		echo "WARNING: UNSUCCESSFUL EXECUTION. CHECK YOUR FILES!"
 	fi
