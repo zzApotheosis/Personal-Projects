@@ -1,0 +1,61 @@
+#!/bin/sh
+
+# I'm just gonna write a quick script to do what I want it to do,
+# with no regard for possible bugs or problems.
+# I'm disrespecting all there is to disrespect about computer science.
+
+# But in all seriousness, this is a very barebones, simple wrapper to
+# tar and gpg to encrypt and store select data of mine.
+
+# Check if required arguments exist, 1 is command, 2 is target file/directory
+if [[ -z $1 || -z $2 ]]; then
+	echo "Invalid arguments. $1 $2"
+	exit 1
+fi
+
+# Check if 3rd argument exists, only required for "peek" command
+if [[ $1 == "peek" && -z $3 ]]; then
+	echo "No target to peek into."
+	exit 2
+fi
+
+SCRIPTPATH=$(dirname "$(readlink -f \"$0\")")
+TARGET="$(pwd)/$2"
+
+if [[ $1 == "unlock" ]]; then
+	gpg -d $2 | tar -xz
+	if [[ $? -eq 0 ]]; then
+		rm $2
+	else
+		echo "WARNING: UNSUCCESSFUL EXECUTION. CHECK YOUR FILES!"
+	fi
+
+	exit 0
+fi
+
+if [[ $1 == "lock" ]]; then
+	tar -cz $2 | gpg -se --cipher-algo $3 -r $4 -o encrypted_archive.tar.gz.gpg
+	if [[ $? -eq 0 ]]; then
+		rm -r $2
+	else
+		echo "WARNING: UNSUCCESSFUL EXECUTION. CHECK YOUR FILES!"
+	fi
+
+	exit 0
+fi
+
+if [[ $1 == "peek" ]]; then
+	TEMPDIR=/tmp/zzCrypt/tempunpack
+
+	if [[ ! -d $TEMPDIR ]]; then
+		mkdir -p $TEMPDIR
+	fi
+	
+	gpg -d $2 | tar -xz --directory $TEMPDIR
+
+	find $TEMPDIR -name $3 -exec cat {} \;
+
+	rm -r $TEMPDIR
+	
+	exit 0
+fi
