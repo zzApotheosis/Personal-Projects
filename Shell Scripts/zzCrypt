@@ -7,6 +7,21 @@
 # But in all seriousness, this is a very barebones, simple wrapper to
 # tar and gpg to encrypt and store select data of mine.
 
+# Usage: zzCrypt arg1 arg2 arg3 arg4
+# If arg1 is unlock...
+# arg2 is the target file to decrypt
+# arg3 and arg4 are ignored
+#
+# If arg1 is lock...
+# arg2 is the target file/directory
+# arg3 is the cipher to use, usually just AES256
+# arg4 is the target key to use, usually just my name or email address
+#
+# If arg1 is peek...
+# arg2 is the target file to decrypt (and later remove)
+# arg3 is the target file in the archive to peek into
+# arg4 is ignored
+
 # Check if required arguments exist, 1 is command, 2 is target file/directory
 if [[ -z $1 || -z $2 ]]; then
 	echo "Invalid arguments."
