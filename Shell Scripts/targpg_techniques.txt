@@ -1,5 +1,8 @@
+This technique requires a GnuPG keypair, which can be created with:
+gpg --full-generate-key
+
 To encrypt:
-tar -czv <files and directories> | gpg -se -r "zzApotheosis@gmail.com" -o <archivefile.tar.gz.gpg>
+tar -czv <files and directories> | gpg -se --cipher-algo AES256 -r <recipients' public keys, usually identified by their name or email address; for me, it's zzApotheosis@gmail.com> -o <archivefile.tar.gz.gpg>
 
 To decrypt:
 gpg -d <archivefile.tar.gz.gpg> | tar -xzv
