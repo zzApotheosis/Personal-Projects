@@ -26,7 +26,7 @@
 # arg3 is the target file in the archive to peek into
 # arg4 is ignored
 #
-# If arg1 is ls...
+# If arg1 is list...
 # arg2 is the target file to decrypt (and won't be stored anywhere on the system as it is piped directly to tar for file listing)
 # arg3 and arg4 are ignored
 
@@ -84,7 +84,7 @@ if [[ $1 == "peek" ]]; then
 	exit 0
 fi
 
-if [[ $1 == "ls" ]]; then
+if [[ $1 == "list" ]]; then
 	gpg -d $2 | tar -tzv
 
 	exit 0
