@@ -46,6 +46,7 @@ fi
 SCRIPTPATH=$(dirname "$(readlink -f \"$0\")")
 TARGET="$(pwd)/$2"
 
+# Unlock command
 if [[ $1 == "unlock" ]]; then
 	gpg -d $2 | tar -xz
 	if [[ $? -eq 0 ]]; then
@@ -57,17 +58,23 @@ if [[ $1 == "unlock" ]]; then
 	exit 0
 fi
 
+# Lock command
 if [[ $1 == "lock" ]]; then
-	tar -cz $2 | gpg -se --cipher-algo $3 -r $4 -o encrypted_archive.tar.gz.gpg
+	FILENAME="${5:encrypted_archive.tar.gz.gpg}"
+	tar -cz $2 | gpg -se --cipher-algo $3 -r $4 -o $FILENAME
 	if [[ $? -eq 0 ]]; then
 		rm -r $2; # Gotta make sure it gets deleted, even if it's a directory
 	else
 		echo "WARNING: UNSUCCESSFUL EXECUTION. CHECK YOUR FILES!"
 	fi
 
+	# This ensures the created file is only accessible by the creator (And root, of course)
+	chmod 0600 $FILENAME
+
 	exit 0
 fi
 
+# Peek command
 if [[ $1 == "peek" ]]; then
 	TEMPDIR=/tmp/zzCrypt/tempunpack
 
@@ -84,7 +91,8 @@ if [[ $1 == "peek" ]]; then
 	exit 0
 fi
 
-if [[ $1 == "list" ]]; then
+# List command
+if [[ $1 == "list" || $1 == "ls" ]]; then
 	gpg -d $2 | tar -tzv
 
 	exit 0
