@@ -9,7 +9,7 @@
 
 # Check if required arguments exist, 1 is command, 2 is target file/directory
 if [[ -z $1 || -z $2 ]]; then
-	echo "Invalid arguments. $1 $2"
+	echo "Invalid arguments."
 	exit 1
 fi
 
