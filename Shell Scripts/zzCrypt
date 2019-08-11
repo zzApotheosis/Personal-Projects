@@ -7,6 +7,10 @@
 # But in all seriousness, this is a very barebones, simple wrapper to
 # tar and gpg to encrypt and store select data of mine.
 
+# THIS SCRIPT REQUIRES THE USER TO HAVE A VALID GnuPG KEYPAIR, WHICH CAN BE CREATED WITH:
+# gpg --full-generate-key
+# PRIOR TO EXECUTING THIS SCRIPT.
+
 # Usage: zzCrypt arg1 arg2 arg3 arg4
 # If arg1 is unlock...
 # arg2 is the target file to decrypt
