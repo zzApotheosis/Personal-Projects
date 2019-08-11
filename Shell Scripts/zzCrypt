@@ -34,6 +34,7 @@ if [[ $1 == "peek" && -z $3 ]]; then
 	exit 2
 fi
 
+# Unneeded variables set. Might remove later if I don't think of any reason to use them
 SCRIPTPATH=$(dirname "$(readlink -f \"$0\")")
 TARGET="$(pwd)/$2"
 
