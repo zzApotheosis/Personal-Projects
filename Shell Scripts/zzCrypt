@@ -11,25 +11,6 @@
 # gpg --full-generate-key
 # PRIOR TO EXECUTING THIS SCRIPT.
 
-# Usage: zzCrypt arg1 arg2 arg3 arg4
-# If arg1 is unlock...
-# arg2 is the target file to decrypt
-# arg3 and arg4 are ignored
-#
-# If arg1 is lock...
-# arg2 is the target file/directory
-# arg3 is the cipher to use, usually just AES256
-# arg4 is the target key to use, usually just my name or email address
-#
-# If arg1 is peek...
-# arg2 is the target file to decrypt (and later remove)
-# arg3 is the target file in the archive to peek into
-# arg4 is ignored
-#
-# If arg1 is list...
-# arg2 is the target file to decrypt (and won't be stored anywhere on the system as it is piped directly to tar for file listing)
-# arg3 and arg4 are ignored
-
 # Check for arguments
 if [[ $# -eq 0 ]]; then
 	echo "No arguments. Try \"zzCrypt help\""
@@ -51,6 +32,8 @@ if [[ $1 == "unlock" ]]; then
 	if [[ $? -eq 0 ]]; then
 		rm $2; # No need for -r because it's a single archive file
 	else
+		# Do NOT remove target archive if gpg or tar failed.
+		# If the archive gets deleted and the unlock failed... no more archive, and data is pretty much permanently lost
 		echo "WARNING: UNSUCCESSFUL EXECUTION. CHECK YOUR FILES!"
 	fi
 
