@@ -32,13 +32,13 @@
 
 # Check if required arguments exist, 1 is command, 2 is target file/directory
 if [[ -z $1 || -z $2 ]]; then
-	echo "Invalid arguments."
+	echo "Invalid arguments. Try \"zzCrypt help\""
 	exit 1
 fi
 
 # Check if 3rd argument exists, only required for "peek" command
 if [[ $1 == "peek" && -z $3 ]]; then
-	echo "No target to peek into."
+	echo "No target to peek into. Try \"zzCrypt help peek\""
 	exit 2
 fi
 
@@ -98,3 +98,39 @@ if [[ $1 == "list" || $1 == "ls" ]]; then
 	exit 0
 fi
 
+# Help command
+if [[ $1 == "help" ]]; then
+	if [[ ! -z $2 ]]; then
+		echo "Usage: zzCrypt <subcommand> <arguments>"
+		echo "Subcommands:"
+		echo "help"
+		echo "lock"
+		echo "unlock"
+		echo "peek"
+		echo "list, ls"
+		echo "\nUse zzCrypt help <subcommand> to view more information about that command."
+	else
+		if [[ $2 == "help" ]]; then # help
+			echo "Usage: zzCrypt help <subcommand>"
+			echo "No, I didn't make the command recursive, ya dummy."
+		elif [[ $2 == "lock" ]]; then # lock
+			echo "Usage: zzCrypt lock <files,directories> <gpg cipher> <gpg recipients> [output file name]"
+			echo "Files and directories can include any combination of files and/or directories, but must be enclosed in quotes."
+			echo "GPG cipher is any valid GPG cipher. AES256 is recommended."
+			echo "GPG recipients is any GPG recipient whose public key is accessible on the system. This usually is a recipient's name or email address."
+			echo "Output file name is optional, but can be named anything. The default name \"encrypted_archive.tar.gz.gpg\" is sufficient."
+		elif [[ $2 == "unlock" ]]; then # unlock
+			echo "Usage: zzCrypt unlock <target archive>"
+			echo "Target archive is the target encrypted archive to attempt to decrypt."
+		elif [[ $2 == "peek" ]]; then # peek
+			echo "Usage: zzCrypt peek <target archive> <target file(s)>"
+			echo "Target archive is the target encrypted archive to attempt to decrypt. The decrypted archive will not be stored anywhere on the system."
+			echo "Target file uses the find command to find the target file, and the cat command to print its contents to stdout."
+		elif [[ $2 == "list" || $2 == "ls" ]]; then # list
+			echo "Usage: zzCrypt list <target archive>"
+			echo "Target archive is the target encrypted archive to attempt to decrypt. The decrypted archive will not be stored anywhere on the system."
+		else
+			echo "Unknown subcommand \"$2\""
+		fi
+	fi
+fi
