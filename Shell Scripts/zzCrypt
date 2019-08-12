@@ -30,16 +30,15 @@
 # arg2 is the target file to decrypt (and won't be stored anywhere on the system as it is piped directly to tar for file listing)
 # arg3 and arg4 are ignored
 
-# Check if required arguments exist, 1 is command, 2 is target file/directory
-if [[ -z $1 || -z $2 ]]; then
-	echo "Invalid arguments. Try \"zzCrypt help\""
+# Check for arguments
+if [[ $# -eq 0 ]]; then
+	echo "No arguments. Try \"zzCrypt help\""
 	exit 1
 fi
 
-# Check if 3rd argument exists, only required for "peek" command
-if [[ $1 == "peek" && -z $3 ]]; then
-	echo "No target to peek into. Try \"zzCrypt help peek\""
-	exit 2
+# Check for valid subcommands
+if [[ $1 != "help" && $1 != "unlock" && $1 != "lock" && $1 != "peek" && $1 != "list" && $1 != "ls" ]]; then
+	echo "Unknown subcommand $1. Try \"zzCrypt help\""
 fi
 
 # Unneeded variables set. Might remove later if I don't think of any reason to use them
@@ -60,7 +59,11 @@ fi
 
 # Lock command
 if [[ $1 == "lock" ]]; then
-	FILENAME="${5:encrypted_archive.tar.gz.gpg}"
+	if [[ -z $5 ]]; then
+		FILENAME="encrypted_archive.tar.gz.gpg"
+	else
+		FILENAME=$5
+	fi
 	tar -cz $2 | gpg -se --cipher-algo $3 -r $4 -o $FILENAME
 	if [[ $? -eq 0 ]]; then
 		rm -r $2; # Gotta make sure it gets deleted, even if it's a directory
@@ -98,9 +101,14 @@ if [[ $1 == "list" || $1 == "ls" ]]; then
 	exit 0
 fi
 
+# Delete command TODO
+if [[ $1 == "delete" ]]; then
+	echo "TODO"
+fi
+
 # Help command
 if [[ $1 == "help" ]]; then
-	if [[ ! -z $2 ]]; then
+	if [[ $2 == "" ]]; then
 		echo "Usage: zzCrypt <subcommand> <arguments>"
 		echo "Subcommands:"
 		echo "help"
@@ -108,7 +116,7 @@ if [[ $1 == "help" ]]; then
 		echo "unlock"
 		echo "peek"
 		echo "list, ls"
-		echo "\nUse zzCrypt help <subcommand> to view more information about that command."
+		echo "Use zzCrypt help <subcommand> to view more information about that subcommand."
 	else
 		if [[ $2 == "help" ]]; then # help
 			echo "Usage: zzCrypt help <subcommand>"
