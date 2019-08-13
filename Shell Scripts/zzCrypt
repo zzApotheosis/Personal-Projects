@@ -11,6 +11,12 @@
 # gpg --full-generate-key
 # PRIOR TO EXECUTING THIS SCRIPT.
 
+# Had an ioctl error at some point in development. If this happens to you, then use this solution:
+# https://github.com/keybase/keybase-issues/issues/2798
+# https://unix.stackexchange.com/questions/257061/gentoo-linux-gpg-encrypts-properly-a-file-passed-through-parameter-but-throws-i/257065#257065
+# https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
+# export GPG_TTY=$(tty)
+
 # Check for arguments
 if [[ $# -eq 0 ]]; then
 	echo "No arguments. Try \"zzCrypt help\""
@@ -18,16 +24,19 @@ if [[ $# -eq 0 ]]; then
 fi
 
 # Check for valid subcommands
-if [[ $1 != "help" && $1 != "unlock" && $1 != "lock" && $1 != "peek" && $1 != "list" && $1 != "ls" ]]; then
+if [[ $1 != "help" && $1 != "unlock" && $1 != "lock" && $1 != "peek" && $1 != "list" && $1 != "ls" && $1 != "delete" ]]; then
 	echo "Unknown subcommand $1. Try \"zzCrypt help\""
 fi
 
-# Unneeded variables set. Might remove later if I don't think of any reason to use them
-SCRIPTPATH=$(dirname "$(readlink -f \"$0\")")
-TARGET="$(pwd)/$2"
+# Set variables
+TEMPDIR="/tmp/zzCrypt/tempunpack"
+if [[ -z $GPG_TTY ]]; then
+	export GPG_TTY=$(tty)
+fi
 
 # Unlock command
 if [[ $1 == "unlock" ]]; then
+	# Decrypt and unarchive target file
 	gpg -d $2 | tar -xz
 	if [[ $? -eq 0 ]]; then
 		rm $2; # No need for -r because it's a single archive file
@@ -35,58 +44,105 @@ if [[ $1 == "unlock" ]]; then
 		# Do NOT remove target archive if gpg or tar failed.
 		# If the archive gets deleted and the unlock failed... no more archive, and data is pretty much permanently lost
 		echo "WARNING: UNSUCCESSFUL EXECUTION. CHECK YOUR FILES!"
+		exit $?
 	fi
 
+	# Success
 	exit 0
 fi
 
 # Lock command
 if [[ $1 == "lock" ]]; then
+	# Determine target archive name
 	if [[ -z $5 ]]; then
 		FILENAME="encrypted_archive.tar.gz.gpg"
 	else
 		FILENAME=$5
 	fi
+
+	# Check for existence of target archive file
+	if [[ -f $FILENAME ]]; then
+		echo "WARNING: $FILENAME ALREADY EXISTS. CHECK YOUR FILES!"
+		exit 1
+	fi
+
+	# Archive and encrypt files to target archive file
 	tar -cz $2 | gpg -se --cipher-algo $3 -r $4 -o $FILENAME
 	if [[ $? -eq 0 ]]; then
-		rm -r $2; # Gotta make sure it gets deleted, even if it's a directory
+		rm -rf $2; # Gotta make sure it gets deleted, even if it's a directory
 	else
 		echo "WARNING: UNSUCCESSFUL EXECUTION. CHECK YOUR FILES!"
+		exit $?
 	fi
 
 	# This ensures the created file is only accessible by the creator (And root, of course)
 	chmod 0600 $FILENAME
 
+	# Success
 	exit 0
 fi
 
 # Peek command
 if [[ $1 == "peek" ]]; then
-	TEMPDIR=/tmp/zzCrypt/tempunpack
-
+	# Make temporary working directory if it doesn't exist
 	if [[ ! -d $TEMPDIR ]]; then
 		mkdir -p $TEMPDIR
 	fi
 	
+	# Temporarily decrypt and unarchive target archive
 	gpg -d $2 | tar -xz --directory $TEMPDIR
 
+	# List contents of all files that match the pattern in $3
 	find $TEMPDIR -name $3 -exec cat {} \;
 
-	rm -r $TEMPDIR
+	# Remove temporary directory and all its contents
+	rm -rf $TEMPDIR
 	
+	# Success
 	exit 0
 fi
 
 # List command
 if [[ $1 == "list" || $1 == "ls" ]]; then
+	# Decrypt and directly pipe its output to tar, which lists all of the archive's contents without unpacking it to the disk
 	gpg -d $2 | tar -tzv
 
+	# Success
 	exit 0
 fi
 
-# Delete command TODO
+# Delete command TODO: FIX THIS SHITE!!!!!!!!!!!!
 if [[ $1 == "delete" ]]; then
-	echo "TODO"
+	# Check for valid arguments
+	if [[ -z $2 || -z $3 || -z $4 ]]; then
+		echo "WARNING: CHECK YOUR ARGUMENTS BEFORE YOU DELETE YOUR DATA ON ACCIDENT!"
+		exit 1
+	fi
+
+	# Make temporary working directory if it doesn't exist
+	if [[ ! -d $TEMPDIR ]]; then
+		mkdir -p $TEMPDIR
+	fi
+
+	# Temporarily decrypt and unarchive target archive
+	gpg -d $2 | tar -xz --directory $TEMPDIR
+
+	# Delete contents of all files
+	find $TEMPDIR -name $3 -exec rm -rf {} \;
+
+	# TODO: Implement confirmation, so user doesn't screw up their data on accident
+
+	# Remove the existing archive to create the new one
+	rm -rf $2
+
+	# Repack and encrypt the archive
+	tar -cz $TEMPDIR/* | gpg -se --cipher-algo $4 -r $5 -o $2
+
+	# Remove temporary working directory files
+	rm -rf $TEMPDIR
+
+	# Success
+	exit 0
 fi
 
 # Help command
@@ -124,4 +180,7 @@ if [[ $1 == "help" ]]; then
 			echo "Unknown subcommand \"$2\""
 		fi
 	fi
+
+	# Success
+	exit 0
 fi
