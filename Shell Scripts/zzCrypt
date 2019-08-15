@@ -30,6 +30,8 @@ fi
 
 # Set variables
 TEMPDIR="/tmp/zzCrypt/tempunpack"
+#ORIGINALDIR=$(dirname $(readlink -f "$0")) # Incorrect, this gets the path of the script
+ORIGINALDIR=pwd
 if [[ -z $GPG_TTY ]]; then
 	export GPG_TTY=$(tty)
 fi
@@ -177,7 +179,8 @@ if [[ $1 == "help" ]]; then
 		echo "lock"
 		echo "unlock"
 		echo "peek"
-		echo "list, ls"
+		echo "list"
+		echo "delete"
 		echo "Use zzCrypt help <subcommand> to view more information about that subcommand."
 	else
 		if [[ $2 == "help" ]]; then # help
@@ -196,9 +199,15 @@ if [[ $1 == "help" ]]; then
 			echo "Usage: zzCrypt peek <target archive> <target file(s)>"
 			echo "Target archive is the target encrypted archive to attempt to decrypt. The decrypted archive will not be stored anywhere on the system."
 			echo "Target file uses the find command to find the target file, and the cat command to print its contents to stdout."
-		elif [[ $2 == "list" || $2 == "ls" ]]; then # list
+		elif [[ $2 == "list" ]]; then # list
 			echo "Usage: zzCrypt list <target archive>"
 			echo "Target archive is the target encrypted archive to attempt to decrypt. The decrypted archive will not be stored anywhere on the system."
+		elif [[ $2 == "delete" ]]; then # delete
+			echo "Usage: zzCrypt delete <target archive> <target file> <gpg cipher> <gpg recipients>"
+			echo "Target archive is the target encrypted archive to attempt to decrypt."
+			echo "Target file is the target file to delete from the archive before repacking."
+			echo "GPG cipher is any valid GPG cipher. AES256 is recommended."
+			echo "GPG recipients is any GPG recipient whose public key is accessible on the system. This usually is a recipient's name or email address."
 		else
 			echo "Unknown subcommand \"$2\""
 		fi
