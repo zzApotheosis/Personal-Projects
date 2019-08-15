@@ -149,6 +149,9 @@ if [[ $1 == "delete" ]]; then
 	# Repack and encrypt the archive
 	tar -cz * | gpg -se --cipher-algo $4 -r $5 -o $2
 
+	# Preserve permissions (should be the same as chmod in lock subcommand)
+	chmod 0600 $2
+
 	# Move new archive to original working directory
 	mv $2 ..
 
