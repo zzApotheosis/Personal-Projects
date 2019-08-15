@@ -88,7 +88,7 @@ if [[ $1 == "peek" ]]; then
 	if [[ ! -d $TEMPDIR ]]; then
 		mkdir -p $TEMPDIR
 	fi
-	
+
 	# Temporarily decrypt and unarchive target archive
 	gpg -d $2 | tar -xz --directory $TEMPDIR
 
@@ -97,7 +97,7 @@ if [[ $1 == "peek" ]]; then
 
 	# Remove temporary directory and all its contents
 	rm -rf $TEMPDIR
-	
+
 	# Success
 	exit 0
 fi
@@ -119,10 +119,8 @@ if [[ $1 == "delete" ]]; then
 		exit 1
 	fi
 
-	# Make temporary working directory if it doesn't exist
-	if [[ ! -d $TEMPDIR ]]; then
-		mkdir -p $TEMPDIR
-	fi
+	# Make temporary working directory
+	mkdir -p $TEMPDIR
 
 	# Temporarily decrypt and unarchive target archive
 	gpg -d $2 | tar -xz --directory $TEMPDIR

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# Fetch all the files I want to backup/share to my GitHub repository
+if [[ -f "/etc/zsh/zshrc" ]]; then
+	cp "/etc/zsh/zshrc" "./etc.zsh.zshrc"
+fi
+
+if [[ -f "~/.zshenv" ]]; then
+	cp "~/.zshenv" .
+fi
+
+if [[ -f "~/.zshrc" ]]; then
+	cp "~/.zshrc" .
+fi
