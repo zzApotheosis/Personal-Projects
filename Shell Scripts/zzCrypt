@@ -24,7 +24,7 @@ if [[ $# -eq 0 ]]; then
 fi
 
 # Check for valid subcommands
-if [[ $1 != "help" && $1 != "unlock" && $1 != "lock" && $1 != "peek" && $1 != "list" && $1 != "ls" && $1 != "delete" ]]; then
+if [[ $1 != "help" && $1 != "unlock" && $1 != "lock" && $1 != "peek" && $1 != "list" && $1 != "delete" && $1 != "repack" ]]; then
 	echo "Unknown subcommand $1. Try \"zzCrypt help\""
 fi
 
@@ -103,7 +103,7 @@ if [[ $1 == "peek" ]]; then
 fi
 
 # List command
-if [[ $1 == "list" || $1 == "ls" ]]; then
+if [[ $1 == "list" ]]; then
 	# Decrypt and directly pipe its output to tar, which lists all of the archive's contents without unpacking it to the disk
 	gpg -d $2 | tar -tzv
 
@@ -111,7 +111,7 @@ if [[ $1 == "list" || $1 == "ls" ]]; then
 	exit 0
 fi
 
-# Delete command TODO: FIX THIS SHITE!!!!!!!!!!!!
+# Delete command
 if [[ $1 == "delete" ]]; then
 	# Check for valid arguments
 	if [[ -z $2 || -z $3 || -z $4 ]]; then
@@ -119,25 +119,50 @@ if [[ $1 == "delete" ]]; then
 		exit 1
 	fi
 
+	# Redefine TEMPDIR (MUST BE IN CURRENT WORKING DIRECTORY)
+	TEMPDIR="./temp"
+
 	# Make temporary working directory
 	mkdir -p $TEMPDIR
 
 	# Temporarily decrypt and unarchive target archive
 	gpg -d $2 | tar -xz --directory $TEMPDIR
 
-	# Delete contents of all files
-	find $TEMPDIR -name $3 -exec rm -rf {} \;
+	# Print found files
+	find $TEMPDIR -name $3
 
-	# TODO: Implement confirmation, so user doesn't screw up their data on accident
+	# Get confirmation
+	echo "PRESS ENTER TO DELETE THE LISTED FILES. Ctrl-C to cancel."
+	read -s
+
+	# Delete contents of all files found
+	find $TEMPDIR -name $3 -exec rm -rf {} \;
 
 	# Remove the existing archive to create the new one
 	rm -rf $2
 
+	# cd to TEMPDIR to preserve tar hierarchy
+	cd $TEMPDIR
+
 	# Repack and encrypt the archive
-	tar -cz $TEMPDIR/* | gpg -se --cipher-algo $4 -r $5 -o $2
+	tar -cz * | gpg -se --cipher-algo $4 -r $5 -o $2
+
+	# Move new archive to original working directory
+	mv $2 ..
+
+	# cd back to original working directory
+	cd ..
 
 	# Remove temporary working directory files
 	rm -rf $TEMPDIR
+
+	# Success
+	exit 0
+fi
+
+# Repack command TODO: This will add specified files to the target archive
+if [[ $1 == "repack" ]]; then
+	echo "TODO"
 
 	# Success
 	exit 0
