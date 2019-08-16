@@ -8,11 +8,15 @@ package main
 
 import (
 	_ "bufio"
-        "fmt"
+	"fmt"
 	_ "jenningsUtil"
-       	_ "os"
-	"time"
+	"os"
+	_ "time"
 )
+
+func main() {
+	fmt.Println(len(os.Args))
+}
 
 /*
 func main() {
