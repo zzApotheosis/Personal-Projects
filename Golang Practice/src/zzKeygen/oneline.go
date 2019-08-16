@@ -11,6 +11,8 @@ import (
   "os"
 )
 
+// oneLineExecute This does not copy to system clipboard because
+// it is designed to be used in shell scripting on Linux.
 func oneLineExecute(args []string) {
   // Define variables
   var fullseed, charset string
