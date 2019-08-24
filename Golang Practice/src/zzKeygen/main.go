@@ -1,8 +1,5 @@
 /*
  * Created by Steven Jennings (zzApotheosis) at an unknown time.
- *
- * TODO: Implement more a more secure option, preferably using the current systems
- * time as the seed.
  */
 
 package main
