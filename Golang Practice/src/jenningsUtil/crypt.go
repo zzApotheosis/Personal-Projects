@@ -9,6 +9,7 @@ import (
 	"encoding/binary"
 	"fmt"
 	"io"
+	"time"
 	mrand "math/rand"
 )
 
@@ -29,6 +30,11 @@ func SetSeedAsString(in string) {
 	var seed uint64 = binary.BigEndian.Uint64(h.Sum(nil))
 	// fmt.Println(seed) // Output MD5-calculated seed
 	mrand.Seed(int64(seed))
+}
+
+// Set seed as system time yeet
+func SetSeedAsSysTime() {
+	mrand.Seed(time.Now().UnixNano())
 }
 
 // RandomInt yeet

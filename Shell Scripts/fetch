@@ -2,26 +2,26 @@
 
 # Fetch all the files I want to backup/share to my GitHub repository
 if [[ -f "$HOME/.config/kitty/kitty.conf" ]]; then
-	cp -v "$HOME/.config/kitty/kitty.conf" ../Config
+	cp -v "$HOME/.config/kitty/kitty.conf" "../System Config"
 fi
 
 if [[ -f "/etc/zsh/zshrc" ]]; then
-	cp -v "/etc/zsh/zshrc" "../Config/etc.zsh.zshrc"
+	cp -v "/etc/zsh/zshrc" "../System Config/etc.zsh.zshrc"
 fi
 
 if [[ -f "$HOME/.zshenv" ]]; then
-	cp -v "$HOME/.zshenv" ../Config
+	cp -v "$HOME/.zshenv" "../System Config"
 fi
 
 if [[ -f "$HOME/.zshrc" ]]; then
-	cp -v "$HOME/.zshrc" ../Config
+	cp -v "$HOME/.zshrc" "../System Config"
 fi
 
 if [[ -f "/home/mcadmin/MCJEServer/backup" ]]; then
-	cp -v "/home/mcadmin/MCJEServer/backup" "../../Shell Scripts/mcserver"
+	cp -v "/home/mcadmin/MCJEServer/backup" "mcserver"
 fi
 
 if [[ -f "/home/mcadmin/MCJEServer/restore" ]]; then
-	cp -v "/home/mcadmin/MCJEServer/restore" "../../Shell Scripts/mcserver"
+	cp -v "/home/mcadmin/MCJEServer/restore" "mcserver"
 fi
 

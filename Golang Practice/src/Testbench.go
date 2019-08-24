@@ -10,12 +10,19 @@ import (
 	_ "bufio"
 	"fmt"
 	_ "jenningsUtil"
-	"os"
+	_ "os"
 	_ "time"
 )
 
+type dataset struct {
+	temp1, temp2 string
+}
+
 func main() {
-	fmt.Println(len(os.Args))
+	yeet := dataset{}
+	yeet.temp1 = "Hello"
+	yeet.temp2 = "world!"
+	fmt.Println(yeet.temp1, yeet.temp2)
 }
 
 /*

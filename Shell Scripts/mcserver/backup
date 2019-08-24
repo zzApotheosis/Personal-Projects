@@ -24,8 +24,8 @@ tar -czvf backup$INDEX.tar.gz world world_the_end world_nether
 # Move archive to backups directory
 mv backup$INDEX.tar.gz $BACKUPDIR
 
-# Remove all backups except previous 3 and the 0th backup
-for (( i = 1; i <= $INDEX - 3; i++ )); do
+# Remove all backups except latest 5 and the 0th backup
+for (( i = 1; i <= $INDEX - 5; i++ )); do
     if [[ -f $BACKUPDIR/backup$i.tar.gz ]]; then
         rm -rv $BACKUPDIR/backup$i.tar.gz
     fi

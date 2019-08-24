@@ -17,12 +17,13 @@ func main() {
 	switch len(os.Args) {
 	case 1:
 		interactive()
-	case 6:
+	case 4: // One-liner that assumes to use systime as seed
+		oneLineExecute(os.Args[1:])
+	case 6: // One-liner that uses given string(s) as seed
 		oneLineExecute(os.Args[1:])
 	default:
 		warn()
 	}
-	os.Exit(0)
 }
 
 func warn() {
