@@ -5,37 +5,37 @@
 package main
 
 import (
-  "fmt"
-  "bufio"
-  "os"
-  "strconv"
-  "jenningsUtil"
+	"bufio"
+	"fmt"
 	"github.com/atotto/clipboard" // For Linux/Unix-like systems, either xclip or xsel must be installed
+	"jenningsUtil"
+	"os"
+	"strconv"
 )
 
 type dataset struct {
-  input, output, offset, fullseed, charset string
-  length, shift int
+	input, output, offset, fullseed, charset string
+	length, shift                            int
 }
 
 func interactive() {
 	// Explain program
 	explain()
 
-  // Create variables
+	// Create variables
 	scanner := bufio.NewScanner(os.Stdin)
 	myData := dataset{}
 
-  // Branch for seed source
-  switch chooseSeedSource(scanner) {
-  case "manual":
-    manualSeedInput(&myData, scanner)
-  case "systime":
-    randSeedInput(&myData, scanner)
-  default:
-    fmt.Println("waow")
-    os.Exit(1) // TODO: Write better error handling
-  }
+	// Branch for seed source
+	switch chooseSeedSource(scanner) {
+	case "manual":
+		manualSeedInput(&myData, scanner)
+	case "systime":
+		randSeedInput(&myData, scanner)
+	default:
+		fmt.Println("waow")
+		os.Exit(1) // TODO: Write better error handling
+	}
 
 	// Wait for keyboard enter before program exit
 	fmt.Print("\n\nPress enter to exit program.")
@@ -51,29 +51,29 @@ func explain() {
 }
 
 func chooseSeedSource(s *bufio.Scanner) string {
-  var inputText string
+	var inputText string
 
-  for inputText != "1" && inputText != "2" {
-    fmt.Print("Select seed source from the following options.\n")
-    fmt.Print("1. Current system time (More secure)\n")
-    fmt.Print("2. Custom seed (More convenient)\n\n")
-    fmt.Print("Enter choice: ")
-    s.Scan()
-    inputText = s.Text()
-  }
+	for inputText != "1" && inputText != "2" {
+		fmt.Print("Select seed source from the following options.\n")
+		fmt.Print("1. Current system time (More secure)\n")
+		fmt.Print("2. Custom seed (More convenient)\n\n")
+		fmt.Print("Enter choice: ")
+		s.Scan()
+		inputText = s.Text()
+	}
 
-  switch inputText {
-  case "1":
-    return "systime"
-  case "2":
-    return "manual"
-  default:
-    return ""
-  }
+	switch inputText {
+	case "1":
+		return "systime"
+	case "2":
+		return "manual"
+	default:
+		return ""
+	}
 }
 
 func makeFullSeed(n *dataset) {
-  n.fullseed = n.input + n.offset
+	n.fullseed = n.input + n.offset
 }
 
 func manualSeedInput(n *dataset, scanner *bufio.Scanner) {
@@ -97,68 +97,68 @@ func manualSeedInput(n *dataset, scanner *bufio.Scanner) {
 	// Combining "Seed" and Offset
 	makeFullSeed(n)
 
-  // Set seed (Took forever to figure this out... i am a stoopid)
-  util.SetSeedAsString(n.fullseed)
+	// Set seed (Took forever to figure this out... i am a stoopid)
+	util.SetSeedAsString(n.fullseed)
 
 	// Get the rest of the data
-  getTertiaryData(n, scanner)
+	getTertiaryData(n, scanner)
 }
 
 func randSeedInput(n *dataset, scanner *bufio.Scanner) {
-  // Use system time as seed
-  util.SetSeedAsSysTime()
+	// Use system time as seed
+	util.SetSeedAsSysTime()
 
-  // Get the rest of the data
-  getTertiaryData(n, scanner)
+	// Get the rest of the data
+	getTertiaryData(n, scanner)
 }
 
 func getTertiaryData(n *dataset, scanner *bufio.Scanner) {
-  // Sequence length
-  fmt.Print("Sequence length: ")
-  scanner.Scan()
-  temp, err := strconv.ParseInt(scanner.Text(), 10, 64)
-  n.length = int(temp)
-  if err != nil {
-    fmt.Println("Invalid sequence length.")
-    return
-  }
-  if n.length <= 0 { // Exit if sequence length is invalid
-    fmt.Println("Sequence length cannot be non-positive.")
-    return
-  }
+	// Sequence length
+	fmt.Print("Sequence length: ")
+	scanner.Scan()
+	temp, err := strconv.ParseInt(scanner.Text(), 10, 64)
+	n.length = int(temp)
+	if err != nil {
+		fmt.Println("Invalid sequence length.")
+		return
+	}
+	if n.length <= 0 { // Exit if sequence length is invalid
+		fmt.Println("Sequence length cannot be non-positive.")
+		return
+	}
 
-  // Shift result (Must be non-negative integer)
-  fmt.Print("Shift: ")
-  scanner.Scan()
-  temp, err = strconv.ParseInt(scanner.Text(), 10, 64)
-  n.shift = int(temp)
-  if err != nil {
-    fmt.Println("Invalid shift value.")
-    return
-  }
-  if n.shift < 0 {
-    fmt.Println("Shift value cannot be negative.")
-    return
-  }
+	// Shift result (Must be non-negative integer)
+	fmt.Print("Shift: ")
+	scanner.Scan()
+	temp, err = strconv.ParseInt(scanner.Text(), 10, 64)
+	n.shift = int(temp)
+	if err != nil {
+		fmt.Println("Invalid shift value.")
+		return
+	}
+	if n.shift < 0 {
+		fmt.Println("Shift value cannot be negative.")
+		return
+	}
 
-  // Character Set (Symbols, lowercase letters, uppercase letters, numbers)
-  fmt.Print("\nEnter character set as a 4-bit binary number, where each bit ")
-  fmt.Print("represents a boolean value for lowercase letters, ")
-  fmt.Print("uppercase letters, numbers, and symbols in that order. ")
-  fmt.Print("A value of 0000 will exit the program.")
-  fmt.Print("\n\nEnter desired character set: ")
-  scanner.Scan()
-  n.charset = scanner.Text()
+	// Character Set (Symbols, lowercase letters, uppercase letters, numbers)
+	fmt.Print("\nEnter character set as a 4-bit binary number, where each bit ")
+	fmt.Print("represents a boolean value for lowercase letters, ")
+	fmt.Print("uppercase letters, numbers, and symbols in that order. ")
+	fmt.Print("A value of 0000 will exit the program.")
+	fmt.Print("\n\nEnter desired character set: ")
+	scanner.Scan()
+	n.charset = scanner.Text()
 
-  // Process data
-  processData(n)
+	// Process data
+	processData(n)
 }
 
 func processData(n *dataset) {
-  // Debug
-  //printAll(n)
+	// Debug
+	//printAll(n)
 
-  // Process data
+	// Process data
 	n.output = util.RandomString(n.length, n.charset, n.shift)
 	fmt.Print("\nOutput: ")
 	fmt.Print(n.output)
