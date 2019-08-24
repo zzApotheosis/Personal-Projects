@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# Define variables
+CWD=$(pwd)
+SCRIPTDIR=$(dirname $(readlink -f "$0"))
+BACKUPDIR=$SCRIPTDIR/backups
+INDEXFILE="/var/tmp/mcserverbackupindex.dat"
+
+# Ensure backup directory exists
+mkdir -pv $BACKUPDIR
+chmod 0775 $BACKUPDIR
+
+# Ensure index file exists
+if [[ ! -f $INDEXFILE ]]; then
+    echo 0 > $INDEXFILE
+fi
+
+# Get index number
+let "INDEX=$(cat $INDEXFILE)"
+
+# Perform backup
+tar -czvf backup$INDEX.tar.gz world world_the_end world_nether
+
+# Move archive to backups directory
+mv backup$INDEX.tar.gz $BACKUPDIR
+
+# Remove all backups except previous 3 and the 0th backup
+for (( i = 1; i <= $INDEX - 3; i++ )); do
+    if [[ -f $BACKUPDIR/backup$i.tar.gz ]]; then
+        rm -rv $BACKUPDIR/backup$i.tar.gz
+    fi
+done
+
+# Increment index
+let INDEX++
+echo $INDEX > $INDEXFILE
+

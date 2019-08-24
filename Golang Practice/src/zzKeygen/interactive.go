@@ -14,9 +14,6 @@ import (
 )
 
 func interactive() {
-  // Clear terminal; Unconventional legacy code
-  //util.TerminalClear()
-
 	// Explain program
 	explain()
 
