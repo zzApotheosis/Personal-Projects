@@ -1,5 +1,8 @@
 /*
  * Created by Steven Jennings (zzApotheosis) on 24 August 2019.
+ *
+ * I just learned that using "go fmt" in a working directory will format all of the go
+ * source files in that directory. No more using "gofmt -w <whatever>"!
  */
 
 package main
