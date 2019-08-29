@@ -10,19 +10,24 @@ import (
 	_ "bufio"
 	"fmt"
 	_ "jenningsUtil"
+	"net"
 	_ "os"
 	_ "time"
 )
 
-type dataset struct {
-	temp1, temp2 string
-}
+//type dataset struct {
+//	temp1, temp2 string
+//}
 
 func main() {
-	yeet := dataset{}
-	yeet.temp1 = "Hello"
-	yeet.temp2 = "world!"
-	fmt.Println(yeet.temp1, yeet.temp2)
+	host := "zzPC.home.net"
+	ips, err := net.LookupIP(host)
+	if err != nil {
+		panic(err)
+	}
+	for _, e := range ips {
+		fmt.Printf("%s - %s\n", host, e.String())
+	}
 }
 
 /*
