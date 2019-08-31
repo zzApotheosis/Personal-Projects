@@ -1,6 +1,9 @@
 /*
  * I'm developing this program to autospam random crap on
  * Town of Salem LUL
+ *
+ * TODO: Implement a new approach that uses clipboard to copy and paste,
+ * instead of trying to "copy/paste" through the keyboard events.
  */
 
 package main

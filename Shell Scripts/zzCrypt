@@ -95,7 +95,7 @@ if [[ $1 == "peek" ]]; then
 	gpg -d $2 | tar -xz --directory $TEMPDIR
 
 	# List contents of all files that match the pattern in $3
-	find $TEMPDIR -name $3 -exec cat {} \;
+	find $TEMPDIR -iname $3 -exec cat {} \;
 
 	# Remove temporary directory and all its contents
 	rm -rf $TEMPDIR
@@ -131,14 +131,14 @@ if [[ $1 == "delete" ]]; then
 	gpg -d $2 | tar -xz --directory $TEMPDIR
 
 	# Print found files
-	find $TEMPDIR -name $3
+	find $TEMPDIR -iname $3
 
 	# Get confirmation
 	echo "PRESS ENTER TO DELETE THE LISTED FILES. Ctrl-C to cancel."
 	read -s
 
 	# Delete contents of all files found
-	find $TEMPDIR -name $3 -exec rm -rf {} \;
+	find $TEMPDIR -iname $3 -exec rm -rf {} \;
 
 	# Remove the existing archive to create the new one
 	rm -rf $2
