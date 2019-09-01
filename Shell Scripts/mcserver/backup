@@ -12,23 +12,29 @@ chmod 0775 $BACKUPDIR
 
 # Ensure index file exists
 if [[ ! -f $INDEXFILE ]]; then
-    echo 0 > $INDEXFILE
+	echo 0 > $INDEXFILE
 fi
 
 # Get index number
 let "INDEX=$(cat $INDEXFILE)"
 
 # Perform backup
-tar -czvf backup$INDEX.tar.gz world world_the_end world_nether
+tar -czvf backup$INDEX.tar.gz --exclude="*database.db*" world world_the_end world_nether plugins server.properties ops.json launch.sh eula.txt
 
 # Move archive to backups directory
 mv backup$INDEX.tar.gz $BACKUPDIR
 
-# Remove all backups except latest 5 and the 0th backup
-for (( i = 1; i <= $INDEX - 5; i++ )); do
-    if [[ -f $BACKUPDIR/backup$i.tar.gz ]]; then
-        rm -rv $BACKUPDIR/backup$i.tar.gz
-    fi
+# Remove most backups; keep particular indexes
+for (( i = $INDEX - 1; i >= 0; i-- )); do
+	if [[ $i -lt $(( INDEX - 25 )) ]]; then
+		if [[ -f $BACKUPDIR/backup$i.tar.gz ]]; then
+			rm -rv $BACKUPDIR/backup$i.tar.gz
+		fi
+	elif [[ $(( i % 5 )) -ne 0 ]]; then
+		if [[ -f $BACKUPDIR/backup$i.tar.gz ]]; then
+			rm -rv $BACKUPDIR/backup$i.tar.gz
+		fi
+	fi
 done
 
 # Increment index

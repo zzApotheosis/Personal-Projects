@@ -41,7 +41,10 @@ func main() {
 	s := bufio.NewScanner(os.Stdin)
 	fmt.Println("PRESS ENTER TO YEET!!!")
 	s.Scan()
-	time.Sleep(3 * time.Second) // Give user time to switch applications, this also gives /dev/uinput time to prepare for writing
+	for i := 3; i > 0; i-- {
+		fmt.Println(i)
+		time.Sleep(1 * time.Second) // Give user time to switch applications; this also gives /dev/uinput time to prepare for writing on Linux systems
+	}
 	// KBString(&kb, "|")
 	TOSautopaster(&kb, &conf)
 }
