@@ -1,27 +1,30 @@
 #!/bin/sh
 
+SCRIPTDIR=$(dirname "$(readlink -f $0)")
+PARENTDIR=$(dirname "$SCRIPTDIR") # Use parent directory
+
 # Fetch all the files I want to backup/share to my GitHub repository
 if [[ -f "$HOME/.config/kitty/kitty.conf" ]]; then
-	cp -v "$HOME/.config/kitty/kitty.conf" "../System Config"
+	cp -v "$HOME/.config/kitty/kitty.conf" "$PARENTDIR/System Config"
 fi
 
 if [[ -f "/etc/zsh/zshrc" ]]; then
-	cp -v "/etc/zsh/zshrc" "../System Config/etc.zsh.zshrc"
+	cp -v "/etc/zsh/zshrc" "$PARENTDIR/System Config/etc.zsh.zshrc"
 fi
 
 if [[ -f "$HOME/.zshenv" ]]; then
-	cp -v "$HOME/.zshenv" "../System Config"
+	cp -v "$HOME/.zshenv" "$PARENTDIR/System Config"
 fi
 
 if [[ -f "$HOME/.zshrc" ]]; then
-	cp -v "$HOME/.zshrc" "../System Config"
+	cp -v "$HOME/.zshrc" "$PARENTDIR/System Config"
 fi
 
 if [[ -f "/home/mcadmin/MCJEServer/backup" ]]; then
-	cp -v "/home/mcadmin/MCJEServer/backup" "mcserver"
+	cp -v "/home/mcadmin/MCJEServer/backup" "$SCRIPTDIR/mcserver"
 fi
 
 if [[ -f "/home/mcadmin/MCJEServer/restore" ]]; then
-	cp -v "/home/mcadmin/MCJEServer/restore" "mcserver"
+	cp -v "/home/mcadmin/MCJEServer/restore" "$SCRIPTDIR/mcserver"
 fi
 
