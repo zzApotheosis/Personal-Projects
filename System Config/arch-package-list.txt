@@ -11,6 +11,7 @@ firefox
 foomatic-db
 foomatic-db-engine
 foomatic-db-ppds
+gnu-free-fonts
 go
 gtk2
 gtk3
@@ -37,9 +38,12 @@ system-config-printer
 tcsh
 tmux
 traceroute
+ttf-arphic-uming
 ttf-croscore
 ttf-dejavu
 ttf-droid
+ttf-indic-otf
+ttf-joypixels
 ttf-liberation
 ttf-roboto
 virtualbox
