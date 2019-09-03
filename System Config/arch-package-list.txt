@@ -11,6 +11,9 @@ firefox
 foomatic-db
 foomatic-db-engine
 foomatic-db-ppds
+gdm
+gnome
+gnome-extra
 gnu-free-fonts
 go
 gtk2
@@ -49,6 +52,7 @@ ttf-roboto
 virtualbox
 virtualbox-guest-utils
 virtualbox-host-modules-arch
+weston
 xclip
 zsh
 
