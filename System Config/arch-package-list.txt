@@ -54,5 +54,6 @@ virtualbox-guest-utils
 virtualbox-host-modules-arch
 weston
 xclip
+xorg
 zsh
 
