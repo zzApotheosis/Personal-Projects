@@ -115,6 +115,7 @@ alias now="date +\"Date: %A, %d %B %Y\"; date +\"Time: %H%M, %Z (UTC %z)\""
 alias fastping="ping -c 10 -i 0.2"
 alias ports="netstat -tulanp"
 alias top="htop"
+alias ligma="echo \"ligma? you mean... ligma BAWLLS!!!!!!!!!!!!!!\""
 
 # Pointlessly personal aliases
 alias 2b="echo \"She's my waifu <3\""
