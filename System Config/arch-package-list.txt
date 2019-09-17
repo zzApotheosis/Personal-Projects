@@ -57,5 +57,6 @@ vlc
 weston
 xclip
 xorg
+youtube-dl
 zsh
 
