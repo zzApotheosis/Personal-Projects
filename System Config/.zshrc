@@ -58,7 +58,7 @@ ZSH_THEME="spaceship"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -115,7 +115,6 @@ alias now="date +\"Date: %A, %d %B %Y\"; date +\"Time: %H%M, %Z (UTC %z)\""
 alias fastping="ping -c 10 -i 0.2"
 alias ports="netstat -tulanp"
 alias top="htop"
-alias ligma="echo \"ligma? you mean... ligma BAWLLS!!!!!!!!!!!!!!\""
 
 # REALLY personal aliases Kappa
 alias 2b="echo \"She's my waifu <3\""
@@ -127,6 +126,8 @@ alias YEET="yeet"
 alias waow="echo \"waAaAaAAaaoOOo0Oo0oow, that was truly amazing\""
 alias america="echo \"AMERICA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\""
 alias AMERICA="america"
+alias ligma="echo \"ligma? you mean... ligma BAWLLS!!!!!!!!!!!!!!\""
+alias bofa="echo \"i'm your doctor, and i need to make sure you don't have bofa\"; sleep 1; echo \"BOFA DEEZ NUTS!!!!!!!!!\""
 
 # Flair each session with the date and time
 date +"Date: %A, %d %B %Y"
