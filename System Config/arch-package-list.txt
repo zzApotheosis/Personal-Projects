@@ -59,4 +59,3 @@ xclip
 xorg
 youtube-dl
 zsh
-
