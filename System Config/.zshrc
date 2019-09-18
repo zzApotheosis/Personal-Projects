@@ -117,7 +117,7 @@ alias ports="netstat -tulanp"
 alias top="htop"
 alias ligma="echo \"ligma? you mean... ligma BAWLLS!!!!!!!!!!!!!!\""
 
-# Pointlessly personal aliases
+# REALLY personal aliases Kappa
 alias 2b="echo \"She's my waifu <3\""
 alias 2B=2b
 alias yorha="echo \"For the glory of mankind.\""
