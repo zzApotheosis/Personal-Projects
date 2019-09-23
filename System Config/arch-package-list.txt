@@ -26,6 +26,7 @@ jdk8-openjdk
 kitty
 libpaper
 libreoffice-fresh
+mc
 minetest
 neofetch
 noto-fonts
