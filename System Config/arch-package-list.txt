@@ -26,6 +26,7 @@ jdk8-openjdk
 kitty
 libpaper
 libreoffice-fresh
+lshw
 mc
 minetest
 neofetch
@@ -60,4 +61,3 @@ xclip
 xorg
 youtube-dl
 zsh
-lshw
