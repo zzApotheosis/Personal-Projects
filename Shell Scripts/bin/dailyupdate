@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# Set variables
+LIMIT=86300 # Using 86300 instead of 86400 for 100 seconds of leeway for a full day
+
+# Exit if not root
+if [ $(id -u) -ne 0 ]; then
+	exit;
+fi
+
+# Get current time
+CURRENTTIME=$(date +"%s")
+
+# Get last update time
+if [ -f /var/tmp/lastupdate.dat ]; then
+	LASTUPDATE=$(cat /var/tmp/lastupdate.dat)
+else
+	LASTUPDATE=$CURRENTTIME
+	echo $LASTUPDATE > /var/tmp/lastupdate.dat
+fi
+
+# Update system only if it has been over a day since last update
+if (($CURRENTTIME - $LASTUPDATE >= $LIMIT)); then
+	echo "Updating system"
+	echo
+	pacman -Syu --noconfirm
+	echo $CURRENTTIME > /var/tmp/lastupdate.dat
+	exit
+else
+	echo "Time elapsed since time last updated: $(($CURRENTTIME - $LASTUPDATE))"
+	echo "Minimum amount of time needed to run daily update again: $LIMIT"
+fi
+
