@@ -28,6 +28,7 @@ jdk8-openjdk
 kitty
 libpaper
 libreoffice-fresh
+linux-lts
 lshw
 mc
 minetest
