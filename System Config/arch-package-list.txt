@@ -14,6 +14,7 @@ foomatic-db
 foomatic-db-engine
 foomatic-db-ppds
 gdm
+git
 gnome
 gnome-extra
 gnu-free-fonts
