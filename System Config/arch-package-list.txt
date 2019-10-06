@@ -4,6 +4,7 @@ atom
 cdrtools
 chromium
 colordiff
+cronie
 cups
 cups-pdf
 dvd+rw-tools
