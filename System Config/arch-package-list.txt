@@ -1,6 +1,8 @@
 arch-install-scripts
 archiso
 atom
+autofs
+bind
 cdrtools
 chromium
 colordiff
@@ -23,7 +25,6 @@ gtk2
 gtk3
 gvim
 htop
-java-openjfx
 jdk8-openjdk
 kitty
 libpaper
@@ -43,6 +44,7 @@ python-pip
 python2
 python2-pip
 rust
+sshfs
 system-config-printer
 tcsh
 tmux
