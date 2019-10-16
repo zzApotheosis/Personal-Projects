@@ -35,6 +35,7 @@ lshw
 mc
 minetest
 neofetch
+nfs-utils
 noto-fonts
 obs-studio
 p7zip
