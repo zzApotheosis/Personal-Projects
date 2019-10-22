@@ -21,6 +21,7 @@ glade
 gnome
 gnome-extra
 gnu-free-fonts
+gnu-netcat
 go
 gtk2
 gtk3
@@ -64,6 +65,7 @@ virtualbox-guest-utils
 virtualbox-host-modules-arch
 vlc
 weston
+whois
 xclip
 xorg
 youtube-dl
