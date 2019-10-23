@@ -39,6 +39,7 @@ neofetch
 nfs-utils
 noto-fonts
 obs-studio
+openldap
 p7zip
 pacman-contrib
 pepper-flash
