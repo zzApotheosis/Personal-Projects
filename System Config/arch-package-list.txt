@@ -50,6 +50,7 @@ rust
 sshfs
 system-config-printer
 tcsh
+tigervnc
 tmux
 traceroute
 ttf-arphic-uming
