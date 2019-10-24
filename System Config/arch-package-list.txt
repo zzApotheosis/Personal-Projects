@@ -27,6 +27,7 @@ gtk2
 gtk3
 gvim
 htop
+iproute2
 jdk8-openjdk
 kitty
 libpaper
