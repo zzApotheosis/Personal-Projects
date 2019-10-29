@@ -52,6 +52,7 @@ python-pip
 python2
 python2-pip
 rust
+samba
 sshfs
 system-config-printer
 tcsh
