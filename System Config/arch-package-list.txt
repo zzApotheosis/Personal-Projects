@@ -1,3 +1,5 @@
+#amd-ucode
+#intel-ucode
 arch-install-scripts
 archiso
 atom
