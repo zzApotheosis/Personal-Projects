@@ -1,11 +1,47 @@
 #!/bin/sh
 
 # Set variables
+HELP=false
 LIMIT=86300 # Using 86300 instead of 86400 for 100 seconds of leeway for a full day
+FORCE=false
 
 # Exit if not root
 if [ $(id -u) -ne 0 ]; then
 	exit;
+fi
+
+# Parse arguments
+positional=()
+while [ $# -gt 0 ]; do
+	case "$1" in
+		-h|--help)
+			HELP=true
+			break
+			;;
+		-f|--force)
+			FORCE=true
+			shift
+			;;
+		-l|--limit)
+			LIMIT="$2"
+			shift
+			shift
+			;;
+		*)
+			positional+=("$1")
+			shift
+			;;
+	esac
+done
+
+# Help prompt
+if [ $HELP == true ]; then
+	echo "$0: A utility generally used to handle daily system updates."
+	echo
+	echo "-h, --help ======== This help prompt"
+	echo "-f, --force ======= Force an update, even if the limit hasn't been reached"
+	echo "-l, --limit ======= Set a custom limit, given by the argument"
+	exit 0
 fi
 
 # Get current time
@@ -20,11 +56,11 @@ else
 fi
 
 # Update system only if it has been over a day since last update
-if (($CURRENTTIME - $LASTUPDATE >= $LIMIT)); then
+if (($CURRENTTIME - $LASTUPDATE >= $LIMIT)) || [ "$FORCE" = true ]; then
 	echo "Updating system"
 	echo
 	pacman -Syu --noconfirm
-	echo $CURRENTTIME > /var/tmp/lastupdate.dat
+	echo $CURRENTTIME | tee /var/tmp/lastupdate.dat
 	exit
 else
 	echo "Time elapsed since time last updated: $(($CURRENTTIME - $LASTUPDATE))"

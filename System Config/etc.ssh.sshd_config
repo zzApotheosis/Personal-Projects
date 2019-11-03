@@ -29,7 +29,7 @@ Port 25564
 # Authentication:
 
 #LoginGraceTime 2m
-PermitRootLogin prohibit-password
+#PermitRootLogin prohibit-password
 #StrictModes yes
 #MaxAuthTries 6
 #MaxSessions 10
@@ -84,9 +84,9 @@ UsePAM yes
 #AllowAgentForwarding yes
 #AllowTcpForwarding yes
 #GatewayPorts no
-X11Forwarding yes
-X11DisplayOffset 10
-X11UseLocalhost yes
+#X11Forwarding no
+#X11DisplayOffset 10
+#X11UseLocalhost yes
 #PermitTTY yes
 PrintMotd no # pam does that
 #PrintLastLog yes
@@ -114,6 +114,3 @@ Subsystem	sftp	/usr/lib/ssh/sftp-server
 #	AllowTcpForwarding no
 #	PermitTTY no
 #	ForceCommand cvs server
-
-# Allow only certain users
-AllowUsers	zzapotheosis mcadmin
