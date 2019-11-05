@@ -11,6 +11,7 @@ colordiff
 cronie
 cups
 cups-pdf
+dhcp
 dvd+rw-tools
 ffmpeg
 firefox
