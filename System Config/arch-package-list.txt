@@ -57,6 +57,7 @@ python2-pip
 rust
 samba
 sshfs
+sssd
 stunnel
 syslog-ng
 system-config-printer
