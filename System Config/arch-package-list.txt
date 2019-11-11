@@ -65,6 +65,7 @@ tcsh
 tigervnc
 tmux
 traceroute
+transmission-gtk
 ttf-arphic-uming
 ttf-croscore
 ttf-dejavu
