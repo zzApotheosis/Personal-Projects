@@ -49,6 +49,7 @@ openldap
 openvpn
 p7zip
 pacman-contrib
+pciutils
 pepper-flash
 python
 python-pip
