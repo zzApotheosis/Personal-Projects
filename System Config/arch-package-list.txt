@@ -42,6 +42,7 @@ mdadm
 minetest
 neofetch
 nfs-utils
+nmap
 noto-fonts
 ntp
 obs-studio
@@ -49,8 +50,8 @@ openldap
 openvpn
 p7zip
 pacman-contrib
-pciutils
 pepper-flash
+pciutils
 python
 python-pip
 python2
