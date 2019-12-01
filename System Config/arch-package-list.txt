@@ -14,6 +14,7 @@ cups-pdf
 dhcp
 dvd+rw-tools
 ffmpeg
+ffmpegthumbnailer
 firefox
 foomatic-db
 foomatic-db-engine
@@ -26,6 +27,8 @@ gnome-extra
 gnu-free-fonts
 gnu-netcat
 go
+gst-libav
+gst-plugins-ugly
 gtk2
 gtk3
 gvim
@@ -50,8 +53,8 @@ openldap
 openvpn
 p7zip
 pacman-contrib
-pepper-flash
 pciutils
+pepper-flash
 python
 python-pip
 python2
