@@ -85,6 +85,7 @@ virtualbox-host-modules-arch
 vlc
 weston
 whois
+wireshark-qt
 xclip
 xorg
 youtube-dl
