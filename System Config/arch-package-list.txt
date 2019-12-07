@@ -5,6 +5,7 @@ archiso
 atom
 autofs
 bind
+blender
 cdrtools
 chromium
 colordiff
