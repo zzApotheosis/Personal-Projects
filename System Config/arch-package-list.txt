@@ -45,6 +45,7 @@ mc
 mdadm
 minetest
 neofetch
+networkmanager-openvpn
 nfs-utils
 nmap
 noto-fonts
