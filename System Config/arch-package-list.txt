@@ -13,6 +13,7 @@ cronie
 cups
 cups-pdf
 dhcp
+distcc
 dvd+rw-tools
 ffmpeg
 ffmpegthumbnailer
@@ -81,6 +82,7 @@ ttf-indic-otf
 ttf-joypixels
 ttf-liberation
 ttf-roboto
+valgrind
 virtualbox
 virtualbox
 virtualbox-ext-vnc
