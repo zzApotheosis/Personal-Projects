@@ -9,6 +9,7 @@ blender
 cdrtools
 chromium
 colordiff
+cppcheck
 cronie
 cups
 cups-pdf
@@ -64,6 +65,7 @@ python2
 python2-pip
 rust
 samba
+splint
 sshfs
 sssd
 stunnel
