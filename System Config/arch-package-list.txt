@@ -39,6 +39,8 @@ htop
 iproute2
 jdk8-openjdk
 kitty
+libaacs
+libbluray
 libpaper
 libreoffice-fresh
 linux-lts
