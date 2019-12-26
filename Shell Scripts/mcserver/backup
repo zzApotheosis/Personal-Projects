@@ -19,6 +19,9 @@ fi
 let "INDEX=$(cat $INDEXFILE)"
 
 # Determine existence of desired files to archive
+if [ -f "./server.jar" ]; then
+	SERVERJAR="server.jar"
+fi
 if [ -d "./world" ]; then
 	WORLD="world"
 fi
@@ -46,7 +49,7 @@ fi
 
 # Perform backup
 #tar -czvf backup$INDEX.tar.gz --exclude="*database.db*" world world_the_end world_nether plugins server.properties ops.json launch.sh eula.txt
-tar -czvf backup$INDEX.tar.gz $WORLD $WORLD_THE_END $WORLD_NETHER $PLUGINS $SERVERPROPERTIES $OPSJSON $LAUNCHSH $EULA
+tar -czhvf backup$INDEX.tar.gz $SERVERJAR $WORLD $WORLD_THE_END $WORLD_NETHER $PLUGINS $SERVERPROPERTIES $OPSJSON $LAUNCHSH $EULA
 
 # Move archive to backups directory
 mv backup$INDEX.tar.gz $BACKUPDIR
