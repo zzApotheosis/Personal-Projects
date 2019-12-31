@@ -2,6 +2,7 @@
 #intel-ucode
 arch-install-scripts
 archiso
+arp-scan
 atom
 autofs
 bind
@@ -51,6 +52,7 @@ minetest
 neofetch
 networkmanager-openvpn
 nfs-utils
+nmap
 nmap
 noto-fonts
 ntp
