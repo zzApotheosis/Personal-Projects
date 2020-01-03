@@ -15,6 +15,7 @@ cronie
 cups
 cups-pdf
 dhcp
+dhcpcd
 distcc
 dvd+rw-tools
 ffmpeg
