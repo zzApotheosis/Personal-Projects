@@ -54,7 +54,6 @@ neofetch
 networkmanager-openvpn
 nfs-utils
 nmap
-nmap
 noto-fonts
 ntp
 obs-studio
