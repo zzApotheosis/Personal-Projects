@@ -46,6 +46,7 @@ libpaper
 libreoffice-fresh
 linux-lts
 lshw
+lvm2
 mc
 mdadm
 minetest
