@@ -1,55 +1,33 @@
 extern crate lettre;
+extern crate lettre_email;
 
-use lettre::{SendableEmail, EmailAddress, Transport, Envelope, SmtpClient};
+use lettre::smtp::authentication::IntoCredentials;
+use lettre::{SmtpClient, Transport};
+use lettre_email::EmailBuilder;
 
 fn main() {
     let to_address = "zzApotheosis@gmail.com";
-    let smtp_server = "smtp.googlemail.com";
-    let smtp_username = "zzApotheosis@gmail.com";
-    let smtp_password = "gruxigzwkpbdxljj";
-    let smtp_port: u16 = 587;
-    
-    let email = SendableEmail::new(
-        Envelope::new(
-            Some(EmailAddress::new("user@localhost".to_string()).unwrap()),
-            vec![EmailAddress::new("root@localhost".to_string()).unwrap()],
-        ).unwrap(),
-        "id".to_string(),
-        "Hello world".to_string().into_bytes(),
-    );
+    let user = "zzApotheosis@gmail.com";
+    let password = "uxbolweeegnixznw";
+    let subject = "Hello Rust!";
+    let body = "Hello Rust! Big ligma!";
+    let smtp_address = "smtp.gmail.com";
 
-    let mut mailer =
-        SmtpClient::new_unencrypted_localhost().unwrap().transport();
+    let email = EmailBuilder::new()
+        .from(user)
+        .to(to_address)
+        .subject(subject)
+        .text(body)
+        .build()
+        .unwrap()
+        .into();
 
-    let result = mailer.send(email);
+    let credentials = (user, password).into_credentials();
 
-    //assert!(result.is_ok());
+    let mut client = SmtpClient::new_simple(smtp_address)
+        .unwrap()
+        .credentials(credentials)
+        .transport();
 
-//    let email = EmailBuilder::new()
-//        .to(to_address)
-//        .from(smtp_username)
-//        .subject("Hi, Hello world")
-//        .body("Hello world.")
-//        //.attachment_from_file(Path::new("Cargo.toml"), None, &TEXT_PLAIN)
-//        .build()
-//        .unwrap();
-
-    // Open a local connection on port 25
-    //let mut mailer = SmtpTransportBuilder::new((sntp_server, smtp_port)).unwrap
-    //    .hello_name("localhost")
-    //    .credentials(smtp_username, smtp_password)
-    //    .security_level(SecurityLevel::AlwaysEncrypt)
-    //    .smtp_utf8(true)
-    //    .build();
-
-    // Send the email
-    //let result = mailer.send(email.clone());
-
-    //if result.is_ok() {
-    //    println!("Email sent");
-    //} else {
-    //    println!("Could not send email: {:?}", result);
-    //}
-
-    //assert!(result.is_ok());
+    let _result = client.send(email);
 }
