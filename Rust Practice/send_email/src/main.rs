@@ -31,3 +31,4 @@ fn main() {
 
     let _result = client.send(email);
 }
+

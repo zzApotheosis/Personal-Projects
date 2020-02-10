@@ -1,0 +1,9 @@
+/home/zzapotheosis/Development/GitHub/Personal-Projects/Rust Practice/testbench/target/x86_64-pc-windows-gnu/debug/deps/encoding_index_japanese-ccf7df8d6f6d779e.rmeta: /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/encoding-index-japanese-1.20141219.5/lib.rs /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/encoding-index-japanese-1.20141219.5/jis0208.rs /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/encoding-index-japanese-1.20141219.5/jis0212.rs
+
+/home/zzapotheosis/Development/GitHub/Personal-Projects/Rust Practice/testbench/target/x86_64-pc-windows-gnu/debug/deps/libencoding_index_japanese-ccf7df8d6f6d779e.rlib: /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/encoding-index-japanese-1.20141219.5/lib.rs /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/encoding-index-japanese-1.20141219.5/jis0208.rs /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/encoding-index-japanese-1.20141219.5/jis0212.rs
+
+/home/zzapotheosis/Development/GitHub/Personal-Projects/Rust Practice/testbench/target/x86_64-pc-windows-gnu/debug/deps/encoding_index_japanese-ccf7df8d6f6d779e.d: /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/encoding-index-japanese-1.20141219.5/lib.rs /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/encoding-index-japanese-1.20141219.5/jis0208.rs /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/encoding-index-japanese-1.20141219.5/jis0212.rs
+
+/home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/encoding-index-japanese-1.20141219.5/lib.rs:
+/home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/encoding-index-japanese-1.20141219.5/jis0208.rs:
+/home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/encoding-index-japanese-1.20141219.5/jis0212.rs:
