@@ -1,0 +1,11 @@
+/home/zzapotheosis/Development/GitHub/Personal-Projects/Rust Practice/send_email/target/debug/deps/time-09538111b153a9ac.rmeta: /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/lib.rs /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/display.rs /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/duration.rs /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/parse.rs /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/sys.rs
+
+/home/zzapotheosis/Development/GitHub/Personal-Projects/Rust Practice/send_email/target/debug/deps/libtime-09538111b153a9ac.rlib: /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/lib.rs /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/display.rs /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/duration.rs /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/parse.rs /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/sys.rs
+
+/home/zzapotheosis/Development/GitHub/Personal-Projects/Rust Practice/send_email/target/debug/deps/time-09538111b153a9ac.d: /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/lib.rs /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/display.rs /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/duration.rs /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/parse.rs /home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/sys.rs
+
+/home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/lib.rs:
+/home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/display.rs:
+/home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/duration.rs:
+/home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/parse.rs:
+/home/zzapotheosis/.cargo/registry/src/github.com-1ecc6299db9ec823/time-0.1.42/src/sys.rs:

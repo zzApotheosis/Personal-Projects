@@ -1,0 +1,1 @@
+/home/zzapotheosis/Development/GitHub/Personal-Projects/Rust\ Practice/send_email/target/debug/send_email: /home/zzapotheosis/Development/GitHub/Personal-Projects/Rust\ Practice/send_email/src/main.rs
