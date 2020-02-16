@@ -24,6 +24,7 @@ foomatic-db
 foomatic-db-engine
 foomatic-db-ppds
 gdm
+gimp
 git
 glade
 gnome
