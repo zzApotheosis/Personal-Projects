@@ -1,0 +1,67 @@
+#!/usr/bin/perl -w
+
+# Check for non-root user
+die("This must be run as root user") if $> != 0;
+
+# Imports
+use strict;
+use warnings;
+use File::Basename;
+
+# Global variables
+my $script_name = basename($0);
+my $log_data_file = "/root/$script_name.log";
+my $hostname = `hostname`; chomp($hostname);
+
+# Main method
+sub main {
+	# Define method variables
+	my $result;
+	my $exit_code = 0;
+
+	# Update system
+	$result = system("pacman -Syu --noconfirm") >> 8;
+
+	# Check for non-successful return code
+	if ($result) {
+	    create_log_file();
+	    notify();
+	    $exit_code = 1;
+	}
+
+	# Done
+	return $exit_code;
+}
+
+# Create a log file from systemd journal
+sub create_log_file {
+    # Define method variables
+    my $command = "journalctl --since \"1 day ago\" --identifier \"CROND\" > $log_data_file";
+    
+    # Get log data from systemd journal
+    system($command);
+}
+
+# Send notification by email
+sub notify {
+    # Define method variables
+    my $executable = "/root/sendEmail";
+    my $subject;
+    my $message;
+    my $result;
+    
+    # Populate data
+    $subject = "$hostname: Unable to update system";
+    $message = "Login to $hostname to investigate the issue. Check the attached log for details.";
+    
+    # Determine if executable exists
+    if (! -f $executable) {
+        print(STDERR "$executable does not exist! Notification was not sent!\n");
+    }
+    
+    # Send notification
+    $result = system("$executable --subject \"$subject\" --message \"$message\" --attachment $log_data_file") >> 8;
+}
+
+# Execute
+exit main();
