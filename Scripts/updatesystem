@@ -24,8 +24,10 @@ sub main {
 
     # Check for non-successful return code
     if ($result) {
-        create_log_file();
-        notify();
+        if (time_elapsed(604300)) { # 604800 is the number of seconds in a week, minus 500 for some lenience
+            create_log_file();
+            notify();
+        }
         $exit_code = 1;
     }
 
@@ -40,6 +42,62 @@ sub create_log_file {
     
     # Get log data from systemd journal
     system($command);
+}
+
+# Time Elapsed
+sub time_elapsed {
+    # Define method variables
+    my $current_time;
+    my $compare_time;
+    my $differential;
+    my $fh;
+    my $compare_file = "/var/tmp/$script_name.data";
+    
+    # Return early if no arguments were provided
+    if (!scalar(@_)) {
+        return;
+    }
+    
+    # Fetch arguments
+    ($differential) = @_;
+    
+    # Check for non-existent file (first run)
+    if (! -f $compare_file) {
+        # Write data to file
+        open($fh, '>', $compare_file) or print(STDERR "Unable to open $compare_file\n");
+        print($fh time());
+        close($fh);
+        
+        # Assume it's the first run, so we can return true
+        print(STDOUT "$compare_file: Timestamp file created!\n");
+        return 1;
+    }
+    
+    # Get epoch to compare
+    open($fh, '<', $compare_file) or print(STDERR "Unable to open $compare_file\n");
+    $compare_time = <$fh>;
+    chomp($compare_time);
+    close($fh);
+    
+    # Get current time
+    $current_time = time();
+    
+    # Compare
+    if ($current_time - $compare_time > $differential) {
+        # Update the compare time
+        open($fh, '>', $compare_file) or print(STDERR "Unable to open $compare_file\n");
+        print($fh $current_time);
+        close($fh);
+        
+        # Return true
+        return 1;
+    } else {
+        # Print time information
+        print(STDOUT "Not enough time elapsed to send email notification!\n");
+        print(STDOUT "Desired differential: $differential\n");
+        print(STDOUT "Current differential: " . ($current_time - $compare_time) . "\n");
+        return 0;
+    }
 }
 
 # Send notification by email
