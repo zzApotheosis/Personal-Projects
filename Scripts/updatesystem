@@ -52,7 +52,9 @@ sub notify {
     
     # Populate data
     $subject = "$hostname: Unable to update system";
-    $message = "Login to $hostname to investigate the issue. Check the attached log for details.";
+    $message = "Login to $hostname to investigate the issue. Check the attached log for details.\n";
+    $message .= "\n";
+    $message .= "Visit https://archlinux.org/news for a possible community solution.";
     
     # Determine if executable exists
     if (! -f $executable) {
