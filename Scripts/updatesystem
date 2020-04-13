@@ -15,22 +15,22 @@ my $hostname = `hostname`; chomp($hostname);
 
 # Main method
 sub main {
-	# Define method variables
-	my $result;
-	my $exit_code = 0;
+    # Define method variables
+    my $result;
+    my $exit_code = 0;
 
-	# Update system
-	$result = system("pacman -Syu --noconfirm") >> 8;
+    # Update system
+    $result = system("pacman -Syu --noconfirm") >> 8;
 
-	# Check for non-successful return code
-	if ($result) {
-	    create_log_file();
-	    notify();
-	    $exit_code = 1;
-	}
+    # Check for non-successful return code
+    if ($result) {
+        create_log_file();
+        notify();
+        $exit_code = 1;
+    }
 
-	# Done
-	return $exit_code;
+    # Done
+    return $exit_code;
 }
 
 # Create a log file from systemd journal
