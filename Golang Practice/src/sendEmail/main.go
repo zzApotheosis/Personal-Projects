@@ -8,11 +8,11 @@ import (
 	"flag"
 	"fmt"
 	"gopkg.in/gomail.v2"
+	"io/ioutil"
 	util "jenningsUtil"
 	"log"
 	"net/smtp"
 	"os"
-	"io/ioutil"
 )
 
 func main() {
