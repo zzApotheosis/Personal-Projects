@@ -37,6 +37,7 @@ gst-plugins-ugly
 gtk2
 gtk3
 gvim
+handbrake
 htop
 iproute2
 jdk8-openjdk
