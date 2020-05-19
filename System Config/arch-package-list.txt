@@ -102,6 +102,7 @@ vlc
 vsftpd
 weston
 whois
+wine
 wireshark-qt
 xclip
 xorg
