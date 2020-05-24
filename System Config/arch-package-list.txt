@@ -4,6 +4,7 @@ arch-install-scripts
 archiso
 arp-scan
 atom
+audacity
 autofs
 bind
 blender
