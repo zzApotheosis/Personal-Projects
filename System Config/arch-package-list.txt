@@ -13,6 +13,7 @@ chromium
 colordiff
 cppcheck
 cronie
+crystal
 cups
 cups-pdf
 dhcp
@@ -57,6 +58,7 @@ neofetch
 networkmanager-openvpn
 nfs-utils
 nmap
+nodejs
 noto-fonts
 ntp
 obs-studio
@@ -72,6 +74,7 @@ python2
 python2-pip
 rust
 samba
+shards
 splint
 sshfs
 sssd
