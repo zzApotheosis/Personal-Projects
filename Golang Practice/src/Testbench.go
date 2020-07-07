@@ -9,24 +9,33 @@ package main
 import (
 	_ "bufio"
 	"fmt"
-	_ "jenningsUtil"
 	"net"
 	_ "os"
 	_ "time"
+	"flag"
 )
 
 //type dataset struct {
 //	temp1, temp2 string
 //}
 
+var name string
+
+func parseArgs() {
+	flag.StringVar(&name, "name", "", "The name to look up")
+	flag.Parse()
+}
+
 func main() {
-	host := "zzPC.home.net"
-	ips, err := net.LookupIP(host)
+	//host := "zzPC.home.net"
+	parseArgs()
+
+	ips, err := net.LookupIP(name)
 	if err != nil {
 		panic(err)
 	}
 	for _, e := range ips {
-		fmt.Printf("%s - %s\n", host, e.String())
+		fmt.Printf("%s - %s\n", name, e.String())
 	}
 }
 

@@ -1,33 +1,49 @@
-extern crate lettre;
-extern crate lettre_email;
+#[macro_use] extern crate text_io;
+//extern crate text_io;
 
-use lettre::smtp::authentication::IntoCredentials;
-use lettre::{SmtpClient, Transport};
-use lettre_email::EmailBuilder;
 
 fn main() {
-    let to_address = "zzApotheosis@gmail.com";
-    let user = "zzApotheosis@gmail.com";
-    let password = "uxbolweeegnixznw";
-    let subject = "Hello Rust!";
-    let body = "Hello Rust! Big ligma!";
-    let smtp_address = "smtp.gmail.com";
+    // Variables can be type annotated.
+    let logical: bool = true;
 
-    let email = EmailBuilder::new()
-        .from(user)
-        .to(to_address)
-        .subject(subject)
-        .text(body)
-        .build()
-        .unwrap()
-        .into();
+    let a_float: f64 = 1.0;  // Regular annotation
+    let an_integer   = 5i32; // Suffix annotation
 
-    let credentials = (user, password).into_credentials();
-
-    let mut client = SmtpClient::new_simple(smtp_address)
-        .unwrap()
-        .credentials(credentials)
-        .transport();
-
-    let _result = client.send(email);
+    // Or a default will be used.
+    let default_float   = 3.0; // `f64`
+    let default_integer = 7;   // `i32`
+    
+    // A type can also be inferred from context 
+    let mut inferred_type = 12; // Type i64 is inferred from another line
+    inferred_type = 4294967296i64;
+    
+    // A mutable variable's value can be changed.
+    let mut mutable = 12; // Mutable `i32`
+    mutable = 21;
+    
+    // Error! The type of a variable can't be changed.
+    //mutable = true;
+    
+    // Variables can be overwritten with shadowing.
+    let mutable = true;
+    
+    println!("{}", logical);
+    println!("{}", a_float);
+    println!("{}", an_integer);
+    println!("{}", default_float);
+    println!("{}", default_integer);
+    println!("{}", inferred_type);
+    println!("{}", mutable);
+    
+    let mut test: i32 = 10;
+    println!("test: {}", test);
+    test += 1;
+    println!("test: {}", test);
+    println!("test(): {}", test());
 }
+
+fn test() -> i32 {
+    let mut i: i32 = 0;
+    return i;
+}
+
