@@ -10,8 +10,8 @@ import (
 	"gopkg.in/gomail.v2"
 	"io/ioutil"
 	util "jenningsUtil"
-	"log"
-	"net/smtp"
+	_ "log"
+	_ "net/smtp"
 	"os"
 )
 
@@ -58,80 +58,6 @@ func getPassword(file string) string {
 
 	// Done
 	return string(data)
-}
-
-/*
- * Sample email with standard Go libraries
- */
-func sendEmail(in map[string]string) {
-	// Define method variables
-	var from, pass, to, subject, message, attachment string
-	var keyExists bool
-	var payload string
-	var err error
-
-	// Determine data
-	from, keyExists = in["username"]
-	if !keyExists {
-		panic("Cannot send email with no username!")
-	}
-	pass, keyExists = in["password"]
-	if !keyExists {
-		panic("Cannot send email with no password!")
-	}
-	to, keyExists = in["target"]
-	if !keyExists {
-		panic("Cannot send email with no destination address!")
-	}
-	subject, keyExists = in["subject"]
-	if !keyExists {
-		subject = "No Subject"
-	}
-	message, keyExists = in["message"]
-	if !keyExists {
-		return // There's no message, so no reason to send anything
-		if !keyExists {
-		}
-		_ = attachment // Right now, I don't need attachments. TODO: implement later
-
-		// Construct email payload
-		payload =
-			"From: " + from + "\n" +
-				"To: " + to + "\n" +
-				"Subject: " + subject + "\n\n" +
-				message
-
-		// Send email over SMTP
-		err = smtp.SendMail("smtp.gmail.com:587",
-			smtp.PlainAuth("", from, pass, "smtp.gmail.com"),
-			from, []string{to}, []byte(payload))
-
-		// Check for errors
-		if err != nil {
-			log.Printf("SMTP Error: %s", err)
-		}
-
-		// Done
-		log.Print("Email sent to " + to)
-	}
-}
-
-func gomailSample() {
-	m := gomail.NewMessage()
-	m.SetHeader("From", "zzApotheosis@gmail.com")
-	m.SetHeader("To", "zzApotheosis@gmail.com")
-	// m.SetAddressHeader("Cc", "dan@example.com", "Dan")
-	m.SetHeader("Subject", "Hello!")
-	// m.SetBody("text/html", "Hello <b>Bob</b> and <i>Cora</i>!")
-	m.SetBody("text/plain", "Big ligma")
-	m.Attach("/home/zzapotheosis/Desktop/test_attachment.txt")
-
-	d := gomail.NewDialer("smtp.gmail.com", 587, "zzApotheosis@gmail.com", "jkovzowhjzkousin")
-
-	// Send the email to Bob, Cora and Dan.
-	if err := d.DialAndSend(m); err != nil {
-		panic(err)
-	}
 }
 
 func sendGomail(in map[string]string) {
