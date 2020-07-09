@@ -72,6 +72,7 @@ python
 python-pip
 python2
 python2-pip
+ruby
 samba
 shards
 splint
