@@ -82,6 +82,7 @@ stunnel
 syslog-ng
 system-config-printer
 tcsh
+thunderbird
 tigervnc
 tmux
 traceroute
