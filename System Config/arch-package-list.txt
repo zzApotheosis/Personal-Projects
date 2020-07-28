@@ -48,6 +48,7 @@ libaacs
 libbluray
 libpaper
 libreoffice-fresh
+links
 linux-lts
 lshw
 lvm2
