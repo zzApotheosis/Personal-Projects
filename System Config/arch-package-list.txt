@@ -33,6 +33,7 @@ gnome
 gnome-extra
 gnu-free-fonts
 gnu-netcat
+gnupg
 go
 gst-libav
 gst-plugins-ugly
