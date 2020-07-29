@@ -28,6 +28,7 @@ foomatic-db-ppds
 gdm
 gimp
 git
+gitlab
 glade
 gnome
 gnome-extra
@@ -75,6 +76,7 @@ python
 python-pip
 python2
 python2-pip
+redis
 ruby
 samba
 shards
