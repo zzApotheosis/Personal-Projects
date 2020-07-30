@@ -72,6 +72,8 @@ p7zip
 pacman-contrib
 pciutils
 pepper-flash
+plasma
+plasma-wayland-session
 python
 python-pip
 python2
@@ -116,6 +118,7 @@ wine
 wireshark-qt
 xclip
 xorg
+xorg-xinit
 yay (AUR)
 youtube-dl
 zsh
