@@ -46,6 +46,7 @@ htop
 iproute2
 jdk8-openjdk
 jenkins
+kdegraphics-thumbnailers
 kitty
 libaacs
 libbluray
