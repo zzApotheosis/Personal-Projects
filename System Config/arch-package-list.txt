@@ -47,6 +47,8 @@ iproute2
 jdk8-openjdk
 jenkins
 kdegraphics-thumbnailers
+kio
+kio-extras
 kitty
 libaacs
 libbluray
