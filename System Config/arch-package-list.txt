@@ -47,6 +47,7 @@ iproute2
 jdk8-openjdk
 jenkins
 kdegraphics-thumbnailers
+kimageformats
 kio
 kio-extras
 kitty
@@ -81,6 +82,7 @@ python
 python-pip
 python2
 python2-pip
+qt5-imageformats
 redis
 ruby
 samba
