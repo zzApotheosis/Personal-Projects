@@ -18,6 +18,7 @@ cups
 cups-pdf
 dhcp
 distcc
+dolphins
 dvd+rw-tools
 ffmpeg
 ffmpegthumbnailer
