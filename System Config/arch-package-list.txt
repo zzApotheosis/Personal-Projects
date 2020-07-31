@@ -18,7 +18,6 @@ cups
 cups-pdf
 dhcp
 distcc
-dolphins
 dvd+rw-tools
 ffmpeg
 ffmpegthumbnailer
@@ -47,7 +46,7 @@ htop
 iproute2
 jdk8-openjdk
 jenkins
-kdegraphics-thumbnailers
+kde-applications
 kimageformats
 kio
 kio-extras
