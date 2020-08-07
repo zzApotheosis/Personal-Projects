@@ -58,6 +58,7 @@ libreoffice-fresh
 links
 linux-lts
 lshw
+lua
 lvm2
 mc
 mdadm
