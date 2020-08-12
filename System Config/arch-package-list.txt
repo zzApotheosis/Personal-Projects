@@ -46,10 +46,6 @@ htop
 iproute2
 jdk8-openjdk
 jenkins
-kde-applications
-kimageformats
-kio
-kio-extras
 kitty
 libaacs
 libbluray
@@ -77,13 +73,10 @@ p7zip
 pacman-contrib
 pciutils
 pepper-flash
-plasma
-plasma-wayland-session
 python
 python-pip
 python2
 python2-pip
-qt5-imageformats
 redis
 ruby
 samba
