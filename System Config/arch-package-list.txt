@@ -73,6 +73,8 @@ p7zip
 pacman-contrib
 pciutils
 pepper-flash
+polkit
+polkit-gnome
 python
 python-pip
 python2
