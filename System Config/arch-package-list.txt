@@ -36,6 +36,7 @@ gnu-free-fonts
 gnu-netcat
 gnupg
 go
+gperf
 gst-libav
 gst-plugins-ugly
 gtk2
