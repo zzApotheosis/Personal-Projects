@@ -18,7 +18,9 @@ cups
 cups-pdf
 dhcp
 distcc
+dnsmasq
 dvd+rw-tools
+ebtables
 ffmpeg
 ffmpegthumbnailer
 firefox
