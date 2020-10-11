@@ -44,6 +44,7 @@ gst-plugins-ugly
 gtk2
 gtk3
 gvim
+gwakeonlan
 handbrake
 htop
 iproute2
@@ -120,6 +121,7 @@ weston
 whois
 wine
 wireshark-qt
+wol
 xclip
 xorg
 xorg-xinit
