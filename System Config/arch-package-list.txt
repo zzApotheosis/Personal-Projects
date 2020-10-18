@@ -67,6 +67,7 @@ neofetch
 neovim
 networkmanager-openvpn
 nfs-utils
+nftables
 nmap
 nodejs
 noto-fonts
