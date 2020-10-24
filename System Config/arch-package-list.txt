@@ -48,6 +48,7 @@ gwakeonlan
 handbrake
 htop
 iproute2
+jdk-openjdk
 jdk8-openjdk
 jenkins
 kitty
