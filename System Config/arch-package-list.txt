@@ -21,6 +21,7 @@ distcc
 dnsmasq
 dvd+rw-tools
 ebtables
+edk2-ovmf
 ffmpeg
 ffmpegthumbnailer
 firefox
