@@ -1,2 +1,0 @@
-• Favorite Zsh theme: spaceship
-
