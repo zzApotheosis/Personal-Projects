@@ -1,0 +1,3 @@
+sys-kernel/vanilla-kernel
+sys-kernel/genkernel
+gnome-base/gnome
