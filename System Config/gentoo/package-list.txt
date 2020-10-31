@@ -27,6 +27,7 @@ net-print/cups-pdf
 net-vpn/openvpn
 sys-apps/iproute2
 sys-auth/pam_u2f
+sys-devel/crossdev
 sys-kernel/genkernel
 sys-kernel/vanilla-kernel
 sys-process/cronie
