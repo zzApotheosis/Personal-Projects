@@ -5,6 +5,7 @@ app-crypt/libu2f-server
 app-crypt/yubikey-manager
 app-editors/atom
 app-editors/neovim
+app-misc/neofetch
 dev-db/mariadb
 dev-lang/crystal
 dev-lang/go
@@ -28,6 +29,7 @@ sys-auth/pam_u2f
 sys-kernel/genkernel
 sys-kernel/vanilla-kernel
 sys-process/cronie
+sys-process/htop
 www-client/chromium
 x11-terms/kitty
 
