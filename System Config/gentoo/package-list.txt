@@ -1,6 +1,17 @@
 app-admin/sudo
+app-crypt/gnupg
+app-crypt/libu2f-host
+app-crypt/libu2f-server
+app-crypt/yubikey-manager
+app-editors/atom
 app-editors/neovim
 dev-db/mariadb
+dev-lang/crystal
+dev-lang/go
+dev-lang/perl
+dev-lang/python
+dev-lang/ruby
+dev-lang/rust
 gnome-base/gnome
 net-dns/bind
 net-firewall/nftables
@@ -8,10 +19,15 @@ net-fs/nfs-utils
 net-fs/samba
 net-misc/dhcp
 net-nds/openldap
+net-print/cups
+net-print/cups-filters
+net-print/cups-pdf
 net-vpn/openvpn
 sys-apps/iproute2
+sys-auth/pam_u2f
 sys-kernel/genkernel
 sys-kernel/vanilla-kernel
 sys-process/cronie
+www-client/chromium
 x11-terms/kitty
 
