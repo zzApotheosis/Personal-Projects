@@ -19,6 +19,7 @@ net-firewall/nftables
 net-fs/nfs-utils
 net-fs/samba
 net-misc/dhcp
+net-misc/openntpd
 net-nds/openldap
 net-print/cups
 net-print/cups-filters
