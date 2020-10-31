@@ -2,7 +2,7 @@
 I've decided to merge all of my personal projects into one repository, as I don't expect them to become large enough to warrant their own independent repositories.
 
 ## Using my public GnuPG key
-The provided GnuPG key file "zzApotheosis.gpg.base64" is base64-encoded data that must be decoded before importing to your keychain.
+The provided file `zzApotheosis.gpg` is my public GnuPG key (and subkeys) which may be imported into your keyring.
 
 To do this on GNU/Linux/Unix-like systems, use:
 ```
