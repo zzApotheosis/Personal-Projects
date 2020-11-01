@@ -1,1 +1,0 @@
-/home/zzapotheosis/Development/GitHub/Personal-Projects/Rust\ Practice/project_euler/problem_0001/target/debug/problem_0001: /home/zzapotheosis/Development/GitHub/Personal-Projects/Rust\ Practice/project_euler/problem_0001/src/main.rs

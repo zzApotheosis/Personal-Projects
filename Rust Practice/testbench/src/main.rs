@@ -35,15 +35,15 @@ fn main() {
     println!("{}", inferred_type);
     println!("{}", mutable);
     
-    let mut test: i32 = 10;
-    println!("test: {}", test);
-    test += 1;
-    println!("test: {}", test);
+    let mut atest: i32 = 10;
+    println!("test: {}", atest);
+    atest += 1;
+    println!("test: {}", atest);
     println!("test(): {}", test());
 }
 
 fn test() -> i32 {
-    let mut i: i32 = 0;
+    let mut i: i32 = 1337;
     return i;
 }
 
