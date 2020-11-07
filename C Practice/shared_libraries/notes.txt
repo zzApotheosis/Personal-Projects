@@ -1,0 +1,4 @@
+Build C object with Position-independent code: gcc -c -fpic foo.c
+Build C shared library from C object: gcc -shared -o libfoo.so foo.o
+Build main C program with "foo" library: gcc -L. -lfoo test.c
+Set Linked Library variable before executing: LD_LIBRARY_PATH=. ./a.out
