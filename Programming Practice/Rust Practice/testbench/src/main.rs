@@ -1,14 +1,18 @@
-#[macro_use] extern crate text_io;
+//#[macro_use] extern crate text_io;
 //extern crate text_io;
 
+// Imports
+//use std::io::{self, Read, Write};
+use std::io::Write;
 
+// Main
 fn main() {
     // Variables can be type annotated.
     let logical: bool = true;
-
+    
     let a_float: f64 = 1.0;  // Regular annotation
     let an_integer   = 5i32; // Suffix annotation
-
+    
     // Or a default will be used.
     let default_float   = 3.0; // `f64`
     let default_integer = 7;   // `i32`
@@ -36,14 +40,21 @@ fn main() {
     println!("{}", mutable);
     
     let mut atest: i32 = 10;
+    
     println!("test: {}", atest);
     atest += 1;
     println!("test: {}", atest);
-    println!("test(): {}", test());
+    
+    test();
 }
 
-fn test() -> i32 {
+fn test() {
     let mut i: i32 = 1337;
-    return i;
+    let mut text = String::new();
+
+    std::io::stdout().write_all("Enter bullshit: ".as_bytes());
+    std::io::stdout().flush();
+    std::io::stdin().read_line(&mut text);
+    std::io::stdout().write_all(text.as_bytes());
 }
 
