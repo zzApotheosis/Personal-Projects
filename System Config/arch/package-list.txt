@@ -110,6 +110,7 @@ ttf-indic-otf
 ttf-joypixels
 ttf-liberation
 ttf-roboto
+usbutils
 valgrind
 virtualbox
 virtualbox-ext-vnc
