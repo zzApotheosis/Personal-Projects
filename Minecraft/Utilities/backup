@@ -1,0 +1,179 @@
+#!/usr/bin/perl -w
+
+# Imports
+use strict;
+use warnings;
+use File::Basename;
+use File::Path qw(make_path remove_tree);
+use File::Copy qw(copy mv);
+use Cwd qw(cwd abs_path);
+use Scalar::Util qw(looks_like_number);
+
+# Global variables
+my $script_name = basename($0);
+my $script_dir = abs_path(dirname(basename($0)));
+my $original_cwd = cwd();
+my $backup_dir = $script_dir . "/backups";
+my @backup_targets;
+my $index_file = $script_dir . "/mcserverbackupindex.dat";
+my $index;
+
+# Main
+sub main {
+    # Define method variables
+    my $exit_code = 0;
+    
+    # Get backup targets
+    @backup_targets = get_backup_targets();
+    
+    # Get index number
+    get_index();
+    
+    # Perform backup
+    backup();
+    
+    # Clean backup directory
+    clean_backup_dir();
+    
+    # Increment index
+    set_index($index + 1);
+
+    # Print information
+    print(STDOUT "Backup directory:\n");
+    system("ls -lah $backup_dir");
+    
+    # Done
+    return $exit_code;
+}
+
+sub get_backup_targets {
+    # Define method variables
+    my @out;
+    
+    # Populate data
+    push(@out, "server.jar");
+    push(@out, "world");
+    push(@out, "world_the_end");
+    push(@out, "world_nether");
+    push(@out, "plugins");
+    push(@out, "server.properties");
+    push(@out, "ops.json");
+    push(@out, "launch.sh");
+    push(@out, "eula.txt");
+    
+    # Done
+    return @out;
+}
+
+sub get_index {
+    # Define method variables
+    my $fh;
+    my @file_data;
+    
+    # If the file doesn't exist, create it
+    if (! -f $index_file) {
+        open($fh, '>', $index_file);
+        print($fh "0");
+        close($fh);
+    }
+    
+    # Read index data
+    open($fh, '<', $index_file);
+    @file_data = <$fh>;
+    chomp(@file_data);
+    close($fh);
+    
+    # If the value appears to be a number, return it
+    if (looks_like_number($file_data[0])) {
+        $index = $file_data[0];
+    } else {
+        if (-f $index_file) {
+            unlink($index_file);
+        }
+        get_index(); # Recursively get index, but on this recursive call, the file is guaranteed to be deleted (setting it to 0)
+    }
+}
+
+sub backup {
+    # Define method variables
+    my $archive = "backup" . $index . ".tar.gz";
+    my $to_archive = "";
+    
+    # Change to script directory
+    chdir($script_dir);
+    
+    # Determine files to archive
+    foreach (@backup_targets) {
+        if (-f $_ || -d $_ || -l $_) {
+            $to_archive .= " $_";
+        }
+    }
+    
+    # Ensure backup directory exists
+    make_path($backup_dir);
+    chmod(0755, $backup_dir);
+    
+    # If no files were found, die!
+    if (length($to_archive) == 0) {
+        die("No files found!\n");
+    }
+    
+    # Use tar and gzip to archive
+    system("tar -czhvf $backup_dir/$archive" . $to_archive);
+    
+    # Change back to original cwd
+    chdir($original_cwd);
+}
+
+sub clean_backup_dir {
+    # Define method variables
+    my $purge_indices_num = 25;
+    my $purge_modulus = 5;
+    
+    # Clean/purge archives (Keep the first index)
+    for (my $i = $index - 1; $i > 0; $i--) {
+        if ($i < $index - $purge_indices_num) {
+            if (-f $backup_dir . "/backup" . $i . ".tar.gz") {
+                print(STDOUT "Removing archive: " . $backup_dir . "/backup" . $i . ".tar.gz\n");
+                unlink($backup_dir . "/backup" . $i . ".tar.gz");
+            }
+        } elsif ($i % $purge_modulus) {
+            if (-f $backup_dir . "/backup" . $i . ".tar.gz") {
+                print(STDOUT "Removing archive: " . $backup_dir . "/backup" . $i . ".tar.gz\n");
+                unlink($backup_dir . "/backup" . $i . ".tar.gz");
+            }
+        }
+    }
+}
+
+sub set_index {
+    # Define method variables
+    my $fh;
+    my $in;
+    
+    # Return early if no arguments provided
+    if (!scalar(@_)) {
+        return;
+    }
+    
+    # Fetch arguments
+    $in = $_[0];
+    chomp($in);
+    
+    # Check input
+    if (!looks_like_number($in)) {
+        print(STDERR "$in is not a number!\n");
+        return;
+    }
+    
+    # Write data to file
+    open($fh, '>', $index_file);
+    print($fh $in);
+    close($fh);
+    
+    # Update global variable
+    $index = $in
+}
+
+# Execute
+exit main();

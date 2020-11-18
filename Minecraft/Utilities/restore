@@ -1,0 +1,47 @@
+#!/bin/sh
+
+# Define variables
+CWD=$(pwd)
+SCRIPTDIR=$(dirname $(readlink -f "$0"))
+BACKUPDIR=$SCRIPTDIR/backups
+INDEXFILE="/var/tmp/mcserverbackupindex.dat"
+let "INDEX=$(cat $INDEXFILE)"
+let INDEX-- # Decrement because the backup script increments the index at the end of its execution
+
+# Ensure backup archive exists
+if [[ ! -z $1 ]]; then # If index argument is given
+    if [[ ! -f $BACKUPDIR/backup$1.tar.gz ]]; then
+        echo "Specified archive $BACKUPDIR/backup$1.tar.gz does not exist."
+	exit 1
+    else
+	TARGET=$BACKUPDIR/backup$1.tar.gz
+    fi
+else # Check if index file data is accurate
+    if [[ ! -f $BACKUPDIR/backup$INDEX.tar.gz ]]; then
+        "$BACKUPDIR/backup$INDEX.tar.gz does not exist. You will need to manually restore the world."
+	exit 1
+    else
+	TARGET=$BACKUPDIR/backup$INDEX.tar.gz
+    fi
+fi
+
+### Begin restoring archive ###
+
+# Remove current world (THE SERVER MUST BE OFFLINE IN ORDER TO PREVENT POTENTIAL DATA CORRUPTION!)
+rm -rfv $SCRIPTDIR/world*
+rm -rfv $SCRIPTDIR/plugins
+rm -rfv $SCRIPTDIR/server.properties
+rm -rfv $SCRIPTDIR/ops.json
+rm -rfv $SCRIPTDIR/launch.sh
+rm -rfv $SCRIPTDIR/eula.txt
+
+# Unpack backup archive
+tar -xzvf $TARGET
+
+# Check for success
+if [[ $? -eq 0 ]]; then
+    echo "World has been successfully restored."
+else
+    echo "World restoration failed. Check for any possible data loss."
+fi
+
