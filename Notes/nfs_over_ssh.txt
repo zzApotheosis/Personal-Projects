@@ -1,0 +1,15 @@
+• Setup an SSH tunnel:
+ssh -f -p <SSH server port> -L <local port>:<forwarding IP>:<destination port> <username>@<SSH server IP> sleep 15
+ssh -f -p <SSH server port> -L 3049:127.0.0.1:2049 <username>@<SSH server IP> sleep 15
+NOTE: 2049 is the default NFS server port, so we forward traffic from local port 3049 to port 2049 on the other end of the SSH tunnel. It wouldn't hurt to use the same port on both ends of the tunnel, so it would be safe to use 2049:127.0.0.1:2049 instead. The "sleep 15" is a command that executes on the remote SSH server, then closes the connection when the command exits. However, since the SSH tunnel will be used, the tunnel will not close until all local processes are finished using the tunnel. So the "sleep 15" command gives the user a 15 second window to mount the NFS share. Once all local processes close the connection to the SSH tunnel, the "sleep 15" command has probably exited, so this serves as a way to "automatically" close the SSH tunnel without leaving forgotten processes. Needless to say, the 15 second value may be arbitrarily changed.
+NOTE: If this SSH tunnel should never expire, then use the -N option in the SSH command, i.e.
+ssh -fN -p <SSH server port> -L <local port>:<forwarding IP>:<destination port> <username>@<SSH server IP>
+Upon successfully authenticating with the SSH server, this will setup an SSH tunnel that will last until the system reboots or the tunnel process is killed.
+NOTE: Optionally, the -v option may be used for standard SSH debug messages, i.e.
+ssh -fv -p <SSH server port> -L <local port>:<forwarding IP>:<destination port> <username>@<SSH server IP> sleep 15
+
+• Mount NFS through SSH tunnel:
+sudo mount -t nfs -o port=<local port> 127.0.0.1:<NFS export from NFS server> <mount point>
+NOTE: The -t and -o arguments can be omitted if using the default NFS port of 2049, i.e.
+sudo mount 127.0.0.1:<NFS export from NFS server> <mount point>
+
