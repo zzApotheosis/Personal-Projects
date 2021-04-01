@@ -45,16 +45,39 @@ fn main() {
     atest += 1;
     println!("test: {}", atest);
     
-    test();
+    //test();
+    test2();
 }
 
 fn test() {
     let mut i: i32 = 1337;
     let mut text = String::new();
 
-    std::io::stdout().write_all("Enter bullshit: ".as_bytes());
-    std::io::stdout().flush();
-    std::io::stdin().read_line(&mut text);
-    std::io::stdout().write_all(text.as_bytes());
+    std::io::stdout().write_all("Enter bullshit: ".as_bytes()).unwrap();
+    std::io::stdout().flush().unwrap();
+    std::io::stdin().read_line(&mut text).unwrap();
+    std::io::stdout().write_all(text.as_bytes()).unwrap();
+}
+
+fn test2() {
+    let n = 5;
+
+    if n < 0 {
+        print!("{} is negative", n);
+    } else if n > 0 {
+        print!("{} is positive", n);
+    } else {
+        print!("{} is zero", n);
+    }
+
+    let big_n = if n < 10 && n > -10 {
+        println!(", and is a small number, increase ten-fold");
+        10 * n
+    } else {
+        println!(", and is a big number, halve the number");
+        n / 2
+    };
+
+    println!("{} -> {}", n, big_n);
 }
 
