@@ -21,8 +21,8 @@ sub main {
     my $dir_prefix = "problem_";
     
     # Do code
-    for (my $i = 0; $i < $limit; $i++) {
-        mkdir(File::Spec->catfile($original_cwd, $dir_prefix . sprintf("%0" . length($limit) . "d", $i)));
+    for (my $i = 1; $i < $limit; $i++) {
+        mkdir(File::Spec->catfile($original_cwd, $dir_prefix . sprintf("%0" . length($limit - 1) . "d", $i)));
     }
     
     # Done
