@@ -3,7 +3,7 @@
 
 int main(int argc, char* argv) {
     // Define method variables
-    int exitCode = 1;
+    int exitCode = 0;
     int limit = 1000;
     int sum = 0;
     
