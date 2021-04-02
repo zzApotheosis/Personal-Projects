@@ -1,0 +1,9 @@
+# Ignore all by default
+/*
+
+# Make exceptions for needed files
+!.gitignore
+!main.c
+!configure.ac
+!Makefile.am
+
