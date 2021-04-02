@@ -1,0 +1,8 @@
+• Create sources (main.c)
+• Create configure.ac
+• Command: aclocal
+• Command: autoconf
+• Create Makefile.am
+• Command: automake --add-missing --foreign
+• Command: ./configure
+• Command: make
