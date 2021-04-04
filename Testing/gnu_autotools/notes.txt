@@ -1,5 +1,6 @@
 • Create sources (main.c)
 • Create configure.ac
+• Command: libtoolize
 • Command: aclocal
 • Command: autoconf
 • Create Makefile.am
