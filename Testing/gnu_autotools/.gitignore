@@ -3,9 +3,7 @@
 
 # Make exceptions for needed files
 !.gitignore
-!main.c
-!foo.c
-!foo.h
+!src
 !configure.ac
 !Makefile.am
 !notes.txt
