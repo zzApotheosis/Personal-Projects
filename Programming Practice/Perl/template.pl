@@ -1,5 +1,8 @@
 #!/usr/bin/perl
 
+# Main Class
+package Main;
+
 # Imports
 use strict;
 use warnings;
@@ -28,5 +31,7 @@ sub main {
 }
 
 # Execute
-exit(main());
+exit(Main::main());
 
+# End Main Class
+1;
