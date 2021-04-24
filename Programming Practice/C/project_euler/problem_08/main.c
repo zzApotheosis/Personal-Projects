@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
 
     // Loop through big number for largest product
     for (int i = 0; i < sizeof(bigNum) - adjacentNums; i++) {
-        product = (unsigned long int) 1;
+        product = 1lu;
         for (int j = 0; j < adjacentNums; j++) product *= (unsigned long int) (bigNum[i + j] - '0');
         if (product > largestProduct) largestProduct = product;
     }
