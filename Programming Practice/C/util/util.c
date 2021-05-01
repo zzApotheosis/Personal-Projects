@@ -30,4 +30,3 @@ long* longToHeap(long l) {
     *ptr = l;
     return ptr;
 }
-
