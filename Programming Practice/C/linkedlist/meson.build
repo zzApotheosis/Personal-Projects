@@ -1,14 +1,35 @@
 # Project structure
-project('linkedlist', 'c')
-libutil_proj = subproject('util')
-libutil_dep = libutil_proj.get_variable('libutil_dep')
+project(
+  'linkedlist',
+  'c'
+)
 
 # Define project structure
-source_files = [
-  'main.c',
-  'main.h',
-  'linkedlist.c',
-  'linkedlist.h']
+project_source_files = [
+  'src/main.c',
+  'src/main.h',
+  'src/linkedlist.c',
+  'src/linkedlist.h',
+  'src/node.c',
+  'src/node.h'
+]
 
-executable('a.out', source_files, dependencies : libutil_dep)
+project_dependencies = [
+  dependency('libutil', fallback : ['libutil', 'libutil_dep'])
+]
+
+build_args = [
+]
+
+# Target
+project_target = executable(
+  meson.project_name(),
+  project_source_files,
+  dependencies : project_dependencies
+)
+
+test(
+  'basic',
+  project_target
+)
 
