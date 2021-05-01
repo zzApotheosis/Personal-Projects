@@ -6,18 +6,18 @@
 
 /* Class Structure */
 struct LinkedList;
-struct LinkedList* LinkedListNew(void);
-void LinkedListDestroy(struct LinkedList*);
+struct LinkedList* linkedlist_new(void);
+void linkedlist_destroy(struct LinkedList*);
 
 /* Object Functions */
-void LinkedListAppend(struct LinkedList*, void*);
-void* LinkedListValueAt(struct LinkedList*, int);
+void linkedlist_append(struct LinkedList*, void*);
+void* linkedlist_value_at(struct LinkedList*, int);
 
 /* Setters and Getters */
-void LinkedListSetSize(struct LinkedList*, int);
-void LinkedListSetHead(struct LinkedList*, struct Node*);
-int LinkedListGetSize(struct LinkedList*);
-struct Node* LinkedListGetHead(struct LinkedList*);
+void linkedlist_set_size(struct LinkedList*, int);
+void linkedlist_set_head(struct LinkedList*, struct Node*);
+int linkedlist_get_size(struct LinkedList*);
+struct Node* linkedlist_get_head(struct LinkedList*);
 
 #endif
 

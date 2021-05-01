@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include "linkedlist.h"
 
+/* Forward declare static functions */
+static void LinkedListRecursiveDestroy(struct Node*);
+
 /* Class structure */
 struct LinkedList {
     int size;
@@ -13,17 +16,24 @@ static void LinkedListInit(struct LinkedList* self) {
     self->head = NULL;
 }
 
-struct LinkedList* LinkedListNew() {
+struct LinkedList* linkedlist_new() {
     struct LinkedList* new = (struct LinkedList*) malloc(sizeof(struct LinkedList));
     LinkedListInit(new);
     return new;
 }
 
 static void LinkedListReset(struct LinkedList* self) {
-    // TODO
+    LinkedListRecursiveDestroy(self->head);
 }
 
-void LinkedListDestroy(struct LinkedList* self) {
+static void LinkedListRecursiveDestroy(struct Node* node) {
+    if (node_get_next(node) != NULL) {
+        LinkedListRecursiveDestroy(node_get_next(node));
+    }
+    node_destroy(node);
+}
+
+void linkedlist_destroy(struct LinkedList* self) {
     if (self) {
         LinkedListReset(self);
         free(self);
@@ -31,53 +41,52 @@ void LinkedListDestroy(struct LinkedList* self) {
 }
 
 /* Object Functions */
-void LinkedListAppend(struct LinkedList* self, void* newValue) {
+void linkedlist_append(struct LinkedList* self, void* newValue) {
     struct Node* node;
     int* newKey = (int*) malloc(sizeof(int));
 
-    if (LinkedListGetSize(self) == 0) {
+    if (linkedlist_get_size(self) == 0) {
         *newKey = 0;
-        self->head = NodeNew(newKey, newValue);
+        self->head = node_new(newKey, newValue);
     } else {
         node = self->head;
-        while (NodeGetNext(node) != NULL) {
-            node = NodeGetNext(node);
+        while (node_get_next(node) != NULL) {
+            node = node_get_next(node);
         }
-        *newKey = LinkedListGetSize(self) + 1;
-        NodeSetNext(node, NodeNew(newKey, newValue));
+        *newKey = linkedlist_get_size(self);
+        node_set_next(node, node_new(newKey, newValue));
     }
-    LinkedListSetSize(self, LinkedListGetSize(self) + 1);
+    linkedlist_set_size(self, linkedlist_get_size(self) + 1);
 }
 
-void* LinkedListValueAt(struct LinkedList* self, int index) {
-    if (index >= LinkedListGetSize(self)) {
+void* linkedlist_value_at(struct LinkedList* self, int index) {
+    if (index >= linkedlist_get_size(self)) {
         return NULL;
     }
-    struct Node* node = LinkedListGetHead(self);
+    struct Node* node = linkedlist_get_head(self);
     for (int i = 0; i < index; i++) {
-        node = NodeGetNext(node);
+        node = node_get_next(node);
     }
     if (node != NULL) {
-        return NodeGetValue(node);
+        return node_get_value(node);
     } else {
         return NULL;
     }
 }
 
 /* Setters and Getters */
-void LinkedListSetSize(struct LinkedList* self, int newSize) {
+void linkedlist_set_size(struct LinkedList* self, int newSize) {
     self->size = newSize;
 }
 
-void LinkedListSetHead(struct LinkedList* self, struct Node* newHead) {
+void linkedlist_set_head(struct LinkedList* self, struct Node* newHead) {
     self->head = newHead;
 }
 
-int LinkedListGetSize(struct LinkedList* self) {
+int linkedlist_get_size(struct LinkedList* self) {
     return self->size;
 }
 
-struct Node* LinkedListGetHead(struct LinkedList* self) {
+struct Node* linkedlist_get_head(struct LinkedList* self) {
     return self->head;
 }
-

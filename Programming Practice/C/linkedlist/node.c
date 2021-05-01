@@ -11,26 +11,27 @@ struct Node {
 };
 
 // Constructor
-static void NodeInit(struct Node* self) {
-    self->key = NULL;
-    self->value = NULL;
+static void NodeInit(struct Node* self, void* key, void* value) {
+    self->key = key;
+    self->value = value;
     self->next = NULL;
 }
 
 // Allocation + Constructor
-struct Node* NodeNew(void* key, void* value) {
+struct Node* node_new(void* key, void* value) {
     struct Node* new = (struct Node*) malloc(sizeof(struct Node));
-    NodeInit(new);
+    NodeInit(new, key, value);
     return new;
 }
 
 // Pre-deconstruction
 static void NodeReset(struct Node* self) {
-    // Do nothing
+    free(self->key);
+    free(self->value);
 }
 
 // Deconstructor
-void NodeDestroy(struct Node* self) {
+void node_destroy(struct Node* self) {
     if (self) {
         NodeReset(self);
         free(self);
@@ -41,29 +42,28 @@ void NodeDestroy(struct Node* self) {
 
 /* Begin Setters and Getters */
 
-void NodeSetKey(struct Node* self, void* newKey) {
+void node_set_key(struct Node* self, void* newKey) {
     self->key = newKey;
 }
 
-void NodeSetValue(struct Node* self, void* newValue) {
+void node_set_value(struct Node* self, void* newValue) {
     self->value = newValue;
 }
 
-void NodeSetNext(struct Node* self, struct Node* newNext) {
+void node_set_next(struct Node* self, struct Node* newNext) {
     self->next = newNext;
 }
 
-void* NodeGetKey(struct Node* self) {
+void* node_get_key(struct Node* self) {
     return self->key;
 }
 
-void* NodeGetValue(struct Node* self) {
+void* node_get_value(struct Node* self) {
     return self->value;
 }
 
-struct Node* NodeGetNext(struct Node* self) {
+struct Node* node_get_next(struct Node* self) {
     return self->next;
 }
 
 /* End Setters and Getters */
-
