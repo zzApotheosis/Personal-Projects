@@ -7,7 +7,7 @@ source_files = \
 'main.c',
 'args.c'
 ]
-incdir = ['.']
+#incdir = ['.']
 
-executable('a.out', source_files, include_directories : incdir)
+executable('a.out', source_files)
 

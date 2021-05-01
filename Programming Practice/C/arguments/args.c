@@ -7,6 +7,10 @@ static struct option long_options[] = {
     {"test",    no_argument,    0,  'a' }
 };
 
+static struct ParsedArgs {
+    
+};
+
 void parseArgs(int c, char** v) {
     int opt = 0;
     int long_index = 0;
