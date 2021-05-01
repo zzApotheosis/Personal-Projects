@@ -12,12 +12,10 @@ void linkedlist_destroy(struct LinkedList*);
 /* Object Functions */
 void linkedlist_append(struct LinkedList*, void*);
 void* linkedlist_value_at(struct LinkedList*, int);
+int linkedlist_length(struct LinkedList*);
 
 /* Setters and Getters */
-void linkedlist_set_size(struct LinkedList*, int);
 void linkedlist_set_head(struct LinkedList*, struct Node*);
-int linkedlist_get_size(struct LinkedList*);
 struct Node* linkedlist_get_head(struct LinkedList*);
 
 #endif
-

@@ -43,27 +43,51 @@ void node_destroy(struct Node* self) {
 /* Begin Setters and Getters */
 
 void node_set_key(struct Node* self, void* newKey) {
-    self->key = newKey;
+    if (self == NULL) {
+        return;
+    } else {
+        self->key = newKey;
+    }
 }
 
 void node_set_value(struct Node* self, void* newValue) {
-    self->value = newValue;
+    if (self == NULL) {
+        return;
+    } else {
+        self->value = newValue;
+    }
 }
 
 void node_set_next(struct Node* self, struct Node* newNext) {
-    self->next = newNext;
+    if (self == NULL) {
+        return;
+    } else {
+        self->next = newNext;
+    }
 }
 
 void* node_get_key(struct Node* self) {
-    return self->key;
+    if (self == NULL) {
+        return NULL;
+    } else {
+        return self->key;
+    }
 }
 
 void* node_get_value(struct Node* self) {
-    return self->value;
+    if (self == NULL) {
+        return NULL;
+    } else {
+        return self->value;
+    }
 }
 
 struct Node* node_get_next(struct Node* self) {
-    return self->next;
+    if (self == NULL) {
+        return NULL;
+    } else {
+        return self->next;
+    }
 }
 
 /* End Setters and Getters */
