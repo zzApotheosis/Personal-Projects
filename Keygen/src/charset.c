@@ -18,7 +18,7 @@ const char charset_uc[] = {'A', 'B', 'C', 'D',
                            'U', 'V', 'W', 'X',
                            'Y', 'Z'};
 
-const char charset_nm[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
+const char charset_nm[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
 const char charset_sy[] = {'`', '~', '!', '@',
                            '#', '$', '%', '^',
