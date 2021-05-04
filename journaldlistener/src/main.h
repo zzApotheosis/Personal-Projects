@@ -2,5 +2,7 @@
 #define MAIN_H
 
 /* Includes */
+#include "journald.h"
+#include "unixsocket.h"
 
 #endif

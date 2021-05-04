@@ -6,11 +6,15 @@ project(
 
 # Define project structure
 project_source_files = [
-  'src/main.c'
+  'src/main.c',
+  'src/journald.c',
+  'src/unixsocket.c'
 ]
 
 project_header_files = [
-  'src/main.h'
+  'src/main.h',
+  'src/journald.h',
+  'src/unixsocket.h'
 ]
 
 project_dependencies = [
