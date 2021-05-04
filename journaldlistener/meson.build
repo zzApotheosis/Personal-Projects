@@ -17,7 +17,10 @@ project_header_files = [
   'src/unixsocket.h'
 ]
 
+libsystemd_dep = dependency('libsystemd', method : 'pkg-config')
+
 project_dependencies = [
+  libsystemd_dep
 ]
 
 build_args = [
