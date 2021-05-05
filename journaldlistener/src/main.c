@@ -10,6 +10,7 @@ void sigint_handler(int);
 /* Main */
 int main(int argc, char** argv) {
     signal(SIGINT, sigint_handler);
+    fprintf(stdout, "Hello world, from C!\n");
     unixsocket_example();
     return EXIT_SUCCESS;
 }
@@ -20,4 +21,3 @@ void sigint_handler(int sig) {
     unlink("socket");
     exit(EXIT_SUCCESS);
 }
-
