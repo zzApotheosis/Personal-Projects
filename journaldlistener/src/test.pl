@@ -38,14 +38,16 @@ sub main {
     sleep(1);
 
     # Loop
-    Client::init();
+    # Client::init();
     while (1) {
         chomp($msg = <STDIN>);
         last if $msg eq "EXIT";
+        Client::init();
         Client::send_message($msg);
-        print(STDOUT Client::read_message(length($msg)) . "\n")
+        print(STDOUT Client::read_message(length($msg)) . "\n");
+        Client::stop();
     }
-    Client::stop();
+    # Client::stop();
     kill('SIGINT', $pid);
 
     # End subroutine
