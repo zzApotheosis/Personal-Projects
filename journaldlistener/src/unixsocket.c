@@ -55,13 +55,13 @@ void unixsocket_example() {
 
         // Begin reading from the connection, once read() returns 0 bytes, the connection is closed
         while ((rc = read(c1, buf, sizeof(buf))) > 0) {
-            //fprintf(stdout, "Read %u bytes: %.*s\n", rc, rc, buf);
+            fprintf(stdout, "Read %u bytes: %.*s\n", rc, rc, buf);
 
             // Echo the input back to the client
-            if (write(c1, buf, rc) == -1) {
-                perror("Write error");
-                return;
-            }
+            // if (write(c1, buf, rc) == -1) {
+            //     perror("Write error");
+            //     return;
+            // }
         }
 
         // Check for errors
