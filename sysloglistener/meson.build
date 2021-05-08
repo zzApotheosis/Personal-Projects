@@ -8,7 +8,6 @@ project(
 server_source_files = [
   'src/server.c',
   'src/logger.c',
-  'src/journald.c',
   'src/unixsocket.c',
   'src/jdlutil.c'
 ]
@@ -24,7 +23,6 @@ project_header_files = [
   'src/server.h',
   'src/server.h',
   'src/logger.h',
-  'src/journald.h',
   'src/unixsocket.h',
   'src/jdlutil.h'
 ]
