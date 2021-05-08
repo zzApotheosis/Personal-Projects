@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <signal.h>
-#include "main.h"
+#include "server.h"
 
 /* Forward declarations */
 void sigint_handler(int);

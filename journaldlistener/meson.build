@@ -5,14 +5,23 @@ project(
 )
 
 # Define project structure
-project_source_files = [
-  'src/main.c',
+server_source_files = [
+  'src/server.c',
+  'src/logger.c',
   'src/journald.c',
   'src/unixsocket.c'
 ]
 
+client_source_files = [
+  'src/client.c',
+  'src/logger.c',
+  'src/unixsocket.c'
+]
+
 project_header_files = [
-  'src/main.h',
+  'src/server.h',
+  'src/server.h',
+  'src/logger.h',
   'src/journald.h',
   'src/unixsocket.h'
 ]
@@ -26,9 +35,17 @@ project_dependencies = [
 build_args = [
 ]
 
-# Target
-project_target = executable(
-  meson.project_name(),
-  project_source_files + project_header_files,
+# Server Target
+server_target = executable(
+  'server',
+  server_source_files + project_header_files,
   dependencies : project_dependencies
 )
+
+# Client Target
+client_target = executable(
+  'client',
+  client_source_files + project_header_files,
+  dependencies : project_dependencies
+)
+
