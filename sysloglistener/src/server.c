@@ -10,8 +10,8 @@ void sigint_handler(int);
 /* Main */
 int main(int argc, char** argv) {
     signal(SIGINT, sigint_handler);
-    logger_setup("This is a test");
-    // unixsocket_example();
+    logger_setup("journaldlistener");
+    logger_set_socket("\0journaldlistener");
     return EXIT_SUCCESS;
 }
 

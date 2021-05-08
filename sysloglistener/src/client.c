@@ -3,7 +3,7 @@
 #include "client.h"
 
 int main(int argc, char** argv) {
-    jdlutil_strcpy(NULL, NULL);
+    logger_set_socket("\0journaldlistener");
     return EXIT_SUCCESS;
 }
 
