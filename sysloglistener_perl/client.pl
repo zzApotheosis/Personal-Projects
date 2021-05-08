@@ -41,8 +41,15 @@ use IO::Socket::UNIX;
 # Class fields
 sub test {
     my $client = IO::Socket::UNIX->new(Type => SOCK_STREAM, Peer => "../sysloglistener/S.sysloglistener");
+    my $msg;
+    return if !defined($client);
     $client->autoflush(1);
-    $client->write("THIS IS A BIG OL TEST FROM test.pl");
+    STDOUT->printflush("Connected to Unix socket. Use \"exit\" to end program.\n");
+    while (1) {
+        chomp($msg = <STDIN>);
+        last if $msg eq 'exit';
+        $client->write($msg);
+    }
     $client->shutdown(SHUT_RDWR);
     $client->close();
 }

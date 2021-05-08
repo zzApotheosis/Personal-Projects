@@ -41,12 +41,13 @@ void logger_server_setup(char* new_identifier, char* new_socket) {
         exit(EXIT_FAILURE);
     }
 
-    openlog(new_identifier, LOG_PERROR | LOG_NDELAY, LOG_USER);
+    openlog(logger_identifier, LOG_PERROR | LOG_NDELAY, LOG_USER);
 }
 
 void logger_listen() {
     int c1 = 0;
     int rc = 0;
+    int pid = 0;
     char buf[1024];
 
     if (listen(logger_socket_fd, 5) == -1) {
@@ -60,17 +61,21 @@ void logger_listen() {
             continue;
         }
 
-        while ((rc = read(c1, buf, sizeof(buf))) > 0) {
-            // fprintf(stdout, "Read %u bytes: %.*s\n", rc, rc, buf);
-            // This is where the syslog logic will go
-            syslog(LOG_INFO, "%.*s", rc, buf);
-        }
-
-        if (rc == -1) {
-            perror("Read error");
-            continue;
-        } else if (rc == 0) {
-            close(c1);
+        pid = fork();
+        if (!pid) {
+            while ((rc = read(c1, buf, sizeof(buf))) > 0) {
+                // fprintf(stdout, "Read %u bytes: %.*s\n", rc, rc, buf);
+                // This is where the syslog logic will go
+                syslog(LOG_INFO, "%.*s", rc, buf);
+            }
+    
+            if (rc == -1) {
+                perror("Read error");
+                exit(EXIT_FAILURE);
+            } else if (rc == 0) {
+                close(c1);
+                exit(EXIT_SUCCESS);
+            }
         }
     }
 }

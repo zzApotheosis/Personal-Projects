@@ -12,6 +12,7 @@ void sigint_handler(int);
 int main(int argc, char** argv) {
     /* Define function variables */
     char* project_name = NULL;
+    char* s = NULL;
     
     /* Perform initialization */
     server_init();
@@ -19,9 +20,11 @@ int main(int argc, char** argv) {
     project_name = project_get_name();
     logger_server_setup(project_name, "S.sysloglistener");
     free(project_name);
+    s = logger_get_socket();
     
     /* Begin main loop */
-    fprintf(stdout, "Listening for connections...\n");
+    fprintf(stdout, "Listening for connections on %s...\n", s);
+    free(s);
     logger_listen();
     
     /* Cleanup, shutdown, release memory back to OS, etc. */
