@@ -1,6 +1,6 @@
 # Project structure
 project(
-  'journaldlistener',
+  'sysloglistener',
   'c'
 )
 
@@ -29,10 +29,7 @@ project_header_files = [
   'src/jdlutil.h'
 ]
 
-libsystemd_dep = dependency('libsystemd', method : 'pkg-config')
-
 project_dependencies = [
-  libsystemd_dep
 ]
 
 build_args = [
