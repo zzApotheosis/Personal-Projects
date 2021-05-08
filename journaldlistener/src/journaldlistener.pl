@@ -10,14 +10,18 @@ use FindBin;
 use Cwd;
 use IO::Socket::UNIX;
 use Time::HiRes qw(usleep);
+use Sys::Syslog qw(:standard :macros);
 
 # Global variables
 my $exec_name = "$FindBin::RealScript";
 my $exec_path = "$FindBin::RealBin/$FindBin::RealScript";
 my $exec_dir = "$FindBin::RealBin";
 my $original_cwd = cwd();
-my $listener_socket_exec = "./a.out";
 my $listener_socket = "socket";
+my $identifier = $exec_name; $identifier =~ s/\.[^.]+$//;
+
+# Declare constants;
+my $MAX_BUF_SIZE = 1024;
 
 # Main
 sub main {
@@ -25,19 +29,33 @@ sub main {
     my $exit_code = 0;
     my $pid;
     my $client;
+    my $server;
+    my $conn;
+    my $conn_ctr = 0;
     my $msg;
     my $status = 0;
+
+    # Set up environment
+    if (-S $listener_socket) {
+        unlink($listener_socket);
+    }
 
     # Fork and make child start Unix socket server
     $pid = fork();
 
-    # Branch behavior
+    # Spin up socket listener on concurrent thread
     if (!$pid) {
-        if (! -x $listener_socket_exec && ! -e $listener_socket_exec) {
-            die();
+        openlog($identifier, "nofatal", LOG_USER);
+        $server = IO::Socket::UNIX->new(Type => SOCK_STREAM, Local => $listener_socket, Listen => 1);
+        STDOUT->printflush("Listening for connections on $listener_socket\n");
+        while ($conn = $server->accept()) {
+            $conn_ctr++;
+            $conn->recv($msg, $MAX_BUF_SIZE);
+            syslog(LOG_INFO, $msg);
+            $conn->shutdown(SHUT_RDWR);
+            $conn->close();
         }
-        print(STDOUT "Starting Unix socket listener from Perl\n");
-        exec($listener_socket_exec);
+        return $status;
     }
 
     # Allow time to establish the Unix socket listener
@@ -52,11 +70,11 @@ sub main {
     $status = 0;
 
     # Main Loop
-    print(STDOUT "Begin main loop. Use \"exit\" to end program.\n");
+    STDOUT->printflush("Begin main loop. Use \"exit\" to end program.\n");
     while (1) {
         chomp($msg = <STDIN>);
         last if $msg eq "exit";
-        $client = IO::Socket::UNIX->new(Type => SOCK_STREAM(), Peer => $listener_socket);
+        $client = IO::Socket::UNIX->new(Type => SOCK_STREAM, Peer => $listener_socket);
         $client->send($msg);
         # $client->recv($msg, 100);
         # print(STDOUT $msg . "\n");
@@ -65,7 +83,10 @@ sub main {
     }
 
     # Clean up
-    kill('SIGINT', $pid);
+    kill('SIGKILL', $pid);
+    if (-S $listener_socket) {
+        unlink($listener_socket);
+    }
 
     # End subroutine
     return $exit_code;
@@ -76,4 +97,3 @@ sub main {
 
 # Execute
 exit(Main::main());
-
