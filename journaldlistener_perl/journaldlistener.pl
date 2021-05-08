@@ -45,7 +45,7 @@ sub main {
 
     # Spin up socket listener on concurrent thread
     if (!$pid) {
-        openlog($identifier, "nofatal", LOG_USER);
+        openlog($identifier, "", LOG_USER);
         $server = IO::Socket::UNIX->new(Type => SOCK_STREAM, Local => $listener_socket, Listen => 1);
         STDOUT->printflush("Listening for connections on $listener_socket\n");
         while ($conn = $server->accept()) {
