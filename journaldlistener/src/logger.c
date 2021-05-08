@@ -8,20 +8,9 @@ int syslog_initialized = 0; // Default: False
 char* identifier = NULL;
 
 /* Initialize syslog */
-void logger_setup(const char* new_identifier) {
-    int l = 0; // Count the length of given argument (minus one because the null character isn't counted)
-    char* ptr = new_identifier;
-    while (*ptr != '\0') {
-        l++;
-        ptr++;
-    }
-    identifier = (char*) malloc((l + 1) * sizeof(char));
-
-    // Copy memory into identifier
-    for (int i = 0; i < l + 1; i++) {
-        identifier[i] = new_identifier[i];
-    }
-
+void logger_setup(char* new_identifier) {
+    jdlutil_strcpy(identifier, new_identifier);
+    fprintf(stdout, "%s\n", identifier);
     // Finally, globally declare syslog has been initialized
     syslog_initialized = 1;
 }

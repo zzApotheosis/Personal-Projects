@@ -1,7 +1,12 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
-void logger_setup(const char*);
+/* Includes */
+#include "jdlutil.h"
+
+/* Functions */
+void logger_setup(char*);
 void logger_cleanup(void);
 
 #endif
+

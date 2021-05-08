@@ -3,8 +3,8 @@
 
 /* Includes */
 #include "journald.h"
-#include "unixsocket.h"
 #include "logger.h"
+#include "unixsocket.h"
 #include "jdlutil.h"
 
 #endif

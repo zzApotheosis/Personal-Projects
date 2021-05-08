@@ -10,7 +10,7 @@ void sigint_handler(int);
 /* Main */
 int main(int argc, char** argv) {
     signal(SIGINT, sigint_handler);
-    setup_listener("This is a test");
+    logger_setup("This is a test");
     // unixsocket_example();
     return EXIT_SUCCESS;
 }
