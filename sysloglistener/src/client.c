@@ -3,7 +3,9 @@
 #include "client.h"
 
 int main(int argc, char** argv) {
-    logger_set_socket("\0journaldlistener");
+    char* test = NULL;
+    slutil_strcpy(&test, "test");
+    fprintf(stdout, "test = %s\n", test);
+    free(test);
     return EXIT_SUCCESS;
 }
-

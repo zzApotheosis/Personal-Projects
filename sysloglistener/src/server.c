@@ -10,8 +10,8 @@ void sigint_handler(int);
 /* Main */
 int main(int argc, char** argv) {
     signal(SIGINT, sigint_handler);
-    logger_setup("journaldlistener");
-    logger_set_socket("\0journaldlistener");
+    logger_setup("sysloglistener", "\0S.sysloglistener");
+    logger_set_socket("\0sysloglistener");
     return EXIT_SUCCESS;
 }
 

@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "jdlutil.h"
+#include "slutil.h"
 
 /* Utility function to copy a string into another memory location */
-void jdlutil_strcpy(char* dest, char* src) {
+void slutil_strcpy(char** dest, char* src) {
     // Define function variables
     int l = 1;
     char* ptr = src;
@@ -21,7 +21,10 @@ void jdlutil_strcpy(char* dest, char* src) {
             return;
         }
     }
-    fprintf(stdout, "src = %s\n", src);
-    fprintf(stdout, "src length = %d\n", l);
-}
 
+    // Perform memory copy
+    *dest = (char*) malloc(l * sizeof(char));
+    for (int i = 0; i < l; i++) {
+        (*dest)[i] = src[i];
+    }
+}
