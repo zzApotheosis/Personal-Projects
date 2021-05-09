@@ -24,19 +24,16 @@ my $socket = defined($ENV{'XDG_RUNTIME_DIR'}) ? $ENV{'XDG_RUNTIME_DIR'} . "/S.$i
 sub main {
     # Define subroutine variables
     my $exit_code = 0;
-    
-    STDOUT->printflush($LogUtil::VERSION . "\n");
 
-    LogUtil::send(MESSAGE => "Hello, world!");
-    LogUtil::send(LOG_LEVEL => LOG_NOTICE, MESSAGE => "2B is amazing!");
-    LogUtil::send(LOG_LEVEL => LOG_EMERG, MESSAGE => "FATAL");
+    LogUtil::set_socket($socket);
+    LogUtil::set_identifier($identifier);
+    LogUtil::listen();
+
+    system("./example_subscript.pl");
 
     while (1) {
         my $msg = <STDIN>;
-        if (!defined($msg)) {
-            STDOUT->printflush("Received EOF. Ending $exec_name\n");
-            last;
-        }
+        last if (!defined($msg));
         chomp($msg);
         LogUtil::send(MESSAGE => $msg);
     }

@@ -12,21 +12,18 @@ use IO::Socket::UNIX;
 use Scalar::Util qw(looks_like_number);
 use File::Basename;
 use Time::HiRes qw(usleep);
+use POSIX;
 
 # Static fields
-my $socket = undef;
+my $default_socket = undef;
+my $default_fifo = undef;
+my $default_log_file = undef;
 my $server = undef;
-my $client = undef;
-my $log_file = undef;
 my $identifier = undef;
 my $pid = 0;
 
 # Constants
 use constant MAX_BUF_SIZE => 1024;
-
-# Handle default signals
-$SIG{INT} = \&LogUtil::sigint_handler_client;
-$SIG{TERM} = \&LogUtil::sigint_handler_client;
 
 #
 # listen()
@@ -37,11 +34,18 @@ $SIG{TERM} = \&LogUtil::sigint_handler_client;
 # set_log_file().
 #
 sub listen {
-    # Define subroutine variables
+    # Define subroutine variables and constants
+    my %args;
     my $fh; # File handle
     my $db; # Data Buffer
     my $d; # Data
     my $c; # Connection
+    my $status = EXIT_SUCCESS;
+    use constant SOCKET_ERR => 0b1;
+
+    # Fetch arguments
+    %args = @_;
+    $args{'SOCKET'}
 
     # Check for existing child process
     if ($pid) {
@@ -51,7 +55,7 @@ sub listen {
 
     # Prepare for listener
     unlink($socket);
-    $ENV{'SYSLOG_LISTENER_SOCK'} = $socket;
+    $ENV{'LOGUTIL_SOCK'} = $socket;
 
     # Fork the process to handle listening and logging
     $pid = fork();
@@ -126,7 +130,6 @@ sub reset {
     }
     $socket = undef;
     $server = undef;
-    $client = undef;
     $log_file = undef;
     $identifier = undef;
     $pid = 0;
@@ -146,21 +149,6 @@ sub stop {
 }
 
 #
-# dump()
-#
-# This is a debug subroutine for development purposes only.
-#
-sub dump {
-    STDERR->printflush("Dumping current " . (caller(0))[3] . " fields!\n");
-    STDERR->printflush("socket = $socket\n") if defined($socket);
-    STDERR->printflush("server = $server\n") if defined($server);
-    STDERR->printflush("client = $client\n") if defined($client);
-    STDERR->printflush("log_file = $log_file\n") if defined($log_file);
-    STDERR->printflush("identifier = $identifier\n") if defined($identifier);
-    STDERR->printflush("pid = $pid\n") if defined($pid);
-}
-
-#
 # send()
 #
 # This subroutine is responsible for accepting log data and
@@ -171,75 +159,92 @@ sub dump {
 #   LOG_LEVEL • The log level to use with syslog. Must
 #               be a valid syslog level.
 #   MESSAGE • The message to write to syslog/logfile.
+#   SOCKET • The socket with which to attempt to establish a connection.
+#   LOG_FILE • The path of the log file to write to.
 #
 # Note: Calls to this subroutine must use named arguments,
 #       i.e. Logger::send(LOG_LEVEL => LOG_INFO, MESSAGE =>
 #       "Hello, world");
 #
 sub send {
-    # Define subroutine variables
+    # Define subroutine variables and constants
     my %args;
+    my $client;
     my $fh;
     my $default_log_file = "default.log";
+    my $status = EXIT_SUCCESS;
+    use constant SOCKET_ERROR => 0b01;
+    use constant LOG_FILE_ERROR => 0b10;
 
     # Fetch arguments
-    %args = (
-        LOG_LEVEL => LOG_INFO,
-        MESSAGE   => undef,
-        @_,
-    );
-    chomp(%args);
+    %args = @_;
+    # Default values
+    $args{'LOG_LEVEL'} = defined($args{'LOG_VALUE'}) ? $args{'LOG_VALUE'} : LOG_INFO;
+    $args{'MESSAGE'} = defined($args{'MESSAGE'}) ? $args{'MESSAGE'} : undef;
+    $args{'SOCKET'} = defined($args{'SOCKET'}) ? $args{'SOCKET'} : $socket;
+    $args{'LOG_FILE'} = defined($args{'LOG_FILE'}) ? $args{'LOG_FILE'} : $log_file;
+    foreach my $key (keys(%args)) {
+        if (defined($args{$key})) {
+            chomp($args{$key});
+        }
+    }
 
     # Check if LOG_LEVEL was passed correctly
-    return if (!looks_like_number($args{'LOG_LEVEL'}));
+    return if (!defined($args{'LOG_LEVEL'}) || !looks_like_number($args{'LOG_LEVEL'}));
 
     # Check if message was provided
-    return if (!defined('MESSAGE'));
+    return if (!defined($args{'MESSAGE'}));
 
     # Check if log level is valid
-    if ($args{'LOG_LEVEL'} != LOG_DEBUG &&
+    return if ($args{'LOG_LEVEL'} != LOG_DEBUG &&
         $args{'LOG_LEVEL'} != LOG_INFO &&
         $args{'LOG_LEVEL'} != LOG_NOTICE &&
         $args{'LOG_LEVEL'} != LOG_WARNING &&
         $args{'LOG_LEVEL'} != LOG_ERR &&
         $args{'LOG_LEVEL'} != LOG_CRIT &&
         $args{'LOG_LEVEL'} != LOG_ALERT &&
-        $args{'LOG_LEVEL'} != LOG_EMERG) {
-        return;
-    }
+        $args{'LOG_LEVEL'} != LOG_EMERG);
 
     # If a log file is defined, append to it
-    if (defined($log_file)) {
-        if (-w dirname($log_file)) {
-            open($fh, '>>', $log_file) or warn($!);
-            print($fh localtime() . " • " . LogUtil::loglevel_to_bareword($args{'LOG_LEVEL'}) . " • " . $args{'MESSAGE'} . "\n");
-            close($fh);
+    if (defined($args{'LOG_FILE'})) {
+        if (-w dirname($args{'LOG_FILE'})) {
+            if (open($fh, '>>', $args{'LOG_FILE'})) {
+                print($fh localtime() . " • " . LogUtil::loglevel_to_bareword($args{'LOG_LEVEL'}) . " • " . $args{'MESSAGE'} . "\n");
+                close($fh);
+            } else {
+                warn($!);
+                $status |= LOG_FILE_ERROR;
+            }
         } else {
-            STDERR->printflush((caller(0))[3] . " - Unable to write to $log_file\n");
+            STDERR->printflush((caller(0))[3] . " - Unable to write to " . $args{'LOG_FILE'} . "\n");
+            $status |= LOG_FILE_ERROR;
         }
     }
 
-    # Check if child process is listening
-    if ($pid) {
-        $client = IO::Socket::UNIX->new(Type => SOCK_STREAM, Peer => $socket);
-        if (!defined($client)) {
-            STDERR->printflush((caller(0))[3] .  " - Unable to connect to $socket\n");
-            return;
+    # Try to connect to socket
+    if (defined($args{'SOCKET'})) {
+        if (defined($client = IO::Socket::UNIX->new(Type => SOCK_STREAM, Peer => $args{'SOCKET'}))) {
+            $client->autoflush(1);
+            $client->send($args{'LOG_LEVEL'} . "\n");
+            $client->send($args{'MESSAGE'});
+            $client->shutdown(SHUT_RDWR);
+            $client->close();
+            $client = undef;
+        } else {
+            STDERR->printflush((caller(0))[3] .  " - Unable to connect to " . $args{'SOCKET'} . "\n");
+            $status |= SOCKET_ERROR;
         }
-        $client->autoflush(1);
-        $client->send($args{'LOG_LEVEL'} . "\n");
-        $client->send($args{'MESSAGE'});
-        $client->shutdown(SHUT_RDWR);
-        $client->close();
-        $client = undef;
     }
 
     # Check if neither a server socket or log file are used
-    if (!defined($log_file) && !$pid) {
+    if (!defined($args{'LOG_FILE'}) && (!defined($args{'SOCKET'}))) {
         STDERR->printflush((caller(0))[3] . " - No log destinations are configured. Sending subsequent messages to $default_log_file\n");
         LogUtil::set_log_file($default_log_file);
-        LogUtil::send(%args);
+        return LogUtil::send(LOG_LEVEL => $args{'LOG_LEVEL'}, MESSAGE => $args{'MESSAGE'});
     }
+
+    # Return send() status
+    return $status;
 }
 
 #
@@ -281,32 +286,20 @@ sub loglevel_to_bareword {
 sub sigint_handler_server {
     $server->shutdown(SHUT_RDWR) if (defined($server));
     $server->close() if (defined($server));
-    exit(0);
-}
-
-#
-# sigint_handler_client()
-#
-# This subroutine handles the SIGTERM signal for the parent process.
-#
-sub sigint_handler_client {
-    $client->shutdown(SHUT_RDWR) if (defined($client));
-    $client->close() if (defined($client));
-    kill('SIGTERM', $pid) if ($pid);
-    exit(0);
+    exit(EXIT_SUCCESS);
 }
 
 #
 # Setters and getters
 #
-sub set_socket {$socket = defined($_[0]) ? $_[0] : $socket;}
-sub get_socket {return $socket;}
+sub set_default_socket {$default_socket = defined($_[0]) ? $_[0] : $default_socket;}
+sub get_default_socket {return $default_socket;}
+sub set_default_fifo {$default_fifo = defined($_[0]) ? $_[0] : $default_fifo;}
+sub get_default_fifo {return $default_fifo;}
+sub set_default_log_file {$default_log_file = defined($_[0]) ? $_[0] : $default_log_file;}
+sub get_default_log_file {return $default_log_file;}
 sub set_server {$server = defined($_[0]) ? $_[0] : $server;}
 sub get_server {return $server;}
-sub set_client {$client = defined($_[0]) ? $_[0] : $client;}
-sub get_client {return $client;}
-sub set_log_file {$log_file = defined($_[0]) ? $_[0] : $log_file;}
-sub get_log_file {return $log_file;}
 sub set_identifier {$identifier = defined($_[0]) ? $_[0] : $identifier;}
 sub get_identifier {return $identifier;}
 
