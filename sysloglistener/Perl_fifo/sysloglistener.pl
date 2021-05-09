@@ -30,7 +30,7 @@ sub main {
 
     # Test the logger module
     Logger::set_fifo($fifo);
-    Logger::set_log_file($identifier . ".log");
+    #    Logger::set_log_file($identifier . ".log");
     Logger::set_identifier($identifier);
     Logger::listen();
 
