@@ -17,8 +17,8 @@ my $exec_name = "$FindBin::RealScript";
 my $exec_path = "$FindBin::RealBin/$FindBin::RealScript";
 my $exec_dir = "$FindBin::RealBin";
 my $original_cwd = cwd();
-my $listener_socket = "socket";
 my $identifier = $exec_name; $identifier =~ s/\.[^.]+$//;
+my $listener_socket = defined($ENV{'XDG_RUNTIME_DIR'}) ? $ENV{'XDG_RUNTIME_DIR'} . "/S.$identifier" : "S.$identifier";
 
 # Declare constants;
 my $MAX_BUF_SIZE = 1024;
@@ -34,7 +34,7 @@ sub main {
     my $conn_ctr = 0;
     my $msg;
     my $status = 0;
-
+    
     # Set up environment
     if (-S $listener_socket) {
         unlink($listener_socket);
@@ -50,10 +50,13 @@ sub main {
         STDOUT->printflush("Listening for connections on $listener_socket\n");
         while ($conn = $server->accept()) {
             $conn_ctr++;
-            $conn->recv($msg, $MAX_BUF_SIZE);
-            syslog(LOG_INFO, $msg);
-            $conn->shutdown(SHUT_RDWR);
-            $conn->close();
+            $pid = fork();
+            if (!$pid) {
+                $conn->recv($msg, $MAX_BUF_SIZE);
+                syslog(LOG_INFO, $msg);
+                $conn->shutdown(SHUT_RDWR);
+                $conn->close();
+            }
         }
         return $status;
     }
