@@ -19,26 +19,19 @@ my $exec_dir = "$FindBin::RealBin";
 my $original_cwd = cwd();
 my $identifier = $exec_name; $identifier =~ s/\.[^.]*$//;
 my $socket = defined($ENV{'XDG_RUNTIME_DIR'}) ? $ENV{'XDG_RUNTIME_DIR'} . "/S.$identifier" : "$exec_dir/S.$identifier";
+my $fifo = defined($ENV{'XDG_RUNTIME_DIR'}) ? $ENV{'XDG_RUNTIME_DIR'} . "fifo.$identifier" : "$exec_dir/fifo.$identifier";
 
 # Main subroutine
 sub main {
     # Define subroutine variables
     my $exit_code = 0;
+    my $logutil = new LogUtil();
+    # $logutil->set_socket($socket);
+    $logutil->set_fifo($fifo);
+    $logutil->set_identifier($identifier);
+    $logutil->listen();
 
-    LogUtil::set_socket($socket);
-    LogUtil::set_identifier($identifier);
-    LogUtil::listen();
-
-    system("./example_subscript.pl");
-
-    while (1) {
-        my $msg = <STDIN>;
-        last if (!defined($msg));
-        chomp($msg);
-        LogUtil::send(MESSAGE => $msg);
-    }
-
-    LogUtil::reset();
+    $logutil->send(message => 'TEST MESSAGE');
 
     # End main subroutine
     return $exit_code;
