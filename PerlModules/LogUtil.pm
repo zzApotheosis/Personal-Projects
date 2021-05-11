@@ -24,8 +24,6 @@ my $default_identifier = undef;
 
 # Constants
 use constant MAX_BUF_SIZE => 1024;
-use constant UNIX_SOCKET_TYPE => 'socket';
-use constant FIFO_TYPE => 'fifo';
 use constant UNDEFINED_IDENTIFIER => 'undefined_identifier';
 use constant DEFAULT_LOG_FILE     => 'default.log';
 use constant LOG_FILE_ERR   => 0b00001;
