@@ -4,6 +4,16 @@ package LogUtil;
 # Class information
 our $VERSION = "0.2.0-20210510";
 
+# Constants
+use constant MAX_BUF_SIZE => 1024;
+use constant UNDEFINED_IDENTIFIER => 'undefined_identifier';
+use constant DEFAULT_LOG_FILE     => 'default.log';
+use constant LOG_FILE_ERR   => 0b00001;
+use constant LOG_LEVEL_ERR  => 0b00010;
+use constant FIFO_ERR       => 0b00100;
+use constant SOCKET_ERR     => 0b01000;
+use constant IDENTIFIER_ERR => 0b10000;
+
 # Imports
 use strict;
 use warnings;
@@ -15,22 +25,12 @@ use Time::HiRes qw(usleep);
 use POSIX;
 
 # Static fields
-my $default_log_file = "default.log";
+my $default_log_file = LogUtil::DEFAULT_LOG_FILE;
 my $default_log_level = LOG_INFO;
 my $default_fifo = undef;
 my $default_fifo_mode = 0700;
 my $default_socket = undef;
 my $default_identifier = undef;
-
-# Constants
-use constant MAX_BUF_SIZE => 1024;
-use constant UNDEFINED_IDENTIFIER => 'undefined_identifier';
-use constant DEFAULT_LOG_FILE     => 'default.log';
-use constant LOG_FILE_ERR   => 0b00001;
-use constant LOG_LEVEL_ERR  => 0b00010;
-use constant FIFO_ERR       => 0b00100;
-use constant SOCKET_ERR     => 0b01000;
-use constant IDENTIFIER_ERR => 0b10000;
 
 #
 # set_default_log_file()
@@ -166,14 +166,14 @@ sub loglevel_to_bareword {
     ($ll) = @_;
 
     # Match LOG_LEVEL
-    return "LOG_EMERG"   if ($ll == 0);
-    return "LOG_ALERT"   if ($ll == 1);
-    return "LOG_CRIT"    if ($ll == 2);
-    return "LOG_ERR"     if ($ll == 3);
-    return "LOG_WARNING" if ($ll == 4);
-    return "LOG_NOTICE"  if ($ll == 5);
-    return "LOG_INFO"    if ($ll == 6);
-    return "LOG_DEBUG"   if ($ll == 7);
+    return "LOG_EMERG"   if ($ll == LOG_EMERG);
+    return "LOG_ALERT"   if ($ll == LOG_ALERT);
+    return "LOG_CRIT"    if ($ll == LOG_CRIT);
+    return "LOG_ERR"     if ($ll == LOG_ERR);
+    return "LOG_WARNING" if ($ll == LOG_WARNING);
+    return "LOG_NOTICE"  if ($ll == LOG_NOTICE);
+    return "LOG_INFO"    if ($ll == LOG_INFO);
+    return "LOG_DEBUG"   if ($ll == LOG_DEBUG);
     return undef;
 }
 
@@ -351,6 +351,7 @@ sub listen {
             } else {
                 STDERR->printflush((caller(0))[3] . " - Error trying to establish fifo listener: Cannot write to fifo/syslog without an identifier\n");
                 $status |= FIFO_ERR;
+                $status |= IDENTIFIER_ERR;
             }
         } else {
             STDERR->printflush((caller(0))[3] . " - Cannot use null characters in fifo name. Perl isn't cool like C\n");
@@ -414,6 +415,7 @@ sub listen {
             } else {
                 STDERR->printflush((caller(0))[3] . " - Error trying to establish socket listener: Cannot write to socket/syslog without an identifier\n");
                 $status |= SOCKET_ERR;
+                $status |= IDENTIFIER_ERR;
             }
         } else {
             STDERR->printflush((caller(0))[3] . " - Cannot use null characters in socket name. Perl isn't cool like C\n");
