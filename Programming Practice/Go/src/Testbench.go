@@ -7,11 +7,8 @@
 package main
 
 import (
-	_ "bufio"
 	"fmt"
 	"net"
-	_ "os"
-	_ "time"
 	"flag"
 )
 
