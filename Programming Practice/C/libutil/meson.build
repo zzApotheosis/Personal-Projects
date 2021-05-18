@@ -6,7 +6,8 @@ project(
 
 # Define project structure
 project_source_files = [
-  'util.c'
+  'src/util.c',
+  'src/string.c'
 ]
 
 project_headers = [
