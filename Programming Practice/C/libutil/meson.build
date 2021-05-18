@@ -1,6 +1,6 @@
 # Project declaration
 project(
-  'libutil',
+  'util',
   'c'
 )
 
@@ -32,7 +32,7 @@ libutil_so_version = '@0@.@1@.@2@'.format((libutil_lt_c - libutil_lt_a), libutil
 
 libutil_shared = shared_library(
   meson.project_name(),
-  project_source_files,
+  project_source_files + project_headers,
   version : libutil_so_version
 )
 

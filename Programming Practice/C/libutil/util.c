@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include "include/util.h"
 
 int* intToHeap(int i) {
     int* ptr = (int*) malloc(sizeof(int));
