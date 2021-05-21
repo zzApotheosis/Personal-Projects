@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "linkedlist.h"
+#include "include/util.h"
 
 /* Forward declare static functions */
 static void LinkedListRecursiveDestroy(struct Node*);

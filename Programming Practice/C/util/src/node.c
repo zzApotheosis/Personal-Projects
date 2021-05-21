@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "node.h"
+#include "include/util.h"
 
 /* Begin Class Structure */
 

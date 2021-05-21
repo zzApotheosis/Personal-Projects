@@ -6,10 +6,11 @@ int main(int argc, char** argv) {
     //*(int*)NULL = 1;
     struct LinkedList* list = NULL;
     list = linkedlist_new();
-    linkedlist_append(list, intToHeap(1337));
+    linkedlist_append(list, util_int_to_heap(1337));
 
     fprintf(stdout, "List length: %d\n", linkedlist_length(list));
     linkedlist_destroy(list);
 
     return EXIT_SUCCESS;
 }
+

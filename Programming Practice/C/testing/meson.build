@@ -1,6 +1,6 @@
 # Project structure
 project(
-  'linkedlist',
+  'mytest',
   'c'
 )
 
@@ -8,10 +8,6 @@ project(
 project_source_files = [
   'src/main.c',
   'src/main.h',
-  'src/linkedlist.c',
-  'src/linkedlist.h',
-  'src/node.c',
-  'src/node.h'
 ]
 
 project_dependencies = [
@@ -29,7 +25,7 @@ project_target = executable(
 )
 
 test(
-  'basic',
+  'mytest',
   project_target
 )
 
