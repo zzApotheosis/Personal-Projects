@@ -1,5 +1,5 @@
 obj-m += lkm.o
-#obj-m += lkm2.o
+obj-m += lkm2.o
 
 all:
 	make -C /lib/modules/`uname -r`/build M="$(PWD)" modules
