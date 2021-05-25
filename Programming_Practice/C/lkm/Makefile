@@ -1,11 +1,13 @@
 obj-m += lkm.o
 obj-m += lkm2.o
 
-all:
-	make -C /lib/modules/`uname -r`/build M="$(PWD)" modules
+all: clean modules
 
 clean:
 	make -C /lib/modules/`uname -r`/build M="$(PWD)" clean
+
+modules:
+	make -C /lib/modules/`uname -r`/build M="$(PWD)" modules
 
 test:
 	-sudo rmmod lkm
