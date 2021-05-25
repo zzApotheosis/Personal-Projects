@@ -7,7 +7,7 @@
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Steven C. Jennings");
 MODULE_DESCRIPTION("A simple Linux module example.");
-MODULE_VERSION(0.01);""
+MODULE_VERSION("0.01");
 
 #define DEVICE_NAME "lkm2"
 #define EXAMPLE_MSG "Hello, World!\n"
