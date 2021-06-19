@@ -8,7 +8,7 @@ use lettre_email::EmailBuilder;
 fn main() {
     let to_address = "zzApotheosis@gmail.com";
     let user = "zzApotheosis@gmail.com";
-    let password = "uxbolweeegnixznw";
+    let password = "tgacfijbmtjaayip";
     let subject = "Hello Rust!";
     let body = "Hello Rust! Big ligma!";
     let smtp_address = "smtp.gmail.com";
@@ -31,4 +31,5 @@ fn main() {
 
     let _result = client.send(email);
 }
+
 
