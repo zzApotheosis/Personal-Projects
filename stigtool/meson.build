@@ -17,7 +17,10 @@ project_header_files = [
   'src/stigtool.h'
 ]
 
+# Dependencies
+gtkdep = dependency('gtk4')
 project_dependencies = [
+  gtkdep
 ]
 
 build_args = [
