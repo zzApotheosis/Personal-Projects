@@ -1,12 +1,12 @@
 # Project structure
 project(
-  'stigtool',
+  'stigme',
   'c'
 )
 
 # Define project structure
 project_source_files = [
-  'src/stigtool.c'
+  'src/stigme.c'
 ]
 
 test_source_files = [
@@ -14,7 +14,7 @@ test_source_files = [
 ]
 
 project_header_files = [
-  'src/stigtool.h'
+  'src/stigme.h'
 ]
 
 # Dependencies
@@ -28,7 +28,7 @@ build_args = [
 
 # Project Target
 project_target = executable(
-  'stigtool',
+  'stigme',
   project_source_files + project_header_files,
   dependencies : project_dependencies
 )
