@@ -2,10 +2,10 @@
 package HashUtil;
 
 # Class information
-our $VERSION = "0.0.1-20210819";
+our $VERSION = "0.0.1-20210823";
 
 # Constants
-use constant DEFAULT_ALGO => 256;
+use constant DEFAULT_ALGO => 'sha256';
 
 # Imports
 use strict;
@@ -57,11 +57,13 @@ sub new {
     %args = @_;
     $args{algo} = defined($args{algo}) ? $args{algo} : HashUtil::get_default_algo();
     $args{data} = defined($args{data}) ? $args{data} : undef;
+    $args{file_list_ref} = defined($args{file_list_ref}) ? $args{file_list_ref} : [];
     
     # Initialize object
     $self = {
         _algo => $args{algo},
         _data => $args{data},
+        _file_list_ref => $args{file_list_ref},
     };
 
     # Instantiate object
@@ -72,7 +74,7 @@ sub new {
 }
 
 #
-# hash_walk(algo => $algo, basedir => $basedir)
+# walk(algo => $algo, basedir => $basedir)
 #
 # This subroutine will walk a target directory and its subdirectories and create a JSON-encoded
 # digest list of every file in the target directory and its subdirectories.
@@ -172,6 +174,9 @@ sub write_data {
 #
 # read_data(infile => $infile)
 #
+# This subroutine will read a given file and attempt to decode it as a JSON. If the decoding
+# succeeds, this subroutine adds the JSON data to this object's data attribute.
+#
 # Args:
 #   $infile • The input JSON file to read
 #             This JSON file must contain two keys: sha_algorithm, digests
@@ -218,6 +223,122 @@ sub read_data {
 }
 
 #
+# export_data()
+#
+# This subroutine will read the current object's data attribute, decode the JSON data,
+# and return the hash reference.
+#
+sub export_data {
+    # Define subroutine variables
+    my $self = shift(@_);
+    my $hash_ref;
+    
+    # Check if data is defined
+    if (!defined($self->get_data())) {
+        return undef;
+    }
+    
+    # Decode the data
+    $hash_ref = decode_json($self->get_data());
+
+    # Return it
+    return(%{$hash_ref});
+}
+
+#
+# add_file(@_)
+#
+# This subroutine will add the given list of files to this object's internal file list array.
+#
+# Args:
+#   @_ • An arbitrarily long list of files to add to the internal file list array
+#
+sub add_file {
+    # Define subroutine variables
+    my $self = shift(@_);
+    
+    # Check for arguments
+    if (!scalar(@_)) {
+        return;
+    }
+
+    # Check if the file list ref is undefined
+    if (!defined($self->get_file_list_ref())) {
+        $self->set_file_list_ref([]);
+    }
+
+    # Add the arguments to this object's file list
+    foreach (@_) {
+        push(@{$self->get_file_list_ref()}, $_);
+    }
+}
+
+#
+# digest(algo => $algo)
+#
+# This subroutine will loop through all the known files in the internal file list array
+# and compute their digest. The hash algorithm may be overridden by using the $algo argument.
+# If it is not provided, this subroutine will default to the current object's defined algorithm.
+# If all else fails, the class default algorithm is used.
+#
+# Args:
+#   $algo • The SHA algorithm to use. If not specified, defaults to the object's current recorded algorithm
+#
+sub digest {
+    # Define subroutine variables
+    my $self = shift(@_);
+    my %args;
+    my $sha;
+    my %digests;
+    my %data;
+    my $json;
+    
+    # Fetch arguments
+    %args = @_;
+    $args{algo} = defined($args{algo}) ? $args{algo} : $self->get_algo();
+    
+    # Check if the selected algorithm is defined
+    if (!defined($args{algo})) {
+        $args{algo} = HashUtil::get_default_algo();
+    }
+    
+    # Loop through all current files
+    for (my $i = 0; $i < scalar(@{$self->get_file_list_ref()}); $i++) {
+        $sha = Digest::SHA->new($args{algo});
+        if ($sha->addfile(${$self->get_file_list_ref()}[$i])) {
+            $digests{${$self->get_file_list_ref()}[$i]} = $sha->hexdigest();
+        } else {
+            warn($!);
+        }
+    }
+    
+    # Record the data for the JSON
+    $data{sha_algorithm} = $args{algo};
+    $data{digests} = \%digests;
+    
+    # Create a JSON from the data
+    $json = encode_json(\%data);
+
+    # Set the data field
+    $self->set_data($json);
+}
+
+#
+# clear()
+#
+# This subroutine clears the file list array and the data attribute for a fresh start
+#
+sub clear {
+    # Define subroutine variables
+    my $self = shift(@_);
+    
+    # Reset
+    $self->set_algo(HashUtil::get_default_algo());
+    $self->set_data(undef);
+    $self->set_file_list_ref([]);
+}
+
+#
 # Setters and getters
 #
 sub set_algo {
@@ -230,12 +351,21 @@ sub set_data {
     $_[0]->{_data} = $_[1];
 }
 
+sub set_file_list_ref {
+    return if (!defined($_[0]) && !defined($_[1]));
+    $_[0]->{_file_list_ref} = $_[1];
+}
+
 sub get_algo {
     return $_[0]->{_algo} if defined($_[0]);
 }
 
 sub get_data {
     return $_[0]->{_data} if defined($_[0]);
+}
+
+sub get_file_list_ref {
+    return $_[0]->{_file_list_ref} if defined($_[0]);
 }
 
 # End HashUtil Class
