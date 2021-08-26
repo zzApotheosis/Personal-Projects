@@ -2,7 +2,7 @@
 package HashUtil;
 
 # Class information
-our $VERSION = "0.0.1-20210823";
+our $VERSION = "0.0.1-20210825";
 
 # Constants
 use constant DEFAULT_ALGO => 'sha256';
@@ -16,6 +16,8 @@ use File::Basename;
 use Digest::SHA;
 use JSON;
 use File::Find;
+use Term::ANSIColor;
+use IO::File;
 
 # Static fields
 my $default_algo = HashUtil::DEFAULT_ALGO;
@@ -55,9 +57,9 @@ sub new {
 
     # Fetch args
     %args = @_;
-    $args{algo} = defined($args{algo}) ? $args{algo} : HashUtil::get_default_algo();
-    $args{data} = defined($args{data}) ? $args{data} : undef;
-    $args{file_list_ref} = defined($args{file_list_ref}) ? $args{file_list_ref} : [];
+    $args{algo} = HashUtil::get_default_algo() if !defined($args{algo});
+    $args{data} = undef if !defined($args{data});
+    $args{file_list_ref} = [] if !defined($args{file_list_ref});
     
     # Initialize object
     $self = {
@@ -91,36 +93,49 @@ sub hash_walk {
     my $json;
     my $base_dir;
     my $find_func;
+    my %find_opts;
     my %data;
     my %digests;
 
     # Fetch arguments
     %args = @_;
-    $args{algo} = defined($args{algo}) ? $args{algo} : $self->get_algo();
-    $args{basedir} = defined($args{basedir}) ? $args{basedir} : getcwd();
+    $args{algo} = $self->get_algo() if !defined($args{algo});
+    $args{basedir} = getcwd() if !defined($args{basedir});
     
     # Define a subroutine for the find() function to use
     $find_func = sub {
         # Define subroutine variables
         my $digest;
         my $sha;
+        my $fh = IO::File->new();
         
         # Skip if it's a directory
         return if (-d $_);
         
+        # Announce this iteration
         STDOUT->printflush("Processing $File::Find::name\n");
-        # Initialize SHA object
-        $sha = Digest::SHA->new($args{algo});
         
-        # Compute the digest of the given file
-        $sha->addfile($File::Find::name);
-        $digest = $sha->hexdigest();
-        $digests{$File::Find::name} = $digest;
+        # Open the file for reading
+        if ($fh->open("$File::Find::name", 'r')) {
+            # Initialize SHA object
+            $sha = Digest::SHA->new($args{algo});
+            
+            # Compute the digest of the given file
+            $sha->addfile($fh);
+            $digest = $sha->hexdigest();
+            $digests{$File::Find::name} = $digest;
+
+            # Close filehandle
+            $fh->close();
+        } else {
+            warn($!);
+        }
     };
 
     # Walk the basedir
     chdir($args{basedir});
-    find($find_func, ".");
+    %find_opts = (no_chdir => 1, wanted => $find_func);
+    find(\%find_opts, ".");
     chdir($initial_cwd);
     
     # Record the data for the JSON
@@ -153,7 +168,6 @@ sub write_data {
     
     # Fetch arguments
     %args = @_;
-    $args{outfile} = defined($args{outfile}) ? $args{outfile} : undef;
     
     # Check if there's any data to write at all
     if (!defined($self->get_data)) {
@@ -197,7 +211,6 @@ sub read_data {
 
     # Fetch arguments
     %args = @_;
-    $args{infile} = defined($args{infile}) ? $args{infile} : undef;
     
     # Check for infile
     if (!defined($args{infile})) {
@@ -295,7 +308,7 @@ sub digest {
     
     # Fetch arguments
     %args = @_;
-    $args{algo} = defined($args{algo}) ? $args{algo} : $self->get_algo();
+    $args{algo} = $self->get_algo() if !defined($args{algo});
     
     # Check if the selected algorithm is defined
     if (!defined($args{algo})) {
@@ -336,6 +349,112 @@ sub clear {
     $self->set_algo(HashUtil::get_default_algo());
     $self->set_data(undef);
     $self->set_file_list_ref([]);
+}
+
+#
+# verify()
+#
+# This subroutine verifies the current data in memory against the real files on the filesystem.
+#
+# NOTE: This subroutine assumes that all files referenced in the data in memory exist relative
+# to the current working directory. I.E. if there is a digest in memory whose file exists at
+# "./path/to/file.txt", then the real file is expected to exist at "./path/to/file.txt". To be
+# safe, use chdir() to the dirname of the JSON file before calling this subroutine.
+#
+# Args:
+#   $basedir • The directory to chdir()
+#
+sub verify {
+    # Define subroutine variables
+    my $self = shift(@_);
+    my %args;
+    my $initial_cwd = getcwd();
+    my %data;
+    my %digests;
+    my $sha;
+    my $algo;
+    my @file_list;
+    my $computed_digest; # Computed from the filesystem
+    my @verified_files;
+    my @fh_errors;
+    my @missing_files;
+    my @mismatch_list;
+    my $fh = IO::File->new();
+    
+    # Fetch arguments
+    %args = @_;
+    $args{basedir} = getcwd() if !defined($args{basedir});
+    
+    # Check if there is any data to work with
+    if (!defined($self->get_data())) {
+        warn("Data undefined");
+        return;
+    }
+    
+    # Check if the basedir exists
+    if (! -d $args{basedir}) {
+        warn($!);
+        return;
+    }
+    
+    # Change to the basedir
+    chdir($args{basedir});
+    
+    # Parse JSON data
+    %data = %{decode_json($self->get_data())};
+    %digests = %{$data{digests}};
+    $algo = $data{sha_algorithm};
+    @file_list = sort(keys(%digests));
+    
+    # Loop through all digests and compare them
+    STDOUT->printflush("********** Verifying Data Integrity ***********\n");
+    for (my $i = 0; $i < scalar(@file_list); $i++) {
+        STDOUT->printflush("* " . color('blue') . "$file_list[$i]" . color('reset') . " ... ");
+        if (! -e $file_list[$i]) {
+            STDOUT->printflush(color('yellow') . "Missing\n" . color('reset'));
+            push(@missing_files, $file_list[$i]);
+            next;
+        }
+        $sha = Digest::SHA->new($algo);
+        if ($fh->open($file_list[$i], 'r')) {
+            $sha->addfile($fh);
+            $computed_digest = $sha->hexdigest();
+            if ($computed_digest eq $digests{$file_list[$i]}) {
+                STDOUT->printflush(color('green') . "Verified\n" . color('reset'));
+                push(@verified_files, $file_list[$i]);
+            } else {
+                STDOUT->printflush(color('red') . "Mismatch\n" . color('reset'));
+                push(@mismatch_list, $file_list[$i]);
+            }
+            $fh->close();
+        } else {
+            STDOUT->printflush(color('red') . "$!\n" . color('reset'));
+            push(@fh_errors, $file_list[$i]);
+        }
+    }
+    STDOUT->printflush("***********************************************\n");
+    STDOUT->printflush("\n");
+    
+    # Change back to initial cwd
+    chdir($initial_cwd);
+    
+    # Print results
+    STDOUT->printflush("***** Data Integrity Verification Results *****\n");
+    STDOUT->printflush("* Total files processed: " . color('blue') . scalar(@file_list) . color('reset') . "\n");
+    STDOUT->printflush("* Files successfully verified: " . color('green') . scalar(@verified_files) . "\n" . color('reset'));
+    STDOUT->printflush("* Missing files: " . (scalar(@missing_files) ? color('yellow') : color('green')) . scalar(@missing_files) . "\n" . color('reset'));
+    foreach (@missing_files) {
+        STDOUT->printflush("* " . color('yellow') . "$_\n" . color('reset'));
+    }
+    STDOUT->printflush("* Files with mismatches: " . (scalar(@mismatch_list) ? color('red') : color('green')) . scalar(@mismatch_list) . "\n" . color('reset'));
+    foreach (@mismatch_list) {
+        STDOUT->printflush("* " . color('red') . "$_\n" . color('reset'));
+    }
+    STDOUT->printflush("* Filehandle errors: " . (scalar(@fh_errors) ? color('red') : color('green')) . scalar(@fh_errors) . "\n" . color('reset'));
+    foreach (@fh_errors) {
+        STDOUT->printflush("* " . color('red') . "$_\n" . color('reset'));
+    }
+    STDOUT->printflush("***********************************************\n");
 }
 
 #
