@@ -440,6 +440,8 @@ sub verify {
     
     # Print results
     STDOUT->printflush("***** Data Integrity Verification Results *****\n");
+    STDOUT->printflush("* Base directory: " . color('blue') . $args{basedir} . "\n" . color('reset'));
+    STDOUT->printflush("* Cryptographic hash function: " . color('blue') . $algo . "\n" . color('reset'));
     STDOUT->printflush("* Total files processed: " . color('blue') . scalar(@file_list) . color('reset') . "\n");
     STDOUT->printflush("* Files successfully verified: " . color('green') . scalar(@verified_files) . "\n" . color('reset'));
     STDOUT->printflush("* Missing files: " . (scalar(@missing_files) ? color('yellow') : color('green')) . scalar(@missing_files) . "\n" . color('reset'));
