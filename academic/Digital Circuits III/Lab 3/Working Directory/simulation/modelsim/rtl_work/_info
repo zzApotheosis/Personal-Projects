@@ -1,0 +1,45 @@
+m255
+K3
+13
+cModel Technology
+Z0 dE:\Digital Circuits III\Lab 3\Working Directory\simulation\modelsim
+vsev_seg_decoder
+!i10b 1
+!s100 GFzmR>V;k4aBj_<Z8f0Pd3
+I6P`lMU:@4nX>4XozY51ja0
+Vk8OFaFFzQ?hf;k:1Jk[n71
+Z1 dE:\Digital Circuits III\Lab 3\Working Directory\simulation\modelsim
+Z2 w1489120317
+Z3 8E:/Digital Circuits III/Lab 3/Working Directory/sev_seg_decoder.v
+Z4 FE:/Digital Circuits III/Lab 3/Working Directory/sev_seg_decoder.v
+L0 9
+Z5 OV;L;10.1d;51
+r1
+!s85 0
+31
+Z6 !s108 1489120358.044000
+Z7 !s107 E:/Digital Circuits III/Lab 3/Working Directory/sev_seg_decoder.v|
+Z8 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+E:/Digital Circuits III/Lab 3/Working Directory|E:/Digital Circuits III/Lab 3/Working Directory/sev_seg_decoder.v|
+!s101 -O0
+Z9 o-vlog01compat -work work -O0
+Z10 !s92 -vlog01compat -work work {+incdir+E:/Digital Circuits III/Lab 3/Working Directory} -O0
+vstimulus_seven_seg
+!i10b 1
+!s100 ;WzBT@SaHB0SGa2>K<J0^0
+IY6RzJBhG3MoEN7FD6KcAg3
+V<73FUHh2?PD3aAID?c@M30
+R1
+R2
+R3
+R4
+L0 42
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!s101 -O0
+R9
+R10

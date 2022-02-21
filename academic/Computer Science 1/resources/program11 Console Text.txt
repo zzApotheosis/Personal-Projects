@@ -1,0 +1,28 @@
+This program calculates the sum and average
+of the entries in an ArrayList.
+Author: Steven Jennings
+
+Enter an integer (0 to end program): -11
+Enter an integer (0 to end program): 13
+Enter an integer (0 to end program): 2
+Enter an integer (0 to end program): 7
+Enter an integer (0 to end program): -19
+Enter an integer (0 to end program): 8
+Enter an integer (0 to end program): -4
+Enter an integer (0 to end program): 0
+Number of data values processed:.....7
+Total of all values:................-4
+Average of all values:..............-0.57
+
+Process finished with exit code 0
+
+This program calculates the sum and average
+of the entries in an ArrayList.
+Author: Steven Jennings
+
+Enter an integer (0 to end program): 0
+Number of data values processed:.....0
+Total of all values:.................0
+Average of all values:...............0.00
+
+Process finished with exit code 0

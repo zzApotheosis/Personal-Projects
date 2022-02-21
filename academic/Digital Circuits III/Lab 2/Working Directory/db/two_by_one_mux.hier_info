@@ -1,0 +1,8 @@
+|two_by_one_mux
+m_out << comb.DB_MAX_OUTPUT_PORT_TYPE
+x_in => wx.IN0
+y_in => wy.IN0
+sel => wy.IN1
+sel => wx.IN1
+
+

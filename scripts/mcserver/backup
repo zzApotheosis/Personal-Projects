@@ -1,0 +1,73 @@
+#!/bin/sh
+
+# Define variables
+CWD=$(pwd)
+SCRIPTDIR=$(dirname $(readlink -f "$0"))
+BACKUPDIR="$SCRIPTDIR/backups"
+INDEXFILE="/var/tmp/mcserverbackupindex.dat"
+
+# Ensure backup directory exists
+mkdir -pv $BACKUPDIR
+chmod 0775 $BACKUPDIR
+
+# Ensure index file exists
+if [[ ! -f $INDEXFILE ]]; then
+	echo 0 > $INDEXFILE
+fi
+
+# Get index number
+let "INDEX=$(cat $INDEXFILE)"
+
+# Determine existence of desired files to archive
+if [ -f "./server.jar" ]; then
+	SERVERJAR="server.jar"
+fi
+if [ -d "./world" ]; then
+	WORLD="world"
+fi
+if [ -d "./world_the_end" ]; then
+	WORLD_THE_END="world_the_end"
+fi
+if [ -d "./world_nether" ]; then
+	WORLD_NETHER="world_nether"
+fi
+if [ -d "./plugins" ]; then
+	PLUGINS="plugins"
+fi
+if [ -f "./server.properties" ]; then
+	SERVERPROPERTIES="server.properties"
+fi
+if [ -f "./ops.json" ]; then
+	OPSJSON="ops.json"
+fi
+if [ -f "./launch.sh" ]; then
+	LAUNCHSH="launch.sh"
+fi
+if [ -f "./eula.txt" ]; then
+	EULA="eula.txt"
+fi
+
+# Perform backup
+#tar -czvf backup$INDEX.tar.gz --exclude="*database.db*" world world_the_end world_nether plugins server.properties ops.json launch.sh eula.txt
+tar -czhvf backup$INDEX.tar.gz $SERVERJAR $WORLD $WORLD_THE_END $WORLD_NETHER $PLUGINS $SERVERPROPERTIES $OPSJSON $LAUNCHSH $EULA
+
+# Move archive to backups directory
+mv backup$INDEX.tar.gz $BACKUPDIR
+
+# Remove most backups; keep particular indexes
+for (( i = $INDEX - 1; i >= 0; i-- )); do
+	if [[ $i -lt $(( INDEX - 25 )) ]]; then
+		if [[ -f $BACKUPDIR/backup$i.tar.gz ]]; then
+			rm -rv $BACKUPDIR/backup$i.tar.gz
+		fi
+	elif [[ $(( i % 5 )) -ne 0 ]]; then
+		if [[ -f $BACKUPDIR/backup$i.tar.gz ]]; then
+			rm -rv $BACKUPDIR/backup$i.tar.gz
+		fi
+	fi
+done
+
+# Increment index
+let INDEX++
+echo $INDEX > $INDEXFILE
+

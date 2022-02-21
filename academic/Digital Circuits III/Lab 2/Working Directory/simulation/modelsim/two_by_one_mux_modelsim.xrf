@@ -1,0 +1,10 @@
+vendor_name = ModelSim
+source_file = 1, E:/Digital Circuist III/Lab 2/two_by_one_mux.v
+source_file = 1, E:/Digital Circuist III/Lab 2/db/two_by_one_mux.cbx.xml
+design_name = two_by_one_mux
+instance = comp, \m_out~output , m_out~output, two_by_one_mux, 1
+instance = comp, \x_in~input , x_in~input, two_by_one_mux, 1
+instance = comp, \sel~input , sel~input, two_by_one_mux, 1
+instance = comp, \y_in~input , y_in~input, two_by_one_mux, 1
+instance = comp, \comb~0 , comb~0, two_by_one_mux, 1
+instance = comp, \~QUARTUS_CREATED_GND~I , ~QUARTUS_CREATED_GND~I, two_by_one_mux, 1

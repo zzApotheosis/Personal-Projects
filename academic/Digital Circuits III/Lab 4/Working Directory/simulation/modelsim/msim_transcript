@@ -1,0 +1,33 @@
+# Reading C:/altera/13.1/modelsim_ase/tcl/vsim/pref.tcl 
+# do Lab4_run_msim_rtl_verilog.do 
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Modifying C:\altera\13.1\modelsim_ase\win32aloem/modelsim.ini
+# 
+# vlog -vlog01compat -work work +incdir+E:/Digital\ Circuits\ III/Lab\ 4/Working\ Directory {E:/Digital Circuits III/Lab 4/Working Directory/eight_bit_counter.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module eight_bit_counter
+# ** Error: E:/Digital Circuits III/Lab 4/Working Directory/eight_bit_counter.v(17): (vlog-2110) Illegal reference to net "w6".
+# 
+# ** Error: E:/Digital Circuits III/Lab 4/Working Directory/eight_bit_counter.v(18): (vlog-2110) Illegal reference to net "w5".
+# 
+# ** Error: E:/Digital Circuits III/Lab 4/Working Directory/eight_bit_counter.v(19): (vlog-2110) Illegal reference to net "w4".
+# 
+# ** Error: E:/Digital Circuits III/Lab 4/Working Directory/eight_bit_counter.v(20): (vlog-2110) Illegal reference to net "w3".
+# 
+# ** Error: E:/Digital Circuits III/Lab 4/Working Directory/eight_bit_counter.v(21): (vlog-2110) Illegal reference to net "w2".
+# 
+# ** Error: E:/Digital Circuits III/Lab 4/Working Directory/eight_bit_counter.v(22): (vlog-2110) Illegal reference to net "w1".
+# 
+# ** Error: E:/Digital Circuits III/Lab 4/Working Directory/eight_bit_counter.v(23): (vlog-2110) Illegal reference to net "w0".
+# 
+# -- Compiling module t_ff
+# -- Compiling module stimulus_counter
+# ** Error: C:/altera/13.1/modelsim_ase/win32aloem/vlog failed.
+# Error in macro ./Lab4_run_msim_rtl_verilog.do line 8
+# C:/altera/13.1/modelsim_ase/win32aloem/vlog failed.
+#     while executing
+# "vlog -vlog01compat -work work +incdir+E:/Digital\ Circuits\ III/Lab\ 4/Working\ Directory {E:/Digital Circuits III/Lab 4/Working Directory/eight_bit_c..."

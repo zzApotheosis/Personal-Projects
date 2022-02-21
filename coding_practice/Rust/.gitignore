@@ -1,0 +1,2 @@
+# Ignore Cargo build files
+Cargo.lock

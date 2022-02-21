@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="JenningsUtil">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/JenningsUtil.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/lib/JenningsUtil.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/JenningsUtil.jar!/" />
+    </SOURCES>
+  </library>
+</component>

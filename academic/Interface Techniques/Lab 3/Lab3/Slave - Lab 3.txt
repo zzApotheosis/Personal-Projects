@@ -1,0 +1,142 @@
+#include <xc.h>
+#include <stdio.h>
+#include "LCD.h"
+
+	#pragma config FOSC=HSPLL
+	#pragma config WDTEN=OFF
+	#pragma config XINST=OFF
+
+/*
+Connections:
+	Master RD5 <-> Slave RD5
+	Master RD6 <-> Slave RD6
+	2.2K pullups on both
+*/
+
+
+void InitPins(void);
+void ConfigInterrupts(void);
+void ConfigPeriph(void);
+
+
+#define _XTAL_FREQ 40000000L
+
+char line1str[17];
+char line2str[17];
+char rx;
+char count;
+char values[] = {1, 2, 6, 4};
+int pos = 0;
+char temp = 0;
+char line;
+void main(void)
+{
+	long i;
+	count = 0;
+	OSCTUNEbits.PLLEN = 1;  
+	LCDInit();
+	LCDClear();
+	InitPins();
+	ConfigPeriph();
+	ConfigInterrupts();
+	
+	while (1)
+	{
+		while (PIR3bits.SSP2IF == 0);  //Wait for byte
+		PIR3bits.SSP2IF = 0;
+		rx = SSP2BUF;	//read the byte - this clears the BF bit
+
+                if (SSP2STATbits.R_W == 0)  //0 == Write, 1 == Read
+		{
+                    
+			//Write to slave
+                        if (SSP2STATbits.D_A == 1) //1 == Data, 0 == Address
+			{
+                            if (temp == 0) {
+                                line = rx;
+                                temp = 1;
+                            }
+                            else if (temp == 1) {
+                                sprintf(line1str, "Got %d", rx);
+                                LCDClearLine(0);
+                                LCDClearLine(1);
+                                LCDWriteLine(line1str, line);
+                                temp = 0;
+                            } 
+
+
+                        }  //else we can ignore the address byte
+		}
+		else 
+		{
+                        //LCDWriteLine("*", 1);
+			//Read from slave
+			//Reply with number of write requests serviced
+			SSP2BUF = values[pos];
+                        //if (SSP2STATbits.D_A == 1)
+                            ++pos;
+                        if (pos > 3) {
+                            pos = 0;
+                        }
+			SSP2CON1bits.CKP = 1;  //Release the clock
+			while (SSP2STATbits.BF == 1);  //Wait for transmit to finish
+		}
+                SSP2CON1bits.CKP = 1;  //Always release the clock - we're done with this request
+	}
+}
+
+
+void InitPins(void)
+{
+	LATD = 0; 	//LED's are outputs
+	TRISD = 0;  //Turn off all LED's
+
+
+	//Set TRIS bits for any required peripherals here.
+	TRISB = 0b00000001;	//Button0 is input;
+	INTCON2bits.RBPU = 0;  //enable weak pullups on port B
+
+	TRISD = 0b01100000;   //MMSP2 uses RD5 as SDA, RD6 as SCL, both set as inputs
+	
+}
+
+void ConfigInterrupts(void)
+{
+
+	RCONbits.IPEN = 0; //no priorities.  This is the default.
+
+	//Configure your interrupts here
+
+	//set up INT0 to interrupt on falling edge
+	INTCON2bits.INTEDG0 = 0;  //interrupt on falling edge
+	INTCONbits.INT0IE = 1;  //Enable the interrupt
+	//note that we don't need to set the priority because we disabled priorities (and INT0 is ALWAYS high priority when priorities are enabled.)
+	INTCONbits.INT0IF = 0;  //Always clear the flag before enabling interrupts
+		
+	INTCONbits.GIE = 1;  //Turn on interrupts
+}
+
+void ConfigPeriph(void)
+{
+
+	//Configure peripherals here
+	
+	SSP2ADD = 0xCE;	//Slave address
+	SSP2CON2bits.SEN = 1;	//Enable clock stretching
+	SSP2CON1bits.SSPM = 0b0110;	//I2C Slave mode - don't interrupt on Start/Stop
+	SSP2CON1bits.SSPEN = 1;	//Enable MSSP
+}
+
+
+void interrupt HighIsr(void)
+{
+	//Check the source of the interrupt
+	if (INTCONbits.INT0IF == 1)
+	{
+
+		INTCONbits.INT0IF = 0; //must clear the flag to avoid recursive interrupts
+	}		
+}
+
+
+

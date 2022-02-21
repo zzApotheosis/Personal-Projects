@@ -1,0 +1,78 @@
+|eight_bit_counter
+count_out[0] << t_ff:t0.port0
+count_out[1] << t_ff:t1.port0
+count_out[2] << t_ff:t2.port0
+count_out[3] << t_ff:t3.port0
+count_out[4] << t_ff:t4.port0
+count_out[5] << t_ff:t5.port0
+count_out[6] << t_ff:t6.port0
+count_out[7] << t_ff:t7.port0
+enable => enable.IN1
+clock => clock.IN8
+clear => clear.IN8
+
+
+|eight_bit_counter|t_ff:t0
+q_out <= q_out~reg0.DB_MAX_OUTPUT_PORT_TYPE
+t_in => q_out.IN1
+t_in => q_out~reg0.ENA
+clock => q_out~reg0.CLK
+clear => q_out~reg0.ACLR
+
+
+|eight_bit_counter|t_ff:t1
+q_out <= q_out~reg0.DB_MAX_OUTPUT_PORT_TYPE
+t_in => q_out.IN1
+t_in => q_out~reg0.ENA
+clock => q_out~reg0.CLK
+clear => q_out~reg0.ACLR
+
+
+|eight_bit_counter|t_ff:t2
+q_out <= q_out~reg0.DB_MAX_OUTPUT_PORT_TYPE
+t_in => q_out.IN1
+t_in => q_out~reg0.ENA
+clock => q_out~reg0.CLK
+clear => q_out~reg0.ACLR
+
+
+|eight_bit_counter|t_ff:t3
+q_out <= q_out~reg0.DB_MAX_OUTPUT_PORT_TYPE
+t_in => q_out.IN1
+t_in => q_out~reg0.ENA
+clock => q_out~reg0.CLK
+clear => q_out~reg0.ACLR
+
+
+|eight_bit_counter|t_ff:t4
+q_out <= q_out~reg0.DB_MAX_OUTPUT_PORT_TYPE
+t_in => q_out.IN1
+t_in => q_out~reg0.ENA
+clock => q_out~reg0.CLK
+clear => q_out~reg0.ACLR
+
+
+|eight_bit_counter|t_ff:t5
+q_out <= q_out~reg0.DB_MAX_OUTPUT_PORT_TYPE
+t_in => q_out.IN1
+t_in => q_out~reg0.ENA
+clock => q_out~reg0.CLK
+clear => q_out~reg0.ACLR
+
+
+|eight_bit_counter|t_ff:t6
+q_out <= q_out~reg0.DB_MAX_OUTPUT_PORT_TYPE
+t_in => q_out.IN1
+t_in => q_out~reg0.ENA
+clock => q_out~reg0.CLK
+clear => q_out~reg0.ACLR
+
+
+|eight_bit_counter|t_ff:t7
+q_out <= q_out~reg0.DB_MAX_OUTPUT_PORT_TYPE
+t_in => q_out.IN1
+t_in => q_out~reg0.ENA
+clock => q_out~reg0.CLK
+clear => q_out~reg0.ACLR
+
+

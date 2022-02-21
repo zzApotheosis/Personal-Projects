@@ -1,0 +1,45 @@
+m255
+K3
+13
+cModel Technology
+Z0 dE:\Digital Circuist III\Lab 2\simulation\modelsim
+vmux_tb
+!i10b 1
+!s100 SKBTdTKdl_3aEVzKVe`671
+If21H<`oaA1UGR6gfYaj6Q0
+VoZY_To73>inM`PBjOR7lG2
+Z1 dE:\Digital Circuist III\Lab 2\simulation\modelsim
+Z2 w1488511343
+Z3 8E:/Digital Circuist III/Lab 2/two_by_one_mux.v
+Z4 FE:/Digital Circuist III/Lab 2/two_by_one_mux.v
+L0 21
+Z5 OV;L;10.1d;51
+r1
+!s85 0
+31
+Z6 !s108 1488511923.814000
+Z7 !s107 E:/Digital Circuist III/Lab 2/two_by_one_mux.v|
+Z8 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+E:/Digital Circuist III/Lab 2|E:/Digital Circuist III/Lab 2/two_by_one_mux.v|
+!s101 -O0
+Z9 o-vlog01compat -work work -O0
+Z10 !s92 -vlog01compat -work work {+incdir+E:/Digital Circuist III/Lab 2} -O0
+vtwo_by_one_mux
+!i10b 1
+!s100 FVX[1cXZafIjG@6X@AW2z1
+Ig2zBKeYVPoOj4;nhgMfAM2
+VJ_S1LVE@f[BB00];O5>g^1
+R1
+R2
+R3
+R4
+L0 6
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!s101 -O0
+R9
+R10

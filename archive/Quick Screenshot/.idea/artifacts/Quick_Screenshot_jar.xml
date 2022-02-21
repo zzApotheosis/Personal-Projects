@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Quick Screenshot:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Quick_Screenshot_jar</output-path>
+    <root id="archive" name="Quick Screenshot.jar">
+      <element id="module-output" name="Quick Screenshot" />
+    </root>
+  </artifact>
+</component>

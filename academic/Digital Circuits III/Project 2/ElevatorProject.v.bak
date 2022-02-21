@@ -1,0 +1,11 @@
+/*
+ * Title: Elevator Project
+ * This is an elevator implementation in Verilog
+ * 
+ * Authors: Steven Jennings, Scott Allen
+ * Date: 27 April 2017
+ */
+
+module elevator();
+	// Define I/O
+endmodule

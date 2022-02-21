@@ -1,0 +1,59 @@
+EDA Netlist Writer report for top_seven_seg_decoder
+Thu Mar 09 21:21:54 2017
+Quartus II 32-bit Version 11.1 Build 259 01/25/2012 Service Pack 2 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. EDA Netlist Writer Summary
+  3. EDA Netlist Writer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2011 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++---------------------------------------------------------------+
+; EDA Netlist Writer Summary                                    ;
++---------------------------+-----------------------------------+
+; EDA Netlist Writer Status ; Failed - Thu Mar 09 21:21:54 2017 ;
+; Revision Name             ; top_seven_seg_decoder             ;
+; Top-level Entity Name     ; sev_seg_decoder                   ;
+; Family                    ; Cyclone V                         ;
++---------------------------+-----------------------------------+
+
+
++-----------------------------+
+; EDA Netlist Writer Messages ;
++-----------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 32-bit EDA Netlist Writer
+    Info: Version 11.1 Build 259 01/25/2012 Service Pack 2 SJ Web Edition
+    Info: Processing started: Thu Mar 09 21:21:54 2017
+Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off top_seven_seg_decoder -c top_seven_seg_decoder
+Error (199073): Unable to generate the EDA simulation netlist files because the Quartus II software does not currently support post-compilation timing simulation for the Cyclone V devices.
+Error: Quartus II 32-bit EDA Netlist Writer was unsuccessful. 1 error, 0 warnings
+    Error: Peak virtual memory: 290 megabytes
+    Error: Processing ended: Thu Mar 09 21:21:54 2017
+    Error: Elapsed time: 00:00:00
+    Error: Total CPU time (on all processors): 00:00:00
+
+

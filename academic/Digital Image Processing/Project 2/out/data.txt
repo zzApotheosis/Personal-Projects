@@ -1,0 +1,50 @@
+Image #0
+Unweighted MSE: 0.003330
+Unweighted PSNR: 24.741292
+Unweighted SSIM: 0.999982
+Unweighted Custom Metric: 0.099453
+Weighted MSE: 0.000188
+Weighted PSNR: 33.087965
+Weighted SSIM: 0.999999
+Weighted Custom Metric: 0.674508
+
+Image #1
+Unweighted MSE: 0.003324
+Unweighted PSNR: 24.783412
+Unweighted SSIM: 0.999982
+Unweighted Custom Metric: 0.100882
+Weighted MSE: 0.000042
+Weighted PSNR: 34.776335
+Weighted SSIM: 1.000000
+Weighted Custom Metric: 0.887201
+
+Image #2
+Unweighted MSE: 0.003333
+Unweighted PSNR: 24.634490
+Unweighted SSIM: 0.999982
+Unweighted Custom Metric: 0.099945
+Weighted MSE: 0.000013
+Weighted PSNR: 33.541978
+Weighted SSIM: 1.000000
+Weighted Custom Metric: 0.988177
+
+Image #3
+Unweighted MSE: 0.003344
+Unweighted PSNR: 24.756743
+Unweighted SSIM: 0.999982
+Unweighted Custom Metric: 0.099710
+Weighted MSE: 0.000111
+Weighted PSNR: 32.958925
+Weighted SSIM: 0.999999
+Weighted Custom Metric: 0.716543
+
+Image #4
+Unweighted MSE: 0.003330
+Unweighted PSNR: 24.775439
+Unweighted SSIM: 0.999982
+Unweighted Custom Metric: 0.100345
+Weighted MSE: 0.000002
+Weighted PSNR: 31.804441
+Weighted SSIM: 1.000000
+Weighted Custom Metric: 0.999997
+

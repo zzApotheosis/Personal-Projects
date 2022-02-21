@@ -1,0 +1,53 @@
+To those learning Computer Science:
+
+It's tough. There's no other way to put it. The only way that you will learn
+Computer Science is if you have a genuine interest in it. I failed Computer
+Science 1 the first time I took it because I just didn't put in the effort
+the first time. And I really hate to seem negative about all of this, but
+it's the truth. It took me a very long time to fully understand concepts about
+Java and Computer Science in general; several years, in fact.
+
+However, failing Computer Science 1 didn't stop me from pursuing an interest in Computer
+Science. Outside of class, I looked up examples, I asked questions, I experimented
+with code, I wrote my own little programs to perform tasks. I did these things
+because I wanted to learn, and I had a genuine interest in learning, and expanding
+my knowledge of the universe.
+
+But it's not all that bad. Like everything, it just takes time. I have almost 4
+years of Java experience, and all of that experience came from simply sitting
+down during quiet time, and just playing with it. It's as simple as that.
+
+By the way, the Internet is an amazing thing. I used several online resources
+to learn about Java and Computer Science in general like StackOverflow, GitHub,
+HackerRank, and YouTube. StackOverflow is an online community of developers that
+ask each other questions, and that's it. GitHub is an online repository hosting
+service (free for any and all open-source projects), which many professional
+businesses use. HackerRank is a really nice website for developers to
+hone their skills. I took their "30 Days of Coding" challenge that they offer and
+it basically teaches everything you need to know for Computer Science 1 and
+Computer Science 2. And everybody knows what YouTube is. It's Google's awesome
+video-hosting website.
+
+And don't be fooled by my confidence. I'm currently (Fall, 2017) taking on my
+Senior Project, in which I have chosen to heavily involve Java programming.
+In my extracurricular studies trying to teach myself things that aren't
+typically taught in Computer Science courses, I'm finding more and more things
+about Java that I have never seen before. As I told my professor earlier this
+year, "Java is just an endless barrel of new stuff to learn." In case you're
+wondering what I'm doing specifically for my project, I'm writing an algorithm
+in Java to playback a music file on one thread, and perform Fourier Transform
+analysis and GPIO control on another thread; all to be executed on a Raspberry
+Pi 3 - Model B. The GPIO pins control a Solid-State relay, which in turn
+controls standard 120V@60Hz power to 8 channels of standard U.S. NEMA outlet power.
+I call it the "Generic Light Show", the perfect decoration for a Christmas tree!
+
+I hope that you continue to strive to learn and expand your knowledge as I did.
+Java isn't that bad. There's a reason it's currently (2017) the most popular
+programming language in the world. Just keep at it, spend time with it outside
+of class, ask your own questions (a lot of answers are on StackOverflow),
+watch YouTube tutorials, experiment for yourself, and you'll do just fine.
+
+Live and learn.
+
+
+Steven Jennings, Electrical Engineering Technology (grad. 2018)

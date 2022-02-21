@@ -1,0 +1,9 @@
+# Ignore all by default
+*
+
+# Exceptions
+!/.gitignore
+!/lkm.c
+!/lkm2.c
+!/Makefile
+

@@ -1,0 +1,3 @@
+# Ignore Java-related build files
+*.jar
+*.class

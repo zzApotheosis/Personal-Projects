@@ -1,0 +1,51 @@
+For more information about Java and Computer Science in general, my favorite
+places to find general information have been StackOverflow, Wikipedia, YouTube,
+HackerRank, and open-source repositories on GitHub.
+
+
+Here's a laundry list of helpful links.
+*******************************************************************************
+
+This website helped me out so much. Once I had enough experience in Java, going through
+the "30 Days of Code" challenge on HackerRank accelerated my knowledge of Java, and
+Computer Science in general.
+HackerRank:
+https://www.hackerrank.com/
+
+YouTube user blondiebytes (Kathryn Hodge) is one of the people who helped launch HackerRank's
+30 Days of Code program, and she has VERY helpful, informative YouTube tutorials on each
+challenge in the 30 Days of Code course.
+Kathryn Hodge:
+https://www.linkedin.com/in/blondiebytes/
+https://www.youtube.com/channel/UC4DwZ2VXM2KWtzHjVk9M_xg
+https://www.youtube.com/playlist?list=PLcLMSci1ZoPs6jV0O3LBJwChjRon3lE1F
+https://github.com/blondiebytes
+
+Java Keywords:
+https://ipfs.io/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/List_of_Java_keywords.html
+https://en.wikipedia.org/wiki/List_of_Java_keywords
+
+Java's Syntax:
+https://en.wikipedia.org/wiki/Java_syntax
+
+How the Java Virtual Machine works (why any Java program can work on any platform):
+https://en.wikipedia.org/wiki/Java_virtual_machine
+https://stackoverflow.com/questions/11547458/what-is-the-difference-between-jvm-jdk-jre-openjdk
+
+Java Bytecode:
+https://en.wikipedia.org/wiki/Java_bytecode
+
+How every single Java program is executed:
+https://en.wikipedia.org/wiki/Call_stack
+
+Here's the link to all of my personal work, open-sourced. DO NOT plagiarize my code (or anyone's).
+Metropolitan State University of Denver holds a high standard of academic integrity, and
+will not hesitate to give you the boot should you go down the dark path that is plagiarism.
+Also be warned, most of my work is licensed (all of my CS1 work), and therefore copyrighted to me.
+I am giving you permission to use my code for reference, and to further your understanding
+of Computer Science.
+My personal GitHub repository:
+https://github.com/zzApotheosis
+
+This document was last updated on 14 November 2017.
+Forewarning: Some links might be broken in the future!

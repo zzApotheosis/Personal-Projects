@@ -1,0 +1,12 @@
+vendor_name = ModelSim
+source_file = 1, E:/Digital Circuist III/Lab 1/Working Directory/AndGate.bdf
+source_file = 1, E:/Digital Circuist III/Lab 1/Working Directory/GateLevelAND.bdf
+source_file = 1, E:/Digital Circuist III/Lab 1/Working Directory/VerilogAND.v
+source_file = 1, E:/Digital Circuist III/Lab 1/Working Directory/db/AndGate.cbx.xml
+design_name = AndGate
+instance = comp, \FG~output , FG~output, AndGate, 1
+instance = comp, \FV~output , FV~output, AndGate, 1
+instance = comp, \A~input , A~input, AndGate, 1
+instance = comp, \B~input , B~input, AndGate, 1
+instance = comp, \inst|inst , inst|inst, AndGate, 1
+instance = comp, \~QUARTUS_CREATED_GND~I , ~QUARTUS_CREATED_GND~I, AndGate, 1

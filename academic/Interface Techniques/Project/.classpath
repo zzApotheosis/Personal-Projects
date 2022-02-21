@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/home/pi/workspace/Project/libraries/javax.mail.jar"/>
+	<classpathentry kind="lib" path="/home/pi/workspace/Project/libraries/simple-java-mail-4.2.1-java6-release.jar"/>
+	<classpathentry kind="lib" path="/home/pi/workspace/Project/libraries/slf4j-api-1.7.25.jar"/>
+	<classpathentry kind="lib" path="/home/pi/workspace/Project/libraries/slf4j-simple-1.7.25.jar"/>
+	<classpathentry kind="lib" path="/opt/pi4j/lib/pi4j-core.jar"/>
+	<classpathentry kind="lib" path="/opt/pi4j/lib/pi4j-device.jar"/>
+	<classpathentry kind="lib" path="/opt/pi4j/lib/pi4j-gpio-extension.jar"/>
+	<classpathentry kind="lib" path="/home/pi/workspace/Project/libraries/Password.jar"/>
+	<classpathentry kind="lib" path="/opt/pi4j/lib/pi4j-service.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

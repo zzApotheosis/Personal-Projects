@@ -1,0 +1,18 @@
+This technique requires a GnuPG keypair, which can be created with:
+gpg --full-generate-key
+
+To encrypt:
+tar -cz <files and directories> | gpg -se --cipher-algo AES256 -r <recipients' public keys, usually identified by their name or email address; for me, it's zzApotheosis@gmail.com> -o <archivefile.tar.gz.gpg>
+
+To decrypt:
+gpg -d <archivefile.tar.gz.gpg> | tar -xz
+
+To export a key(pair):
+gpg --export-secret-key --armor <key ID, or name, or email address> > ./key.asc
+
+To import a key(pair):
+gpg --import <key file>
+
+To recognize an imported key as ultimately trusted:
+gpg --edit <key ID, or name, or email address>
+Then enter "trust" at the prompt to enter trust level.

@@ -1,0 +1,16 @@
+   Mileage       Reimbursement
+__________    ________________
+     250.6              $45.11
+      99.4              $17.89
+      -2.8               *****
+     999.4             $126.93
+     799.4             $128.90
+   1,899.8             $199.98
+       0.0               $0.00
+   1,300.2             $140.02
+   1,101.7             $139.20
+   3,333.3             $239.00
+
+Total amount of reimbursement: $1,037.03
+Number of data values processed: 10
+Number of valid data values processed: 9
