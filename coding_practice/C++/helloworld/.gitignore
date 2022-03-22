@@ -1,0 +1,8 @@
+# Ignore all CMake-derived data
+CMakeCache.txt
+CMakeFiles
+cmake_install.cmake
+Makefile
+
+# Ignore executables
+helloworld
