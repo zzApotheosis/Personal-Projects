@@ -1,8 +1,0 @@
-# Ignore all except
-*
-!/.gitignore
-!/configure.ac
-!/Makefile.am
-!/README
-!/src
-!/test.txt
