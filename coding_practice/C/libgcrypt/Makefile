@@ -1,6 +1,6 @@
 SOURCES=main.c
 HEADERS=main.h
-TARGET=main
+TARGET=a.out
 
 .PHONY: all clean compile build
 .DEFAULT_GOAL: all
