@@ -63,6 +63,17 @@ void join_keys(const size_t key_len, const uint32_t n_parts, const uint8_t split
     }
 }
 
+void dump_to_file(size_t len, uint8_t data[len], const char filename[]) {
+    FILE * fh = fopen(filename, "w+b");
+    if (fh == NULL) {
+        fprintf(stderr, "CANNOT DUMP DATA TO FILE!\n");
+        return;
+    } else {
+        fwrite(data, sizeof(uint8_t), len, fh);
+        fclose(fh);
+    }
+}
+
 int main(int argc, char ** argv) {
     // Declare a test key, a split key multidimensional array, and a derived key
     uint8_t original_key[KEY_LEN] = {
@@ -99,6 +110,16 @@ int main(int argc, char ** argv) {
     }
     fprintf(stdout, "[*] HERE IS OUR DERIVED KEY. MAKE SURE IT MATCHES THE ORIGINAL KEY!!!\n");
     printhex(derived_key, KEY_LEN, "derived_key");
+    
+    // Dump all of them to files
+    uint8_t buffer[32];
+    memset(buffer, 0, sizeof(buffer));
+    dump_to_file(KEY_LEN, original_key, "original.key");
+    for (int i = 0; i < N_PARTS; i++) {
+        snprintf(buffer, sizeof(buffer), "split%02d.key", i);
+        dump_to_file(KEY_LEN, split_keys[i], buffer);
+    }
+    dump_to_file(KEY_LEN, derived_key, "derived.key");
 
     // Done
     return(EXIT_SUCCESS);
