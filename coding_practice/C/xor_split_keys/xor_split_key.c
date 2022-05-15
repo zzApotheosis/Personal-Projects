@@ -90,6 +90,8 @@ int main(int argc, char ** argv) {
     memset(split_keys, 0, N_PARTS * KEY_LEN);
     uint8_t derived_key[KEY_LEN];
     memset(derived_key, 0, KEY_LEN);
+    uint8_t buffer[32]; // Character buffer for strings
+    memset(buffer, 0, sizeof(buffer));
 
     // Show that our original key is clearly defined in memory
     fprintf(stdout, "[*] HERE IS OUR ORIGINAL KEY AS DEFINED\n");
@@ -106,14 +108,13 @@ int main(int argc, char ** argv) {
     // Show that our original key HOPEFULLY matches our derived key
     fprintf(stdout, "[*] HERE ARE ALL %d OF OUR SPLIT KEYS\n", N_PARTS);
     for (int i = 0; i < N_PARTS; i++) {
-        printhex(split_keys[i], KEY_LEN, "split_key");
+        snprintf(buffer, sizeof(buffer), "split_key_%02d", i);
+        printhex(split_keys[i], KEY_LEN, buffer);
     }
     fprintf(stdout, "[*] HERE IS OUR DERIVED KEY. MAKE SURE IT MATCHES THE ORIGINAL KEY!!!\n");
     printhex(derived_key, KEY_LEN, "derived_key");
     
     // Dump all of them to files
-    uint8_t buffer[32];
-    memset(buffer, 0, sizeof(buffer));
     dump_to_file(KEY_LEN, original_key, "original.key");
     for (int i = 0; i < N_PARTS; i++) {
         snprintf(buffer, sizeof(buffer), "split%02d.key", i);
