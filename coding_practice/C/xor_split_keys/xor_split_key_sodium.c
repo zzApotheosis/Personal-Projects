@@ -11,7 +11,7 @@
 #include <sodium.h>
 
 #define KEY_LEN 32
-#define N_PARTS 3
+#define N_PARTS 10
 
 void printhex(uint8_t arr[], size_t arr_len, char arr_name[]) {
     fprintf(stdout, "    Printing array %s, length=%d\n", arr_name, (int) arr_len);
