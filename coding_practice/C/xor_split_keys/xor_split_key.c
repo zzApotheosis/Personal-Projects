@@ -115,6 +115,7 @@ int main(int argc, char ** argv) {
     printhex(derived_key, KEY_LEN, "derived_key");
     
     // Dump all of them to files
+    fprintf(stdout, "[*] DUMPING KEYS TO INDIVIDUAL FILES\n");
     dump_to_file(KEY_LEN, original_key, "original.key");
     for (int i = 0; i < N_PARTS; i++) {
         snprintf(buffer, sizeof(buffer), "split%02d.key", i);
