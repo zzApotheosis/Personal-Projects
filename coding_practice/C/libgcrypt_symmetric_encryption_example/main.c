@@ -40,7 +40,7 @@ int main(int argc, char ** argv) {
     unsigned char key[32]; memset(key, 0, sizeof(key));
     gcry_cipher_hd_t hd = 0;
     unsigned char iv[16] = {
-        0x18, 0x89, 0x24, 0x1c,
+        0x19, 0x89, 0x24, 0x1c,
         0xbd, 0x79, 0x97, 0x40,
         0xdf, 0x58, 0xef, 0x84,
         0x49, 0x7f, 0x9c, 0x2d
@@ -61,7 +61,7 @@ int main(int argc, char ** argv) {
     printhex(sizeof(key), key, "derived key");
     
     // Open a new cipher handle
-    err = gcry_cipher_open(&hd, GCRY_CIPHER_AES256, GCRY_CIPHER_MODE_CBC, GCRY_CIPHER_SECURE);
+    err = gcry_cipher_open(&hd, GCRY_CIPHER_AES256, GCRY_CIPHER_MODE_GCM, GCRY_CIPHER_SECURE);
     if (err) {
         fprintf(stderr, "GOT ERROR ON gcry_cipher_open\n");
         exit(err);
