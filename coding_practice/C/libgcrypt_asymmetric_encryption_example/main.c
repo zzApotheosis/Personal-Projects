@@ -91,7 +91,7 @@ int main(int argc, char ** argv) {
     gcry_sexp_release(ciphertext_sexp);
     gcry_sexp_release(decrypted_sexp);
     
-    // There's still a memory leak somewhere in here... I'd like to find out where
+    // There's still a memory leak due to gcry_pk_genkey()
     
     // Done
     return(EXIT_SUCCESS);
