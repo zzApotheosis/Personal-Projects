@@ -57,8 +57,8 @@ int main(int argc, char ** argv) {
     //gcry_sexp_dump(plaintext_sexp);
     
     // Generate signature of plaintext data
-    fprintf(stdout, "[*] SIGNING PLAINTEXT DATA\n");
-    fprintf(stdout, "    Plaintext: %s\n", plaintext);
+    fprintf(stdout, "[*] SIGNING DATA\n");
+    fprintf(stdout, "    Data: %s\n", plaintext);
     e = gcry_pk_sign(&signature_sexp, data_sexp, priv_key);
     //gcry_sexp_dump(signature_sexp);
     
