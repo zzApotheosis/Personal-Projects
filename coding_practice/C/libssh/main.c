@@ -98,7 +98,7 @@ int main(int argc, char ** argv) {
     int verbosity = SSH_LOG_PROTOCOL;
 
     my_ssh_session = ssh_new();
-    if (channel == NULL) {
+    if (my_ssh_session == NULL) {
         fprintf(stderr, "Error on line %d\n", __LINE__);
         abort();
     }
