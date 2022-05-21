@@ -7,15 +7,11 @@
 
 void printhex(size_t arr_len, unsigned char arr[arr_len], char name[]) {
     fprintf(stdout, "[*] Printing array %s, length=%d\n", name, arr_len);
+    fprintf(stdout, "    0x%02x ", arr[0]);
     for (size_t i = 0; i < arr_len; i++) {
-        if (i == 0) {
-            fprintf(stdout, "    0x%02x ", arr[i]);
-        } else if (i == arr_len - 1) {
-            fprintf(stdout, "0x%02x\n", arr[i]);
-        } else {
-            fprintf(stdout, "0x%02x ", arr[i]);
-        }
+        fprintf(stdout, "0x%02x ", arr[i]);
     }
+    fprintf(stdout, "0x%02x\n", arr[arr_len - 1]);
 }
 
 void init() {
@@ -111,6 +107,7 @@ int main(int argc, char ** argv) {
     }
     
     // Show results
+    fprintf(stdout, "[*] Passphrase string: %s\n", str);
     fprintf(stdout, "[*] Original text: %s\n", plaintext);
     printhex(sizeof(plaintext), plaintext, "plaintext");
     printhex(sizeof(ciphertext), ciphertext, "ciphertext");
