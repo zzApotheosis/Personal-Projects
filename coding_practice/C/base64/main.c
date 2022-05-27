@@ -8,6 +8,10 @@
  * implementation is generally only available on *nix systems.
  *
  * https://docs.gtk.org/glib/index.html
+ *
+ * NOTE: base64 encoding is NOT the same as encryption! If you
+ * need a solid cryptography library, libgcrypt is my personal
+ * favorite cryptographic library to use.
  */
 
 int main(int argc, char ** argv) {
