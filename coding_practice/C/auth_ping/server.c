@@ -10,7 +10,7 @@
 #include <netinet/in.h>
 
 #define NEED_LIBGCRYPT_VERSION "1.10.1"
-#define PORT 41454
+#define PORT 41454 // Port randomly selected between 1-65536
 #define MAXLINE 1024
 
 unsigned char * read_file(const unsigned char fn[], unsigned long * data_len) {
