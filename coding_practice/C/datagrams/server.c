@@ -8,6 +8,7 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <string.h>
+#include <sys/wait.h>
 
 #define PORT 41454 // Port randomly selected between 1-65536
 #define MAXLINE 1024
@@ -17,6 +18,7 @@ const char hello[] = "Hello from server!";
 void handle_client(int sockfd, const struct sockaddr_in client) {
     int len = sizeof(client);
     sendto(sockfd, hello, strlen(hello), MSG_CONFIRM, (const struct sockaddr *) &client, len);
+    close(sockfd);
     exit(EXIT_SUCCESS); // CHILD EXIT
 }
 
@@ -55,6 +57,7 @@ int main(int argc, char ** argv) {
             // Let the child handle this client
             handle_client(sockfd, cliaddr);
         }
+        waitpid(pid, NULL, 0);
         fprintf(stdout, "THIS IS THE PARENT PROCESS!\n");
     }
     
