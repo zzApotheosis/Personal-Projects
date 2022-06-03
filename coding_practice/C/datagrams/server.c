@@ -58,7 +58,6 @@ int main(int argc, char ** argv) {
             handle_client(sockfd, cliaddr);
         }
         waitpid(pid, NULL, 0);
-        fprintf(stdout, "THIS IS THE PARENT PROCESS!\n");
     }
     
     close(sockfd);
