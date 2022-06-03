@@ -10,7 +10,7 @@ int main(int argc, char ** argv) {
     
     libvlc_media_add_option(vlc_media, ":screen-fps=15.0");
     libvlc_media_add_option(vlc_media, ":live-caching=300");
-    libvlc_media_add_option(vlc_media, ":sout=#transcode{vcodec=h264,scale=Auto,acodec=none,scodec=none}:http{mux=ffmpeg{mux=flv},dst=:8080/}");
+    libvlc_media_add_option(vlc_media, ":sout=#transcode{vcodec=h264,scale=Auto,acodec=none,scodec=none}:http{mux=ffmpeg{mux=flv},dst=:8080/}"); // This will transcode the screen:// source and send it to HTTP clients
 
     libvlc_media_player_t * vlc_media_player = libvlc_media_player_new_from_media(vlc_media);
     
