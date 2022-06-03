@@ -8,10 +8,14 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#include <sys/wait.h>
 
 #define NEED_LIBGCRYPT_VERSION "1.10.1"
 #define PORT 41454 // Port randomly selected between 1-65536
 #define MAXLINE 1024
+
+unsigned long key_len;
+unsigned char * key;
 
 unsigned char * read_file(const unsigned char fn[], unsigned long * data_len) {
     if (fn == NULL) {
@@ -76,17 +80,55 @@ void generate_mac(size_t data_len, unsigned char data[data_len], size_t key_len,
     gcry_mac_close(hd);
 }
 
-int main(int argc, char ** argv) {
-    unsigned long key_len;
-    unsigned char * key = read_file("test.key", &key_len); // Read 32 bytes of random data; alternatively, you could use a rand() function call for a quick and dirty way to generate 32 pseudo-random bytes
+int compare(size_t arr_len, unsigned char a[arr_len], unsigned char b[arr_len]) {
+    for (size_t i = 0; i < arr_len; i++) {
+        if (a[i] < b[i]) {
+            return(-1);
+        } else if (a[i] > b[i]) {
+            return(1);
+        }
+    }
+    return(0);
+}
+
+void handle_client(int sockfd, struct sockaddr_in client, int len) {
     unsigned char data[1024];
     memset(data, 0, sizeof(data));
+    unsigned char mac[32];
+    memset(mac, 0, sizeof(mac));
+    unsigned char buffer[MAXLINE];
+    int n;
+    gcry_randomize(data, sizeof(data), GCRY_VERY_STRONG_RANDOM);
+    generate_mac(sizeof(data), data, key_len, key, sizeof(mac), mac);
+    sendto(sockfd, data, sizeof(data), MSG_CONFIRM, (const struct sockaddr *) &client, len);
+    fprintf(stdout, "Challenged the client with random data\n");
+
+    memset(buffer, 0, sizeof(buffer));
+    n = recvfrom(sockfd, buffer, sizeof(mac), MSG_WAITALL, (struct sockaddr *) &client, &len);
+    fprintf(stdout, "Our MAC vs. Their MAC\n");
+    for (int i = 0; i < sizeof(mac); i++) {
+        fprintf(stdout, "%02x ", mac[i]);
+    }
+    fprintf(stdout, "\n");
+    for (int i = 0; i < sizeof(mac); i++) {
+        fprintf(stdout, "%02x ", buffer[i]);
+    }
+    fprintf(stdout, "\n");
+    if (compare(sizeof(mac), mac, buffer) == 0) {
+        sendto(sockfd, "ok", 3, MSG_CONFIRM, (const struct sockaddr *) &client, len);
+    } else {
+        sendto(sockfd, "rejected", 9, MSG_CONFIRM, (const struct sockaddr *) &client, len);
+    }
+    close(sockfd);
+    exit(EXIT_SUCCESS); // Only child processes should call this function
+}
+
+int main(int argc, char ** argv) {
+    key = read_file("test.key", &key_len); // Read 32 bytes of random data; alternatively, you could use a rand() function call for a quick and dirty way to generate 32 pseudo-random bytes
     if (key_len != 32lu) {
         fprintf(stderr, "The key must be 32 bytes long\n");
         return(EXIT_FAILURE);
     }
-    unsigned char mac[32];
-    memset(mac, 0, sizeof(mac));
     int sockfd;
     char buffer[MAXLINE];
     char * hello = "Hello from server";
@@ -115,26 +157,16 @@ int main(int argc, char ** argv) {
 
     int len, n;
     len = sizeof(cliaddr);
+    int pid = 0;
     while (1) {
         memset(buffer, 0, sizeof(buffer));
         n = recvfrom(sockfd, buffer, MAXLINE, MSG_WAITALL, (struct sockaddr *) &cliaddr, &len);
-        gcry_randomize(data, sizeof(data), GCRY_VERY_STRONG_RANDOM);
-        generate_mac(sizeof(data), data, key_len, key, sizeof(mac), mac);
-        sendto(sockfd, data, sizeof(data), MSG_CONFIRM, (const struct sockaddr *) &cliaddr, len);
-        fprintf(stdout, "Challenged the client with random data\n");
-
-        memset(buffer, 0, sizeof(buffer));
-        n = recvfrom(sockfd, buffer, MAXLINE, MSG_WAITALL, (struct sockaddr *) &cliaddr, &len);
-        fprintf(stdout, "Our MAC vs. Their MAC\n");
-        for (int i = 0; i < sizeof(mac); i++) {
-            fprintf(stdout, "%02x ", mac[i]);
+        pid = fork();
+        if (pid == 0) {
+            // Handle the child process
+            handle_client(sockfd, cliaddr, len);
         }
-        fprintf(stdout, "\n");
-        for (int i = 0; i < sizeof(mac); i++) {
-            fprintf(stdout, "%02x ", buffer[i]);
-        }
-        fprintf(stdout, "\n");
-        sendto(sockfd, "end", 4, MSG_CONFIRM, (const struct sockaddr *) &cliaddr, len);
+        waitpid(pid, NULL, 0);
     }
     
     close(sockfd);
