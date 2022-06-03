@@ -1,8 +1,2 @@
-# Ignore all by default in this directory
-*
-
-# Exceptions
-!/.gitignore
-!/server.c
-!/client.c
-!/test.key
+# Ignore build directory
+build
