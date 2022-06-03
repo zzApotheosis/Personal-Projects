@@ -1,0 +1,6 @@
+# Ignore all by default
+*
+
+# Exceptions
+!/.gitignore
+!/main.c
