@@ -3,6 +3,7 @@
 
 # Exceptions
 !/.gitignore
+!/CMakeLists.txt
 !/server.c
 !/client.c
 !/test.key
