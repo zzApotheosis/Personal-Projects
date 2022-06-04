@@ -84,7 +84,7 @@ int main(int argc, char ** argv) {
     char buffer[MAXLINE];
     struct sockaddr_in servaddr;
     unsigned char mac[32];
-    key = read_file("test.key", &key_len);
+    key = read_file("client.key", &key_len);
 
     init();
 

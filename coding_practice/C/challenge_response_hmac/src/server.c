@@ -124,7 +124,7 @@ void handle_client(int sockfd, struct sockaddr_in client, int len) {
 }
 
 int main(int argc, char ** argv) {
-    key = read_file("test.key", &key_len); // Read 32 bytes of random data; alternatively, you could use a rand() function call for a quick and dirty way to generate 32 pseudo-random bytes
+    key = read_file("server.key", &key_len); // Read 32 bytes of random data; alternatively, you could use a rand() function call for a quick and dirty way to generate 32 pseudo-random bytes
     if (key_len != 32lu) {
         fprintf(stderr, "The key must be 32 bytes long\n");
         return(EXIT_FAILURE);
