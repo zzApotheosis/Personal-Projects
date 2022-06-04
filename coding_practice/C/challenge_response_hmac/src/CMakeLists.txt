@@ -32,6 +32,8 @@ target_link_libraries(client
     gpg-error
 )
 
+configure_file(${CMAKE_CURRENT_LIST_DIR}/test.key ${CMAKE_BINARY_DIR}/test.key COPYONLY)
+
 # Set compile options
 target_compile_options(server PRIVATE -fPIC)
 target_compile_options(client PRIVATE -fPIC)
