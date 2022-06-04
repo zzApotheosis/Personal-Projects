@@ -6,4 +6,6 @@
 !/CMakeLists.txt
 !/server.c
 !/client.c
-!/test.key
+!/client.key
+!/server.key
+!/different.key
