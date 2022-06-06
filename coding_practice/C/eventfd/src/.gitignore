@@ -1,0 +1,9 @@
+# Ignore all by default
+*
+
+# Exceptions
+!/.gitignore
+!/CMakeLists.txt
+!/README.md
+!/forked.c
+!/single_thread.c
