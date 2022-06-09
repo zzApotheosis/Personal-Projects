@@ -1,0 +1,61 @@
+PKCS #10 Certificate Request Information:
+	Version: 1
+	Subject: CN=Server Cert
+	Subject Public Key Algorithm: RSA
+	Algorithm Security Level: Medium (2048 bits)
+		Modulus (bits 2048):
+			00:b9:27:97:99:31:83:61:a8:98:ea:b7:cb:18:97:5f
+			6f:48:27:e0:c5:61:2c:b0:32:ff:c6:8c:e7:a8:17:cc
+			4a:09:ea:61:03:44:9a:74:ed:23:ea:93:14:e9:b0:98
+			a6:9a:db:c0:02:64:19:89:f5:ce:47:b5:37:49:bf:c0
+			dc:94:74:56:4c:2f:76:ca:ee:1b:ce:da:72:a7:a4:8d
+			f6:c1:36:12:20:a4:96:25:07:15:a0:85:85:c6:08:f2
+			01:43:e9:ab:ec:3a:df:09:b3:9f:15:d7:16:02:90:b8
+			29:41:ab:4f:9b:86:31:e2:f8:80:ce:c6:be:9b:a5:3b
+			8f:04:1a:ae:48:b5:75:a0:42:96:43:46:d9:0f:80:9b
+			7c:6c:8e:7a:21:1d:b2:26:2e:55:47:97:a7:8c:d8:15
+			5c:2b:b4:cb:ac:38:15:b4:63:f4:34:6b:d4:36:db:f7
+			d5:50:44:7e:9b:01:1d:e1:de:d9:ff:ad:45:e7:df:9e
+			df:ac:14:af:90:3b:c0:59:74:67:84:5d:2f:ae:95:2f
+			76:ed:40:31:e7:db:5a:c7:66:78:47:eb:65:86:f5:f7
+			36:67:e1:10:dc:6a:22:ab:fa:d2:38:24:2e:1e:06:50
+			77:82:71:8b:83:00:0e:45:bd:d7:56:6d:79:a3:d0:ad
+			f9
+		Exponent (bits 24):
+			01:00:01
+	Signature Algorithm: RSA-SHA256
+	Attributes:
+		Extensions:
+			Basic Constraints (critical):
+				Certificate Authority (CA): FALSE
+			Key Usage (critical):
+				Digital signature.
+				Key encipherment.
+			Key Purpose (critical):
+				TLS WWW Server.
+Other Information:
+	Public Key ID:
+		sha1:af28a2ee144372e8d95477553a1f3de3c15e9a14
+		sha256:ff3d82e72192b1803c8600fd88e32a3293d12548910613f6413fb152f6e16b92
+	Public Key PIN:
+		pin-sha256:/z2C5yGSsYA8hgD9iOMqMpPRJUiRBhP2QT+xUvbha5I=
+
+Self signature: verified
+
+-----BEGIN NEW CERTIFICATE REQUEST-----
+MIICojCCAYoCAQAwFjEUMBIGA1UEAxMLU2VydmVyIENlcnQwggEiMA0GCSqGSIb3
+DQEBAQUAA4IBDwAwggEKAoIBAQC5J5eZMYNhqJjqt8sYl19vSCfgxWEssDL/xozn
+qBfMSgnqYQNEmnTtI+qTFOmwmKaa28ACZBmJ9c5HtTdJv8DclHRWTC92yu4bztpy
+p6SN9sE2EiCkliUHFaCFhcYI8gFD6avsOt8Js58V1xYCkLgpQatPm4Yx4viAzsa+
+m6U7jwQarki1daBClkNG2Q+Am3xsjnohHbImLlVHl6eM2BVcK7TLrDgVtGP0NGvU
+Ntv31VBEfpsBHeHe2f+tReffnt+sFK+QO8BZdGeEXS+ulS927UAx59tax2Z4R+tl
+hvX3NmfhENxqIqv60jgkLh4GUHeCcYuDAA5FvddWbXmj0K35AgMBAAGgRzBFBgkq
+hkiG9w0BCQ4xODA2MAwGA1UdEwEB/wQCMAAwDgYDVR0PAQH/BAQDAgWgMBYGA1Ud
+JQEB/wQMMAoGCCsGAQUFBwMBMA0GCSqGSIb3DQEBCwUAA4IBAQCuemKsWGxrCIfH
+LlDiafoZtw87vs1KCEQb0PRgqwLfZ/4wGlgJxbgvJdUltO/gfr2e0neA5rn/Y5id
+Tpd6Z2nrJLU6N8RUUCGvPRbS430SfvH5pSttj7O9hRMmuR99cM10tNZ8GHAEafwF
+/BH3yRUXl7PAQ7g0kXtffGW7G1kDoma23SKfoTtNz90MQR751y05d4IQjy2OqsKp
+nySbTWGNWN7o4G95+uR5cQoc8DWiMLutoa6CrJDKt4nYfPn6l0Ddk59nJSygWB/R
+3DzG/Exw5SCsu6oZ2/6JhpL++TMPpfSqTiST8ed9Ikw0pNTBemmHYaYLQi8Ovre8
+yc6xBOqS
+-----END NEW CERTIFICATE REQUEST-----

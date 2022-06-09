@@ -7,3 +7,11 @@
 !/udp.c
 !/client.c
 !/server.c
+!/root.key
+!/root.crt
+!/server.key
+!/server.req
+!/server.crt
+!/client.key
+!/client.req
+!/client.crt
