@@ -8,6 +8,8 @@ project(gnutls_example)
 # Define main executable
 add_executable(dtls_client)
 add_executable(dtls_server)
+add_executable(tls_client)
+add_executable(tls_server)
 
 # Define all source files used in building
 target_sources(dtls_client PRIVATE
@@ -18,12 +20,26 @@ target_sources(dtls_server PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}/dtls_server.c
     ${CMAKE_CURRENT_LIST_DIR}/udp.c
 )
+target_sources(tls_client PRIVATE
+    ${CMAKE_CURRENT_LIST_DIR}/tls_client.c
+    ${CMAKE_CURRENT_LIST_DIR}/tcp.c
+)
+target_sources(tls_server PRIVATE
+    ${CMAKE_CURRENT_LIST_DIR}/tls_server.c
+    ${CMAKE_CURRENT_LIST_DIR}/tcp.c
+)
 
 # Define libraries to link
 target_link_libraries(dtls_client
     gnutls
 )
 target_link_libraries(dtls_server
+    gnutls
+)
+target_link_libraries(tls_client
+    gnutls
+)
+target_link_libraries(tls_server
     gnutls
 )
 
@@ -40,4 +56,6 @@ configure_file(${CMAKE_CURRENT_LIST_DIR}/client.crt ${CMAKE_BINARY_DIR}/client.c
 # Set compile options
 target_compile_options(dtls_client PRIVATE -fPIC)
 target_compile_options(dtls_server PRIVATE -fPIC)
+target_compile_options(tls_client PRIVATE -fPIC)
+target_compile_options(tls_server PRIVATE -fPIC)
 

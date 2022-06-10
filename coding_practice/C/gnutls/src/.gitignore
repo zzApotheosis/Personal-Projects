@@ -7,6 +7,9 @@
 !/udp.c
 !/dtls_client.c
 !/dtls_server.c
+!/tcp.c
+!/tls_client.c
+!/tls_server.c
 !/root.key
 !/root.crt
 !/server.key
