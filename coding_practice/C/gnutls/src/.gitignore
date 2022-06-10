@@ -10,6 +10,7 @@
 !/tcp.c
 !/tls_client.c
 !/tls_server.c
+!/examples.h
 !/root.key
 !/root.crt
 !/server.key
