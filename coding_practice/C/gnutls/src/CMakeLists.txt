@@ -6,24 +6,24 @@ project(gnutls_example)
 #find_package(vlc REQUIRED)
 
 # Define main executable
-add_executable(client)
-add_executable(server)
+add_executable(dtls_client)
+add_executable(dtls_server)
 
 # Define all source files used in building
-target_sources(client PRIVATE
-    ${CMAKE_CURRENT_LIST_DIR}/client.c
+target_sources(dtls_client PRIVATE
+    ${CMAKE_CURRENT_LIST_DIR}/dtls_client.c
     ${CMAKE_CURRENT_LIST_DIR}/udp.c
 )
-target_sources(server PRIVATE
-    ${CMAKE_CURRENT_LIST_DIR}/server.c
+target_sources(dtls_server PRIVATE
+    ${CMAKE_CURRENT_LIST_DIR}/dtls_server.c
     ${CMAKE_CURRENT_LIST_DIR}/udp.c
 )
 
 # Define libraries to link
-target_link_libraries(client
+target_link_libraries(dtls_client
     gnutls
 )
-target_link_libraries(server
+target_link_libraries(dtls_server
     gnutls
 )
 
@@ -38,6 +38,6 @@ configure_file(${CMAKE_CURRENT_LIST_DIR}/client.req ${CMAKE_BINARY_DIR}/client.r
 configure_file(${CMAKE_CURRENT_LIST_DIR}/client.crt ${CMAKE_BINARY_DIR}/client.crt COPYONLY)
 
 # Set compile options
-target_compile_options(client PRIVATE -fPIC)
-target_compile_options(server PRIVATE -fPIC)
+target_compile_options(dtls_client PRIVATE -fPIC)
+target_compile_options(dtls_server PRIVATE -fPIC)
 
