@@ -26,7 +26,8 @@
         assert(rval >= 0)
 
 #define MAX_BUF 1024
-#define MSG "GET / HTTP/1.0\r\n\r\n"
+//#define MSG "GET / HTTP/1.0\r\n\r\n"
+#define MSG "Super ligma? KEKW"
 
 extern int udp_connect(void);
 extern void udp_close(int sd);
@@ -61,10 +62,11 @@ int main(void)
 
     /* put the x509 credentials to the current session */
     CHECK(gnutls_credentials_set(session, GNUTLS_CRD_CERTIFICATE, xcred));
+    /*
     CHECK(gnutls_server_name_set(session, GNUTLS_NAME_DNS, "www.example.com",
                                  strlen("www.example.com")));
-
     gnutls_session_set_verify_cert(session, "www.example.com", 0);
+    */
 
     /* connect to the peer */
     sd = udp_connect();
@@ -120,7 +122,7 @@ int main(void)
      * be lost */
     CHECK(gnutls_bye(session, GNUTLS_SHUT_WR));
 
-end:
+  end:
 
     udp_close(sd);
 
