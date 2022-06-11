@@ -18,7 +18,7 @@ clean:
 
 # gen stub
 gen:
-	#gdbus-codegen --generate-c-code testbus --c-namespace TestBus --interface-prefix com.testbus. com.testbus.xml
+#	gdbus-codegen --generate-c-code testbus --c-namespace TestBus --interface-prefix com.testbus. com.testbus.xml
 	gdbus-codegen --generate-c-code testbus --interface-prefix com.testbus. com.testbus.xml
 
 # dbus
