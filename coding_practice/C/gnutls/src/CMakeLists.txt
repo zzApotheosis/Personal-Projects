@@ -44,7 +44,6 @@ target_link_libraries(tls_server
 )
 
 # Copy files to build dir
-configure_file(${CMAKE_CURRENT_LIST_DIR}/root.key ${CMAKE_BINARY_DIR}/root.key COPYONLY)
 configure_file(${CMAKE_CURRENT_LIST_DIR}/root.crt ${CMAKE_BINARY_DIR}/root.crt COPYONLY)
 configure_file(${CMAKE_CURRENT_LIST_DIR}/server.key ${CMAKE_BINARY_DIR}/server.key COPYONLY)
 configure_file(${CMAKE_CURRENT_LIST_DIR}/server.crt ${CMAKE_BINARY_DIR}/server.crt COPYONLY)
