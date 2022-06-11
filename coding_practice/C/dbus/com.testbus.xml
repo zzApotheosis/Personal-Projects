@@ -1,5 +1,5 @@
 <node>
-    <interface name="com.test.name">
+    <interface name="com.testbus">
         <method name="HelloWorld">
             <arg name="greeting" direction="in" type="s"/>
             <arg name="response" direction="out" type="s"/>
