@@ -33,6 +33,15 @@ int main(int argc, char ** argv) {
     n = recvfrom(sockfd, buffer, MAXLINE, MSG_WAITALL, (struct sockaddr *) &servaddr, &len);
     fprintf(stdout, "Client received message from server: %s\n", buffer);
     
+    char * user_msg = (char *) malloc(MAXLINE * sizeof(char));
+    size_t user_msg_len = 0;
+    fprintf(stdout, "Enter a message to send to the server:\n");
+    n = getline(&user_msg, &user_msg_len, stdin);
+    user_msg[n - 1] = '\0';
+    sendto(sockfd, (const char *) user_msg, n, MSG_CONFIRM, (const struct sockaddr *) &servaddr, sizeof(servaddr));
+    n = recvfrom(sockfd, buffer, MAXLINE, MSG_WAITALL, (struct sockaddr *) &servaddr, &len);
+    fprintf(stdout, "Client received message from server: %s\n", buffer);
+    
     close(sockfd);
     
     return(EXIT_SUCCESS);

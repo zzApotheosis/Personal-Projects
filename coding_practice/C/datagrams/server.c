@@ -15,9 +15,9 @@
 
 const char hello[] = "Hello from server!";
 
-void handle_client(int sockfd, const struct sockaddr_in client) {
+void handle_client(int sockfd, const char msg[], const size_t msg_len, const struct sockaddr_in client) {
     int len = sizeof(client);
-    sendto(sockfd, hello, strlen(hello), MSG_CONFIRM, (const struct sockaddr *) &client, len);
+    sendto(sockfd, msg, msg_len, MSG_CONFIRM, (const struct sockaddr *) &client, len);
     close(sockfd);
     exit(EXIT_SUCCESS); // CHILD EXIT
 }
@@ -55,9 +55,8 @@ int main(int argc, char ** argv) {
         pid = fork();
         if (pid == 0) {
             // Let the child handle this client
-            handle_client(sockfd, cliaddr);
+            handle_client(sockfd, buffer, n, cliaddr);
         }
-        waitpid(pid, NULL, 0);
     }
     
     close(sockfd);
