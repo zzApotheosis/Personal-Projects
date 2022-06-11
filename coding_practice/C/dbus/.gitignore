@@ -1,0 +1,9 @@
+# Ignore all by default
+*
+
+# Exceptions
+!/.gitignore
+!/Makefile
+!/client.c
+!/server.c
+!/com.test.name.xml
