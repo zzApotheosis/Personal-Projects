@@ -1,0 +1,7 @@
+# Ignore all by default
+*
+
+# Exceptions
+!/.gitignore
+!/Cargo.toml
+!/src**
