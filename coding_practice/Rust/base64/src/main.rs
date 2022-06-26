@@ -5,8 +5,5 @@ fn main() {
     let encoded = encode(my_string);
     println!("{}", encoded);
     let decoded = decode(encoded).unwrap();
-    for i in decoded {
-        print!("{}", i as char);
-    }
-    println!();
+    println!("{}", std::string::String::from_utf8(decoded).unwrap());
 }
