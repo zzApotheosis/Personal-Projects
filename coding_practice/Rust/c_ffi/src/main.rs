@@ -12,10 +12,14 @@ extern "C" {
     );
 }
 
+fn c_cool_function(i: cty::c_int, c: cty::c_char, cs: *mut CoolStruct) {
+    unsafe{
+        cool_function(i, c, cs);
+    };
+}
+
 fn main() -> Result<(), i32> {
     let mut s = CoolStruct{x: 7, y: 11};
-    unsafe{
-        cool_function(1, 0x34, &mut s);
-    };
+    c_cool_function(1, 0x23, &mut s);
     Ok(())
 }
