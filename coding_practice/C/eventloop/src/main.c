@@ -20,14 +20,37 @@ int emit(int efd, unsigned long int signal) {
 }
 
 unsigned long int catch(int efd) {
-    unsigned long int cs = 0;
-    int status = read(efd, &cs, sizeof(unsigned long int));
+    unsigned long int event = 0;
+    int status = read(efd, &event, sizeof(unsigned long int));
     if (status != sizeof(unsigned long int))
         perror("read() error");
-    return(cs);
+    return(event);
 }
 
-int file_detected_loop(int efd, const unsigned char file_name[]) {
+void dump_file(const unsigned char file_name[]) {
+    struct stat s;
+    memset(&s, 0, sizeof(struct stat));
+    if (stat(file_name, &s) == 0) {
+        size_t file_size = s.st_size;
+        unsigned char * file_data = (unsigned char *) malloc(file_size * sizeof(unsigned char));
+        memset(file_data, 0, file_size);
+        FILE * fp = fopen(file_name, "r");
+        if (fp == NULL) {
+            perror("fopen() error");
+            free(file_data);
+            return;
+        }
+        if (fread(file_data, sizeof(unsigned char), file_size, fp) != sizeof(unsigned char) * file_size)
+            perror("read() error");
+        fwrite(file_data, sizeof(unsigned char), file_size, stdout);
+        fclose(fp);
+        free(file_data);
+    } else {
+        perror("stat() error");
+    }
+}
+
+int file_detected_loop(const int efd, const unsigned char file_name[]) {
     struct stat s;
     while (1) {
         sleep(1);
@@ -43,7 +66,7 @@ int file_detected_loop(int efd, const unsigned char file_name[]) {
     exit(EXIT_SUCCESS); // Die child process
 }
 
-int random_hello(int efd) {
+int random_hello(const int efd) {
     srand(time(NULL));
     while (1) {
         sleep(rand() % 10);
@@ -54,9 +77,10 @@ int random_hello(int efd) {
 static const unsigned char file[] = "test.txt";
 static const unsigned char end_file[] = "end.txt";
 
-int process_signal(unsigned long int signal) {
+int process_signal(const unsigned long int signal) {
     switch (signal) {
         case EVENT_FILE_DETECTED:
+            dump_file(file);
             return(unlink(file));
             break;
         case EVENT_QUIT:
@@ -71,7 +95,7 @@ int process_signal(unsigned long int signal) {
     return(0);
 }
 
-int main(int argc, char *argv[]) {
+int main(const int argc, char * restrict argv[]) {
     int efd;
     int cpid0 = 0, cpid1 = 0;
     
@@ -91,7 +115,7 @@ int main(int argc, char *argv[]) {
     }
 
     
-    /* This is the parent */
+    /* This is the parent performing the event loop */
     while (1) {
         fprintf(stdout, "Waiting for event...");
         fflush(stdout);
