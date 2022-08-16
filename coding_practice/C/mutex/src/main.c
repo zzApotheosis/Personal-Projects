@@ -10,9 +10,9 @@ int shared = 0;
 pthread_mutex_t shared_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void incr_func(int id) {
-    pthread_mutex_lock(&shared_mutex);
+    pthread_mutex_lock(&shared_mutex); // TRY REMOVING ME
     shared++;
-    pthread_mutex_unlock(&shared_mutex);
+    pthread_mutex_unlock(&shared_mutex); // TRY REMOVING ME
 }
 
 void * func(void * arg) {
