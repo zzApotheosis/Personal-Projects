@@ -9,17 +9,16 @@
 int shared = 0;
 pthread_mutex_t shared_mutex = PTHREAD_MUTEX_INITIALIZER;
 
-void incr_func(int id) {
+void incr_func() {
     pthread_mutex_lock(&shared_mutex); // TRY REMOVING ME
     shared++;
     pthread_mutex_unlock(&shared_mutex); // TRY REMOVING ME
 }
 
 void * func(void * arg) {
-    int id = *(int *) arg;
     fprintf(stdout, "Inrementing shared value...\n");
     for (int i = 0; i < ITER; i++) {
-        incr_func(id);
+        incr_func();
     }
     return(NULL);
 }
