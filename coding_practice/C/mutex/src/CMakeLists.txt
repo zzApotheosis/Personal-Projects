@@ -15,7 +15,8 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
 
 # Define libraries to link
 target_link_libraries(${CMAKE_PROJECT_NAME}
-    ${CMAKE_THREAD_LIBS_INIT}
+    #${CMAKE_THREAD_LIBS_INIT}
+    Threads::Threads
 )
 
 # Set compile options
