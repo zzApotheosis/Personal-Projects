@@ -25,14 +25,14 @@ int main(int argc, char** argv) {
         multi,
         divide
     };
+    unsigned char operator[] = {'+', '-', '*', '/'};
     int num1 = 4, num2 = 17;
 
     fprintf(stdout, "num1 = %d\n", num1);
     fprintf(stdout, "num2 = %d\n", num2);
-    fprintf(stdout, "%d + %d = %f\n", num1, num2, math_functions[0](num1, num2));
-    fprintf(stdout, "%d - %d = %f\n", num1, num2, math_functions[1](num1, num2));
-    fprintf(stdout, "%d * %d = %f\n", num1, num2, math_functions[2](num1, num2));
-    fprintf(stdout, "%d / %d = %f\n", num1, num2, math_functions[3](num1, num2));
+    for (int i = 0; i < 4; i++) {
+        fprintf(stdout, "%d %c %d = %f\n", num1, operator[i], num2, math_functions[i](num1, num2));
+    }
     
     return(EXIT_SUCCESS);
 }
