@@ -1,0 +1,7 @@
+# Ignore all by default in this directory
+*
+
+# Exceptions
+!/.gitignore
+!/CMakeLists.txt
+!/main.c
