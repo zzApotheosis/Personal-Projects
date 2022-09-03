@@ -4,5 +4,5 @@
 # Exceptions
 !.gitignore
 !CMakeLists.txt
-!main.c
+!/main.c
 
