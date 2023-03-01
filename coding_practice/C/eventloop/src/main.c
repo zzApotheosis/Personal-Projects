@@ -27,12 +27,12 @@ unsigned long int catch(int efd) {
     return(event);
 }
 
-void dump_file(const unsigned char file_name[]) {
+void dump_file(const char file_name[]) {
     struct stat s;
     memset(&s, 0, sizeof(struct stat));
     if (stat(file_name, &s) == 0) {
         size_t file_size = s.st_size;
-        unsigned char * file_data = (unsigned char *) malloc(file_size * sizeof(unsigned char));
+        char * file_data = (char *) malloc(file_size * sizeof(char));
         memset(file_data, 0, file_size);
         FILE * fp = fopen(file_name, "r");
         if (fp == NULL) {
@@ -40,9 +40,9 @@ void dump_file(const unsigned char file_name[]) {
             free(file_data);
             return;
         }
-        if (fread(file_data, sizeof(unsigned char), file_size, fp) != sizeof(unsigned char) * file_size)
+        if (fread(file_data, sizeof(char), file_size, fp) != sizeof(char) * file_size)
             perror("read() error");
-        fwrite(file_data, sizeof(unsigned char), file_size, stdout);
+        fwrite(file_data, sizeof(char), file_size, stdout);
         fclose(fp);
         free(file_data);
     } else {
@@ -50,7 +50,7 @@ void dump_file(const unsigned char file_name[]) {
     }
 }
 
-int file_detected_loop(const int efd, const unsigned char file_name[]) {
+int file_detected_loop(const int efd, const char file_name[]) {
     struct stat s;
     while (1) {
         sleep(1);
@@ -74,8 +74,8 @@ int random_hello(const int efd) {
     }
 }
 
-static const unsigned char file[] = "test.txt";
-static const unsigned char end_file[] = "end.txt";
+static const char file[] = "test.txt";
+static const char end_file[] = "end.txt";
 
 int process_signal(const unsigned long int signal) {
     switch (signal) {
@@ -95,7 +95,7 @@ int process_signal(const unsigned long int signal) {
     return(0);
 }
 
-int main(const int argc, char * restrict argv[]) {
+int main(const int argc, char * argv[]) {
     int efd;
     int cpid0 = 0, cpid1 = 0;
     
