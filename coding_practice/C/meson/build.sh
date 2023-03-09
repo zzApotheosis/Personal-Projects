@@ -1,6 +1,4 @@
 #!/bin/sh
-export CC="clang"
-export CXX="clang++"
-export LD="lld"
-export AR="llvm-ar"
-rm -rf target && meson setup target && meson compile -C target
+SOURCE_DIR=src
+BUILD_DIR=build
+rm -rf ${BUILD_DIR} && meson setup ${BUILD_DIR} ${SOURCE_DIR} && meson compile -C ${BUILD_DIR}
