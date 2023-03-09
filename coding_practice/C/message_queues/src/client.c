@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <mqueue.h>
+#include <string.h>
 
 #include "common.h"
 
