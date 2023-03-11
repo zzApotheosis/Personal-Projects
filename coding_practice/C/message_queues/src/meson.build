@@ -5,3 +5,4 @@ project('message_queues', 'c',
 
 executable('client', ['client.c'], link_args : '-lrt')
 executable('server', ['server.c'], link_args : '-lrt')
+executable('multithreaded', ['multithreaded.c'], link_args : '-lrt')
