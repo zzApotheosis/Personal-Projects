@@ -123,10 +123,17 @@ int main(int argc, char * argv[]) {
     char buffer[MAX_SIZE];
     memset(buffer, 0, sizeof(buffer));
     ssize_t bytes_read = 0;
-    fprintf(stdout, "Try to guess the number! The correct answer is between %d and %d. Type \"exit\" to quit early.\n", MIN_NUMBER, MAX_NUMBER);
+    fprintf(stdout, "Try to guess the number! The correct answer is between %d and %d. Type \"%s\" to quit early.\n", MIN_NUMBER, MAX_NUMBER, MSG_STOP);
     while (1) {
         fprintf(stdout, "Enter a number: ");
         fgets(buffer, MAX_SIZE, stdin);
+
+        // Check for EOF
+        if (feof(stdin)) {
+            snprintf(buffer, MAX_SIZE, MSG_STOP);
+            CHECK(0 <= mq_send(mq, buffer, MAX_SIZE, 0));
+            break;
+        }
 
         // Send guess
         CHECK(0 <= mq_send(mq, buffer, MAX_SIZE, 0)); // Send the guess to the game thread
