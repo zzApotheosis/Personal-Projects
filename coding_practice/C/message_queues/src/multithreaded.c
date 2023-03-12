@@ -17,6 +17,8 @@
 #define GUESS_TOO_LOW 1
 #define GUESS_TOO_HIGH 2
 
+static pthread_mutex_t cs_mutex = PTHREAD_MUTEX_INITIALIZER;
+
 int buffer_looks_like_number(char buffer[], size_t buffer_size) {
     int result = 1; // Assume true
     for (size_t i = 0; i < buffer_size; i++) {
@@ -128,10 +130,13 @@ int main(int argc, char * argv[]) {
         fprintf(stdout, "Enter a number: ");
         fgets(buffer, MAX_SIZE, stdin);
 
+        pthread_mutex_lock(&cs_mutex);
+
         // Check for EOF
         if (feof(stdin)) {
             snprintf(buffer, MAX_SIZE, MSG_STOP);
             CHECK(0 <= mq_send(mq, buffer, MAX_SIZE, 0));
+            pthread_mutex_unlock(&cs_mutex);
             break;
         }
 
@@ -140,6 +145,7 @@ int main(int argc, char * argv[]) {
 
         // Check for "exit"
         if (!strncmp(buffer, MSG_STOP, strlen(MSG_STOP))) {
+            pthread_mutex_unlock(&cs_mutex);
             break;
         }
 
@@ -150,6 +156,7 @@ int main(int argc, char * argv[]) {
         
         if (buffer[0] == GUESS_CORRECT) {
             fprintf(stdout, "That was the answer!\n");
+            pthread_mutex_unlock(&cs_mutex);
             break;
         } else if (buffer[0] == GUESS_TOO_LOW) {
             fprintf(stdout, "Too low. Try again.\n");
@@ -158,6 +165,7 @@ int main(int argc, char * argv[]) {
         } else if (buffer[0] == GUESS_ERROR) {
             fprintf(stdout, "Bad entry! Did you enter a number? Try again.\n");
         }
+        pthread_mutex_unlock(&cs_mutex);
     }
 
     CHECK((mqd_t)-1 != mq_close(mq));
