@@ -23,8 +23,8 @@ int main(int argc, char * argv[]) {
     
     size_t test_cell_x = 0u;
     size_t test_cell_y = 0u;
-    unsigned char buffer[POSSIBLE_VALUES_LIMIT];
-    memset(buffer, 0, POSSIBLE_VALUES_LIMIT);
+    unsigned char buffer[POSSIBLE_VALUES_MAX];
+    memset(buffer, 0, POSSIBLE_VALUES_MAX);
 
     // Extreme
     //board_set_cellgroup_from_given(board, "000070000", 0, 0);

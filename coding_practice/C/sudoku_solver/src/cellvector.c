@@ -26,7 +26,7 @@ void cellvector_get_cellgroup(const struct board * const b, const size_t x, cons
     if (b == NULL)
         return;
     struct cellgroup * cellgroup = board_get_cellgroup(b, x, y);
-    if (cellgroup_get_total_size(cellgroup) > POSSIBLE_VALUES_LIMIT)
+    if (cellgroup_get_total_size(cellgroup) > POSSIBLE_VALUES_MAX)
         abort();
     for (size_t i = 0; i < cellgroup_get_total_size(cellgroup); i++) {
         buffer[i] = cellgroup_get_cell_value(cellgroup, i % cellgroup_get_x_size(cellgroup), i / cellgroup_get_y_size(cellgroup));

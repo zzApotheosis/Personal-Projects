@@ -48,7 +48,7 @@ void board_init(struct board * const self) {
     for (unsigned int i = 0; i < board_get_total_y_size(self); i++) {
         for (unsigned int j = 0; j < board_get_total_x_size(self); j++) {
             c = board_get_cell(self, j, i);
-            memset(cell_get_possible_values_vector(c), 1u, POSSIBLE_VALUES_LIMIT);
+            memset(cell_get_possible_values_vector(c), 1u, POSSIBLE_VALUES_MAX);
         }
     }
 }

@@ -1,14 +1,15 @@
 #ifndef CELL_H
 #define CELL_H
 
-#define POSSIBLE_VALUES_LIMIT 9
+#define POSSIBLE_VALUES_MIN 1
+#define POSSIBLE_VALUES_MAX 9
 #define POSSIBLE_VALUE   1
 #define IMPOSSIBLE_VALUE 0
 
 struct cell {
     unsigned char value;
     unsigned char given_value;
-    unsigned char possible_values[POSSIBLE_VALUES_LIMIT];
+    unsigned char possible_values[POSSIBLE_VALUES_MAX];
 };
 
 /* Instance functions */
