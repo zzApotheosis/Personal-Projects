@@ -1,0 +1,13 @@
+# Ignore all by default
+/*
+
+# Exceptions
+!.gitignore
+!CMakeLists.txt
+!/main.c
+!/board.c
+!/board.h
+!/cell.c
+!/cell.h
+!/validity.c
+!/validity.h
