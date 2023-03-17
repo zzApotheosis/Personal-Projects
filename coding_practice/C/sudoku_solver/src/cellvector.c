@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
+#include "board.h"
 #include "cellvector.h"
 
 /* It is expected and assumed that the buffer size will always be 9, since a sudoku row/column always holds a total of 9 numbers */

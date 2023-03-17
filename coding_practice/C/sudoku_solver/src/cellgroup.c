@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <string.h>
 
+#include "cell.h"
 #include "cellgroup.h"
 
 /* Instance functions */
