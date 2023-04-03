@@ -1,4 +1,4 @@
 #!/usr/bin/lua
 
-print("fuck")
+print("Hello world!")
 
