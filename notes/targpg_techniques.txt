@@ -2,10 +2,13 @@ This technique requires a GnuPG keypair, which can be created with:
 gpg --full-generate-key
 
 To encrypt:
-tar -cz <files and directories> | gpg -se --cipher-algo AES256 -r <recipients' public keys, usually identified by their name or email address; for me, it's zzApotheosis@gmail.com> -o <archivefile.tar.gz.gpg>
+tar --create --verbose --owner 0 --group 0 <files and directories> | gzip | gpg --sign --encrypt --cipher-algo aes256 -r <recipients' public keys, usually identified by their name or email address; for me, it's zzApotheosis@gmail.com> > <archivefile.tar.gz.gpg>
+
+To encrypt symmetrically:
+tar --create --verbose --owner 0 --group 0 <files and directories> | gzip | gpg --symmetric --cipher-algo aes256 > <archivefile.tar.gz.gpg>
 
 To decrypt:
-gpg -d <archivefile.tar.gz.gpg> | tar -xz
+cat <archivefile.tar.gz.gpg> | gpg --decrypt | gzip --decompress | tar --extract --verbose
 
 To export a key(pair):
 gpg --export-secret-key --armor <key ID, or name, or email address> > ./key.asc
