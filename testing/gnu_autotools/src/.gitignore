@@ -1,9 +1,0 @@
-# Ignore all by default
-/*
-
-# Exceptions
-!.gitignore
-!Makefile.am
-!main.c
-!foo.c
-!foo.h

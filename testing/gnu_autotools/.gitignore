@@ -1,9 +1,0 @@
-# Ignore all by default
-/*
-
-# Make exceptions for needed files
-!.gitignore
-!src
-!configure.ac
-!Makefile.am
-!README.md
