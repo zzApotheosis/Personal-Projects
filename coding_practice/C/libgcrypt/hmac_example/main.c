@@ -7,7 +7,7 @@
 
 #define NEED_LIBGCRYPT_VERSION "1.10.1"
 
-unsigned char * read_file(const unsigned char fn[], unsigned long * data_len) {
+unsigned char * read_file(const char fn[], unsigned long * data_len) {
     if (fn == NULL) {
         fprintf(stderr, "Error on line %d\n", __LINE__);
         return(NULL);
