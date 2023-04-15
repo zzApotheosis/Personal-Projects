@@ -16,3 +16,6 @@ a.out
 
 # Everything under "target" directories for Rust
 target*
+
+# A hidden directory called ".cache" which comes from some Neovim plugin (probably Coc or NERDTree)
+.cache
