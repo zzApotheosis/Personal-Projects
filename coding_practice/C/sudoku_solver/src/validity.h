@@ -2,7 +2,6 @@
 #define VALIDITY_H
 
 #include "board.h"
-#include "cellvector.h"
 
 /*
  * This function needs to accept a board object and recursively determine every single possible value in every empty cell. There are a few algorithmic ways to evaluate each empty cell:

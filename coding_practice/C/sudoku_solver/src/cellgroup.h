@@ -4,9 +4,9 @@
 #include "cell.h"
 
 struct cellgroup {
-    size_t x_size;
-    size_t y_size;
-    struct cell * cells;
+  size_t x_size;
+  size_t y_size;
+  struct cell * cells;
 };
 
 /* Instance functions */

@@ -1,14 +1,15 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+#include <stdio.h>
 #include "cellgroup.h"
 
 struct board {
-    size_t x_size;
-    size_t y_size;
-    size_t cellgroup_x_size;
-    size_t cellgroup_y_size;
-    struct cellgroup * cellgroups;
+  size_t x_size;
+  size_t y_size;
+  size_t cellgroup_x_size;
+  size_t cellgroup_y_size;
+  struct cellgroup * cellgroups;
 };
 
 /* Instance functions */
