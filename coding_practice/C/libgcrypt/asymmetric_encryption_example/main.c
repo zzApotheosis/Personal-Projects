@@ -5,7 +5,7 @@
 #include <string.h>
 #include <gcrypt.h>
 
-void dump_sexp_to_file(const unsigned char f[], gcry_sexp_t s) {
+void dump_sexp_to_file(const char f[], gcry_sexp_t s) {
     FILE * fh = NULL;
     size_t buf_len;
     unsigned char * buf;
@@ -70,7 +70,7 @@ int main(int argc, char ** argv) {
     
     // Retrieve decrypted text from s-expression
     size_t dec_text_len;
-    const unsigned char * dec_text = gcry_sexp_nth_data(decrypted_sexp, 0, &dec_text_len);
+    const char * dec_text = gcry_sexp_nth_data(decrypted_sexp, 0, &dec_text_len);
     fprintf(stdout, "    Decrypted: %s\n", dec_text);
 
     // Dump stuff to files

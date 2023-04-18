@@ -5,7 +5,7 @@
 
 #define NEED_LIBGCRYPT_VERSION "1.10.1"
 
-void printhex(size_t arr_len, unsigned char arr[arr_len], char name[]) {
+void printhex(int arr_len, unsigned char arr[arr_len], char name[]) {
     fprintf(stdout, "[*] Printing array %s, length=%d\n", name, arr_len);
     fprintf(stdout, "    0x%02x ", arr[0]);
     for (size_t i = 1; i < arr_len - 1; i++) {

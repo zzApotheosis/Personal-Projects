@@ -5,7 +5,7 @@
 #include <string.h>
 #include <gcrypt.h>
 
-void dump_sexp_to_file(const unsigned char f[], gcry_sexp_t s) {
+void dump_sexp_to_file(const char f[], gcry_sexp_t s) {
     FILE * fh = NULL;
     size_t buf_len;
     unsigned char * buf;
@@ -33,7 +33,7 @@ int main(int argc, char ** argv) {
     gcry_sexp_t signature_sexp;
     size_t erroff;
     unsigned char plaintext[16] = "HAHAHAHA ligma";
-    unsigned char dummy_data[16] = "DUMMY LUL";
+    char dummy_data[16] = "DUMMY LUL";
     unsigned char buf[4096];
     
     // Generate a keypair to use for this demonstration
