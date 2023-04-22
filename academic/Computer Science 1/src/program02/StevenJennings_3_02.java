@@ -66,8 +66,12 @@ public class StevenJennings_3_02 {
 
     public static void main(String[] args) {
         // Get user input
-        if (getUserInput() == -1) {
-            return; // Exit the program early
+        try {
+            getUserInput();
+        } catch (InputMismatchException e) {
+            e.printStackTrace();
+            System.err.println("Invalid input!");
+            return;
         }
 
         // Make calculations
@@ -77,57 +81,37 @@ public class StevenJennings_3_02 {
         output();
     }
 
-    private static int getUserInput() {
+    private static void getUserInput() throws InputMismatchException {
         // Instantiate scanner object
         Scanner sc = new Scanner(System.in);
 
         // Get Gross Pay
         System.out.print("Enter the gross pay: ");
-        try {
-            grossPay = sc.nextDouble();
-        } catch (InputMismatchException e) {
-            e.printStackTrace();
-            System.out.println("Invalid input!");
-            return -1;
-        }
+        grossPay = sc.nextDouble();
 
         // Get Savings Rate
         System.out.print("Enter the savings rate %: ");
-        try {
-            savingsRate = sc.nextDouble();
-        } catch (InputMismatchException e) {
-            e.printStackTrace();
-            System.out.println("Invalid input!");
-            return -1;
-        }
+        savingsRate = sc.nextDouble();
 
         // Get IRA Rate
         System.out.print("Enter the IRA rate %: ");
-        try {
-            iraRate = sc.nextDouble();
-        } catch (InputMismatchException e) {
-            e.printStackTrace();
-            System.out.println("Invalid input!");
-            return -1;
-        }
+        iraRate = sc.nextDouble();
 
-        return 0; // 0 for successful method call
+        // Close scanner
+        sc.close();
     }
 
-    private static int calculate() {
+    private static void calculate() {
         savingsAmount = grossPay * (savingsRate / 100.0);
         iraAmount = grossPay * (iraRate / 100.0);
-        return 0; // 0 for successful method call
     }
 
-    private static int output() {
+    private static void output() {
         System.out.println("Gross pay: " + grossPay);
         System.out.println("Savings rate %: " + savingsRate);
         System.out.println("Savings amount: " + savingsAmount);
         System.out.println("IRA rate %: " + iraRate);
         System.out.println("IRA investment amount: " + iraAmount);
         System.out.println("Total of savings and IRA amounts: " + (savingsAmount + iraAmount));
-        return 0; // 0 for successful method call
     }
-
 }
