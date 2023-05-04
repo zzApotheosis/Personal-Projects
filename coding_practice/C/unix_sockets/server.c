@@ -6,6 +6,8 @@
 
 char* socket_path = "\0hidden";
 
+void client_handler(int);
+
 int main(int argc, char** argv) {
     struct sockaddr_un addr;
     char buf[100];
@@ -38,23 +40,35 @@ int main(int argc, char** argv) {
         return EXIT_FAILURE;
     }
 
+    int cpid = 0;
     while (1) {
         if ((c1 = accept(fd, NULL, NULL)) == -1) {
             perror("Accept error");
             return EXIT_FAILURE;
         }
 
-        while ((rc = read(c1, buf, sizeof(buf))) > 0) {
-            fprintf(stdout, "Read %u bytes: %.*s\n", rc, rc, buf);
-        }
-        if (rc == -1) {
-            perror("Read error");
-            return EXIT_FAILURE;
-        } else if (rc == 0) {
-            fprintf(stdout, "EOF\n");
-            close(c1);
+        /* Fork to handle client */
+        cpid = fork();
+        if (!cpid) {
+          client_handler(c1);
         }
     }
 
     return EXIT_SUCCESS;
+}
+
+void client_handler(int c1) {
+  int rc = 0;
+  char buf[256];
+  while ((rc = read(c1, buf, sizeof(buf))) > 0) {
+    fprintf(stdout, "Read %u bytes: %.*s\n", rc, rc, buf);
+  }
+  if (rc == -1) {
+    perror("Read error");
+    exit(EXIT_FAILURE);
+  } else if (rc == 0) {
+    fprintf(stdout, "EOF\n");
+    close(c1);
+  }
+  exit(EXIT_SUCCESS);
 }
