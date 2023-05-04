@@ -10,8 +10,7 @@ void client_handler(int);
 
 int main(int argc, char** argv) {
     struct sockaddr_un addr;
-    char buf[100];
-    int fd, c1, rc;
+    int fd, c1;
 
     if (argc > 1) socket_path = argv[1];
 
