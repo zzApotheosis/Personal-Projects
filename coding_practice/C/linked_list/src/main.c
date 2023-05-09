@@ -31,7 +31,7 @@ int main(void) {
 
   /* Create nodes for the slist */
   for (int i = 0; i < num_nodes; i++) {
-    n = malloc(1 * sizeof(struct node));
+    n = (struct node *) malloc(1 * sizeof(struct node));
     n->data = (i + 1) * 100;
     SLIST_INSERT_HEAD(&list, n, nodes);
   }
