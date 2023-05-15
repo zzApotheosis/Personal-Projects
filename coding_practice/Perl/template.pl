@@ -30,9 +30,8 @@ sub main {
     return $exit_code;
 }
 
-# Execute
-exit(Main::main());
-
 # End Main Class
 1;
 
+# Execute
+exit(Main::main());
