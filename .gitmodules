@@ -1,0 +1,3 @@
+[submodule "coding_practice/C/lkm/lkmpg"]
+	path = coding_practice/C/lkm/lkmpg
+	url = https://github.com/sysprog21/lkmpg.git

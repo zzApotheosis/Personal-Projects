@@ -3,6 +3,7 @@
 
 # Exceptions
 !/.gitignore
+!/lkmpg
 !/lkm.c
 !/lkm2.c
 !/Makefile
