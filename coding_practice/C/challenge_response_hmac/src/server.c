@@ -53,7 +53,7 @@ void init() {
     gcry_control(GCRYCTL_INITIALIZATION_FINISHED);
 }
 
-void generate_mac(size_t data_len, unsigned char data[data_len], size_t key_len, unsigned char key[key_len], size_t buffer_len, unsigned char buffer[buffer_len]) {
+void generate_mac(size_t data_len, unsigned char * data, size_t key_len, unsigned char * key, size_t buffer_len, unsigned char * buffer) {
     int selected_mac_algorithm = GCRY_MAC_HMAC_SHA256;
     unsigned char mac[32];
     size_t mac_len = 32;
@@ -80,7 +80,7 @@ void generate_mac(size_t data_len, unsigned char data[data_len], size_t key_len,
     gcry_mac_close(hd);
 }
 
-int compare(size_t arr_len, unsigned char a[arr_len], unsigned char b[arr_len]) {
+int compare(size_t arr_len, unsigned char * a, unsigned char * b) {
     for (size_t i = 0; i < arr_len; i++) {
         if (a[i] < b[i]) {
             return(-1);
