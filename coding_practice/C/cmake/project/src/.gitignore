@@ -1,8 +1,0 @@
-# Ignore all by default
-/*
-
-# Exceptions
-!.gitignore
-!CMakeLists.txt
-!/main.c
-
