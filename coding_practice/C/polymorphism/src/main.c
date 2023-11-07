@@ -13,6 +13,12 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <errno.h>
+
+#define handle_error(msg) do {\
+        fprintf(stderr, "Line %d: %s\n", __LINE__, msg);\
+        abort();}\
+        while (0);
 
 #define ANIMAL_NAME_SIZE 64
 #define ANIMAL_DESCRIPTION "I'm %s. I'm a %d year old %s. %s\n"
@@ -20,74 +26,86 @@
 struct animal {
         char name[ANIMAL_NAME_SIZE];
         unsigned int age;
-        void (* describe)(const struct animal * const);
+        void (* describe)(const struct animal * const); // Can't use "animal" type definition here because it hasn't been defined yet
 };
+typedef struct animal * animal;
 
-void animal_set_name(struct animal * const self, const char * const new_name) {
+void animal_set_name(animal self, const char * const new_name) {
         if (self == NULL)
-                return;
+                handle_error("self == NULL");
         if (new_name == NULL)
-                return;
+                handle_error("new_name == NULL");
         strncpy(self->name, new_name, ANIMAL_NAME_SIZE);
 }
 
-void animal_set_age(struct animal * const self, const unsigned int new_age) {
+void animal_set_age(animal self, const unsigned int new_age) {
         if (self == NULL)
-                return;
+                handle_error("self == NULL");
         self->age = new_age;
+}
+
+void animal_describe(const struct animal * const self) {
+        if (self == NULL)
+                handle_error("self == NULL");
+        self->describe(self);
 }
 
 void cat_describe(const struct animal * const self) {
         if (self == NULL)
-                return;
+                handle_error("self == NULL");
         fprintf(stdout, ANIMAL_DESCRIPTION, self->name, self->age, "cat", "Meow!");
 }
 
 void dog_describe(const struct animal * const self) {
         if (self == NULL)
-                return;
+                handle_error("self == NULL");
         fprintf(stdout, ANIMAL_DESCRIPTION, self->name, self->age, "dog", "BARK!");
 }
 
 void mountain_lion_describe(const struct animal * const self) {
         if (self == NULL)
-                return;
+                handle_error("self == NULL");
         fprintf(stdout, ANIMAL_DESCRIPTION, self->name, self->age, "sentient mountain lion", "Let's meat.");
 }
 
-struct animal * cat_new() {
-        struct animal * instance = (struct animal *) malloc(1 * sizeof(struct animal));
+animal cat_new() {
+        animal instance = (animal) malloc(1 * sizeof(struct animal));
+        if (instance == NULL)
+                handle_error("Failed to allocate memory");
         memset(instance, 0, sizeof(struct animal));
         instance->describe = cat_describe;
         return instance;
 }
 
-struct animal * dog_new() {
-        struct animal * instance = (struct animal *) malloc(1 * sizeof(struct animal));
+animal dog_new() {
+        animal instance = (animal) malloc(1 * sizeof(struct animal));
+        if (instance == NULL)
+                handle_error("Failed to allocate memory");
         memset(instance, 0, sizeof(struct animal));
         instance->describe = dog_describe;
         return instance;
 }
 
-struct animal * mountain_lion_new() {
-        struct animal * instance = (struct animal *) malloc(1 * sizeof(struct animal));
+animal mountain_lion_new() {
+        animal instance = (animal) malloc(1 * sizeof(struct animal));
+        if (instance == NULL)
+                handle_error("Failed to allocate memory");
         memset(instance, 0, sizeof(struct animal));
         instance->describe = mountain_lion_describe;
         return instance;
 }
 
-void animal_free(struct animal * const self) {
+void animal_free(animal self) {
         if (self == NULL)
-                return;
+                handle_error("self == NULL");
         free(self);
 }
 
 int main(int argc, char * argv[]) {
-        // Define method variables
         int exit_code = 0;
-        struct animal * cat = cat_new();
-        struct animal * dog = dog_new();
-        struct animal * mountain_lion = mountain_lion_new();
+        animal cat = cat_new();
+        animal dog = dog_new();
+        animal mountain_lion = mountain_lion_new();
 
         animal_set_name(cat, "Angel");
         animal_set_name(dog, "Copper");
@@ -96,9 +114,9 @@ int main(int argc, char * argv[]) {
         animal_set_age(dog, 3);
         animal_set_age(mountain_lion, 2);
 
-        cat->describe(cat);
-        dog->describe(dog);
-        mountain_lion->describe(mountain_lion);
+        animal_describe(cat);
+        animal_describe(dog);
+        animal_describe(mountain_lion);
 
         // Now this is just dumb
         fprintf(stdout, "\nHILARIOUSLY INCORRECT USAGE OF C \"POLYMORPHISM\":\n");
@@ -109,6 +127,11 @@ int main(int argc, char * argv[]) {
         animal_free(cat);
         animal_free(dog);
         animal_free(mountain_lion);
+        cat = NULL;
+        dog = NULL;
+        mountain_lion = NULL;
+
+        animal_describe(mountain_lion); // INCOMING PROGRAM ABORT
         
         // Done
         return exit_code;
