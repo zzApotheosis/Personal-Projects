@@ -17,8 +17,8 @@
 
 #define handle_error(msg) do {\
         fprintf(stderr, "Line %d: %s\n", __LINE__, msg);\
-        abort();}\
-        while (0);
+        abort();\
+} while (0);
 
 #define ANIMAL_NAME_SIZE 64
 #define ANIMAL_DESCRIPTION "I'm %s. I'm a %d year old %s. %s\n"
