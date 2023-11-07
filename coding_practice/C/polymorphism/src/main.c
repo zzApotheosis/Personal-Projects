@@ -23,12 +23,14 @@
 #define ANIMAL_NAME_SIZE 64
 #define ANIMAL_DESCRIPTION "I'm %s. I'm a %d year old %s. %s\n"
 
+typedef struct animal * animal;
 struct animal {
         char name[ANIMAL_NAME_SIZE];
         unsigned int age;
-        void (* describe)(const struct animal * const); // Can't use "animal" type definition here because it hasn't been defined yet
+
+        // Implementation-specific functions
+        void (* describe)(const animal);
 };
-typedef struct animal * animal;
 
 void animal_set_name(animal self, const char * const new_name) {
         if (self == NULL)
@@ -44,53 +46,59 @@ void animal_set_age(animal self, const unsigned int new_age) {
         self->age = new_age;
 }
 
-void animal_describe(const struct animal * const self) {
+void animal_birthday(animal self) {
+        if (self == NULL)
+                handle_error("self == NULL");
+        self->age++;
+        fprintf(stdout, "Happy birthday %s! You are now %d years old.\n", self->name, self->age);
+}
+
+void animal_describe(const animal self) {
         if (self == NULL)
                 handle_error("self == NULL");
         self->describe(self);
 }
 
-void cat_describe(const struct animal * const self) {
+void cat_describe(const animal self) {
         if (self == NULL)
                 handle_error("self == NULL");
         fprintf(stdout, ANIMAL_DESCRIPTION, self->name, self->age, "cat", "Meow!");
 }
 
-void dog_describe(const struct animal * const self) {
+void dog_describe(const animal self) {
         if (self == NULL)
                 handle_error("self == NULL");
         fprintf(stdout, ANIMAL_DESCRIPTION, self->name, self->age, "dog", "BARK!");
 }
 
-void mountain_lion_describe(const struct animal * const self) {
+void mountain_lion_describe(const animal self) {
         if (self == NULL)
                 handle_error("self == NULL");
         fprintf(stdout, ANIMAL_DESCRIPTION, self->name, self->age, "sentient mountain lion", "Let's meat.");
 }
 
-animal cat_new() {
+animal animal_new() {
         animal instance = (animal) malloc(1 * sizeof(struct animal));
         if (instance == NULL)
                 handle_error("Failed to allocate memory");
         memset(instance, 0, sizeof(struct animal));
+        return instance;
+}
+
+animal cat_new() {
+        animal instance = animal_new();
         instance->describe = cat_describe;
         return instance;
 }
 
 animal dog_new() {
-        animal instance = (animal) malloc(1 * sizeof(struct animal));
-        if (instance == NULL)
-                handle_error("Failed to allocate memory");
-        memset(instance, 0, sizeof(struct animal));
+        animal instance = animal_new();
         instance->describe = dog_describe;
         return instance;
 }
 
 animal mountain_lion_new() {
-        animal instance = (animal) malloc(1 * sizeof(struct animal));
-        if (instance == NULL)
-                handle_error("Failed to allocate memory");
-        memset(instance, 0, sizeof(struct animal));
+        animal instance = animal_new();
         instance->describe = mountain_lion_describe;
         return instance;
 }
@@ -111,27 +119,20 @@ int main(int argc, char * argv[]) {
         animal_set_name(dog, "Copper");
         animal_set_name(mountain_lion, "Symba");
         animal_set_age(cat, 7);
-        animal_set_age(dog, 3);
+        animal_set_age(dog, 2);
         animal_set_age(mountain_lion, 2);
 
         animal_describe(cat);
         animal_describe(dog);
         animal_describe(mountain_lion);
 
-        // Now this is just dumb
-        fprintf(stdout, "\nHILARIOUSLY INCORRECT USAGE OF C \"POLYMORPHISM\":\n");
-        cat->describe(dog);
-        dog->describe(mountain_lion);
-        mountain_lion->describe(cat);
-        
+        animal_birthday(cat);
+        animal_birthday(dog);
+        animal_birthday(mountain_lion);
+
         animal_free(cat);
         animal_free(dog);
         animal_free(mountain_lion);
-        cat = NULL;
-        dog = NULL;
-        mountain_lion = NULL;
-
-        animal_describe(mountain_lion); // INCOMING PROGRAM ABORT
         
         // Done
         return exit_code;
