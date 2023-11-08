@@ -37,7 +37,9 @@ void animal_set_name(animal self, const char * const new_name) {
                 handle_error("self == NULL");
         if (new_name == NULL)
                 handle_error("new_name == NULL");
+        memset(self->name, 0, ANIMAL_NAME_SIZE);
         strncpy(self->name, new_name, ANIMAL_NAME_SIZE);
+        self->name[ANIMAL_NAME_SIZE - 1] = '\0';
 }
 
 void animal_set_age(animal self, const unsigned int new_age) {
