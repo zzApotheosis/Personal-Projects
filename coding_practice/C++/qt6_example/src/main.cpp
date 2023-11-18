@@ -3,15 +3,14 @@
 
 #include <QApplication>
 
-int main(int argc, char *argv[])
-{
-    QApplication app(argc, argv);
+int main(int argc, char * argv[]) {
+        QApplication app(argc, argv);
 
-    Game * game = Game::get_instance();
-    game->generate_number();
+        Game * game = Game::get_instance();
+        game->generate_number();
 
-    MainWindow w;
-    w.show();
+        MainWindow w;
+        w.show();
 
-    return app.exec();
+        return app.exec();
 }

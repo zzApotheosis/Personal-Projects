@@ -5,6 +5,7 @@
 
 class Game: public QObject {
     Q_OBJECT
+
 public:
     static Game * get_instance(void);
     void generate_number(void);
