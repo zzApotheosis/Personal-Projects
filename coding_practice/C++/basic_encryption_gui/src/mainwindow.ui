@@ -15,23 +15,6 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="2">
-     <widget class="QLineEdit" name="passphrase_lineedit">
-      <property name="echoMode">
-       <enum>QLineEdit::Password</enum>
-      </property>
-      <property name="clearButtonEnabled">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="passphrase_label">
-      <property name="text">
-       <string>Passphrase</string>
-      </property>
-     </widget>
-    </item>
     <item row="1" column="3">
      <widget class="QCheckBox" name="show_passphrase_checkbox">
       <property name="text">
@@ -60,6 +43,11 @@
        </item>
        <item row="0" column="0" alignment="Qt::AlignLeft">
         <widget class="QLabel" name="plaintext_label">
+         <property name="font">
+          <font>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string>Plaintext</string>
          </property>
@@ -74,6 +62,11 @@
        </item>
        <item row="0" column="3" alignment="Qt::AlignRight">
         <widget class="QLabel" name="ciphertext_label">
+         <property name="font">
+          <font>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string>Ciphertext</string>
          </property>
@@ -83,6 +76,23 @@
         <widget class="QTextEdit" name="ciphertext_textedit"/>
        </item>
       </layout>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QLineEdit" name="passphrase_lineedit">
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
+      </property>
+      <property name="clearButtonEnabled">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="2" alignment="Qt::AlignRight">
+     <widget class="QLabel" name="passphrase_label">
+      <property name="text">
+       <string>Passphrase</string>
+      </property>
      </widget>
     </item>
    </layout>
