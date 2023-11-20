@@ -13,7 +13,6 @@ MainWindow::MainWindow(QWidget * parent) :
         ui(new Ui::MainWindow)
 {
         ui->setupUi(this);
-        CipherHandler::initialize();
 }
 
 MainWindow::~MainWindow() { delete ui; }
