@@ -13,20 +13,20 @@ MainWindow::MainWindow(QWidget *parent) :
         QString prompt = "Let's play a game! Try and guess the number between " + QString::number(game->get_low_limit()) + " and " + QString::number(game->get_high_limit()) + ".";
         ui->setupUi(this);
         ui->label->setText(prompt);
-        QObject::connect(ui->lineEdit, &QLineEdit::returnPressed, this, &MainWindow::lineEditTriggered);
-        QObject::connect(ui->pushButton, &QPushButton::pressed, this, &MainWindow::lineEditTriggered);
-        QObject::connect(game, SIGNAL(Game::guess_too_low), this, SLOT(MainWindow::guess_too_low));
-        QObject::connect(game, SIGNAL(Game::guess_too_high), this, SLOT(MainWindow::guess_too_high));
-        QObject::connect(game, SIGNAL(Game::guess_match), this, SLOT(MainWindow::guess_match));
+        QObject::connect(ui->lineEdit, SIGNAL(returnPressed(void)), this, SLOT(lineEditTriggered(void)));
+        QObject::connect(ui->pushButton, SIGNAL(pressed(void)), this, SLOT(lineEditTriggered(void)));
+        QObject::connect(game, SIGNAL(guess_too_low(void)), this, SLOT(guess_too_low(void)));
+        QObject::connect(game, SIGNAL(guess_too_high(void)), this, SLOT(guess_too_high(void)));
+        QObject::connect(game, SIGNAL(guess_match(int &)), this, SLOT(guess_match(int &)));
 }
 
 MainWindow::~MainWindow() {
         Game * game = Game::get_instance();
-        QObject::disconnect(ui->lineEdit, &QLineEdit::returnPressed, this, &MainWindow::lineEditTriggered);
-        QObject::disconnect(ui->pushButton, &QPushButton::pressed, this, &MainWindow::lineEditTriggered);
-        QObject::disconnect(game, SIGNAL(Game::guess_too_low), this, SLOT(MainWindow::guess_too_low));
-        QObject::disconnect(game, SIGNAL(Game::guess_too_high), this, SLOT(MainWindow::guess_too_high));
-        QObject::disconnect(game, SIGNAL(Game::guess_match), this, SLOT(MainWindow::guess_match));
+        QObject::disconnect(ui->lineEdit, SIGNAL(returnPressed(void)), this, SLOT(lineEditTriggered(void)));
+        QObject::disconnect(ui->pushButton, SIGNAL(pressed(void)), this, SLOT(lineEditTriggered(void)));
+        QObject::disconnect(game, SIGNAL(guess_too_low(void)), this, SLOT(guess_too_low(void)));
+        QObject::disconnect(game, SIGNAL(guess_too_high(void)), this, SLOT(guess_too_high(void)));
+        QObject::disconnect(game, SIGNAL(guess_match(int &)), this, SLOT(guess_match(int &)));
         delete ui;
 }
 
