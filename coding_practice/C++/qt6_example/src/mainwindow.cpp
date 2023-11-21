@@ -15,18 +15,18 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->label->setText(prompt);
         QObject::connect(ui->lineEdit, &QLineEdit::returnPressed, this, &MainWindow::lineEditTriggered);
         QObject::connect(ui->pushButton, &QPushButton::pressed, this, &MainWindow::lineEditTriggered);
-        QObject::connect(game, &Game::guess_too_low, this, &MainWindow::guess_too_low);
-        QObject::connect(game, &Game::guess_too_high, this, &MainWindow::guess_too_high);
-        QObject::connect(game, &Game::guess_match, this, &MainWindow::guess_match);
+        QObject::connect(game, SIGNAL(Game::guess_too_low), this, SLOT(MainWindow::guess_too_low));
+        QObject::connect(game, SIGNAL(Game::guess_too_high), this, SLOT(MainWindow::guess_too_high));
+        QObject::connect(game, SIGNAL(Game::guess_match), this, SLOT(MainWindow::guess_match));
 }
 
 MainWindow::~MainWindow() {
         Game * game = Game::get_instance();
         QObject::disconnect(ui->lineEdit, &QLineEdit::returnPressed, this, &MainWindow::lineEditTriggered);
         QObject::disconnect(ui->pushButton, &QPushButton::pressed, this, &MainWindow::lineEditTriggered);
-        QObject::disconnect(game, &Game::guess_too_low, this, &MainWindow::guess_too_low);
-        QObject::disconnect(game, &Game::guess_too_high, this, &MainWindow::guess_too_high);
-        QObject::disconnect(game, &Game::guess_match, this, &MainWindow::guess_match);
+        QObject::disconnect(game, SIGNAL(Game::guess_too_low), this, SLOT(MainWindow::guess_too_low));
+        QObject::disconnect(game, SIGNAL(Game::guess_too_high), this, SLOT(MainWindow::guess_too_high));
+        QObject::disconnect(game, SIGNAL(Game::guess_match), this, SLOT(MainWindow::guess_match));
         delete ui;
 }
 
