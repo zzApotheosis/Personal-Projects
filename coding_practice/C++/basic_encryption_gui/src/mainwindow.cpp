@@ -10,12 +10,17 @@
 
 MainWindow::MainWindow(QWidget * parent) :
         QMainWindow(parent),
-        ui(new Ui::MainWindow)
+        ui(new Ui::MainWindow),
+        ch(CipherHandler())
 {
         ui->setupUi(this);
+        QObject::connect(&this->ch, SIGNAL(decryption_failed(void)), this, SLOT(decryption_failed(void)));
 }
 
-MainWindow::~MainWindow() { delete ui; }
+MainWindow::~MainWindow() {
+        QObject::disconnect(&this->ch, SIGNAL(decryption_failed(void)), this, SLOT(decryption_failed(void)));
+        delete ui;
+}
 
 bool MainWindow::passphrase_check() {
         return ui->passphrase_lineedit->text().size() > 0;
@@ -78,6 +83,9 @@ void MainWindow::on_decrypt_button_clicked() {
                 ciphertext.push_back(ciphertext_array[i]);
         }
         std::vector<unsigned char> plaintext = ch.decrypt(ciphertext);
+        if (plaintext.size() == 0) {
+                return;
+        }
         std::stringstream s;
         for (int i = 0; i < plaintext.size(); i++) {
                 s << plaintext[i];
@@ -100,3 +108,6 @@ void MainWindow::on_show_passphrase_checkbox_stateChanged(int state) {
         }
 }
 
+void MainWindow::decryption_failed() {
+        ui->statusbar->showMessage("Unable to decrypt");
+}

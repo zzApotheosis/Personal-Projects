@@ -17,6 +17,7 @@
 #define KEY_SIZE 32
 #define BLOCK_SIZE 32
 #define IV_SIZE BLOCK_SIZE
+#define PLAINTEXT_IDENTIFIER "PLAINTEXT"
 
 void dump_vector(const std::vector<unsigned char> & v) {
         char buffer[4];
@@ -215,11 +216,30 @@ std::vector<unsigned char> CipherHandler::encrypt(const std::vector<unsigned cha
         }
         // The rest of the ciphertext vector is the ciphertext payload
 
-        // Encrypt the given plaintext data
+        // The first block will always be the PLAINTEXT_IDENTIFIER string
         unsigned char plaintextbuffer[BLOCK_SIZE];
         unsigned char ciphertextbuffer[BLOCK_SIZE];
         int index = 0;
         int block_size = 0;
+        std::memset(plaintextbuffer, 0, sizeof(plaintextbuffer));
+        std::memset(ciphertextbuffer, 0, sizeof(ciphertextbuffer));
+        
+        // Prepend the PLAINTEXT_IDENTIFIER string
+        const std::string plaintext_identifier(PLAINTEXT_IDENTIFIER);
+        for (int i = 0; i < plaintext_identifier.size(); i++) {
+                plaintextbuffer[i] = plaintext_identifier[i];
+        }
+        err = gcry_cipher_encrypt(this->ch, ciphertextbuffer, sizeof(ciphertextbuffer), plaintextbuffer, sizeof(plaintextbuffer));
+        if (err) {
+                std::cerr << "GOT ERROR ON gcry_cipher_encrypt" << std::endl;
+                exit(err);
+        }
+        for (int i = 0; i < sizeof(ciphertextbuffer); i++) {
+                ciphertext.push_back(ciphertextbuffer[i]);
+        }
+
+
+        // Encrypt the given plaintext data
         while (index < plaintext.size()) {
                 // Reset buffers
                 std::memset(plaintextbuffer, 0, sizeof(plaintextbuffer));
@@ -302,11 +322,33 @@ std::vector<unsigned char> CipherHandler::decrypt(const std::vector<unsigned cha
                 exit(err);
         }
 
-        // The rest of the ciphertext is the payload to decrypt
+        // Decrypt the plaintext identifier string
+        // This is a test designed to ensure the rest of the payload is nearly guarantee that the rest of the payload will be decrypted successfully
         std::vector<unsigned char> plaintext;
         unsigned char ciphertextbuffer[BLOCK_SIZE];
         unsigned char plaintextbuffer[BLOCK_SIZE];
         int block_size = 0;
+        for (int i = 0; i < BLOCK_SIZE; i++) {
+                ciphertextbuffer[i] = ciphertext[index++];
+        }
+        err = gcry_cipher_decrypt(this->ch, plaintextbuffer, sizeof(plaintextbuffer), ciphertextbuffer, sizeof(ciphertextbuffer));
+        if (err) {
+                std::cerr << "GOT ERROR ON gcry_cipher_decrypt" << std::endl;
+                exit(err);
+        }
+        std::string test_string;
+        for (unsigned int i = 0; i < sizeof(plaintextbuffer); i++) {
+                if (plaintextbuffer[i] == '\0')
+                        break;
+                test_string += plaintextbuffer[i];
+        }
+        if (test_string.compare(std::string(PLAINTEXT_IDENTIFIER))) {
+                emit decryption_failed();
+                return std::vector<unsigned char>();
+        }
+
+
+        // The rest of the ciphertext is the payload to decrypt
         while (index < ciphertext.size()) {
                 // Reset buffers
                 std::memset(plaintextbuffer, 0, sizeof(plaintextbuffer));

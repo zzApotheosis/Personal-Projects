@@ -33,6 +33,9 @@ class CipherHandler : public QObject {
         void generate_salt(void);
         void generate_iv(void);
         void derive_key(void);
+
+      signals:
+        void decryption_failed(void);
 };
 
 #endif // CIPHERHANDLER_HPP

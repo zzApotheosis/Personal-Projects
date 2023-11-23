@@ -28,6 +28,7 @@ class MainWindow : public QMainWindow {
         void on_encrypt_button_clicked(void);
         void on_decrypt_button_clicked(void);
         void on_show_passphrase_checkbox_stateChanged(int);
+        void decryption_failed(void);
 };
 
 #endif // MAINWINDOW_HPP
