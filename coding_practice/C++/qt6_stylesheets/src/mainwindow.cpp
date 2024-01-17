@@ -21,9 +21,37 @@ MainWindow::~MainWindow() {
  *       signals with QObject::connect().
  */
 void MainWindow::on_pushButton_blue_clicked() {
-        qApp->setStyleSheet("QLabel { color: blue }");
+        qApp->setStyleSheet(
+                        "QPushButton { "
+                        "       background-color: white;"
+                        "       border-style: outset;"
+                        "       border-width: 2px;"
+                        "       border-radius: 10px;"
+                        "       border-color: blue;"
+                        "       font: bold 14px;"
+                        "       min-width: 10em;"
+                        "       padding: 6px;"
+                        "}"
+                        ""
+                        "QLabel {"
+                        "       color: blue;"
+                        "}");
 }
 
 void MainWindow::on_pushButton_red_clicked() {
-        qApp->setStyleSheet("QLabel { color: red }");
+        qApp->setStyleSheet(
+                        "QPushButton { "
+                        "       background-color: white;"
+                        "       border-style: outset;"
+                        "       border-width: 2px;"
+                        "       border-radius: 10px;"
+                        "       border-color: red;"
+                        "       font: bold 14px;"
+                        "       min-width: 10em;"
+                        "       padding: 6px;"
+                        "}"
+                        ""
+                        "QLabel {"
+                        "       color: red;"
+                        "}");
 }
