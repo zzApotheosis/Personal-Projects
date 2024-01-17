@@ -1,0 +1,8 @@
+# Ignore all by default
+/*
+
+# Exceptions to the rule
+!/.gitignore
+!/CMakeLists.txt
+!/src/
+!/build.sh
