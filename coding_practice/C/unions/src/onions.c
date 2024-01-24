@@ -14,7 +14,7 @@ int main(int argc, char * argv[]) {
 
         fprintf(stdout, "This is project %s.\n", PROJECT_NAME);
 
-        ogres_have_layers(67, "cool string");
+        ogres_have_layers(1651470178, "nice job");
 
         return EXIT_SUCCESS;
 }
