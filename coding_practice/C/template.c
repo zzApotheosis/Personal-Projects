@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <string.h>
+#include <errno.h>
 
 #include "template.h"
 
@@ -17,7 +19,7 @@ int main(int argc, char * argv[]) {
 
         /* Try passing in any arguments to this program */
         if (argc > 1)
-                handle_error(stderr);
+                die(stderr, strerror(errno));
 
         return exit_code;
 }

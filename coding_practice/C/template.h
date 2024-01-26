@@ -2,17 +2,16 @@
 #define TEMPLATE_H
 
 #include <stdio.h>
-#include <string.h>
-#include <errno.h>
 
 #define warn(f, msg)\
         do {\
                 fprintf(f, "%s:%d %s\n", __FILE__, __LINE__, msg);\
+                fflush(f);\
         } while (0);
 
-#define handle_error(f)\
+#define die(f, msg)\
         do {\
-                fprintf(f, "%s:%d %s\n", __FILE__, __LINE__, strerror(errno));\
+                warn(f, msg);\
                 abort();\
         } while (0);
 
