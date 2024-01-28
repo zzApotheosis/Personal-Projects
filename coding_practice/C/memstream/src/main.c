@@ -1,5 +1,8 @@
 /*
  * See the man page for open_memstream(3)
+ *
+ * Disclaimer: I did pretty much no error handling in this application.
+ * A real implementation will have error checking everywhere.
  */
 
 #include <stdlib.h>
@@ -39,6 +42,37 @@ int main(void) {
         fflush(stream);
         fprintf(stdout, "stream size: %lu\n", size);
         fprintf(stdout, "stream: %s\n", stream_buffer);
+        fprintf(stdout, "\n");
+
+        /* Use fread() to get data from the memory stream */
+        fprintf(stdout, "Using fread() and fseek() to read from the memory stream:\n");
+        memset(buffer, 0, BUFFER_SIZE);
+        fprintf(stdout, "Reading 5 bytes from the memory stream:\n");
+        fread(buffer, 5, 1, stream);
+        fwrite(buffer, BUFFER_SIZE, 1, stdout);
+        fwrite("\n", 1, 1, stdout);
+        fflush(stdout);
+        fprintf(stdout, "Reading as many bytes as possbile to fill the buffer (size: %u):\n", BUFFER_SIZE);
+        memset(buffer, 0, BUFFER_SIZE);
+        //fseek(stream, 0, SEEK_SET);
+        fread(buffer, BUFFER_SIZE, 1, stream);
+        fwrite(buffer, BUFFER_SIZE, 1, stdout);
+        fwrite("\n\n", 2, 1, stdout);
+        fflush(stdout);
+
+        /* Use fseek() and fwrite() to modify the memory stream */
+        fprintf(stdout, "Using fseek() and fwrite() to modify the memory stream:\n");
+        memset(buffer, 0, BUFFER_SIZE);
+        fseek(stream, 7, SEEK_SET);
+        snprintf(buffer, BUFFER_SIZE, "Steven! :)");
+        fwrite(buffer, BUFFER_SIZE, 1, stream);
+        memset(buffer, 0, BUFFER_SIZE);
+        fseek(stream, 0, SEEK_SET);
+        fread(buffer, BUFFER_SIZE, 1, stream);
+        fprintf(stdout, "Modified buffer:\n");
+        fwrite(buffer, BUFFER_SIZE, 1, stdout);
+        fprintf(stdout, "\n");
+        fflush(stdout);
 
         /* Close the stream and free its memory */
         fclose(stream);
