@@ -65,14 +65,16 @@ int main(void) {
         memset(buffer, 0, BUFFER_SIZE);
         fseek(stream, 7, SEEK_SET);
         snprintf(buffer, BUFFER_SIZE, "Steven! :)");
-        fwrite(buffer, BUFFER_SIZE, 1, stream);
+        fwrite(buffer, strnlen(buffer, BUFFER_SIZE), 1, stream);
+        fflush(stream);
         memset(buffer, 0, BUFFER_SIZE);
         fseek(stream, 0, SEEK_SET);
         fread(buffer, BUFFER_SIZE, 1, stream);
         fprintf(stdout, "Modified buffer:\n");
         fwrite(buffer, BUFFER_SIZE, 1, stdout);
-        fprintf(stdout, "\n");
+        fprintf(stdout, "\n\n");
         fflush(stdout);
+        fprintf(stdout, "stream size: %lu\n", size);
 
         /* Close the stream and free its memory */
         fclose(stream);
