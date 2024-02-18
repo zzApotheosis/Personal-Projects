@@ -1,3 +1,17 @@
+/*
+ * This is a very straightforward implementation demonstrating the concept of
+ * read/write mutex locks in C.
+ *
+ * Note: In this specific example, the counter_get_read_lock() and
+ * counter_get_write_lock() functions could be internal-only, but
+ * these functions are exposed (to main.c) so that other programmers can
+ * learn how/when to get the locks. These functions could be made
+ * private to this source code file (static) because the
+ * counter_set_value(), counter_get_value(), and counter_increment()
+ * functions could internally handle the mutex locking mechanism
+ * themselves.
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -6,6 +20,13 @@
 
 #include "common-macros.h"
 #include "counter.h"
+
+struct counter_t {
+        size_t value;
+        pthread_mutex_t lock;
+        ssize_t locks;
+        pthread_cond_t instance_released;
+};
 
 counter_t * counter_new() {
         counter_t * const new_counter = (counter_t *) malloc(1 * sizeof(counter_t));
@@ -36,6 +57,13 @@ ssize_t counter_get_value(const counter_t * const self, size_t * const value_ptr
         if (value_ptr == NULL)
                 return -1;
         *value_ptr = self->value;
+        return 0;
+}
+
+ssize_t counter_increment(counter_t * const self, const size_t value) {
+        if (self == NULL)
+                return -1;
+        self->value += value;
         return 0;
 }
 

@@ -47,7 +47,7 @@ void * thread_reader_main(void * arg) {
                 fprintf(stdout, "Thread #%02d reading counter value: ", thread_id);
                 counter_get_value(counter_instance, &value);
                 fprintf(stdout, "%ld\n", value);
-                usleep((rand() % READER_SLEEP_TIME) * 2 / NUM_READ_THREADS);
+                usleep((rand() % READER_SLEEP_TIME) * 4 / NUM_READ_THREADS);
                 counter_release_read_lock(counter_instance);
         }
 
