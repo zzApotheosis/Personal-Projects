@@ -90,5 +90,6 @@ ssize_t counter_release_write_lock(counter_t * const self) {
                 return -1;
         counter_instance_locks = 0;
         pthread_mutex_unlock(&counter_instance_lock);
+        pthread_cond_broadcast(&counter_instance_released);
         return 0;
 }

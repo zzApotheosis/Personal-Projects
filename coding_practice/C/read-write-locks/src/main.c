@@ -9,7 +9,7 @@
 #include "counter.h"
 
 #ifndef NUM_READ_THREADS
-#define NUM_READ_THREADS 16
+#define NUM_READ_THREADS 4
 #endif
 
 #ifndef MAX_VALUE
