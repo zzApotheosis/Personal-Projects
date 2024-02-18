@@ -93,6 +93,7 @@ int main(void) {
         fprintf(stdout, "Joining writer thread\n");
         pthread_join(writer_thread, NULL);
 
+        counter_destroy();
         fprintf(stdout, "Main thread finished\n");
         return EXIT_SUCCESS;
 }
