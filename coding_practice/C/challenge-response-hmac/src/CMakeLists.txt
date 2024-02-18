@@ -1,6 +1,6 @@
 # Project Definitions
 cmake_minimum_required(VERSION 3.23.2)
-project(challenge_response_hmac)
+project(challenge-response-hmac)
 
 # Check for required packages, libraries, items, etc.
 #find_package(vlc REQUIRED)

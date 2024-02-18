@@ -1,6 +1,6 @@
 # Project Definitions
 cmake_minimum_required(VERSION 3.23.2)
-project(function_pointer_example)
+project(function-pointer-example)
 
 # Define main executable
 add_executable(${CMAKE_PROJECT_NAME})

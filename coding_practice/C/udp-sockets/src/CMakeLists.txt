@@ -1,6 +1,6 @@
 # Project Definitions
 cmake_minimum_required(VERSION 3.23.2)
-project(udp_example)
+project(udp-example)
 
 # Define main executable
 add_executable(server)

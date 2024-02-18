@@ -1,7 +1,7 @@
-project('libcurl_smtp', 'c',
+project('libcurl-smtp', 'c',
   version : '0.1',
   default_options : ['warning_level=3'])
 
 libcurl = dependency('libcurl')
 
-executable('libcurl_smtp', ['main.c'], dependencies : [libcurl])
+executable('libcurl-smtp', ['main.c'], dependencies : [libcurl])
