@@ -27,6 +27,8 @@
 static int thread_count = 0;
 static pthread_mutex_t thread_count_mutex = PTHREAD_MUTEX_INITIALIZER;
 
+static counter_t * counter_instance = NULL;
+
 void * thread_reader_main(void * arg) {
         if (arg) {} /* Completely unnecessary arg check but it makes GCC and Clang shut up about unused arguments */
         pthread_mutex_lock(&thread_count_mutex);
@@ -41,12 +43,12 @@ void * thread_reader_main(void * arg) {
         /* We are now at the mercy of the kernel scheduler */
         for (;value < MAX_VALUE;) {
                 usleep(rand() % READER_SLEEP_TIME);
-                const counter_t * const counter = counter_get_read_lock();
+                counter_get_read_lock(counter_instance);
                 fprintf(stdout, "Thread #%02d reading counter value: ", thread_id);
-                counter_get_value(counter, &value);
+                counter_get_value(counter_instance, &value);
                 fprintf(stdout, "%ld\n", value);
                 usleep((rand() % READER_SLEEP_TIME) * 2 / NUM_READ_THREADS);
-                counter_release_read_lock(counter);
+                counter_release_read_lock(counter_instance);
         }
 
         return NULL;
@@ -60,11 +62,11 @@ void * thread_writer_main(void * arg) {
         /* We are now at the mercy of the kernel scheduler */
         for (;value < MAX_VALUE;) {
                 usleep(rand() % WRITER_SLEEP_TIME);
-                counter_t * const counter = counter_get_write_lock();
+                counter_get_write_lock(counter_instance);
                 value++;
                 fprintf(stdout, "Iterating writer thread, new value = %lu\n", value);
-                counter_set_value(counter, value);
-                counter_release_write_lock(counter);
+                counter_set_value(counter_instance, value);
+                counter_release_write_lock(counter_instance);
         }
 
         return NULL;
@@ -76,6 +78,7 @@ int main(void) {
         setbuf(stderr, NULL);
         
         fprintf(stdout, "Starting main thread\n");
+        counter_instance = counter_new();
 
         /* Initialize the reader threads */
         pthread_t threads[NUM_READ_THREADS];
@@ -93,7 +96,7 @@ int main(void) {
         fprintf(stdout, "Joining writer thread\n");
         pthread_join(writer_thread, NULL);
 
-        counter_destroy();
+        counter_destroy(counter_instance);
         fprintf(stdout, "Main thread finished\n");
         return EXIT_SUCCESS;
 }
