@@ -39,6 +39,8 @@ void * thread_main(void * arg) {
         pthread_mutex_lock(&thread_count_mutex);
         int thread_id = thread_count++;
         pthread_mutex_unlock(&thread_count_mutex);
+
+        size_t contribution_counter = 0;
         fprintf(stdout, "Initializing thread #%d\n", thread_id);
 
         /* We are now at the mercy of the kernel scheduler */
@@ -50,8 +52,8 @@ void * thread_main(void * arg) {
                         break;
                 }
                 data++;
-                fprintf(stdout, "Thread #%02d incremented the shared data to %d\n",
-                                thread_id, data);
+                fprintf(stdout, "Thread #%02d incremented the shared data to %06d; this thread has contributed %06d times\n",
+                                thread_id, data, ++contribution_counter);
                 pthread_mutex_unlock(&data_mutex);
                 pthread_cond_broadcast(&data_incremented);
         }
