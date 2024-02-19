@@ -1,8 +1,6 @@
 #ifndef COUNTER_H
 #define COUNTER_H
 
-#include <pthread.h>
-
 typedef struct counter_t counter_t;
 
 counter_t * counter_new(void);
