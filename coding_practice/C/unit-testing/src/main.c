@@ -19,10 +19,10 @@ int main(void) {
         fprintf(stdout, "Life, the universe, and everything: %d\n", divide(420, 10));
 
         /* Modulo */
-        fprintf(stdout, "%d is even? %s\n", 69, mod(69, 2) == 1 ? "Hell nah!" : "Heavens yes!");
+        fprintf(stdout, "%d is even? %s\n", 69, mod(69, 2) == 0 ? "Heavens yes!" : "Hell nah!");
 
         /* Exponent */
-        fprintf(stdout, "Beeg number: %d\n", power(10, 4));
+        fprintf(stdout, "Beeg number: %d\n", power(69, 3));
 
         /* Factorial */
         fprintf(stdout, "%d! = %ld\n", 5, factorial(5));
