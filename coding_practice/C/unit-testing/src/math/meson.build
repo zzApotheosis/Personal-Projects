@@ -10,4 +10,4 @@ math_lib_sources = files(
 
 include_dirs = ['../util']
 
-math_lib = static_library('math', math_lib_sources, include_directories : include_dirs)
+math_lib = static_library('math', math_lib_sources, include_directories: include_dirs)
