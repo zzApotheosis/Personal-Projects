@@ -14,11 +14,11 @@ MainWindow::MainWindow(QWidget * parent) :
         ch(CipherHandler())
 {
         ui->setupUi(this);
-        QObject::connect(&this->ch, SIGNAL(decryption_failed(void)), this, SLOT(decryption_failed(void)));
+        QObject::connect(&this->ch, &CipherHandler::decryption_failed, this, &MainWindow::decryption_failed);
 }
 
 MainWindow::~MainWindow() {
-        QObject::disconnect(&this->ch, SIGNAL(decryption_failed(void)), this, SLOT(decryption_failed(void)));
+        QObject::disconnect(&this->ch, &CipherHandler::decryption_failed, this, &MainWindow::decryption_failed);
         delete ui;
 }
 
