@@ -109,5 +109,5 @@ void MainWindow::on_show_passphrase_checkbox_stateChanged(int state) {
 }
 
 void MainWindow::decryption_failed() {
-        ui->statusbar->showMessage("Unable to decrypt");
+        ui->statusbar->showMessage("Unable to decrypt", 5000);
 }
