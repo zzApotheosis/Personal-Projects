@@ -1,4 +1,5 @@
 --recurse=yes
 --kinds-C=+lpxzL
+--kinds-C++=+lpxzLAU
 --exclude=.git
 --exclude=build
