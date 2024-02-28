@@ -1,0 +1,8 @@
+Powerful features of Neovim (or Vim/Vi in general)
+• Tabs
+• Tags
+• Folding
+• Macros
+• Plugins
+
+There's more to this list. I'll need to update this later.
