@@ -1,0 +1,77 @@
+/------------------------------\
+|==============================|
+|===== Welcome to Neovim! =====|
+|==============================|
+\------------------------------/
+
+Get help with Neovim ==================== :help
+                                          :h
+
+Exit Neovim ============================= :q
+                                          :q!
+                                          :qa!
+
+Files
+-----------------------------------------
+Edit a file ============================= :e
+
+Write a file ============================ :w
+
+Display current file ==================== :f
+
+Buffers
+-----------------------------------------
+Create a new buffer ===================== :enew
+
+Switch between buffers ================== :buffer
+
+List buffers ============================ :ls
+
+Delete buffers ========================== :bd
+
+Sessions
+-----------------------------------------
+Restore a previous session ============== :source
+
+Save the current session ================ :mksession
+
+Tabs
+-----------------------------------------
+Create new tabs ========================= :tabnew
+                                          :Texplore (:Tex)
+
+Move tabs =============================== :tabmove
+
+Navigate tabs =========================== gt
+                                          gT
+
+File Explorer
+-----------------------------------------
+Navigate the filesystem ================= :Explore (:Ex)
+
+Refresh :Explore window listing ========= Ctrl+l
+
+Tags
+-----------------------------------------
+Go to declaration/definition ============ Ctrl+]
+                                          g]
+                                          :tag
+
+Folding
+-----------------------------------------
+Create a new fold ======================= zf
+
+Open a fold ============================= zo
+
+Open all folds ========================== zR
+
+Close a fold ============================ zc
+
+Close all folds ========================= zM
+
+Delete a fold =========================== zd
+
+
+/------------------------\
+| Never stop learning :D |
+\------------------------/
