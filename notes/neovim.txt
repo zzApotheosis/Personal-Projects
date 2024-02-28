@@ -4,5 +4,6 @@ Powerful features of Neovim (or Vim/Vi in general)
 • Folding
 • Macros
 • Plugins
+• Sessions
 
 There's more to this list. I'll need to update this later.
