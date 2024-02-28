@@ -37,4 +37,7 @@ augroup END
 inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 " Setup custom keymaps
-nnoremap <F12> :CocCommand clangd.symbolInfo<Enter>
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
