@@ -35,6 +35,12 @@ Restore a previous session ============== :source
 
 Save the current session ================ :mksession
 
+Views
+-----------------------------------------
+Create a view for the current buffer ==== :mkview
+
+Restore a view for the current buffer === :loadview
+
 Tabs
 -----------------------------------------
 Create new tabs ========================= :tabnew
@@ -71,6 +77,7 @@ Close all folds ========================= zM
 
 Delete a fold =========================== zd
 
+Delete all manual/marker folds ========== zE
 
 /------------------------\
 | Never stop learning :D |
