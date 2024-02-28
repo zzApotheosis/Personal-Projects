@@ -1,4 +1,4 @@
 --recurse=yes
---kinds-C=+l
+--kinds-C=+lpxzL
 --exclude=.git
 --exclude=build
