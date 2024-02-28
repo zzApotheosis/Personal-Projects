@@ -28,12 +28,6 @@ call plug#end()
 
 lua require('leap').create_default_mappings()
 
-" Restore Cursor on exit
-augroup RestoreCursorShapeOnExit
-  autocmd!
-  autocmd VimLeave * set guicursor=a:ver20
-augroup END
-
 inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 " Setup custom keymaps
