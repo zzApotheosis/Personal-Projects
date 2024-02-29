@@ -31,9 +31,3 @@ call plug#end()
 lua require('leap').create_default_mappings()
 
 inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
-
-" Setup custom keymaps
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
