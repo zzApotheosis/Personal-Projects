@@ -7,6 +7,8 @@ set expandtab
 set ai
 set si
 set cindent
+set mouse=a
+set foldmethod=indent
 
 " Plugins will be downloaded under the specified directory.
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
