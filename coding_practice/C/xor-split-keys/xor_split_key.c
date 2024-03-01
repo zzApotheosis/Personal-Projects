@@ -90,7 +90,7 @@ int main(int argc, char ** argv) {
     memset(split_keys, 0, N_PARTS * KEY_LEN);
     uint8_t derived_key[KEY_LEN];
     memset(derived_key, 0, KEY_LEN);
-    uint8_t buffer[32]; // Character buffer for strings
+    char buffer[32]; // Character buffer for strings
     memset(buffer, 0, sizeof(buffer));
 
     // Show that our original key is clearly defined in memory
