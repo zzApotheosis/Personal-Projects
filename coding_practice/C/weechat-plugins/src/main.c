@@ -45,7 +45,7 @@ int command_double_cb (const void * pointer, void * data, struct t_gui_buffer * 
 
 int weechat_plugin_init(struct t_weechat_plugin * plugin, int argc, char * argv[]) {
         if (plugin == NULL)
-                warn(stderr, "Plugin is NULL! Expect a crash soon!");
+                warn("Plugin is NULL! Expect a crash soon!");
 
         if (argc || argv) {} /* Useless statement to satisfy compiler warnings */
 

@@ -9,6 +9,6 @@ thread_dep = dependency('threads')
 
 counter_sources = files('counter.c')
 
-counter_lib = static_library('counter', counter_sources)
+counter_lib = static_library('counter', counter_sources, include_directories : ['../../common-macros'])
 
-executable('read-write-locks', ['main.c'], dependencies : [thread_dep], link_with : counter_lib)
+executable('read-write-locks', ['main.c'], include_directories : ['../../common-macros'], dependencies : [thread_dep], link_with : counter_lib)

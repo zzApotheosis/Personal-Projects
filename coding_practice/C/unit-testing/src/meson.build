@@ -12,5 +12,5 @@ project_link_targets = [math_lib]
 executable('unit-test-example',
   main_sources,
   link_with : project_link_targets,
-  include_directories : ['util', 'math'],
+  include_directories : ['../../common-macros', 'math'],
   install : true)

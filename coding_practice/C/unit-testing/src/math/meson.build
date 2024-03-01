@@ -8,6 +8,6 @@ math_lib_sources = files(
   'factorial.c'
   )
 
-include_dirs = ['../util']
+include_dirs = ['../../../common-macros']
 
 math_lib = static_library('math', math_lib_sources, include_directories: include_dirs)

@@ -7,4 +7,6 @@ project_sources = files('main.c')
 
 weechat_dep = dependency('weechat')
 
-shared_library(meson.project_name(), project_sources, dependencies : [weechat_dep])
+include_common_macros = include_directories('../../common-macros')
+
+shared_library(meson.project_name(), project_sources, include_directories : [include_common_macros], dependencies : [weechat_dep])
