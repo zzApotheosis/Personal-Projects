@@ -31,25 +31,35 @@ local plugins = {
                 'stevearc/oil.nvim',
                 opts = {},
                 -- Optional dependencies
-                dependencies = { "nvim-tree/nvim-web-devicons" },
+                dependencies = {"nvim-tree/nvim-web-devicons"},
                 config = function ()
                         require("oil").setup()
                 end
-        },
+        }
 
         -- leap.nvim
-        {
+        ,{
                 'ggandor/leap.nvim',
                 opts = {}
-        },
+        }
 
         -- project.nvim
-        {
+        ,{
                'ahmedkhalf/project.nvim',
                 opts = {},
                 config = function()
-			require("project_nvim").setup {}
+			require("project_nvim").setup()
 		end
+        }
+
+        -- nvim-tree.lua
+        ,{
+                'nvim-tree/nvim-tree.lua',
+                opts = {},
+                dependencies = {"nvim-tree/nvim-web-devicons"},
+                config = function()
+                        require("nvim-tree").setup()
+                end
         }
 }
 
