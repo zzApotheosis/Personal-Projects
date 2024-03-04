@@ -64,6 +64,15 @@ local plugins = {
                         require("nvim-tree").setup()
                 end
         }
+
+        -- ale
+        ,{
+                'dense-analysis/ale',
+                opts = {},
+                config = function()
+                        -- Do nothing
+                end
+        }
 }
 
 -- Invoke lazy.nvim to setup desired plugins
