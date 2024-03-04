@@ -40,7 +40,10 @@ local plugins = {
         -- leap.nvim
         ,{
                 'ggandor/leap.nvim',
-                opts = {}
+                opts = {},
+                config = function()
+                        require('leap').create_default_mappings()
+                end
         }
 
         -- project.nvim
