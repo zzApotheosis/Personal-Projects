@@ -1,0 +1,6 @@
+[Socket]
+ListenStream=/home/zzapotheosis/.emacs.d/.socket
+#DirectoryMode=0700
+
+[Install]
+WantedBy=sockets.target
