@@ -1,2 +1,2 @@
-alias l ls -lah
+alias l ls -lah $*
 alias c clear 1
