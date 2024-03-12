@@ -1,6 +1,6 @@
 ;; Enable mouse support you fucking donkey
 (unless (display-graphic-p)
-  (xterm-mouse-mode)
+  (setq-default xterm-mouse-mode t)
   )
 
 ;; Disable the startup screen you fucking donkey
