@@ -1,6 +1,6 @@
 ;; Enable mouse support you fucking donkey
 (unless (display-graphic-p)
-  (setq-default xterm-mouse-mode t)
+  (xterm-mouse-mode t)
   )
 
 ;; Disable the startup screen you fucking donkey
@@ -24,16 +24,17 @@
 ;; Set C style
 (setq c-default-style "gnu")
 
-;;(setq-default tab-stop-list (number-sequence ))
+;; Define hook for c-mode-common
+(add-hook 'c-mode-common-hook
+          #'(lambda ()
+              (column-number-mode t)
+              ))
 
-(defun my-c-mode-common-hook ()
-  ;; my customizations for all of c-mode and related modes
-  (setq column-number-mode t)
-  ;;(c-mode-tab-stop-list)
-  ;;(setq indent-line-function 'insert-tab)
-  )
-(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+;; Define hook for prog-mode
+(add-hook 'prog-mode-hook
+          #'(lambda ()
+              (hs-minor-mode t)
+              ))
 
 ;; Customize backup location
 (setq
@@ -44,27 +45,30 @@
  kept-new-versions 6
  kept-old-versions 2
  version-control t)       ; use versioned backups
+;; (defun make-backup-file-name (FILE)
+;;   (let ((dirname (concat "~/.emacs.d/backup/"
+;;                          (format-time-string "%y/%m/%d/"))))
+;;     (if (not (file-exists-p dirname))
+;;         (make-directory dirname t))
+;;     (concat dirname (file-name-nondirectory FILE))))
 
 ;; Show matching braces
-(setq-default show-paren-mode t)
-
-;; Show column numbers
-(setq-default column-number-mode t)
+(show-paren-mode t)
 
 ;; Set smooth scrolling
 (setq-default scroll-step 1)
 
 ;; ERC column width
-;; (add-hook 'window-configuration-change-hook
-;;           #'(lambda ()
-;;              (setq erc-fill-column (- (window-width) 2))))
-(make-variable-buffer-local 'erc-fill-column)
-(add-hook 'window-configuration-change-hook 
-	  #'(lambda ()
-	      (save-excursion
-	        (walk-windows
-		 (lambda (w)
-		   (let ((buffer (window-buffer w)))
-		     (set-buffer buffer)
-		     (when (eq major-mode 'erc-mode)
-		       (setq erc-fill-column (- (window-width w) 2)))))))))
+(add-hook 'window-configuration-change-hook
+          #'(lambda ()
+              (setq erc-fill-column (- (window-width) 2))))
+;; (make-variable-buffer-local 'erc-fill-column)
+;; (add-hook 'window-configuration-change-hook 
+;; 	  #'(lambda ()
+;; 	      (save-excursion
+;; 	        (walk-windows
+;; 		 (lambda (w)
+;; 		   (let ((buffer (window-buffer w)))
+;; 		     (set-buffer buffer)
+;; 		     (when (eq major-mode 'erc-mode)
+;; 		       (setq erc-fill-column (- (window-width w) 2)))))))))
