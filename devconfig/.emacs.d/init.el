@@ -36,6 +36,13 @@
               (hs-minor-mode t)
               ))
 
+;; Define hook for dired-mode
+(add-hook 'dired-mode-hook
+          #'(lambda ()
+              (interactive)
+              (dired-hide-details-mode)
+              ))
+
 ;; Customize backup location
 (setq
  backup-by-copying t      ; don't clobber symlinks
