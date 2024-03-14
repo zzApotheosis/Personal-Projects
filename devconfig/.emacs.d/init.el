@@ -7,13 +7,13 @@
 (setq-default inhibit-startup-screen t)
 
 ;; Never use tabs you fucking donkey
-(setq-default indent-tabs-mode nil)
+(indent-tabs-mode 0)
 
 ;; Don't use the menu bar you fucking donkey
-(setq-default menu-bar-mode nil)
+(menu-bar-mode 0)
 
 ;; Don't use the scroll bar you fucking donkey
-(setq-default scroll-bar-mode nil)
+(scroll-bar-mode 0)
 
 ;; Define tab-stop-list
 (let ((limit 120)
@@ -74,8 +74,8 @@
 ;; 	  #'(lambda ()
 ;; 	      (save-excursion
 ;; 	        (walk-windows
-;; 		 (lambda (w)
-;; 		   (let ((buffer (window-buffer w)))
-;; 		     (set-buffer buffer)
-;; 		     (when (eq major-mode 'erc-mode)
-;; 		       (setq erc-fill-column (- (window-width w) 2)))))))))
+;; 		 #'(lambda (w)
+;; 		     (let ((buffer (window-buffer w)))
+;; 		       (set-buffer buffer)
+;; 		       (when (eq major-mode 'erc-mode)
+;; 		         (setq erc-fill-column (- (window-width w) 2)))))))))
