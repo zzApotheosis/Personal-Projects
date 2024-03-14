@@ -118,7 +118,6 @@ fi
 if [ -z $(alias c       > /dev/null 2>&1) ]; then alias c="clear"; fi
 if [ -z $(alias ls      > /dev/null 2>&1) ]; then alias ls="ls --color=auto"; fi
 if [ -z $(alias l       > /dev/null 2>&1) ]; then alias l="ls -lah"; fi
-if [ -z $(alias dummy_a > /dev/null 2>&1) ]; then alias dummy_a="echo dummy_a alias"; fi
 if [ -z $(alias grep    > /dev/null 2>&1) ]; then alias grep="grep --color=auto"; fi
 if [ -z $(alias emc     > /dev/null 2>&1) ]; then alias emc="emacsclient"; fi
 
