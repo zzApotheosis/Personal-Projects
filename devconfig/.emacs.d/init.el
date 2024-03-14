@@ -15,6 +15,9 @@
 ;; Don't use the scroll bar you fucking donkey
 (scroll-bar-mode 0)
 
+;; Define eshell history size
+(setq-default eshell-history-size 25000)
+
 ;; Define tab-stop-list
 (let ((limit 120)
       (step 4)

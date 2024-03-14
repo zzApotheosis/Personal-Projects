@@ -121,9 +121,6 @@ if [ -z "$(alias l       > /dev/null 2>&1)" ]; then alias l="ls -lah"; fi
 if [ -z "$(alias grep    > /dev/null 2>&1)" ]; then alias grep="grep --color=auto"; fi
 if [ -z "$(alias edit    > /dev/null 2>&1)" ]; then alias edit="${EDITOR}"; fi
 if [ -z "$(alias e       > /dev/null 2>&1)" ]; then alias e="edit"; fi
-if [ -z "$(alias em      > /dev/null 2>&1)" ]; then alias em="emacs"; fi
-if [ -z "$(alias emc     > /dev/null 2>&1)" ]; then alias emc="emacsclient"; fi
-if [ -z "$(alias emd     > /dev/null 2>&1)" ]; then alias emd="em --daemon"; fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
