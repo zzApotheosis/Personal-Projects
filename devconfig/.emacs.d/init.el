@@ -30,13 +30,15 @@
 ;; Define hook for c-mode-common
 (add-hook 'c-mode-common-hook
           #'(lambda ()
-              (column-number-mode t)
+              ;; Put stuff here
               ))
 
 ;; Define hook for prog-mode
 (add-hook 'prog-mode-hook
           #'(lambda ()
               (hs-minor-mode t)
+	      (display-line-numbers-mode t)
+	      (column-number-mode t)
               ))
 
 ;; Define hook for dired-mode
@@ -82,3 +84,17 @@
 ;; 		       (set-buffer buffer)
 ;; 		       (when (eq major-mode 'erc-mode)
 ;; 		         (setq erc-fill-column (- (window-width w) 2)))))))))
+
+;; Custom settings from the (customize) function
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(Man-notify-method 'pushy)) ;; I want man pages to follow in the current buffer
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
