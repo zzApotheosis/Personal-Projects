@@ -12,6 +12,9 @@
 ;; Don't use the menu bar you fucking donkey
 (menu-bar-mode 0)
 
+;; Don't use the tool bar you fucking donkey
+(tool-bar-mode 0)
+
 ;; Don't use the scroll bar you fucking donkey
 (scroll-bar-mode 0)
 
