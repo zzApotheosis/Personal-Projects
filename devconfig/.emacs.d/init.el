@@ -22,8 +22,8 @@
 (use-package auto-complete)
 
 ;; Default to Emacs keybindings but have Evil mode installed
+(setq evil-default-state 'emacs)
 (evil-mode t)
-(setq-default evil-default-state 'emacs)
 
 ;; Enable Vertico mode
 (vertico-mode t)
@@ -41,8 +41,9 @@
 (add-hook 'c-mode-common-hook
           #'(lambda ()
               ;; Put stuff here
-	      (eglot-ensure)
+	      ;;(eglot-ensure)
 	      (auto-complete-mode t)
+	      ;;(xref-etags-mode t)
               ))
 
 ;; Define hook for prog-mode
@@ -56,9 +57,15 @@
 ;; Define hook for dired-mode
 (add-hook 'dired-mode-hook
           #'(lambda ()
-              (interactive)
-              (dired-hide-details-mode)
+              (dired-hide-details-mode t)
               ))
+
+;; Define hook for compilation-mode
+(add-hook 'compilation-mode-hook
+	  #'(lambda ()
+	      (setq evil-state 'emacs)
+	      (evil-local-mode t)
+	      ))
 
 ;; Customize backup location
 (setq
