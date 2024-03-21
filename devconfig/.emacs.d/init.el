@@ -1,32 +1,26 @@
-;; Enable mouse support you fucking donkey
-(unless (display-graphic-p)
-  (xterm-mouse-mode t)
-  )
-
-;; Disable the startup screen you fucking donkey
+;; These are the basic settings
+(unless (display-graphic-p) (xterm-mouse-mode t))
 (setq-default inhibit-startup-screen t)
-
-;; Never use tabs, the menu bar, the tool bar, or the scroll bar you fucking donkey
 (indent-tabs-mode 0)
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
-
-;; Define eshell history size
 (setq-default eshell-history-size 25000)
+(vertico-mode t)
+(show-paren-mode t)
 
 ;; Define manual load-path items
-(add-to-list 'load-path "~/.emacs.d/pkgs/auto-complete")
+;;(add-to-list 'load-path "~/.emacs.d/pkgs/auto-complete")
 
 ;; Load manually installed packages
-(use-package auto-complete)
+;;(use-package auto-complete)
 
 ;; Default to Emacs keybindings but have Evil mode installed
 (setq evil-default-state 'emacs)
 (evil-mode t)
 
-;; Enable Vertico mode
-(vertico-mode t)
+;; Set smooth scrolling
+(setq-default scroll-step 1)
 
 ;; Define tab-stop-list
 (let ((limit 120)
@@ -35,14 +29,19 @@
   (setq-default tab-stop-list (number-sequence start limit step)))
 
 ;; Set C style
-(setq c-default-style "gnu")
+(c-add-style "z"
+	     '("gnu"
+	       (c-basic-offset . 4)
+	       (c-set-offset 'substatement-open '0)
+	       ))
+(setq c-default-style "z")
 
 ;; Define hook for c-mode-common
 (add-hook 'c-mode-common-hook
           #'(lambda ()
               ;; Put stuff here
 	      ;;(eglot-ensure)
-	      (auto-complete-mode t)
+	      ;;(auto-complete-mode t)
 	      ;;(xref-etags-mode t)
               ))
 
@@ -82,12 +81,6 @@
 ;;     (if (not (file-exists-p dirname))
 ;;         (make-directory dirname t))
 ;;     (concat dirname (file-name-nondirectory FILE))))
-
-;; Show matching braces
-(show-paren-mode t)
-
-;; Set smooth scrolling
-(setq-default scroll-step 1)
 
 ;; ERC column width
 (add-hook 'window-configuration-change-hook
