@@ -15,7 +15,7 @@
 ;; Define eshell history size
 (setq-default eshell-history-size 25000)
 
-;; Define more load-path items
+;; Define manual load-path items
 (add-to-list 'load-path "~/.emacs.d/pkgs/auto-complete")
 
 ;; Load manually installed packages
@@ -105,8 +105,7 @@
  ;; If there is more than one, they won't work right.
  '(Man-notify-method 'pushy)
  '(package-selected-packages
-   '(org rust-mode flycheck cl-lib goto-chg eglot dash multishell)))
- ;; I want man pages to follow in the current buffer
+   '(magit org rust-mode flycheck cl-lib goto-chg eglot dash multishell)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
