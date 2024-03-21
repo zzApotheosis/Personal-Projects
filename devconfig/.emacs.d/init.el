@@ -41,7 +41,7 @@
 (add-hook 'c-mode-common-hook
           #'(lambda ()
               ;; Put stuff here
-	      (eglot-ensure t)
+	      (eglot-ensure)
 	      (auto-complete-mode t)
               ))
 
