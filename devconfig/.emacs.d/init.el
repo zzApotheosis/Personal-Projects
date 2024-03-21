@@ -41,7 +41,7 @@
 (add-hook 'c-mode-common-hook
           #'(lambda ()
               ;; Put stuff here
-	      (eglot-ensure)
+	      (eglot-ensure t)
 	      (auto-complete-mode t)
               ))
 
@@ -105,7 +105,7 @@
  ;; If there is more than one, they won't work right.
  '(Man-notify-method 'pushy)
  '(package-selected-packages
-   '(magit org rust-mode flycheck cl-lib goto-chg eglot dash multishell)))
+   '(magit org rust-mode flycheck goto-chg eglot dash multishell)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -1,0 +1,9 @@
+#+title: Emacs Notes
+
+* Useful packages
+- eglot
+- evil
+- magit
+- org
+- vertico
+- flycheck
