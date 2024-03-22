@@ -1,0 +1,17 @@
+[window]
+opacity = 0.9
+blur = true
+dynamic_title = true
+
+[scrolling]
+history = 10000
+
+[colors.primary]
+foreground = "#FFFFFF"
+background = "#000000"
+
+[cursor]
+style = "Beam"
+
+[mouse]
+hide_when_typing = true

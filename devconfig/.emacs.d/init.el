@@ -29,12 +29,12 @@
   (setq-default tab-stop-list (number-sequence start limit step)))
 
 ;; Set C style
-(c-add-style "z"
-	     '("gnu"
-	       (c-basic-offset . 4)
-	       (c-set-offset 'substatement-open '0)
-	       ))
-(setq c-default-style "z")
+;; (c-add-style "z"
+;; 	     '("gnu"
+;; 	       (c-basic-offset . 4)
+;; 	       (c-set-offset 'substatement-open '0)
+;; 	       ))
+(setq c-default-style "gnu")
 
 ;; Define hook for c-mode-common
 (add-hook 'c-mode-common-hook
@@ -61,6 +61,13 @@
 
 ;; Define hook for compilation-mode
 (add-hook 'compilation-mode-hook
+	  #'(lambda ()
+	      (setq evil-state 'emacs)
+	      (evil-local-mode t)
+	      ))
+
+;; Define hook for man-common-mode
+(add-hook 'Man-mode-hook
 	  #'(lambda ()
 	      (setq evil-state 'emacs)
 	      (evil-local-mode t)
