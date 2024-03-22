@@ -11,7 +11,8 @@ foreground = "#FFFFFF"
 background = "#000000"
 
 [cursor]
-style = "Beam"
+style = "Block"
+vi_mode_style = "Block"
 
 [mouse]
 hide_when_typing = true
