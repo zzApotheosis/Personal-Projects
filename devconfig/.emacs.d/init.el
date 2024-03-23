@@ -36,6 +36,13 @@
 ;; 	       ))
 (setq c-default-style "gnu")
 
+;; Create function to default to evil emacs mode
+(defun default-to-evil-emacs-mode ()
+  "Personal function to default to emacs evil mode in certain major modes"
+  (setq evil-state 'emacs)
+  (evil-local-mode t)
+  )
+
 ;; Define hook for c-mode-common
 (add-hook 'c-mode-common-hook
           #'(lambda ()
@@ -62,15 +69,19 @@
 ;; Define hook for compilation-mode
 (add-hook 'compilation-mode-hook
 	  #'(lambda ()
-	      (setq evil-state 'emacs)
-	      (evil-local-mode t)
+	      (default-to-evil-emacs-mode)
 	      ))
 
-;; Define hook for man-common-mode
+;; Define hook for Man-mode
 (add-hook 'Man-mode-hook
 	  #'(lambda ()
-	      (setq evil-state 'emacs)
-	      (evil-local-mode t)
+	      (default-to-evil-emacs-mode)
+	      ))
+
+;; Define hook for buffer-mode
+(add-hook 'Buffer-menu-mode-hook
+	  #'(lambda ()
+	      (default-to-evil-emacs-mode)
 	      ))
 
 ;; Customize backup location
