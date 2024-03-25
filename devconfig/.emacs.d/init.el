@@ -84,6 +84,12 @@
 	      (default-to-evil-emacs-mode)
 	      ))
 
+;; Define hook for eshell-mode
+(add-hook 'eshell-mode-hook
+	  #'(lambda()
+	      (default-to-evil-emacs-mode)
+	      ))
+
 ;; Customize backup location
 (setq
  backup-by-copying t      ; don't clobber symlinks
@@ -130,3 +136,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; Enable certain commands
+(put 'downcase-region 'disabled nil)
