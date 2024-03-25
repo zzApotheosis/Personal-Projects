@@ -8,6 +8,7 @@
 (setq-default eshell-history-size 25000)
 (vertico-mode t)
 (show-paren-mode t)
+(global-auto-revert-mode t)
 
 ;; Define manual load-path items
 ;;(add-to-list 'load-path "~/.emacs.d/pkgs/auto-complete")
