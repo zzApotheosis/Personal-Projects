@@ -87,11 +87,8 @@
 	      (default-to-evil-emacs-mode)
 	      ))
 
-;; Define hook for eshell-mode
-(add-hook 'eshell-mode-hook
-	  #'(lambda()
-	      (default-to-evil-emacs-mode)
-	      ))
+;; Create personal keybindings
+(keymap-global-set "ESC ESC z" 'evil-local-mode)
 
 ;; Customize backup location
 (setq
