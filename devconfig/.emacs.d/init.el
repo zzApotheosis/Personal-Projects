@@ -16,9 +16,9 @@
 ;; Load manually installed packages
 ;;(use-package auto-complete)
 
-;; Default to Emacs keybindings but have Evil mode installed
+;; Default to Emacs keybindings and leave Evil mode disabled but have it installed and available
 (setq evil-default-state 'emacs)
-(evil-mode t)
+;;(evil-mode t)
 
 ;; Set smooth scrolling
 (setq-default scroll-step 1)
@@ -57,35 +57,17 @@
 
 ;; Define hook for prog-mode
 (add-hook 'prog-mode-hook
-          #'(lambda ()
-              (hs-minor-mode t)
-	      (display-line-numbers-mode t)
-	      (column-number-mode t)
-              ))
+          (lambda ()
+            (hs-minor-mode t)
+	    (display-line-numbers-mode t)
+	    (column-number-mode t)
+            ))
 
 ;; Define hook for dired-mode
 (add-hook 'dired-mode-hook
-          #'(lambda ()
-              (dired-hide-details-mode t)
-              ))
-
-;; Define hook for compilation-mode
-(add-hook 'compilation-mode-hook
-	  #'(lambda ()
-	      (default-to-evil-emacs-mode)
-	      ))
-
-;; Define hook for Man-mode
-(add-hook 'Man-mode-hook
-	  #'(lambda ()
-	      (default-to-evil-emacs-mode)
-	      ))
-
-;; Define hook for buffer-mode
-(add-hook 'Buffer-menu-mode-hook
-	  #'(lambda ()
-	      (default-to-evil-emacs-mode)
-	      ))
+          (lambda ()
+            (dired-hide-details-mode t)
+            ))
 
 ;; Create personal keybindings
 (keymap-global-set "ESC ESC z" 'evil-local-mode)
