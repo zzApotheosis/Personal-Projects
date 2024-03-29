@@ -9,6 +9,7 @@
 (vertico-mode t)
 (show-paren-mode t)
 (global-auto-revert-mode t)
+(global-ede-mode t)
 
 ;; Define manual load-path items
 ;;(add-to-list 'load-path "~/.emacs.d/pkgs/auto-complete")
@@ -39,21 +40,14 @@
 	       ))
 (setq c-default-style "gnu")
 
-;; Create function to default to evil emacs mode
-(defun default-to-evil-emacs-mode ()
-  "Personal function to default to emacs evil mode in certain major modes"
-  (setq evil-state 'emacs)
-  (evil-local-mode t)
-  )
-
 ;; Define hook for c-mode-common
 (add-hook 'c-mode-common-hook
-          #'(lambda ()
-              ;; Put stuff here
-	      ;;(eglot-ensure)
-	      ;;(auto-complete-mode t)
-	      ;;(xref-etags-mode t)
-              ))
+          (lambda ()
+            ;; Put stuff here
+	    (eglot-ensure)
+	    (auto-complete-mode t)
+	    ;;(xref-etags-mode t)
+            ))
 
 ;; Define hook for prog-mode
 (add-hook 'prog-mode-hook
@@ -110,6 +104,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(Man-notify-method 'pushy)
+ '(eglot-ignored-server-capabilities
+   '(:documentFormattingProvider :documentRangeFormattingProvider :documentOnTypeFormattingProvider))
  '(package-selected-packages
    '(magit org rust-mode flycheck goto-chg eglot dash multishell)))
 (custom-set-faces
@@ -121,3 +117,4 @@
 
 ;; Enable certain commands
 (put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
