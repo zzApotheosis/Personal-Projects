@@ -1,5 +1,10 @@
 #+title: Emacs Notes
 
+* Notes
+Unless this gets updated at some point in the future, this community-driven GitHub repository is a fantastic place to
+learn what cool packages we can use to extend and customize God's editor, GNU Emacs.
+https://github.com/emacs-tw/awesome-emacs
+
 * Useful packages
 - eglot (LSP client)
 - evil (Extensible vi layer for Emacs)
