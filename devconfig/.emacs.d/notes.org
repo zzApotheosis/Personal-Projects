@@ -1,9 +1,10 @@
 #+title: Emacs Notes
 
 * Useful packages
-- eglot
-- evil
-- magit
-- org
-- vertico
-- flycheck
+- eglot (LSP client)
+- evil (Extensible vi layer for Emacs)
+- magit (Git helper)
+- org (Note-taking, like this file :D)
+- vertico (Enhanced completion)
+- company (Automatic code suggestions)
+- flycheck (Syntax checking alternative to flymake)

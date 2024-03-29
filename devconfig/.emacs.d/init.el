@@ -45,8 +45,8 @@
           (lambda ()
             ;; Put stuff here
 	    (eglot-ensure)
-	    (auto-complete-mode t)
-	    ;;(xref-etags-mode t)
+	    (yas-minor-mode t)
+            (flycheck-mode t)
             ))
 
 ;; Define hook for prog-mode
@@ -55,6 +55,7 @@
             (hs-minor-mode t)
 	    (display-line-numbers-mode t)
 	    (column-number-mode t)
+	    (company-mode t)
             ))
 
 ;; Define hook for dired-mode
@@ -107,7 +108,7 @@
  '(eglot-ignored-server-capabilities
    '(:documentFormattingProvider :documentRangeFormattingProvider :documentOnTypeFormattingProvider))
  '(package-selected-packages
-   '(magit org rust-mode flycheck goto-chg eglot dash multishell)))
+   '(flycheck evil vertico yasnippet company magit org rust-mode goto-chg eglot dash multishell)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
