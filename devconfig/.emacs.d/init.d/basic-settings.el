@@ -9,6 +9,7 @@
 (global-auto-revert-mode t)
 (show-paren-mode t)
 
+;; TODO: Need to move these to their own pkg-setup.d files
 (vertico-mode t)
 (global-ede-mode t)
 
@@ -39,4 +40,3 @@
 ;;     (if (not (file-exists-p dirname))
 ;;         (make-directory dirname t))
 ;;     (concat dirname (file-name-nondirectory FILE))))
-

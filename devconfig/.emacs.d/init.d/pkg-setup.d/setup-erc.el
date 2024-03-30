@@ -12,4 +12,3 @@
 ;; 		       (set-buffer buffer)
 ;; 		       (when (eq major-mode 'erc-mode)
 ;; 		         (setq erc-fill-column (- (window-width w) 2)))))))))
-

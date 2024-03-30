@@ -21,3 +21,8 @@
           (lambda ()
             (dired-hide-details-mode t)
             ))
+
+(add-hook 'Man-mode-hook
+	  (lambda ()
+	    (setq Man-notify-method 'pushy)
+	    ))
