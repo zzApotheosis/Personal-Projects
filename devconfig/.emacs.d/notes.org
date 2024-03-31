@@ -13,3 +13,4 @@ https://github.com/emacs-tw/awesome-emacs
 - vertico (Enhanced completion)
 - company (Automatic code suggestions)
 - flycheck (Syntax checking alternative to flymake)
+- vterm (Terminal emulator based on libvterm. Seriously, use this one)

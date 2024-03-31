@@ -1,3 +1,6 @@
+(use-package erc
+  :ensure t)
+
 ;; ERC column width
 ;;(add-hook 'window-configuration-change-hook
 ;;          #'(lambda ()

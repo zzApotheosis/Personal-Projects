@@ -16,7 +16,7 @@ use FindBin;
 use Cwd;
 use POSIX qw(strftime);
 use File::Copy;
-use File::Path qw(make_path);
+use File::Path qw(make_path remove_tree);
 
 # Class Fields
 my $exec_name = "$FindBin::RealScript";
@@ -29,6 +29,9 @@ my $now = strftime("%Y-%m-%d_%H:%M:%S", localtime());
 my @backup_targets = ("$home_dir/.emacs",
 		      "$home_dir/.emacs.el",
 		      "$emacs_dir/eshell/alias");
+my $pkg_dir = "$emacs_dir/pkgs";
+my @other_package_targets = ("https://github.com/jaypei/emacs-neotree",
+			     "https://github.com/akermu/emacs-libvterm");
 
 # Main Subroutine
 sub main
@@ -38,17 +41,20 @@ sub main
 
     # Backup existing Emacs files (if they exist)
     Main::backup_existing_emacs();
-
+    
     # Set up directory structure and symlinks
     make_path("$emacs_dir") or warn($!);
     make_path("$emacs_dir/eshell") or warn($!);
     eval {
-	symlink("$exec_dir/init.el", "$emacs_dir/init.el") or warn($!);
-	symlink("$exec_dir/init.d", "$emacs_dir/init.d") or warn($!);
+    	symlink("$exec_dir/init.el", "$emacs_dir/init.el") or warn($!);
+    	symlink("$exec_dir/init.d", "$emacs_dir/init.d") or warn($!);
     };
     if ($@) {
-	warn($!);
+    	warn($!);
     }
+
+    # Download non-ELPA packages (yes, I realize that this is what MELPA is for, but I'm still learning Emacs Lisp so I still have yet to write this functionality within elisp itself)
+    Main::download_packages();
 
     # Copy other files to Emacs directory
     copy("$exec_dir/eshell/alias", "$emacs_dir/eshell/alias") or warn($!);
@@ -75,6 +81,31 @@ sub backup_existing_emacs
 	    # Looks like we don't have to do anything here :)
 	}
     }
+}
+
+# Download Packages Subroutine
+sub download_packages
+{
+    # Define subroutine variables
+    my $repo_basename;
+
+    make_path($pkg_dir) or die($!);
+    chdir($pkg_dir);
+    for (my $i = 0; $i < scalar(@other_package_targets); $i++)
+    {
+	if ($other_package_targets[$i] =~ /\/([^\/]*)$/)
+        {
+	    $repo_basename = $1;
+	}
+	else
+	{
+	    warn($!);
+	    next;
+	}
+	remove_tree($repo_basename) or warn($!);
+	system("git clone $other_package_targets[$i]") or warn($!);
+    }
+    chdir($original_cwd);
 }
 
 # End Main Class

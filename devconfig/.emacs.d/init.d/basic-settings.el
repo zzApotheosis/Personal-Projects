@@ -10,7 +10,6 @@
 (show-paren-mode t)
 
 ;; TODO: Need to move these to their own pkg-setup.d files
-(vertico-mode t)
 (global-ede-mode t)
 
 ;; Confirm when quitting emacs
