@@ -1,0 +1,11 @@
+*
+
+!/.gitignore
+!/backup
+!/eshell
+!/elpa
+!/auto-save-list
+!/init.el
+!/init.d
+!/notes.org
+!/emacs-setup.pl
