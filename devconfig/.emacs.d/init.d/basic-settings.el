@@ -23,17 +23,16 @@
   (setq-default tab-stop-list (number-sequence start limit step)))
 
 ;; Customize backup location
-(setq
- backup-by-copying t      ; don't clobber symlinks
- backup-directory-alist
- '(("." . "~/.emacs.d/backup/"))    ; don't litter my fs tree
- delete-old-versions t
- kept-new-versions 6
- kept-old-versions 2
- version-control t)       ; use versioned backups
-;; (defun make-backup-file-name (FILE)
-;;   (let ((dirname (concat "~/.emacs.d/backup/"
-;;                          (format-time-string "%y/%m/%d/"))))
-;;     (if (not (file-exists-p dirname))
-;;         (make-directory dirname t))
-;;     (concat dirname (file-name-nondirectory FILE))))
+(let (
+      (backup-dir (concat user-emacs-directory "backup/" (format-time-string "%Y/%m/%d/")))
+      )
+  (when (not (file-directory-p backup-dir))
+    (make-directory backup-dir t))
+  (setq
+   backup-by-copying t
+   backup-directory-alist (list (cons "." backup-dir))
+   delete-old-versions t
+   kept-new-versions 4
+   kept-old-versions 2
+   version-control t)
+  )
