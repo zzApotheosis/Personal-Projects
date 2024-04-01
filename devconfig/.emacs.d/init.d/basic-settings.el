@@ -8,8 +8,6 @@
 (setq-default eshell-history-size 25000)
 (global-auto-revert-mode t)
 (show-paren-mode t)
-
-;; TODO: Need to move these to their own pkg-setup.d files
 (global-ede-mode t)
 
 ;; Confirm when quitting emacs

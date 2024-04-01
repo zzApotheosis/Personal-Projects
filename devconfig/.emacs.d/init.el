@@ -1,14 +1,14 @@
 ;; Initialize GNU Emacs
-(make-variable-buffer-local 'load-path)
-
-(add-to-list 'load-path (concat user-emacs-directory "/init.d/"))
-
-(load "basic-settings")
-(load "pkg-setup")
-(load "c-style-preferences")
-(load "enable-commands")
-(load "hooks")
-(load "keybindings")
+(let (
+      (init-dir (concat user-emacs-directory "/init.d/"))
+      )
+  (load-file (concat init-dir "/basic-settings.el"))
+  (load-file (concat init-dir "/pkg-setup.el"))
+  (load-file (concat init-dir "/c-style-preferences.el"))
+  (load-file (concat init-dir "/enable-commands.el"))
+  (load-file (concat init-dir "/hooks.el"))
+  (load-file (concat init-dir "/keybindings.el"))
+  )
 
 ;; Custom settings from the (customize) function
 (custom-set-variables

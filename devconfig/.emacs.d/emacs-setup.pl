@@ -27,8 +27,7 @@ my $home_dir = $ENV{HOME};
 my $emacs_dir = "$home_dir/.emacs.d";
 my $now = strftime("%Y-%m-%d_%H:%M:%S", localtime());
 my @backup_targets = ("$home_dir/.emacs",
-		      "$home_dir/.emacs.el",
-		      "$emacs_dir/eshell/alias");
+		      "$home_dir/.emacs.el");
 my $pkg_dir = "$emacs_dir/pkgs";
 my @other_package_targets = ("https://github.com/jaypei/emacs-neotree",
 			     "https://github.com/akermu/emacs-libvterm");
@@ -43,11 +42,10 @@ sub main
     Main::backup_existing_emacs();
     
     # Set up directory structure and symlinks
-    make_path("$emacs_dir") or warn($!);
-    make_path("$emacs_dir/eshell") or warn($!);
     eval {
-    	symlink("$exec_dir/init.el", "$emacs_dir/init.el") or warn($!);
-    	symlink("$exec_dir/init.d", "$emacs_dir/init.d") or warn($!);
+	unlink("$emacs_dir") or warn($!);
+	my $emacs_dir_basename = basename($emacs_dir);
+    	symlink("$emacs_dir", "$original_cwd/$emacs_dir_basename") or warn($!);
     };
     if ($@) {
     	warn($!);
