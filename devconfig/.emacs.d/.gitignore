@@ -2,7 +2,6 @@
 
 !/.gitignore
 !/eshell
-!/elpa
 !/auto-save-list
 !/init.el
 !/init.d
