@@ -2,7 +2,6 @@
 
 !/.gitignore
 !/eshell
-!/auto-save-list
 !/init.el
 !/init.d
 !/notes.org

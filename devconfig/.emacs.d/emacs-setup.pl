@@ -17,6 +17,7 @@ use Cwd;
 use POSIX qw(strftime);
 use File::Copy;
 use File::Path qw(make_path remove_tree);
+use File::Basename;
 
 # Class Fields
 my $exec_name = "$FindBin::RealScript";
@@ -42,20 +43,25 @@ sub main
     Main::backup_existing_emacs();
     
     # Set up directory structure and symlinks
-    eval {
-	unlink("$emacs_dir") or warn($!);
-	my $emacs_dir_basename = basename($emacs_dir);
-    	symlink("$emacs_dir", "$original_cwd/$emacs_dir_basename") or warn($!);
+    if (-d "$emacs_dir")
+    {
+	remove_tree("$emacs_dir");
+    }
+    if (-l "$emacs_dir")
+    {
+	unlink("$emacs_dir");
+    }
+    eval
+    {
+    	symlink("$original_cwd", "$emacs_dir") or warn($!);
     };
-    if ($@) {
+    if ($@)
+    {
     	warn($!);
     }
 
     # Download non-ELPA packages (yes, I realize that this is what MELPA is for, but I'm still learning Emacs Lisp so I still have yet to write this functionality within elisp itself)
     Main::download_packages();
-
-    # Copy other files to Emacs directory
-    copy("$exec_dir/eshell/alias", "$emacs_dir/eshell/alias") or warn($!);
 
     # Done
     return $exit_code;
@@ -87,7 +93,8 @@ sub download_packages
     # Define subroutine variables
     my $repo_basename;
 
-    make_path($pkg_dir) or die($!);
+    remove_tree($pkg_dir);
+    make_path($pkg_dir);
     chdir($pkg_dir);
     for (my $i = 0; $i < scalar(@other_package_targets); $i++)
     {
@@ -100,7 +107,10 @@ sub download_packages
 	    warn($!);
 	    next;
 	}
-	remove_tree($repo_basename) or warn($!);
+        if (-d $repo_basename)
+        {
+	    remove_tree($repo_basename) or warn($!);
+        }
 	system("git clone $other_package_targets[$i]") or warn($!);
     }
     chdir($original_cwd);
