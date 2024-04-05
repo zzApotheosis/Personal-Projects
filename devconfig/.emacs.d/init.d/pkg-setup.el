@@ -1,9 +1,8 @@
 ;; Add extra load-path items
 ;;(add-to-list 'load-path "~/.emacs.d/pkgs/auto-complete")
-(setq user-pkgs-dir (concat user-emacs-directory "/pkgs/"))
-
 (let (
       (pkg-setup-dir (concat user-emacs-directory "/init.d/pkg-setup.d/"))
+      (user-pkgs-dir (concat user-emacs-directory "/pkgs/"))
       )
   (load-file (concat pkg-setup-dir "/setup-company.el"))
   (load-file (concat pkg-setup-dir "/setup-dash.el"))
