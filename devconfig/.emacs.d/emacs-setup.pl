@@ -31,7 +31,8 @@ my @backup_targets = ("$home_dir/.emacs",
 		      "$home_dir/.emacs.el");
 my $pkg_dir = "$emacs_dir/pkgs";
 my @other_package_targets = ("https://github.com/jaypei/emacs-neotree",
-			     "https://github.com/akermu/emacs-libvterm");
+			     "https://github.com/akermu/emacs-libvterm",
+			     "https://github.com/protocolbuffers/protobuf");
 
 # Main Subroutine
 sub main
@@ -111,7 +112,7 @@ sub download_packages
         {
 	    remove_tree($repo_basename) or warn($!);
         }
-	system("git clone $other_package_targets[$i]") or warn($!);
+	system("git clone --depth 1 $other_package_targets[$i]");
     }
     chdir($original_cwd);
 }

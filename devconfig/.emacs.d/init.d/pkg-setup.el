@@ -21,4 +21,5 @@
   ;; Non GNU ELPA packages (generally these are on MELPA but I'd prefer to manage them myself. See emacs-setup.pl)
   (load-file (concat pkg-setup-dir "/setup-vterm.el"))
   (load-file (concat pkg-setup-dir "/setup-neotree.el"))
+  (load-file (concat pkg-setup-dir "/setup-protobuf.el"))
   )
