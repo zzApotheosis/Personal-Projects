@@ -1,1 +1,1 @@
-(load-file (concat user-pkg-dir "/protobuf/editors/protobuf-mode.el"))
+(load-file (concat user-pkgs-dir "/protobuf/editors/protobuf-mode.el"))
