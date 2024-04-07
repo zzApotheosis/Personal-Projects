@@ -1,7 +1,10 @@
 ;; Create personal keybindings
 
+;; All Evil related keybindings
 ;; A convenience keybinding for switching between emacs mode and evil mode when evil-mode is enabled
-(keymap-global-set "ESC ESC z" 'evil-local-mode)
+(keymap-global-set "C-x c e l" 'evil-local-mode)
+;; A convenience keybinding for evil-mode
+(keymap-global-set "C-x c e e" 'evil-mode)
 
 ;; A keybinding to quit Emacs, but also kill the daemon with the client
 (keymap-global-set "C-x c k" 'save-buffers-kill-emacs)
