@@ -7,7 +7,6 @@
 	(result)
 	)
     (dolist (element themes result)
-      ;;(message element)
       (disable-theme element)
       )
     )
