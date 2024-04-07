@@ -4,4 +4,4 @@
 (keymap-global-set "ESC ESC z" 'evil-local-mode)
 
 ;; A keybinding to quit Emacs, but also kill the daemon with the client
-(keymap-global-set "C-x c ESC" 'save-buffers-kill-emacs)
+(keymap-global-set "C-x c k" 'save-buffers-kill-emacs)

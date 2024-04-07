@@ -4,6 +4,7 @@
       (pkg-setup-dir (concat user-emacs-directory "/init.d/pkg-setup.d/"))
       (user-pkgs-dir (concat user-emacs-directory "/pkgs/"))
       )
+  (load-file (concat pkg-setup-dir "/setup-spacemacs-theme.el"))
   (load-file (concat pkg-setup-dir "/setup-company.el"))
   (load-file (concat pkg-setup-dir "/setup-dash.el"))
   (load-file (concat pkg-setup-dir "/setup-eglot.el"))
