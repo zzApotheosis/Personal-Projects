@@ -2,12 +2,14 @@
 (let (
       (init-dir (concat user-emacs-directory "/init.d/"))
       )
+  (load-file (concat init-dir "/functions.el"))
   (load-file (concat init-dir "/basic-settings.el"))
   (load-file (concat init-dir "/pkg-setup.el"))
   (load-file (concat init-dir "/c-style-preferences.el"))
   (load-file (concat init-dir "/enable-commands.el"))
   (load-file (concat init-dir "/hooks.el"))
   (load-file (concat init-dir "/keybindings.el"))
+  (load-file (concat init-dir "/theme.el"))
   )
 
 ;; Custom settings from the (customize) function

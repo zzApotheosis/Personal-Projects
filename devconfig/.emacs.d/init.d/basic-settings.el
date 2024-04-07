@@ -11,7 +11,7 @@
 (global-ede-mode t)
 
 ;; Confirm when quitting emacs
-(setq-default confirm-kill-emacs #'y-or-n-p)
+(setq-default confirm-kill-emacs #'yes-or-no-p)
 
 ;; Set smooth scrolling
 (setq-default scroll-step 1)
