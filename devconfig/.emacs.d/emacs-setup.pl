@@ -18,27 +18,37 @@ use POSIX qw(strftime);
 use File::Copy;
 use File::Path qw(make_path remove_tree);
 use File::Basename;
+use File::Find;
+
+# Constants
+use constant {
+    UNIX => 'unix',
+    DOS => 'dos',
+};
 
 # Class Fields
 my $exec_name = "$FindBin::RealScript";
 my $exec_path = "$FindBin::RealBin/$FindBin::RealScript";
 my $exec_dir = "$FindBin::RealBin";
 my $original_cwd = getcwd();
-my $home_dir = $ENV{HOME};
-my $emacs_dir = "$home_dir/.emacs.d";
+my $home_dir = undef;
+my $emacs_dir = undef;
 my $now = strftime("%Y-%m-%d_%H:%M:%S", localtime());
-my @backup_targets = ("$home_dir/.emacs",
-		      "$home_dir/.emacs.el");
-my $pkg_dir = "$emacs_dir/pkgs";
+my @backup_targets = ();
+my $pkg_dir = undef;
 my @other_package_targets = ("https://github.com/jaypei/emacs-neotree",
 			     "https://github.com/akermu/emacs-libvterm",
 			     "https://github.com/protocolbuffers/protobuf");
+my $os_type = undef;
 
 # Main Subroutine
 sub main
 {
     # Define subroutine variables
     my $exit_code = 0;
+
+    # Initialization
+    Main::init();
 
     # Backup existing Emacs files (if they exist)
     Main::backup_existing_emacs();
@@ -54,7 +64,7 @@ sub main
     }
     eval
     {
-    	symlink("$original_cwd", "$emacs_dir") or warn($!);
+	Main::deploy();
     };
     if ($@)
     {
@@ -68,6 +78,41 @@ sub main
     return $exit_code;
 }
 
+# Initialization Subroutine
+sub init
+{
+    if ($^O eq 'linux'   ||
+	$^O eq 'unix'    ||
+	$^O eq 'darwin'  ||
+	$^O eq 'bsdos'   ||
+	$^O eq 'openbsd' ||
+	$^O eq 'solaris')
+    {
+	$home_dir = $ENV{HOME};
+	$os_type = UNIX;
+    }
+    elsif ($^O eq 'dos'     ||
+	   $^O eq 'MSWin32' ||
+	   $^O eq 'cygwin')
+    {
+	$home_dir = $ENV{APPDATA};
+	$os_type = DOS;
+    }
+    
+    $emacs_dir = "$home_dir/.emacs.d";
+    @backup_targets = ("$home_dir/.emacs",
+		       "$home_dir/.emacs.el");
+    $pkg_dir = "$emacs_dir/pkgs";
+
+    # Check if prerequisite tools will work before continuing
+    my $status = 0;
+    $status = system("git --version") >> 8;
+    if ($status != 0)
+    {
+	die("Unable to detect Git installation. Visit https://git-scm.com/");
+    }
+}
+
 # Backup Existing Emacs Subroutine
 sub backup_existing_emacs
 {
@@ -75,7 +120,12 @@ sub backup_existing_emacs
     {
 	if (-l $backup_targets[$i])
 	{
+	    STDOUT->printflush("Unlinking $backup_targets[$i]\n");
 	    unlink($backup_targets[$i]) or warn($!);
+	}
+	elsif (-d $backup_targets[$i])
+	{
+	    warn("Backup target [$backup_targets[$i]] appears to be a directory. Skipping...");
 	}
 	elsif (-e $backup_targets[$i])
 	{
@@ -85,6 +135,71 @@ sub backup_existing_emacs
 	{
 	    # Looks like we don't have to do anything here :)
 	}
+    }
+}
+
+# Deploy Subroutine
+sub deploy
+{
+    if ($os_type eq UNIX)
+    {
+	# On Unix-like systems, let's just symlink ~/.emacs.d to here. Easy :)
+	symlink("$original_cwd", "$emacs_dir") or die($!);
+    }
+    elsif ($os_type eq DOS)
+    {	
+	remove_tree($emacs_dir);
+
+	# Recursively copy all files in $original_cwd to the destination
+	find(
+	    {
+		wanted => sub {
+		    # Skip "desktop.ini" dumb Microsoft
+		    if ($_ eq 'desktop.ini')
+		    {
+			return;
+		    }
+		    my $depth = $File::Find::name =~ tr/\///; # tr is the transliteration operator. See https://perldoc.perl.org/perlop#Quote-Like-Operators
+
+		    # Mindepth 1
+		    if ($depth < 1)
+		    {
+			return;
+		    }
+
+		    # Copy file to emacs_dir
+		    my $file_basename = '';
+		    if ($File::Find::name =~ /\.\/(.*)/)
+		    {
+			$file_basename = $1;
+		    }
+		    else
+		    {
+			warn("Cannot determine stripped filename for $File::Find::name");
+			return;
+		    }
+		    
+		    my $target_dir = '';
+		    if (dirname($file_basename) eq '.')
+		    {
+			$target_dir = $emacs_dir
+		    }
+		    else
+		    {
+			$target_dir = dirname($file_basename);
+		    }
+		    if (! -d $target_dir)
+		    {
+			make_path($target_dir) or warn($!);
+		    }
+		    copy($File::Find::name, "$emacs_dir/$file_basename") or warn($!);
+		},
+		no_chdir => 1
+	    }, '.');
+    }
+    else
+    {
+	die("How did you manage this?");
     }
 }
 
