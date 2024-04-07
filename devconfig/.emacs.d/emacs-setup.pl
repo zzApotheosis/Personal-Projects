@@ -81,6 +81,10 @@ sub main
 # Initialization Subroutine
 sub init
 {
+    # Define subroutine variables
+    my $status = 0;
+
+    # Check OS type
     if ($^O eq 'linux'   ||
 	$^O eq 'unix'    ||
 	$^O eq 'darwin'  ||
@@ -98,19 +102,22 @@ sub init
 	$home_dir = $ENV{APPDATA};
 	$os_type = DOS;
     }
-    
+
+    # Populate variables
     $emacs_dir = "$home_dir/.emacs.d";
     @backup_targets = ("$home_dir/.emacs",
 		       "$home_dir/.emacs.el");
     $pkg_dir = "$emacs_dir/pkgs";
 
     # Check if prerequisite tools will work before continuing
-    my $status = 0;
+    STDOUT->printflush("Checking prerequisite tools...\n");
+    STDOUT->printflush("Checking git... ");
     $status = system("git --version") >> 8;
     if ($status != 0)
     {
 	die("Unable to detect Git installation. Visit https://git-scm.com/");
     }
+    STDOUT->printflush("\n");
 }
 
 # Backup Existing Emacs Subroutine
@@ -154,45 +161,58 @@ sub deploy
 	find(
 	    {
 		wanted => sub {
+		    # Define subroutine variables
+		    my $depth;
+		    my $file_basename;
+		    my $target_dir;
+		    
 		    # Skip "desktop.ini" dumb Microsoft
-		    if ($_ eq 'desktop.ini')
+		    if (basename($_) eq 'desktop.ini')
 		    {
 			return;
 		    }
-		    my $depth = $File::Find::name =~ tr/\///; # tr is the transliteration operator. See https://perldoc.perl.org/perlop#Quote-Like-Operators
+
+		    # Skip directories (we'll re-create the directory structure properly)
+		    if (-d $File::Find::name)
+		    {
+			return;
+		    }
 
 		    # Mindepth 1
+		    $depth = $File::Find::name =~ tr/\///; # tr is the transliteration operator. See https://perldoc.perl.org/perlop#Quote-Like-Operators
 		    if ($depth < 1)
 		    {
 			return;
 		    }
 
-		    # Copy file to emacs_dir
-		    my $file_basename = '';
-		    if ($File::Find::name =~ /\.\/(.*)/)
+		    # Re-format the file name (I don't want the leading "./")
+		    $file_basename = '';
+		    if ($File::Find::name =~ /^\.\/(.*)$/)
 		    {
 			$file_basename = $1;
 		    }
 		    else
 		    {
 			warn("Cannot determine stripped filename for $File::Find::name");
-			return;
 		    }
-		    
-		    my $target_dir = '';
+
+		    # Determine target directory
+		    $target_dir = '';
 		    if (dirname($file_basename) eq '.')
 		    {
 			$target_dir = $emacs_dir
 		    }
 		    else
 		    {
-			$target_dir = dirname($file_basename);
+			$target_dir = $emacs_dir . "/" . dirname($file_basename);
 		    }
 		    if (! -d $target_dir)
 		    {
 			make_path($target_dir) or warn($!);
 		    }
-		    copy($File::Find::name, "$emacs_dir/$file_basename") or warn($!);
+
+		    # Copy file to emacs_dir
+		    copy($File::Find::name, "$target_dir/" . basename($_)) or warn($!);
 		},
 		no_chdir => 1
 	    }, '.');
