@@ -37,8 +37,8 @@ my $now = strftime("%Y-%m-%d_%H:%M:%S", localtime());
 my @backup_targets = ();
 my $pkg_dir = undef;
 my @other_package_targets = ("https://github.com/jaypei/emacs-neotree",
-			     "https://github.com/akermu/emacs-libvterm",
 			     "https://github.com/protocolbuffers/protobuf");
+my @other_packages_for_os_unix = ("https://github.com/emacs-libvterm");
 my $os_type = undef;
 
 # Main Subroutine
@@ -108,6 +108,12 @@ sub init
     @backup_targets = ("$home_dir/.emacs",
 		       "$home_dir/.emacs.el");
     $pkg_dir = "$emacs_dir/pkgs";
+
+    # Depending on our OS, we can download certain packages
+    if ($os_type eq UNIX)
+    {
+	push(@other_package_targets, @other_packages_for_os_unix);
+    }
 
     # Check if prerequisite tools will work before continuing
     STDOUT->printflush("Checking prerequisite tools...\n");
@@ -200,7 +206,7 @@ sub deploy
 		    $target_dir = '';
 		    if (dirname($file_basename) eq '.')
 		    {
-			$target_dir = $emacs_dir
+			$target_dir = $emacs_dir;
 		    }
 		    else
 		    {

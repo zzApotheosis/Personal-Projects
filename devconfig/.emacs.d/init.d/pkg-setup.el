@@ -20,7 +20,14 @@
   (load-file (concat pkg-setup-dir "/setup-erc.el"))
 
   ;; Non GNU ELPA packages (generally these are on MELPA but I'd prefer to manage them myself. See emacs-setup.pl)
-  (load-file (concat pkg-setup-dir "/setup-vterm.el"))
+  (when (or
+	 (string-equal system-type "gnu")
+	 (string-equal system-type "gnu/linux")
+	 (string-equal system-type "darwin")
+	 )
+    ;; lmao Windows you suuuuuucccccckkkkkk
+    (load-file (concat pkg-setup-dir "/setup-vterm.el"))
+    )
   (load-file (concat pkg-setup-dir "/setup-neotree.el"))
   (load-file (concat pkg-setup-dir "/setup-protobuf.el"))
   )
