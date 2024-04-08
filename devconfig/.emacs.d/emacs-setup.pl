@@ -38,7 +38,7 @@ my @backup_targets = ();
 my $pkg_dir = undef;
 my @other_package_targets = ("https://github.com/jaypei/emacs-neotree",
 			     "https://github.com/protocolbuffers/protobuf");
-my @other_packages_for_os_unix = ("https://github.com/emacs-libvterm");
+my @other_packages_for_os_unix = ("https://github.com/akermu/emacs-libvterm");
 my $os_type = undef;
 
 # Main Subroutine
