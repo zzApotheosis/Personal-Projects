@@ -9,6 +9,7 @@
 (global-auto-revert-mode t)
 (show-paren-mode t)
 (global-ede-mode t)
+(tab-bar-mode t)
 
 ;; Confirm when quitting emacs
 (setq-default confirm-kill-emacs #'y-or-n-p)
