@@ -27,10 +27,3 @@
 	  (lambda ()
 	    (setq Man-notify-method 'pushy)
 	    ))
-
-;; Define hook for org-mode
-(add-hook 'org-mode-hook
-	  (lambda ()
-	    ;;(interactive)
-	    (org-indent-mode)
-	    ))
