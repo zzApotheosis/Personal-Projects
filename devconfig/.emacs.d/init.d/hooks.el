@@ -22,7 +22,15 @@
             (dired-hide-details-mode t)
             ))
 
+;; Define hook for Man-mode
 (add-hook 'Man-mode-hook
 	  (lambda ()
 	    (setq Man-notify-method 'pushy)
+	    ))
+
+;; Define hook for org-mode
+(add-hook 'org-mode-hook
+	  (lambda ()
+	    ;;(interactive)
+	    (org-indent-mode)
 	    ))
