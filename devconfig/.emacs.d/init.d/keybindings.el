@@ -20,3 +20,6 @@
 				     (interactive)
 				     (neotree-show)
 				     (neotree-hide)))
+
+;; All VTerm related keybindings
+(keymap-global-set "C-x c v" 'vterm) ;; Swap this out for ansi-term or other preferred terminal emulator. Or don't. I'm not your dad. Or am I?
