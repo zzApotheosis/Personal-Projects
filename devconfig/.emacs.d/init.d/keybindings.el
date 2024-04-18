@@ -23,3 +23,10 @@
 
 ;; All VTerm related keybindings
 (keymap-global-set "C-x c v" 'vterm) ;; Swap this out for ansi-term or other preferred terminal emulator. Or don't. I'm not your dad. Or am I?
+
+;; "Miscellaneous" keybindings (Keep this set near the bottom)
+(keymap-global-set "C-x c m s" (lambda ()
+				 (interactive)
+				 (switch-to-buffer "*scratch*")
+				 ))
+(keymap-global-set "C-x c m r" 'rename-uniquely)
