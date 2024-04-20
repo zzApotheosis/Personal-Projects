@@ -30,4 +30,5 @@
     )
   (load-file (concat pkg-setup-dir "/setup-neotree.el"))
   (load-file (concat pkg-setup-dir "/setup-protobuf.el"))
+  (load-file (concat pkg-setup-dir "/setup-eldoc-box.el"))
   )

@@ -5,6 +5,7 @@
 	    (eglot-ensure)
 	    (yas-minor-mode t)
             (flycheck-mode t)
+	    (eldoc-box-hover-at-point-mode t)
             ))
 
 ;; Define hook for prog-mode

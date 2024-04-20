@@ -37,7 +37,8 @@ my $now = strftime("%Y-%m-%d_%H:%M:%S", localtime());
 my @backup_targets = ();
 my $pkg_dir = undef;
 my @other_package_targets = ("https://github.com/jaypei/emacs-neotree",
-			     "https://github.com/protocolbuffers/protobuf");
+			     "https://github.com/protocolbuffers/protobuf",
+			     "https://github.com/casouri/eldoc-box");
 my @other_packages_for_os_unix = ("https://github.com/akermu/emacs-libvterm");
 my $os_type = undef;
 
