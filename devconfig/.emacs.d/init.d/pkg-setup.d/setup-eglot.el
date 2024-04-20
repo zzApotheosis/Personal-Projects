@@ -5,3 +5,5 @@
 	      '(:documentFormattingProvider
 		:documentRangeFormattingProvider
 		:documentOnTypeFormattingProvider))
+
+(setq-default pkg-installed-eglot-p t)

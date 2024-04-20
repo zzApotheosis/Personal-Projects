@@ -2,10 +2,14 @@
 (add-hook 'c-mode-common-hook
           (lambda ()
             ;; Put stuff here
-	    (eglot-ensure)
-	    (yas-minor-mode t)
-            (flycheck-mode t)
-	    (eldoc-box-hover-at-point-mode t)
+	    (when pkg-installed-eglot-p
+	      (eglot-ensure))
+	    (when pkg-installed-yasnippet-p
+	      (yas-minor-mode t))
+	    (when pkg-installed-flycheck-p
+              (flycheck-mode t))
+	    (when pkg-installed-eldoc-box-p
+	      (eldoc-box-hover-at-point-mode t))
             ))
 
 ;; Define hook for prog-mode
@@ -14,7 +18,9 @@
             (hs-minor-mode t)
 	    (display-line-numbers-mode t)
 	    (column-number-mode t)
-	    (company-mode t)
+	    (when pkg-installed-company-p
+	      (company-mode t)
+	      )
             ))
 
 ;; Define hook for dired-mode
@@ -28,3 +34,6 @@
 	  (lambda ()
 	    (setq Man-notify-method 'pushy)
 	    ))
+
+(when pkg-installed-fakepkg-p
+  (message "LIGMA"))

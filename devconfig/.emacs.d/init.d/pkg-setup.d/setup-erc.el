@@ -28,3 +28,5 @@
 ;;    (load-file erc-creds-file)
 ;;    )
 ;;  )
+
+(setq-default pkg-installed-erc-p t)

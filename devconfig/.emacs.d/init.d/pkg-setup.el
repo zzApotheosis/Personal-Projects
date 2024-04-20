@@ -1,5 +1,25 @@
-;; Add extra load-path items
-;;(add-to-list 'load-path "~/.emacs.d/pkgs/auto-complete")
+;; Define variables to use later
+(setq-default pkg-installed-company-p nil)
+(setq-default pkg-installed-compat-p nil)
+(setq-default pkg-installed-dash-p nil)
+(setq-default pkg-installed-eglot-p nil)
+(setq-default pkg-installed-eldoc-p nil)
+(setq-default pkg-installed-erc-p nil)
+(setq-default pkg-installed-evil-p nil)
+(setq-default pkg-installed-flycheck-p nil)
+(setq-default pkg-installed-goto-chg-p nil)
+(setq-default pkg-installed-magit-p nil)
+(setq-default pkg-installed-multishell-p nil)
+(setq-default pkg-installed-neotree-p nil)
+(setq-default pkg-installed-org-p nil)
+(setq-default pkg-installed-protobuf-p nil)
+(setq-default pkg-installed-rust-mode-p nil)
+(setq-default pkg-installed-spacemacs-common-p nil)
+(setq-default pkg-installed-vertico-p nil)
+(setq-default pkg-installed-vterm-p nil)
+(setq-default pkg-installed-yasnippet-p nil)
+(setq-default pkg-installed-fakepkg-p nil)
+
 (let (
       (pkg-setup-dir (concat user-emacs-directory "/init.d/pkg-setup.d/"))
       (user-pkgs-dir (concat user-emacs-directory "/pkgs/"))
