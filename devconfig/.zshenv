@@ -1,3 +1,8 @@
+# Customize PATH
+PATH=$(printf "%s" "${PATH}" | sed "s@:${HOME}/usr/local/bin@@" | sed "s@${HOME}/usr/local/bin:@@")
+PATH="${HOME}/usr/local/bin:${PATH}"
+export PATH
+
 # C Compiler
 # Default to GCC but have Clang available. The more, the merrier!
 #export CC="clang"
