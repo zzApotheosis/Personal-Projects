@@ -38,6 +38,7 @@
   (load-file (concat pkg-setup-dir "/setup-vertico.el"))
   (load-file (concat pkg-setup-dir "/setup-yasnippet.el"))
   (load-file (concat pkg-setup-dir "/setup-erc.el"))
+  (load-file (concat pkg-setup-dir "/setup-eshell.el"))
 
   ;; Non GNU ELPA packages (generally these are on MELPA but I'd prefer to manage them myself. See emacs-setup.pl)
   (when (or
