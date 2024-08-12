@@ -76,7 +76,7 @@ local plugins = {
 
   -- vimwiki
   ,{
-    '',
+    'vimwiki/vimwiki',
     opts = {},
     config = function()
       -- Do nothing
