@@ -46,6 +46,17 @@ local plugins = {
   --  end
   --}
 
+  -- mini-icons
+  ,{
+    'echasnovski/mini.icons',
+    version = false
+  }
+
+  -- nvim-web-devicons
+  ,{
+    'nvim-tree/nvim-web-devicons'
+  }
+
   -- project.nvim
   ,{
    'ahmedkhalf/project.nvim',
