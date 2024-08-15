@@ -56,14 +56,14 @@ local plugins = {
   }
 
   -- nvim-tree.lua
-  ,{
-    'nvim-tree/nvim-tree.lua',
-    opts = {},
-    dependencies = {"nvim-tree/nvim-web-devicons"},
-    config = function()
-      require("nvim-tree").setup()
-    end
-  }
+  --,{
+  --  'nvim-tree/nvim-tree.lua',
+  --  opts = {},
+  --  dependencies = {"nvim-tree/nvim-web-devicons"},
+  --  config = function()
+  --    require("nvim-tree").setup()
+  --  end
+  --}
 
   -- ale
   ,{
