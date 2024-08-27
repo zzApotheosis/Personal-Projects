@@ -1,4 +1,4 @@
-use base64::{encode, decode};
+use base64::{decode, encode};
 
 fn main() {
     let my_string: &str = "HAHA SUPER LIGMA";

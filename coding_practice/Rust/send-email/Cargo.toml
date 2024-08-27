@@ -1,5 +1,5 @@
 [package]
-name = "send_email"
+name = "send-email"
 version = "0.1.0"
 authors = ["zzApotheosis <zzApotheosis@gmail.com>"]
 edition = "2018"
