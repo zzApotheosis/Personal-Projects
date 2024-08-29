@@ -14,8 +14,8 @@ fn main() -> Result<(), i32> {
     let s1 = CoolStruct { x: 69, y: 11 };
     let s2 = CoolStruct { x: 420, y: 0 };
     unsafe {
-        cool_function(s2.x, 0x23, &s1);
-        cool_function(s1.x, 0x23, &s2);
+        cool_function(s2.x, 'z' as cty::c_char, &s1);
+        cool_function(s1.x, 'S' as cty::c_char, &s2);
     }
 
     let mut x: cty::c_int = 24;

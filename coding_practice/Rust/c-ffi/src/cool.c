@@ -23,7 +23,7 @@ void cool_function(int i, char c, CoolStruct * const cs) {
 }
 
 void set_x(const int new_x) {
-    fprintf(stdout, "Setting C static x = %u\n", new_x);
+    fprintf(stdout, "In C, setting static x = %u\n", new_x);
     x = new_x;
 }
 
