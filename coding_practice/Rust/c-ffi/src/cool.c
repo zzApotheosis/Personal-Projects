@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <gmp.h>
 
 #include "cool.h"
 
@@ -19,6 +20,11 @@ void cool_function(int i, char c, CoolStruct * const cs) {
         fprintf(stdout, "x = %d\n", cs->x);
         fprintf(stdout, "y = %d\n", cs->y);
     }
+
+    mpz_t gmp_num;
+    mpz_init(gmp_num);
+    gmp_printf("gmp_num = %Zd\n", gmp_num);
+
     fprintf(stdout, "\n");
 }
 
