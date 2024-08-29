@@ -1,15 +1,3 @@
-#[repr(C)]
-struct CoolStruct {
-    pub x: cty::c_int,
-    pub y: cty::c_int,
-}
-
-extern "C" {
-    fn cool_function(i: cty::c_int, c: cty::c_char, cs: *const CoolStruct);
-    fn set_x(new_x: cty::c_int);
-    fn get_x() -> cty::c_int;
-}
-
 fn main() -> Result<(), i32> {
     let s1 = CoolStruct { x: 69, y: 11 };
     let s2 = CoolStruct { x: 420, y: 0 };
@@ -29,4 +17,16 @@ fn main() -> Result<(), i32> {
     }
     println!("Rust x = {}", x);
     return Ok(());
+}
+
+#[repr(C)]
+struct CoolStruct {
+    pub x: cty::c_int,
+    pub y: cty::c_int,
+}
+
+extern "C" {
+    fn cool_function(i: cty::c_int, c: cty::c_char, cs: *const CoolStruct);
+    fn set_x(new_x: cty::c_int);
+    fn get_x() -> cty::c_int;
 }
