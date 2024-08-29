@@ -4,8 +4,8 @@ fn main() -> Result<(), i32> {
     println!("cargo:rerun-if-changed=src/cool.h");
     // println!("cargo:rustc-link-lib=gmp");
     println!("cargo:rustc-link-arg=-lgmp");
-    let mut c_compiler = cc::Build::new();
-    c_compiler.file("src/cool.c");
-    c_compiler.compile("libcool.a");
+    let mut libcool_builder = cc::Build::new();
+    libcool_builder.file("src/cool.c");
+    libcool_builder.compile("libcool.a");
     Ok(())
 }
