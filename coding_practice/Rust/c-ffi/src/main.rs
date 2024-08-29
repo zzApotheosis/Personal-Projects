@@ -1,13 +1,13 @@
 #[repr(C)]
-pub struct CoolStruct {
+struct CoolStruct {
     pub x: cty::c_int,
     pub y: cty::c_int,
 }
 
 extern "C" {
-    pub fn cool_function(i: cty::c_int, c: cty::c_char, cs: *const CoolStruct);
-    pub fn set_x(new_x: cty::c_int);
-    pub fn get_x() -> cty::c_int;
+    fn cool_function(i: cty::c_int, c: cty::c_char, cs: *const CoolStruct);
+    fn set_x(new_x: cty::c_int);
+    fn get_x() -> cty::c_int;
 }
 
 fn main() -> Result<(), i32> {
