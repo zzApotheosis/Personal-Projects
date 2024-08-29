@@ -10,7 +10,7 @@ struct CoolStruct {
     int y;
 };
 
-void cool_function(int i, char c, CoolStruct * cs) {
+void cool_function(int i, char c, CoolStruct * const cs) {
     fprintf(stdout, "i = %d\n", i);
     fprintf(stdout, "c = %c\n", c);
     x = i;
@@ -23,6 +23,7 @@ void cool_function(int i, char c, CoolStruct * cs) {
 }
 
 void set_x(const int new_x) {
+    fprintf(stdout, "Setting C static x = %u\n", new_x);
     x = new_x;
 }
 

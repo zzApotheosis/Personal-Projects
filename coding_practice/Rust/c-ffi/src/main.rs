@@ -5,27 +5,28 @@ pub struct CoolStruct {
 }
 
 extern "C" {
-    pub fn cool_function(i: cty::c_int, c: cty::c_char, cs: *mut CoolStruct);
+    pub fn cool_function(i: cty::c_int, c: cty::c_char, cs: *const CoolStruct);
     pub fn set_x(new_x: cty::c_int);
     pub fn get_x() -> cty::c_int;
 }
 
-fn c_cool_function(i: cty::c_int, c: cty::c_char, cs: *mut CoolStruct) {
-    unsafe {
-        cool_function(i, c, cs);
-    }
-}
-
 fn main() -> Result<(), i32> {
-    let mut s = CoolStruct { x: 69, y: 11 };
-    c_cool_function(1, 0x23, &mut s);
-    c_cool_function(10, 0x23, &mut s);
-    let x: cty::c_int;
+    let s1 = CoolStruct { x: 69, y: 11 };
+    let s2 = CoolStruct { x: 420, y: 0 };
+    unsafe {
+        cool_function(s2.x, 0x23, &s1);
+        cool_function(s1.x, 0x23, &s2);
+    }
+
+    let mut x: cty::c_int = 24;
+    println!("Rust x = {}", x);
     println!("Calling unsafe C functions!");
     unsafe {
+        println!("From Rust, C static x = {}", get_x());
         set_x(123 as cty::c_int);
+        println!("From Rust, C static x = {}", get_x());
         x = get_x();
     }
-    println!("x = {}", x);
+    println!("Rust x = {}", x);
     return Ok(());
 }
