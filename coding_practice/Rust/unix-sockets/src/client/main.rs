@@ -5,7 +5,7 @@ use std::time::Duration;
 use std::vec::Vec;
 
 const SOCKET: &str = "/tmp/rustsock";
-const DELAY: Duration = Duration::new(0u64, 0_250_000_000u32);
+const DELAY: Duration = Duration::new(0u64, 0_500_000_000u32);
 
 fn main() -> std::io::Result<()> {
     let args: Vec<String> = std::env::args().collect();

@@ -39,10 +39,11 @@ fn main() -> std::io::Result<()> {
         match stream {
             Ok(stream) => {
                 /* connection succeeded */
-                thread::spawn(|| {
+                let t = thread::spawn(|| {
                     handle_client(stream).expect("NOT GOOD");
                     println!("Client finished");
                 });
+                t.join().expect("NOT GOOD");
             }
 
             Err(err) => {
@@ -51,6 +52,10 @@ fn main() -> std::io::Result<()> {
                 break;
             }
         }
+        break;
     }
+
+    // Remove the socket file
+    std::fs::remove_file(SOCKET).expect("UNABLE TO REMOVE SOCKET");
     Ok(())
 }
