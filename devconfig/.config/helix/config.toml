@@ -9,9 +9,6 @@ insert = "bar"
 normal = "block"
 select = "block"
 
-# [editor.file-picker]
-# hidden = false
-
 [keys.normal]
 C-y = "scroll_up"
 C-e = "scroll_down"
