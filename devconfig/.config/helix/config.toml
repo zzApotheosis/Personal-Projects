@@ -15,3 +15,7 @@ select = "block"
 [keys.normal]
 C-y = "scroll_up"
 C-e = "scroll_down"
+
+[keys.select]
+C-y = "scroll_up"
+C-e = "scroll_down"
