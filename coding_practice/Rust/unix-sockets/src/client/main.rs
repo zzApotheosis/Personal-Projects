@@ -13,18 +13,22 @@ fn main() -> std::io::Result<()> {
         panic!("Pass some arguments to this program, freaking noob.");
     }
 
-    let mut stream: UnixStream = UnixStream::connect(SOCKET)?;
-    let mut msg: String = std::string::String::new();
+    let stream: UnixStream = UnixStream::connect(SOCKET)?;
+    let mut stream_reader = std::io::BufReader::new(&stream);
+    let mut stream_writer = std::io::BufWriter::new(&stream);
+    let mut msg: String;
+    let mut response: Vec<String> = Vec::new();
 
+    println!("Sending messages...");
     for i in 1..args.len() {
-        stream.write_all(args[i].as_bytes())?;
-        stream.write(b"\n")?;
+        msg = args[i].clone() + "\n";
+        stream_writer.write_all(msg.as_bytes())?;
+        stream_writer.flush()?;
 
-        let mut reader = std::io::BufReader::new(&mut stream);
         msg.clear();
-        reader.read_line(&mut msg)?;
+        stream_reader.read_line(&mut msg)?;
         let msg = msg.trim();
-        println!("Received response: {msg}");
+        response.push(String::from(msg));
 
         std::thread::sleep(DELAY);
     }
@@ -34,6 +38,15 @@ fn main() -> std::io::Result<()> {
      * connection when the server receives an empty message, delimited by
      * the newline character "\n".
      */
-    stream.write_all(b"\n")?;
+    stream_writer.write_all(b"\n")?;
+
+    /*
+     * Let's show all the responses we got from the server, in order.
+     */
+    print!("All responses received from server:");
+    for msg in response {
+        print!(" {msg}");
+    }
+    println!();
     Ok(())
 }

@@ -5,7 +5,8 @@ use std::thread;
 const SOCKET: &str = "/tmp/rustsock";
 
 fn handle_client(stream: UnixStream) -> std::io::Result<()> {
-    let mut reader = std::io::BufReader::new(&stream); // I don't trust this
+    let mut stream_reader = std::io::BufReader::new(&stream);
+    let mut stream_writer = std::io::BufWriter::new(&stream);
 
     /*
      * NOTE: This implementation uses the newline "\n" character
@@ -15,23 +16,42 @@ fn handle_client(stream: UnixStream) -> std::io::Result<()> {
      * prequel movie, "this is where the fun begins".
      */
     loop {
+        /*
+         * Get a message from the client.
+         */
         let mut msg: String = String::new();
-        reader.read_line(&mut msg)?;
+        stream_reader.read_line(&mut msg)?;
         let msg = msg.trim();
+
+        /*
+         * Check for empty string (that's the signal to quit).
+         */
         if msg.len() == 0usize {
             break;
         }
         println!("Received message: {msg}");
-        // writeln!(&stream, "{}", msg)?;
-        (&stream).write_all(msg.as_bytes())?;
-        (&stream).write_all(b"\n")?;
+
+        /*
+         * Echo the message back to the client.
+         */
+        let response = String::from(msg) + "\n";
+        stream_writer.write_all(response.as_bytes())?;
+        stream_writer.flush()?;
     }
 
+    /*
+     * Shutdown the connection.
+     */
     stream.shutdown(std::net::Shutdown::Both)?;
+
     Ok(())
 }
 
 fn main() -> std::io::Result<()> {
+    // Ignore errors here; it's okay if it doesn't currently exist
+    std::fs::remove_file(SOCKET).ok();
+
+    // Listen on the socket
     let listener = UnixListener::bind(SOCKET)?;
 
     // accept connections and process them, spawning a new thread for each one
@@ -39,11 +59,10 @@ fn main() -> std::io::Result<()> {
         match stream {
             Ok(stream) => {
                 /* connection succeeded */
-                let t = thread::spawn(|| {
+                thread::spawn(move || {
                     handle_client(stream).expect("NOT GOOD");
                     println!("Client finished");
                 });
-                t.join().expect("NOT GOOD");
             }
 
             Err(err) => {
@@ -52,10 +71,10 @@ fn main() -> std::io::Result<()> {
                 break;
             }
         }
-        break;
     }
 
     // Remove the socket file
     std::fs::remove_file(SOCKET).expect("UNABLE TO REMOVE SOCKET");
+
     Ok(())
 }
