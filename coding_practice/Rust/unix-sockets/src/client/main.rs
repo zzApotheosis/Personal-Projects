@@ -21,6 +21,8 @@ fn main() -> std::io::Result<()> {
 
     println!("Sending messages...");
     for i in 1..args.len() {
+        print!("\r{i}");
+        std::io::stdout().flush().ok();
         msg = args[i].clone() + "\n";
         stream_writer.write_all(msg.as_bytes())?;
         stream_writer.flush()?;
@@ -32,6 +34,7 @@ fn main() -> std::io::Result<()> {
 
         std::thread::sleep(DELAY);
     }
+    println!();
 
     /*
      * In this implementation, I am defining that the server should close the
