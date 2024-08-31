@@ -1,5 +1,5 @@
 use std::{
-    io::Read,
+    io::{Read, Write},
     sync::mpsc::{self, Receiver, Sender},
     thread::{self, JoinHandle},
     time::Duration,
@@ -66,6 +66,30 @@ fn main() -> std::result::Result<(), i32> {
     }
 
     println!("{:?}", ids);
+
+    /*
+     * I tried to replicate the getc() function in C here,
+     * but it doesn't behave the same way. It will properly
+     * get a single character from stdin, but it only does so
+     * when the stdin buffer is flushed with a newline. That
+     * is, it will only accept the first character when the
+     * user presses enter on the keyboard. Ctrl-D may also
+     * work.
+     *
+     * In any case, this is a good snippet of code to learn
+     * the different ways to implement things in Rust and to
+     * understand what is considered good practice and what
+     * isn't.
+     */
+    std::io::stdout()
+        .write_all(b"Press any key to continue\n")
+        .ok();
+    std::io::stdin()
+        .lock()
+        .bytes()
+        .next()
+        .and_then(|result| result.ok())
+        .map(|byte| byte as i32);
 
     Ok(())
     // Err(1)
