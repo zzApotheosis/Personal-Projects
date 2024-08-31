@@ -15,6 +15,18 @@ fn thread_main(id: u32, tx: Sender<u32>, rand_delay: u32) -> std::result::Result
     Ok(())
 }
 
+// fn dump(n: u32) {
+//     println!("{:#034b}", n);
+// }
+
+fn u8_slice_to_u32(buf: &[u8; 4], target: &mut u32) {
+    (*target) = 0u32;
+    for i in 0..buf.len() {
+        (*target) <<= 8;
+        (*target) |= buf[i] as u32;
+    }
+}
+
 fn main() -> std::result::Result<(), i32> {
     let (tx, rx): (Sender<u32>, Receiver<u32>) = mpsc::channel();
     let mut children: Vec<JoinHandle<()>> = Vec::new();
@@ -23,7 +35,8 @@ fn main() -> std::result::Result<(), i32> {
 
     for id in 0..NTHREADS {
         rng_source.read(&mut buf).expect("NOT GOOD");
-        let rand_delay = u32::from_ne_bytes(buf) % 1_000_000_000u32;
+        let mut rand_delay: u32 = 0u32;
+        u8_slice_to_u32(&buf, &mut rand_delay);
 
         /*
          * NOTE: With Channels in Rust, there can be multiple transmitters, but there can only be
