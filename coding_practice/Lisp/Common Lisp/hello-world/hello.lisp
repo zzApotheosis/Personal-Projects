@@ -1,4 +1,4 @@
-#!/bin/sbcl --script
+#!/bin/env -S sbcl --script
 (write-line "Hello world!")
 
 (defun main ()
