@@ -8,11 +8,11 @@ or why all the deep wizards of the Church of Emacs swear it is the greatest thin
 means to learn and understand more about Lisp so that I may one day reach that same runner's high that so many others have claimed to reach.
 
 # Resources
-Common Lisp, https://lisp-lang.org/
-Practical Common Lisp, https://gigamonkeys.com/book/
-ANSI Common Lisp, https://paulgraham.com/acl.html
-On Lisp, https://paulgraham.com/onlisp.html
-Let Over Lambda, https://letoverlambda.com/
+Common Lisp, https://lisp-lang.org/ \
+Practical Common Lisp, https://gigamonkeys.com/book/ \
+ANSI Common Lisp, https://paulgraham.com/acl.html \
+On Lisp, https://paulgraham.com/onlisp.html \
+Let Over Lambda, https://letoverlambda.com/ \
 SBCL Manual, https://www.sbcl.org/manual/
 
 # Tips
