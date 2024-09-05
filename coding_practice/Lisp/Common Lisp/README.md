@@ -13,3 +13,6 @@ Practical Common Lisp, https://gigamonkeys.com/book/
 ANSI Common Lisp, https://paulgraham.com/acl.html
 On Lisp, https://paulgraham.com/onlisp.html
 Let Over Lambda, https://letoverlambda.com/
+
+# Tips
+(describe #'function-name)
