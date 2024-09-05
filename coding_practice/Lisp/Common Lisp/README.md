@@ -13,7 +13,8 @@ Practical Common Lisp, https://gigamonkeys.com/book/ \
 ANSI Common Lisp, https://paulgraham.com/acl.html \
 On Lisp, https://paulgraham.com/onlisp.html \
 Let Over Lambda, https://letoverlambda.com/ \
-SBCL Manual, https://www.sbcl.org/manual/
+SBCL Manual, https://www.sbcl.org/manual/ \
+CLiki, https://www.cliki.net/
 
 # Tips
 (describe #'function-name)
