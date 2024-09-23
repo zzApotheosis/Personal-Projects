@@ -1,6 +1,6 @@
 # Customize PATH
 PATH=$(printf "%s" "${PATH}" | sed "s@:${HOME}/usr/local/bin@@" | sed "s@${HOME}/usr/local/bin:@@")
-PATH="${HOME}/usr/local/bin:${PATH}"
+PATH="${HOME}/.local/bin:${PATH}"
 export PATH
 
 # C Compiler
