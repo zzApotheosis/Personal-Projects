@@ -28,7 +28,7 @@ struct counter_t {
         pthread_cond_t instance_released;
 };
 
-counter_t * counter_new() {
+counter_t * counter_new(void) {
         counter_t * const new_counter = (counter_t *) malloc(1 * sizeof(counter_t));
         if (new_counter == NULL)
                 malloc_error();
