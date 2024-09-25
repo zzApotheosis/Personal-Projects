@@ -10,7 +10,7 @@
 #include <string.h>
 #include <gcrypt.h>
 
-#define NEED_LIBGCRYPT_VERSION "1.10.1"
+#define NEED_LIBGCRYPT_VERSION "1.10.0"
 
 #define KEY_LEN 32
 #define N_PARTS 10
