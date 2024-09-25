@@ -64,9 +64,9 @@ const std = @import("std");
 
 pub fn main() !void {
     //const allocator = std.heap.page_allocator;
-    //const allocator = std.heap.c_allocator;
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
-    const allocator = gpa.allocator();
+    const allocator = std.heap.c_allocator;
+    //var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    //const allocator = gpa.allocator();
     var list = std.ArrayList(u8).init(allocator);
     defer list.deinit();
 
@@ -75,11 +75,31 @@ pub fn main() !void {
         try list.append(n);
     }
 
-    for (0..list.items.len, list.items) |i, item| {
+    for (0.., list.items) |i, item| {
         if (i % 257 == 0) {
             std.debug.print("Cool: item[{}] = {}\n", .{ i, item });
         }
     }
+}
+
+test "inline for loop" {
+    const nums = [_]i32{ 2, 4, 6 };
+    var sum: usize = 0;
+    inline for (nums) |i| {
+        const T = switch (i) {
+            2 => f32,
+            4 => i8,
+            6 => bool,
+            else => unreachable,
+        };
+        sum += typeNameLength(T);
+        std.debug.print("{}\n", .{sum});
+    }
+    try std.testing.expect(sum == 9);
+    unreachable;
+}
+fn typeNameLength(comptime T: type) usize {
+    return @typeName(T).len;
 }
 
 fn foo() void {
@@ -91,14 +111,4 @@ test "simple test" {
     defer list.deinit(); // Try commenting this out and see if zig detects the memory leak!
     try list.append(42);
     try std.testing.expectEqual(@as(i32, 42), list.pop());
-}
-
-test "fuzz example" {
-    const ligma = struct {
-        fn testOne(input: []const u8) anyerror!void {
-            // Try passing `--fuzz` to `zig build test` and see if it manages to fail this test case!
-            try std.testing.expect(!std.mem.eql(u8, "canyoufindme", input));
-        }
-    };
-    try std.testing.fuzz(ligma.testOne, .{});
 }
