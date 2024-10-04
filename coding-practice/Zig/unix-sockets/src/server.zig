@@ -27,12 +27,38 @@ pub fn main() void {
     if (server == null) {
         return;
     }
+    defer server.?.deinit();
 
+    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    const allocator = gpa.allocator();
     while (true) {
-        const client: ?std.net.Server.Connection = server.?.accept() catch |e| a: {
+        var client = allocator.alloc(std.net.Server.Connection, 1) catch |e| {
             std.debug.print("error: {}\n", .{e});
-            break :a null;
+            return;
         };
-        defer client.?.stream.close();
+        std.debug.print("typeof(client) = {}\n", .{@TypeOf(client)});
+        client[0] = server.?.accept() catch |e| {
+            std.debug.print("error: {}\n", .{e});
+            continue;
+        };
+        //const connection = server.?.accept() catch undefined;
+        //client[0] = connection;
+        //const client: ?std.net.Server.Connection = server.?.accept() catch |e| a: {
+        //    std.debug.print("error: {}\n", .{e});
+        //    break :a null;
+        //};
+        //defer client.?.stream.close();
+        var t = std.Thread.spawn(.{}, client_handler, .{client[0]}) catch |e| {
+            std.debug.print("error: {}\n", .{e});
+            continue;
+        };
+        t.detach();
     }
+}
+
+fn client_handler(client: std.net.Server.Connection) void {
+    client.stream.writer().print("ligma balls\n", .{}) catch |e| {
+        std.debug.print("error: {}\n", .{e});
+    };
+    client.stream.close();
 }
