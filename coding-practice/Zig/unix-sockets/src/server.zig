@@ -40,9 +40,38 @@ pub fn main() void {
     }
 }
 
+const msg_limit: usize = 512;
+
 fn client_handler(client: std.net.Server.Connection) void {
-    client.stream.writer().print("ligma balls\n", .{}) catch |e| {
-        std.debug.print("error: {}\n", .{e});
-    };
+    var client_reader = client.stream.reader();
+    var client_writer = std.io.bufferedWriter(client.stream.writer());
+    var buffer: [msg_limit]u8 = undefined;
+    while (true) {
+        @memset(&buffer, 0);
+        // Read the client's message
+        _ = client_reader.readUntilDelimiter(&buffer, '\n') catch |e| {
+            std.log.err("{}", .{e});
+            continue;
+        };
+        std.debug.print("Received message: {s}\n", .{buffer});
+
+        if (std.mem.eql(u8, &buffer, "exit\n")) {
+            break;
+        }
+
+        // Echo the message
+        _ = client_writer.writer().write(&buffer) catch |e| {
+            std.log.err("{}", .{e});
+            continue;
+        };
+        _ = client_writer.writer().writeByte('\n') catch |e| {
+            std.log.err("{}", .{e});
+            continue;
+        };
+        client_writer.flush() catch |e| {
+            std.log.err("{}", .{e});
+            continue;
+        };
+    }
     client.stream.close();
 }
