@@ -96,7 +96,6 @@ test "inline for loop" {
         std.debug.print("{}\n", .{sum});
     }
     try std.testing.expect(sum == 9);
-    unreachable;
 }
 fn typeNameLength(comptime T: type) usize {
     return @typeName(T).len;
