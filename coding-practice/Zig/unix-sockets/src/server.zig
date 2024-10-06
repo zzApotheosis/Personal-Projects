@@ -49,22 +49,22 @@ fn client_handler(client: std.net.Server.Connection) void {
     while (true) {
         @memset(&buffer, 0);
         // Read the client's message
-        _ = client_reader.readUntilDelimiter(&buffer, '\n') catch |e| {
+        const result = client_reader.readUntilDelimiterOrEof(&buffer, '\n') catch |e| {
             std.log.err("{}", .{e});
-            continue;
+            break;
         };
-        std.debug.print("Received message: {s}\n", .{buffer});
+        if (result == null) {
+            std.log.err("result == null", .{});
+            break;
+        }
+        std.debug.print("Received message: {s}\n", .{result.?});
 
-        if (std.mem.eql(u8, &buffer, "exit\n")) {
+        if (std.mem.eql(u8, result.?, "exit")) {
             break;
         }
 
         // Echo the message
-        _ = client_writer.writer().write(&buffer) catch |e| {
-            std.log.err("{}", .{e});
-            continue;
-        };
-        _ = client_writer.writer().writeByte('\n') catch |e| {
+        _ = client_writer.writer().print("{s}\n", .{result.?}) catch |e| {
             std.log.err("{}", .{e});
             continue;
         };
@@ -73,5 +73,6 @@ fn client_handler(client: std.net.Server.Connection) void {
             continue;
         };
     }
+    std.log.info("Closing client connection", .{});
     client.stream.close();
 }

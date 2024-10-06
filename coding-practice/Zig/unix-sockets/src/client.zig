@@ -15,12 +15,12 @@ pub fn main() void {
     while (true) {
         @memset(&buffer, 0);
         std.io.getStdOut().writer().print("> ", .{}) catch {};
-        _ = stdin_reader.readUntilDelimiter(&buffer, '\n') catch |e| {
+        var message = stdin_reader.readUntilDelimiter(&buffer, '\n') catch |e| {
             std.log.err("{}", .{e});
             continue;
         };
-        std.debug.print("Sending message: {s}\n", .{buffer});
-        buffered_connection_writer.writer().writeAll(&buffer) catch |e| {
+        std.debug.print("Sending message: {s}\n", .{message});
+        buffered_connection_writer.writer().print("{s}\n", .{message}) catch |e| {
             std.log.err("{}", .{e});
             continue;
         };
@@ -29,18 +29,18 @@ pub fn main() void {
             continue;
         };
 
-        if (std.mem.eql(u8, &buffer, "exit")) {
+        if (std.mem.eql(u8, message, "exit")) {
             break;
         }
 
         std.debug.print("Receiving message...\n", .{});
         @memset(&buffer, 0);
-        _ = connection_reader.readUntilDelimiter(&buffer, '\n') catch |e| {
+        message = connection_reader.readUntilDelimiter(&buffer, '\n') catch |e| {
             std.log.err("{}", .{e});
             continue;
         };
 
-        std.io.getStdOut().writer().print("{s}", .{buffer}) catch {};
+        std.io.getStdOut().writer().print("{s}\n", .{message}) catch {};
     }
 
     connection.close();
