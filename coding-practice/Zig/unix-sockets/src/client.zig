@@ -19,7 +19,6 @@ pub fn main() void {
             std.log.err("{}", .{e});
             continue;
         };
-        std.debug.print("Sending message: {s}\n", .{message});
         buffered_connection_writer.writer().print("{s}\n", .{message}) catch |e| {
             std.log.err("{}", .{e});
             continue;
@@ -33,7 +32,6 @@ pub fn main() void {
             break;
         }
 
-        std.debug.print("Receiving message...\n", .{});
         @memset(&buffer, 0);
         message = connection_reader.readUntilDelimiter(&buffer, '\n') catch |e| {
             std.log.err("{}", .{e});
