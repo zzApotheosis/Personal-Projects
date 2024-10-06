@@ -46,6 +46,7 @@ fn client_handler(client: std.net.Server.Connection) void {
     var client_reader = client.stream.reader();
     var client_writer = std.io.bufferedWriter(client.stream.writer());
     var buffer: [msg_limit]u8 = undefined;
+    std.log.info("New client connection", .{});
     while (true) {
         @memset(&buffer, 0);
         // Read the client's message
