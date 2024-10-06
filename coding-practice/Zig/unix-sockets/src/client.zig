@@ -12,13 +12,33 @@ pub fn main() void {
     std.io.getStdOut().writer().print("Connected to Unix socket! Type some messages to the server.\n", .{}) catch {};
     const stdin_reader = std.io.getStdIn().reader();
     var buffer: [512]u8 = undefined;
-    while (true) {
+    loop: while (true) {
         @memset(&buffer, 0);
         std.io.getStdOut().writer().print("> ", .{}) catch {};
         var message = stdin_reader.readUntilDelimiter(&buffer, '\n') catch |e| {
-            std.log.err("{}", .{e});
-            continue;
+            switch (e) {
+                error.EndOfStream => {
+                    // This is probably because Ctrl-D was issued, signaling EOF
+                    std.io.getStdOut().writer().print("\n", .{}) catch {};
+                    buffered_connection_writer
+                        .writer()
+                        .print("exit\n", .{}) catch {};
+                    buffered_connection_writer
+                        .flush() catch {};
+                    break :loop;
+                },
+                else => {
+                    std.log.err("{}", .{e});
+                    continue;
+                },
+            }
         };
+
+        // Ignore empty messages
+        if (message.len == 0) {
+            continue;
+        }
+
         buffered_connection_writer.writer().print("{s}\n", .{message}) catch |e| {
             std.log.err("{}", .{e});
             continue;
