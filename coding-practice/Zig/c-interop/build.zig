@@ -29,22 +29,38 @@ pub fn build(b: *std.Build) void {
     // running `zig build`).
     //b.installArtifact(lib);
 
-    const exe = b.addExecutable(.{
-        .name = "c-interop",
+    const zig_calls_c_exe = b.addExecutable(.{
+        .name = "zig-calls-c",
         .root_source_file = b.path("src/main.zig"),
         .target = target,
         .optimize = optimize,
+        .link_libc = true,
     });
+    zig_calls_c_exe.addCSourceFile(std.Build.Module.CSourceFile{ .file = b.path("src/foo.c") });
+    const c_calls_zig_exe = b.addExecutable(.{
+        .name = "c-calls-zig",
+        .target = target,
+        .optimize = optimize,
+        .link_libc = true,
+    });
+    c_calls_zig_exe.addCSourceFiles(.{
+        .files = &.{
+            "src/main.c",
+        },
+        .flags = &.{},
+    });
+    c_calls_zig_exe.installHeader();
 
     // This declares intent for the executable to be installed into the
     // standard location when the user invokes the "install" step (the default
     // step when running `zig build`).
-    b.installArtifact(exe);
+    b.installArtifact(zig_calls_c_exe);
+    b.installArtifact(c_calls_zig_exe);
 
     // This *creates* a Run step in the build graph, to be executed when another
     // step is evaluated that depends on it. The next line below will establish
     // such a dependency.
-    const run_cmd = b.addRunArtifact(exe);
+    const run_cmd = b.addRunArtifact(zig_calls_c_exe);
 
     // By making the run step depend on the install step, it will be run from the
     // installation directory rather than directly from within the cache directory.

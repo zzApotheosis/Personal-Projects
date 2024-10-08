@@ -16,6 +16,8 @@ pub fn main() !void {
     try bw.flush(); // don't forget to flush!
 }
 
+fn call_c_foo() void {}
+
 test "simple test" {
     var list = std.ArrayList(i32).init(std.testing.allocator);
     defer list.deinit(); // try commenting this out and see if zig detects the memory leak!
