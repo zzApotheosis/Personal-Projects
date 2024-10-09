@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-void c_foo(unsigned int x) {
+void c_foo(const unsigned int x) {
   const char * msg = NULL;
   if (x < 10) {
     msg = "A pretty small number :)";

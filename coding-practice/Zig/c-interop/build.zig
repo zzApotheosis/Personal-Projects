@@ -15,20 +15,19 @@ pub fn build(b: *std.Build) void {
     // set a preferred release mode, allowing the user to decide how to optimize.
     const optimize = b.standardOptimizeOption(.{});
 
-    //const lib = b.addStaticLibrary(.{
-    //    .name = "c-interop",
-    //    // In this case the main source file is merely a path, however, in more
-    //    // complicated build scripts, this could be a generated file.
-    //    .root_source_file = b.path("src/root.zig"),
-    //    .target = target,
-    //    .optimize = optimize,
-    //});
-
-    // This declares intent for the library to be installed into the standard
-    // location when the user invokes the "install" step (the default step when
-    // running `zig build`).
-    //b.installArtifact(lib);
-
+    const c_foo_lib = b.addStaticLibrary(.{
+        .name = "cfoo",
+        .target = target,
+        .optimize = optimize,
+        .link_libc = true,
+    });
+    c_foo_lib.addCSourceFiles(.{
+        .files = &.{
+            "src/foo.c",
+        },
+        .flags = &.{},
+    });
+    //b.installArtifact(c_foo_lib);
     const zig_calls_c_exe = b.addExecutable(.{
         .name = "zig-calls-c",
         .root_source_file = b.path("src/main.zig"),
@@ -36,7 +35,15 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
         .link_libc = true,
     });
-    zig_calls_c_exe.addCSourceFile(std.Build.Module.CSourceFile{ .file = b.path("src/foo.c") });
+    zig_calls_c_exe.addIncludePath(b.path("src"));
+    zig_calls_c_exe.linkLibrary(c_foo_lib);
+
+    const zig_foo_lib = b.addStaticLibrary(.{
+        .name = "zigfoo",
+        .target = target,
+        .optimize = optimize,
+        .root_source_file = b.path("src/foo.zig"),
+    });
     const c_calls_zig_exe = b.addExecutable(.{
         .name = "c-calls-zig",
         .target = target,
@@ -49,7 +56,8 @@ pub fn build(b: *std.Build) void {
         },
         .flags = &.{},
     });
-    c_calls_zig_exe.installHeader();
+    c_calls_zig_exe.linkLibrary(zig_foo_lib);
+    //c_calls_zig_exe.addIncludePath(b.path("src"));
 
     // This declares intent for the executable to be installed into the
     // standard location when the user invokes the "install" step (the default
