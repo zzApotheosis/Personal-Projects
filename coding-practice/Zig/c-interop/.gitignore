@@ -5,3 +5,5 @@
 !/build.zig.zon
 !/src
 !/src/**
+
+*.o
