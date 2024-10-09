@@ -8,7 +8,16 @@ pub fn main() !void {
 }
 
 fn call_c_foo() void {
-    const num: u32 = 69;
+    var prng = std.rand.DefaultPrng.init(blk: {
+        var seed: u64 = undefined;
+        std.posix.getrandom(std.mem.asBytes(&seed)) catch |e| {
+            std.log.err("error: {}", .{e});
+            return;
+        };
+        break :blk seed;
+    });
+    const rand = prng.random();
+    const num: u32 = rand.intRangeAtMost(u32, 0, 199);
     c_foo.c_foo(num);
 }
 

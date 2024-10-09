@@ -1,8 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <time.h>
 
 void c_foo(const unsigned int x) {
+  fprintf(stdout, "Hello from C!\n");
   const char * msg = NULL;
   if (x < 10) {
     msg = "A pretty small number :)";
