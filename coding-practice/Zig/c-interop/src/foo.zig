@@ -7,18 +7,38 @@ pub export fn zig_foo(x: u32) callconv(.C) void {
     };
     var buffer: [64:0]u8 = undefined;
     var msg: [:0]u8 = undefined;
-    if (x < 10) {
-        msg = std.fmt.bufPrintZ(&buffer, "A pretty small number :)", .{}) catch |e| {
+    if (x < 60) {
+        msg = std.fmt.bufPrintZ(&buffer, "No offense, but you suck.", .{}) catch |e| {
+            std.log.err("{}", .{e});
+            return;
+        };
+    } else if (x < 70) {
+        msg = std.fmt.bufPrintZ(&buffer, "Do better next time.", .{}) catch |e| {
+            std.log.err("{}", .{e});
+            return;
+        };
+    } else if (x < 80) {
+        msg = std.fmt.bufPrintZ(&buffer, "Not bad, but could be better.", .{}) catch |e| {
+            std.log.err("{}", .{e});
+            return;
+        };
+    } else if (x < 90) {
+        msg = std.fmt.bufPrintZ(&buffer, "Good job!", .{}) catch |e| {
             std.log.err("{}", .{e});
             return;
         };
     } else if (x < 100) {
-        msg = std.fmt.bufPrintZ(&buffer, "A nice-sized number!", .{}) catch |e| {
+        msg = std.fmt.bufPrintZ(&buffer, "Outstanding!", .{}) catch |e| {
             std.log.err("{}", .{e});
             return;
         };
-    } else {
-        msg = std.fmt.bufPrintZ(&buffer, "You really had to prove something...", .{}) catch |e| {
+    } else if (x < 110) {
+        msg = std.fmt.bufPrintZ(&buffer, "Okay, now you're just showing off.", .{}) catch |e| {
+            std.log.err("{}", .{e});
+            return;
+        };
+    } else if (x == 110) {
+        msg = std.fmt.bufPrintZ(&buffer, "You really had to prove something, didn't you... freaking nerd.", .{}) catch |e| {
             std.log.err("{}", .{e});
             return;
         };

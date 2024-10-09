@@ -8,6 +8,11 @@ pub fn main() !void {
 }
 
 fn call_c_foo() void {
+    const stdout = std.io.getStdOut();
+    stdout.writer().print("This is the main function in Zig!\n", .{}) catch |e| {
+        std.log.err("{}", .{e});
+        return;
+    };
     var prng = std.rand.DefaultPrng.init(blk: {
         var seed: u64 = undefined;
         std.posix.getrandom(std.mem.asBytes(&seed)) catch |e| {
@@ -17,7 +22,7 @@ fn call_c_foo() void {
         break :blk seed;
     });
     const rand = prng.random();
-    const num: u32 = rand.intRangeAtMost(u32, 0, 199);
+    const num: u32 = rand.intRangeAtMost(u32, 0, 110);
     c_foo.c_foo(num);
 }
 

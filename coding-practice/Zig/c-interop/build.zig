@@ -15,13 +15,13 @@ pub fn build(b: *std.Build) void {
     // set a preferred release mode, allowing the user to decide how to optimize.
     const optimize = b.standardOptimizeOption(.{});
 
-    const c_foo_lib = b.addStaticLibrary(.{
+    const cfoo_lib = b.addStaticLibrary(.{
         .name = "cfoo",
         .target = target,
         .optimize = optimize,
         .link_libc = true,
     });
-    c_foo_lib.addCSourceFiles(.{
+    cfoo_lib.addCSourceFiles(.{
         .files = &.{
             "src/foo.c",
         },
@@ -36,9 +36,9 @@ pub fn build(b: *std.Build) void {
         .link_libc = true,
     });
     zig_calls_c_exe.addIncludePath(b.path("src"));
-    zig_calls_c_exe.linkLibrary(c_foo_lib);
+    zig_calls_c_exe.linkLibrary(cfoo_lib);
 
-    const zig_foo_lib = b.addStaticLibrary(.{
+    const zigfoo_lib = b.addStaticLibrary(.{
         .name = "zigfoo",
         .target = target,
         .optimize = optimize,
@@ -56,7 +56,7 @@ pub fn build(b: *std.Build) void {
         },
         .flags = &.{},
     });
-    c_calls_zig_exe.linkLibrary(zig_foo_lib);
+    c_calls_zig_exe.linkLibrary(zigfoo_lib);
     //c_calls_zig_exe.addIncludePath(b.path("src"));
 
     // This declares intent for the executable to be installed into the
