@@ -13,5 +13,6 @@ fn use_lib() !void {
     var my_struct = lib.MyStruct.new();
     defer my_struct.deinit();
     my_struct.append(69);
-    try stdout.writer().print("Data = {}\n", .{my_struct.pop()});
+    try stdout.writer().print("Data = {?}\n", .{my_struct.pop()});
+    try stdout.writer().print("Data = {?}\n", .{my_struct.pop()});
 }

@@ -25,22 +25,20 @@ pub const MyStruct = struct {
         self.data.deinit();
     }
 
-    //pub fn increment(self: *Self) void {
-    //    self.data += 1;
-    //}
-
-    //pub fn decrement(self: *Self) void {
-    //    self.data -= 1;
-    //}
-
     pub fn append(self: *Self, n: i32) void {
         self.data.append(n) catch |e| {
             std.log.err("{}", .{e});
         };
     }
 
-    pub fn pop(self: *Self) i32 {
-        return self.data.pop();
+    pub fn pop(self: *Self) ?i32 {
+        return r: {
+            if (self.len() > 0) {
+                break :r self.data.pop();
+            } else {
+                break :r null;
+            }
+        };
     }
 
     pub fn len(self: *Self) usize {
