@@ -4,7 +4,7 @@ const testing = std.testing;
 pub const MyStruct = struct {
     const Self = @This(); // Not necessary, but very convenient
 
-    _allocator: std.mem.Allocator = std.heap.page_allocator,
+    _allocator: std.mem.Allocator = undefined,
 
     mutex: std.Thread.Mutex = undefined,
     condition: std.Thread.Condition = undefined,
@@ -121,6 +121,7 @@ test "Dumb Multithreading Test" {
     const duration: u64 = 15_000_000_000;
 
     var my_struct = MyStruct.new();
+    my_struct._allocator = std.testing.allocator;
     const producer = std.Thread.spawn(.{}, producer_main, .{&my_struct}) catch |e| {
         std.log.err("{}", .{e});
         return;
