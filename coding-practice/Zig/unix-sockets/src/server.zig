@@ -2,9 +2,6 @@ const std = @import("std");
 
 const socket_path = "socket";
 
-var gpa = std.heap.GeneralPurposeAllocator(.{}){};
-const allocator = gpa.allocator();
-
 pub fn main() void {
     const address: std.net.Address = std.net.Address.initUnix(socket_path) catch |e| {
         std.io.getStdErr().writer().print("error: {}\n", .{e}) catch {};
