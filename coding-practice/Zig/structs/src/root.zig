@@ -105,7 +105,7 @@ fn consumer_main(my_struct: *MyStruct) void {
             }
 
             while (my_struct.len() > 0) {
-                std.log.info("Consumer thread: Got data ({})", .{my_struct.pop()});
+                std.log.info("Consumer thread: Got data ({?})", .{my_struct.pop()});
             }
 
             if (my_struct.stop) {

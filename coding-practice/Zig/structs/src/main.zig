@@ -16,3 +16,13 @@ fn use_lib() !void {
     try stdout.writer().print("Data = {?}\n", .{my_struct.pop()});
     try stdout.writer().print("Data = {?}\n", .{my_struct.pop()});
 }
+
+test "too many pops" {
+    var a = lib.MyStruct.new();
+    a.append(69);
+    a.append(420);
+
+    for (0..5) |_| {
+        _ = a.pop();
+    }
+}
