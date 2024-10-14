@@ -20,6 +20,8 @@ export PATH
 #export HOSTAR="llvm-ar"
 #export HOSTLD="lld"
 ##export HOSTLD="ld.lld"
+#export CC="zig cc"
+#export CXX="zig c++"
 
 # GnuPG TTY
 export GPG_TTY=${TTY}
