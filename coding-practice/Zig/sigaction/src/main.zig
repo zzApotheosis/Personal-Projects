@@ -12,6 +12,13 @@ pub fn main() !void {
         .mask = undefined,
         .flags = 0,
     }, null);
+    _ = try std.posix.sigaction(std.posix.SIG.TERM, &std.posix.Sigaction{
+        .handler = .{
+            .handler = signal_handler,
+        },
+        .mask = undefined,
+        .flags = 0,
+    }, null);
 
     try stdout.print("use ctrl+c to exit\n", .{});
     try bw.flush();
@@ -22,6 +29,10 @@ pub fn main() !void {
 }
 
 fn signal_handler(s: i32) callconv(.C) void {
-    std.debug.print("\nCaught signal: {}\n", .{s});
+    std.debug.print("\nCaught signal: {s}\n", .{switch (s) {
+        std.posix.SIG.TERM => "SIGTERM",
+        std.posix.SIG.INT => "SIGINT",
+        else => "OTHER",
+    }});
     std.process.exit(0);
 }
