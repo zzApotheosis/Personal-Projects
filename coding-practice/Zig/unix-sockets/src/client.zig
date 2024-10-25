@@ -5,14 +5,17 @@ pub fn main() void {
         std.debug.print("error: {}\n", .{e});
         return;
     };
+    defer connection.close();
     const connection_reader = connection.reader();
     const connection_writer = connection.writer();
     var buffered_connection_writer = std.io.bufferedWriter(connection_writer);
 
-    std.io.getStdOut().writer().print("Connected to Unix socket! Type some messages to the server.\n", .{}) catch {};
+    std.debug.print("Connected to Unix socket! Type some messages to the server.\n", .{});
+    std.debug.print("Send \"exit\" to close the connection.\n", .{});
+    std.debug.print("Send \"shutdown\" to stop the server\n", .{});
     const stdin_reader = std.io.getStdIn().reader();
     var buffer: [512]u8 = undefined;
-    loop: while (true) {
+    client_loop: while (true) {
         @memset(&buffer, 0);
         std.io.getStdOut().writer().print("> ", .{}) catch {};
         var message = stdin_reader.readUntilDelimiter(&buffer, '\n') catch |e| {
@@ -25,7 +28,7 @@ pub fn main() void {
                         .print("exit\n", .{}) catch {};
                     buffered_connection_writer
                         .flush() catch {};
-                    break :loop;
+                    break :client_loop;
                 },
                 else => {
                     std.log.err("{}", .{e});
@@ -48,7 +51,9 @@ pub fn main() void {
             continue;
         };
 
-        if (std.mem.eql(u8, message, "exit")) {
+        if (std.mem.eql(u8, message, "exit") or
+            std.mem.eql(u8, message, "shutdown"))
+        {
             break;
         }
 
@@ -60,6 +65,4 @@ pub fn main() void {
 
         std.io.getStdOut().writer().print("{s}\n", .{message}) catch {};
     }
-
-    connection.close();
 }
