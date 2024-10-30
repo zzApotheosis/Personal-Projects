@@ -1,5 +1,3 @@
-KDIR = /lib/modules/`uname -r`/build
-
 obj-m += lkm.o
 lkm-y += module.o foo.o
 
@@ -10,7 +8,13 @@ zig:
 	touch .foo.o.cmd
 
 clean:
-	make -C $(KDIR) M=`pwd` clean
+	make -C /lib/modules/`uname -r`/build M="$(PWD)" clean
 
 modules: zig
-	make -C $(KDIR) M=`pwd` modules
+	make -C /lib/modules/`uname -r`/build M="$(PWD)" modules
+
+test: modules
+	-sudo rmmod lkm2
+	sudo dmesg -C
+	sudo insmod lkm2.ko
+	sudo dmesg
