@@ -2,6 +2,7 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/fs.h>
+#include <linux/string.h>
 #include <asm/uaccess.h>
 
 #define DEVICE_NAME "lkm"
@@ -25,7 +26,6 @@ static int major_num;
 static int device_open_count = 0;
 static char msg_buffer[MSG_BUFFER_LEN];
 static char* msg_ptr;
-static unsigned int data = 0;
 
 /* This structure points to all of the device functions */
 static struct file_operations file_ops = {
@@ -57,8 +57,14 @@ static ssize_t device_read(struct file* flip, char* buffer, size_t len, loff_t* 
 static ssize_t device_write(struct file* flip, const char* buffer, size_t len, loff_t* offset) {
     /* This is a read-only device */
     printk(KERN_ALERT "This operation is not supported.\n");
-    data = zig_foo(10);
+    unsigned int data = zig_foo(10);
     printk(KERN_INFO "data=%d\n", data);
+
+    char localmsg[256];
+    memset(localmsg, 0, sizeof(localmsg));
+    strncpy(localmsg, buffer, sizeof(localmsg));
+    printk(KERN_INFO "len=%lu\n", len);
+    //printk(KERN_INFO "%s", localmsg);
     return -EINVAL;
 }
 

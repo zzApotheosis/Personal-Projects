@@ -13,4 +13,4 @@ clean:
 	make -C $(KDIR) M=`pwd` clean
 
 modules: zig
-	make -C $(KDIR) M=`pwd` modules foo.o
+	make -C $(KDIR) M=`pwd` modules
