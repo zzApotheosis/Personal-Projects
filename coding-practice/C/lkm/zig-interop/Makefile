@@ -1,10 +1,16 @@
 KDIR = /lib/modules/`uname -r`/build
 
-kbuild: foo.o
-	make -C $(KDIR) M=`pwd`
+obj-m += lkm.o
+lkm-y += module.o foo.o
 
-foo.o:
-	zig build-obj -fPIE foo.zig
+all: clean modules
+
+zig:
+	zig build-obj -O ReleaseSmall foo.zig
+	touch .foo.o.cmd
 
 clean:
 	make -C $(KDIR) M=`pwd` clean
+
+modules: zig
+	make -C $(KDIR) M=`pwd` modules foo.o

@@ -4,7 +4,7 @@
 #include <linux/fs.h>
 #include <asm/uaccess.h>
 
-#define DEVICE_NAME "lkm2"
+#define DEVICE_NAME "lkm"
 #define EXAMPLE_MSG "Hello, World!\n"
 #define MSG_BUFFER_LEN 15
 
@@ -57,7 +57,7 @@ static ssize_t device_read(struct file* flip, char* buffer, size_t len, loff_t* 
 static ssize_t device_write(struct file* flip, const char* buffer, size_t len, loff_t* offset) {
     /* This is a read-only device */
     printk(KERN_ALERT "This operation is not supported.\n");
-    zig_foo(data++);
+    data = zig_foo(10);
     printk(KERN_INFO "data=%d\n", data);
     return -EINVAL;
 }
