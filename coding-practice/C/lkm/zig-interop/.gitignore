@@ -5,4 +5,5 @@
 !/.gitignore
 !/Makefile
 !/lkm.c
+!/foo.zig
 
