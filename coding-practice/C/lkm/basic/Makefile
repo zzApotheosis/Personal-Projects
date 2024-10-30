@@ -1,5 +1,4 @@
 obj-m += lkm.o
-obj-m += lkm2.o
 
 all: clean modules
 
@@ -11,9 +10,7 @@ modules:
 
 test:
 	-sudo rmmod lkm
-	-sudo rmmod lkm2
 	sudo dmesg -C
 	sudo insmod lkm.ko
-	sudo insmod lkm2.ko
 	sudo dmesg
 

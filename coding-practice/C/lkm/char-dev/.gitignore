@@ -3,8 +3,6 @@
 
 # Exceptions
 !/.gitignore
-!/basic/
-!/basic/**
-!/char-dev/
-!/char-dev/**
+!/Makefile
+!/lkm.c
 
