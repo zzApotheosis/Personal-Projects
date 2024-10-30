@@ -4,14 +4,16 @@
 #include <linux/fs.h>
 #include <asm/uaccess.h>
 
+#define DEVICE_NAME "lkm2"
+#define EXAMPLE_MSG "Hello, World!\n"
+#define MSG_BUFFER_LEN 15
+
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Steven C. Jennings");
 MODULE_DESCRIPTION("A simple Linux module example.");
 MODULE_VERSION("0.01");
 
-#define DEVICE_NAME "lkm2"
-#define EXAMPLE_MSG "Hello, World!\n"
-#define MSG_BUFFER_LEN 15
+extern unsigned int zig_foo(unsigned int);
 
 /* Prototypes for device functions */
 static int device_open(struct inode*, struct file*);
@@ -23,6 +25,7 @@ static int major_num;
 static int device_open_count = 0;
 static char msg_buffer[MSG_BUFFER_LEN];
 static char* msg_ptr;
+static unsigned int data = 0;
 
 /* This structure points to all of the device functions */
 static struct file_operations file_ops = {
@@ -54,6 +57,8 @@ static ssize_t device_read(struct file* flip, char* buffer, size_t len, loff_t* 
 static ssize_t device_write(struct file* flip, const char* buffer, size_t len, loff_t* offset) {
     /* This is a read-only device */
     printk(KERN_ALERT "This operation is not supported.\n");
+    zig_foo(data++);
+    printk(KERN_INFO "data=%d\n", data);
     return -EINVAL;
 }
 

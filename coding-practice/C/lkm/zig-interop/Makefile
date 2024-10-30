@@ -1,16 +1,10 @@
-obj-m += lkm.o
+KDIR = /lib/modules/`uname -r`/build
 
-all: clean modules
+kbuild: foo.o
+	make -C $(KDIR) M=`pwd`
+
+foo.o:
+	zig build-obj -fPIE foo.zig
 
 clean:
-	make -C /lib/modules/`uname -r`/build M="$(PWD)" clean
-
-modules:
-	make -C /lib/modules/`uname -r`/build M="$(PWD)" modules
-
-test:
-	-sudo rmmod lkm
-	sudo dmesg -C
-	sudo insmod lkm.ko
-	sudo dmesg
-
+	make -C $(KDIR) M=`pwd` clean
