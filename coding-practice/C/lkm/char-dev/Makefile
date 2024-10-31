@@ -1,4 +1,5 @@
 obj-m += lkm.o
+lkm-y += module.o
 
 all: clean modules
 

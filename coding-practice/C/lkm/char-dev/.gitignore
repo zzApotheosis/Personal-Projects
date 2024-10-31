@@ -4,5 +4,5 @@
 # Exceptions
 !/.gitignore
 !/Makefile
-!/lkm.c
+!/module.c
 
