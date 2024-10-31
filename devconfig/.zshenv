@@ -27,7 +27,7 @@ export PATH
 export GPG_TTY=${TTY}
 
 # Declare Preferred Editor
-export EDITOR="hx"
-#export EDITOR="nvim"
+export EDITOR="nvim"
+#export EDITOR="hx"
 #export EDITOR="emacs"
 #export EDITOR="emacsclient -s ${HOME}/.emacs.d/.socket -c"
