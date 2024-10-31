@@ -44,11 +44,12 @@ static ssize_t device_read(struct file * const flip, char * buffer, size_t len, 
     len--;
     bytes_read++;
   }
+  
   return bytes_read;
 }
 
 static ssize_t device_write(struct file * const flip, const char * const buffer, const size_t len, loff_t * const offset) {
-  printk(KERN_ALERT "This operation is not supported.\n");
+  printk(KERN_WARNING "This operation is not supported.\n");
   unsigned int data = 0;
   data = zig_increment(data);
   printk(KERN_INFO "Data = %d\n", data);
