@@ -1,0 +1,8 @@
+# Ignore all by default
+*
+
+# Exceptions
+!/.gitignore
+!/init.lua
+!/init/
+!/init/**

@@ -5,34 +5,94 @@ local m = {}
 -- Define desired plugins
 m.plugins = {
   -- mason.nvim
-  {
-    'williamboman/mason.nvim',
-    opts = {},
-    config = function()
-      local mymason = require('mason')
-      mymason.setup()
-    end
-  }
-
-  -- lspconfig.nvim
-  ,{
-    'neovim/nvim-lspconfig',
-    opts = {},
-    config = function ()
-      mylspconfig = require('lspconfig')
-      mylspconfig.clangd.setup{}
-      mylspconfig.rust_analyzer.setup{}
-    end
-  }
-
-  -- nvim-treesitter/nvim-treesitter
-  --,{
-  --  'nvim-treesitter/nvim-treesitter',
+  --{
+  --  'williamboman/mason.nvim',
   --  opts = {},
   --  config = function()
-  --    vim.cmd('TSUpdate')
+  --    local mymason = require('mason')
+  --    mymason.setup()
   --  end
   --}
+
+  -- nvim-lspconfig
+  {
+    "neovim/nvim-lspconfig", -- REQUIRED: for native Neovim LSP integration
+    lazy = false, -- REQUIRED: tell lazy.nvim to start this plugin at startup
+    dependencies = {
+      -- main one
+      { "ms-jpq/coq_nvim", branch = "coq" },
+  
+      -- 9000+ Snippets
+      { "ms-jpq/coq.artifacts", branch = "artifacts" },
+  
+      -- lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
+      -- Need to **configure separately**
+      { 'ms-jpq/coq.thirdparty', branch = "3p" }
+      -- - shell repl
+      -- - nvim lua api
+      -- - scientific calculator
+      -- - comment banner
+      -- - etc
+    },
+    init = function()
+      vim.g.coq_settings = {
+          auto_start = true, -- if you want to start COQ at startup
+          -- Your COQ settings here
+      }
+    end,
+    config = function()
+      -- Your LSP settings here
+    end,
+  },
+
+  -- nvim-treesitter/nvim-treesitter
+  {
+    'nvim-treesitter/nvim-treesitter',
+    opts = {},
+    config = function()
+      vim.cmd('TSUpdate')
+    end
+  },
+
+  -- zig.vim
+  {
+    'ziglang/zig.vim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = {},
+    config = function()
+      -- Do nothing
+    end,
+  },
+
+  -- oil.nvim
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = {"nvim-tree/nvim-web-devicons"},
+    config = function ()
+      require('oil').setup()
+    end
+  },
+
+  -- leap.nvim
+  {
+    'ggandor/leap.nvim',
+    opts = {},
+    config = function()
+      require('leap').create_default_mappings()
+    end
+  },
+
+  -- vimwiki
+  {
+    'vimwiki/vimwiki',
+    opts = {},
+    config = function()
+      -- Do nothing
+    end
+  },
 
   -- mason-lspconfig.nvim
   --,{
@@ -55,72 +115,44 @@ m.plugins = {
   --}
 
   -- ale
-  ,{
-    'dense-analysis/ale',
-    opts = {},
-    config = function()
-      -- Do nothing
-    end
-  }
+  --,{
+  --  'dense-analysis/ale',
+  --  opts = {},
+  --  config = function()
+  --    -- Do nothing
+  --  end
+  --}
 
   -- nvim-dap
-  ,{
-    'mfussenegger/nvim-dap',
-    opts = {},
-    config = function()
-      -- Do nothing
-    end
-  }
-
-  -- oil.nvim
-  ,{
-    'stevearc/oil.nvim',
-    opts = {},
-    -- Optional dependencies
-    dependencies = {"nvim-tree/nvim-web-devicons"},
-    config = function ()
-      require("oil").setup()
-    end
-  }
-
-  -- leap.nvim
-  ,{
-    'ggandor/leap.nvim',
-    opts = {},
-    config = function()
-      require('leap').create_default_mappings()
-    end
-  }
-
-  -- vimwiki
-  ,{
-    'vimwiki/vimwiki',
-    opts = {},
-    config = function()
-      -- Do nothing
-    end
-  }
+  --,{
+  --  'mfussenegger/nvim-dap',
+  --  opts = {},
+  --  config = function()
+  --    -- Do nothing
+  --  end
+  --}
+  
 } -- end plugins definition
 
 -- Setup function
 function m.setup()
   -- Utilize lazy.nvim plugin manager
-  --local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-  --if not vim.loop.fs_stat(lazypath) then
-  --  vim.fn.system({
-  --    "git",
-  --    "clone",
-  --    "--filter=blob:none",
-  --    "https://github.com/folke/lazy.nvim.git",
-  --    "--branch=stable", -- latest stable release
-  --    lazypath,
-  --  })
-  --end
-  --vim.opt.runtimepath:prepend(lazypath)
+  local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+  if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+      "git",
+      "clone",
+      "--filter=blob:none",
+      "https://github.com/folke/lazy.nvim.git",
+      "--branch=stable", -- latest stable release
+      lazypath,
+    })
+  end
+  vim.opt.runtimepath:prepend(lazypath)
   
   
   -- Invoke lazy.nvim to setup desired plugins
-  --require('lazy').setup(m.plugins, {})
+  require('lazy').setup(m.plugins, {})
   
   -- Old sample code to set up LSP client/server
   -- vim.lsp.start({
