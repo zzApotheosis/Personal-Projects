@@ -13,8 +13,8 @@ end
 
 -- Initialize setup (All custom modules must exist under $HOME/.config/nvim/?.lua)
 require('init.vimoptions').init()
+require('init.pkgmanager').init()
 require('init.colors').init()
 require('init.lsp').init()
 require('init.usercommands').init()
 require('init.autocommands').init()
-require('init.pkgmanager').init()

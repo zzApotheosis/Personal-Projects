@@ -94,6 +94,12 @@ m.plugins = {
     end
   },
 
+  -- catppuccin.nvim
+  {
+    'catppuccin/nvim',
+    lazy = false,
+  },
+
   -- mason-lspconfig.nvim
   --,{
   --  'williamboman/mason-lspconfig.nvim'
