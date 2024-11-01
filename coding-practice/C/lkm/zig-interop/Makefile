@@ -1,6 +1,3 @@
-obj-m += lkm.o
-lkm-y += module.o foo.o
-
 all: clean modules
 
 zig:

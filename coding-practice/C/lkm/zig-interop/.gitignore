@@ -4,6 +4,7 @@
 # Exceptions
 !/.gitignore
 !/Makefile
+!/Kbuild
 !/module.c
 !/foo.zig
 
