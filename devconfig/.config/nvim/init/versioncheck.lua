@@ -5,7 +5,7 @@ local m = {}
 -- Expected Neovim version
 local min_expected = {}
 min_expected['major'] = 0
-min_expected['minor'] = 8
+min_expected['minor'] = 10
 min_expected['patch'] = 0
 
 local actual = vim.version()
