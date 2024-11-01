@@ -11,7 +11,6 @@ function m.setup()
         vim.lsp.completion.enable(true, client.id, { autotrigger = true })
         return -- is this actually needed?
       end
-      print("TEST")
     end,
   })
 end
