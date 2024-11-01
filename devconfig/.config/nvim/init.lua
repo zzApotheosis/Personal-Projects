@@ -65,6 +65,16 @@ vim.api.nvim_create_autocmd('FileType', {
     })
   end,
 })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'rust',
+  callback = function(args)
+    vim.lsp.start({
+      name = 'rust-analyzer',
+      cmd = {'rust-analyzer'},
+      root_dir = vim.fs.root(args.buf, {'Cargo.toml'}),
+    })
+  end,
+})
 
 -- Create custom commands
 vim.api.nvim_create_user_command('LSPStop', stop_lsp, {})
@@ -191,17 +201,6 @@ local plugins = {
 --   name = 'my-server-name',
 --   cmd = {'clangd'},
 --   root_dir = "/home/zzapotheosis/Development/Git/Personal-Projects/coding_practice/C"
--- })
-
--- vim.api.nvim_create_autocmd('FileType', {
---   pattern = 'rust',
---   callback = function(args)
---     vim.lsp.start({
---       name = 'my-rust-analyzer',
---       cmd = {'rust-analyzer'},
---       root_dir = vim.fs.root(args.buf, {'Cargo.toml'}),
---     })
---   end,
 -- })
 
 -- vim.api.nvim_create_autocmd('LspAttach', {
