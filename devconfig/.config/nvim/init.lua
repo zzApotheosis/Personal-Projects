@@ -1,12 +1,8 @@
 -- Append package load path
 package.path = package.path .. ';' .. os.getenv('HOME') .. '/.config/nvim/?.lua'
 
--- Load custom modules
-local versioncheck = require('versioncheck')
-local vimoptions = require('vimoptions')
-local colors = require('colors')
-local lsp = require('lsp')
-local usercommands = require('usercommands')
+-- Load version check module
+local versioncheck = require('init.versioncheck')
 
 -- Check version first before anything else
 if versioncheck.versioncheck() < 0 then
@@ -15,11 +11,11 @@ if versioncheck.versioncheck() < 0 then
   os.exit(1)
 end
 
--- Initialize setup
-vimoptions.init()
-colors.init()
-lsp.init()
-usercommands.init()
+-- Initialize setup (All custom modules must exist under $HOME/.config/nvim/?.lua)
+require('init.vimoptions').init()
+require('init.colors').init()
+require('init.lsp').init()
+require('init.usercommands').init()
 
 -- Utilize lazy.nvim plugin manager
 --local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
