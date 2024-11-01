@@ -16,6 +16,14 @@ vim.opt.cindent = true
 vim.opt.mouse = 'a'
 vim.opt.foldmethod = 'indent'
 
+-- Set transparent background no matter what
+vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
+vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
+
+--vim.opt.background = 'none'
+--vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+--vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+
 -- Custom function to check running version
 function version_check()
   local actual = vim.version()
