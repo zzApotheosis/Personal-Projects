@@ -1,91 +1,25 @@
--- Expected Neovim version
-local min_expected = {}
-min_expected['major'] = 0
-min_expected['minor'] = 8
-min_expected['patch'] = 0
+-- Append package load path
+package.path = package.path .. ';' .. os.getenv('HOME') .. '/.config/nvim/?.lua'
 
--- Set standard Neovim configuration options
-vim.opt.number = true
--- vim.opt.relativenumber = true
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
-vim.opt.ai = true
-vim.opt.si = true
-vim.opt.cindent = true
-vim.opt.mouse = 'a'
-vim.opt.foldmethod = 'indent'
+-- Load custom modules
+local versioncheck = require('versioncheck')
+local vimoptions = require('vimoptions')
+local colors = require('colors')
+local lsp = require('lsp')
+local usercommands = require('usercommands')
 
--- Set transparent background no matter what
-vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
-vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
-
---vim.opt.background = 'none'
---vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
---vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-
--- Custom function to check running version
-function version_check()
-  local actual = vim.version()
-
-  if actual['major'] < min_expected['major'] then
-    return -1
-  elseif actual['major'] > min_expected['major'] then
-    return 1
-  end
-
-  if actual['minor'] < min_expected['minor'] then
-    return -1
-  elseif actual['minor'] > min_expected['minor'] then
-    return 1
-  end
-
-  if actual['patch'] < min_expected['patch'] then
-    return -1
-  elseif actual['patch'] > min_expected['patch'] then
-    return 1
-  end
-
-  return 0
-end
-vim.api.nvim_create_user_command('Test', version_check, {})
-
-function stop_lsp()
-  vim.lsp.stop_client(vim.lsp.get_active_clients())
+-- Check version first before anything else
+if versioncheck.versioncheck() < 0 then
+  print("This Neovim version is too old! (Minimum " .. versioncheck.expected() .. ', actual ' .. versioncheck.actual() .. ')')
+  vim.fn.input("Press Enter to continue")
+  os.exit(1)
 end
 
--- Set up autocmd for LSP servers
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = {'c', 'cpp', 'c++'},
-  callback = function(args)
-    vim.lsp.start({
-      name = 'clangd',
-      cmd = {'clangd'},
-    })
-  end,
-})
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = {'zig'},
-  callback = function(args)
-    vim.lsp.start({
-      name = 'zls',
-      cmd = {'zls'},
-    })
-  end,
-})
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'rust',
-  callback = function(args)
-    vim.lsp.start({
-      name = 'rust-analyzer',
-      cmd = {'rust-analyzer'},
-      root_dir = vim.fs.root(args.buf, {'Cargo.toml'}),
-    })
-  end,
-})
-
--- Create custom commands
-vim.api.nvim_create_user_command('LSPStop', stop_lsp, {})
+-- Initialize setup
+vimoptions.init()
+colors.init()
+lsp.init()
+usercommands.init()
 
 -- Utilize lazy.nvim plugin manager
 --local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
