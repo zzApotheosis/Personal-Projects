@@ -4,7 +4,7 @@ local m = {}
 
 -- Setup function
 function m.setup()
-  vim.cmd('colorscheme catppuccin')
+  --vim.cmd('colorscheme catppuccin')
   m.bg_transparent()
 end
 
