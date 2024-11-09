@@ -3,7 +3,7 @@
 #include <string.h>
 #include <gcrypt.h>
 
-#define NEED_LIBGCRYPT_VERSION "1.10.1"
+#define NEED_LIBGCRYPT_VERSION "1.10.0"
 
 void printhex(int arr_len, unsigned char arr[arr_len], char name[]) {
     fprintf(stdout, "[*] Printing array %s, length=%d\n", name, arr_len);
