@@ -29,25 +29,22 @@ void Point_destroy(Point * const self) {
   free(self);
 }
 
-Point * Point_set_x(Point * const self, const int x) {
+void Point_set_x(Point * const self, const int x) {
   if (self == NULL)
-    return NULL;
+    return;
   self->x = x;
-  return self;
 }
 
-Point * Point_set_y(Point * const self, const int y) {
+void Point_set_y(Point * const self, const int y) {
   if (self == NULL)
-    return NULL;
+    return;
   self->y = y;
-  return self;
 }
 
-Point * Point_set_z(Point * const self, const int z) {
+void Point_set_z(Point * const self, const int z) {
   if (self == NULL)
-    return NULL;
+    return;
   self->z = z;
-  return self;
 }
 
 int Point_get_x(Point * const self) {
