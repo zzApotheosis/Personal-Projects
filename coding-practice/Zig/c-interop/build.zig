@@ -38,6 +38,16 @@ pub fn build(b: *std.Build) void {
     zig_calls_c_exe.addIncludePath(b.path("src"));
     zig_calls_c_exe.linkLibrary(cfoo_lib);
 
+    const c_structs_exe = b.addExecutable(.{
+        .name = "c-structs",
+        .root_source_file = b.path("src/c-structs.zig"),
+        .target = target,
+        .optimize = optimize,
+        .link_libc = true,
+    });
+    c_structs_exe.addIncludePath(b.path("src"));
+    c_structs_exe.linkLibrary(cfoo_lib);
+
     const zigfoo_lib = b.addStaticLibrary(.{
         .name = "zigfoo",
         .target = target,
@@ -64,6 +74,7 @@ pub fn build(b: *std.Build) void {
     // step when running `zig build`).
     b.installArtifact(zig_calls_c_exe);
     b.installArtifact(c_calls_zig_exe);
+    b.installArtifact(c_structs_exe);
 
     // This *creates* a Run step in the build graph, to be executed when another
     // step is evaluated that depends on it. The next line below will establish
@@ -102,7 +113,10 @@ pub fn build(b: *std.Build) void {
         .root_source_file = b.path("src/main.zig"),
         .target = target,
         .optimize = optimize,
+        .link_libc = true,
     });
+    exe_unit_tests.addIncludePath(b.path("src"));
+    exe_unit_tests.linkLibrary(cfoo_lib);
 
     const run_exe_unit_tests = b.addRunArtifact(exe_unit_tests);
 
