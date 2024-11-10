@@ -18,15 +18,19 @@ pub fn main() void {
     if (point == null) {
         return;
     }
+    defer Point_destroy(point); // This prevents memory leak (classic C mistake)
 
-    const x: c_int = @as(c_int, 1);
-    const y: c_int = @as(c_int, 2);
-    const z: c_int = @as(c_int, 3);
+    const x: c_int = @as(c_int, 1337);
+    const y: c_int = @as(c_int, 420);
+    const z: c_int = @as(c_int, 69);
     _ = Point_set_x(point, x);
     _ = Point_set_y(point, y);
     _ = Point_set_z(point, z);
     std.debug.assert(Point_get_x(point) == x);
     std.debug.assert(Point_get_y(point) == y);
     std.debug.assert(Point_get_z(point) == z);
-    Point_destroy(point);
+
+    std.debug.print("x = {}\n", .{Point_get_x(point)});
+    std.debug.print("y = {}\n", .{Point_get_y(point)});
+    std.debug.print("z = {}\n", .{Point_get_z(point)});
 }
