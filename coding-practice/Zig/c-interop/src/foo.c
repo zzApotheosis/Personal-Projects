@@ -25,8 +25,13 @@ Point * Point_new() {
   return self;
 }
 
-void Point_destroy(Point * const self) {
-  free(self);
+void Point_destroy(Point ** const self) {
+  if (self == NULL)
+    return;
+  if (*self == NULL)
+    return;
+  free(*self);
+  *self = NULL;
 }
 
 void Point_set_x(Point * const self, const int x) {

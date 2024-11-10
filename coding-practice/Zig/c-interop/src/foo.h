@@ -3,7 +3,7 @@
 
 typedef struct Point Point;
 Point * Point_new(void);
-void Point_destroy(Point * const);
+void Point_destroy(Point ** const);
 void Point_set_x(Point * const, const int);
 void Point_set_y(Point * const, const int);
 void Point_set_z(Point * const, const int);

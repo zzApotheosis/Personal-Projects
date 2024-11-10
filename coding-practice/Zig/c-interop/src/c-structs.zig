@@ -45,13 +45,26 @@ pub fn main() void {
     std.debug.print("x = {}\n", .{Point_get_x(points[0])});
     std.debug.print("y = {}\n", .{Point_get_y(points[0])});
     std.debug.print("z = {}\n", .{Point_get_z(points[0])});
+    std.debug.print("\n", .{});
 
-    std.debug.print("\nPoint 2\n", .{});
+    std.debug.print("Point 2\n", .{});
     std.debug.print("x = {}\n", .{Point_get_x(points[1])});
     std.debug.print("y = {}\n", .{Point_get_y(points[1])});
     std.debug.print("z = {}\n", .{Point_get_z(points[1])});
+    std.debug.print("\n", .{});
+
+    std.debug.print("Before free()\n", .{});
+    for (0..points.len) |i| {
+        std.debug.print("point {} = {?}\n", .{ i + 1, points[i] });
+    }
+    std.debug.print("\n", .{});
 
     for (0..points.len) |i| {
-        Point_destroy(points[i]);
+        Point_destroy(&points[i]);
+    }
+
+    std.debug.print("After free()\n", .{});
+    for (0..points.len) |i| {
+        std.debug.print("point {} = {?}\n", .{ i + 1, points[i] });
     }
 }
