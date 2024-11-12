@@ -1,6 +1,9 @@
 # Customize PATH
 PATH=$(printf "%s" "${PATH}" | sed "s@:${HOME}/usr/local/bin@@" | sed "s@${HOME}/usr/local/bin:@@")
 PATH="${HOME}/.local/bin:${PATH}"
+if [ -d "${HOME}/go/bin" ]; then
+  PATH="${PATH}:${HOME}/go/bin"
+fi
 export PATH
 
 # C Compiler
