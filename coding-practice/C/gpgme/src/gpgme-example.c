@@ -9,12 +9,12 @@
 
 #include "gpgme-example.h"
 
-#define GPGME_VERSION "1.15.1"
+#define GPGME_MIN_VERSION "1.15.1"
 
 static gpgme_ctx_t ctx = NULL;
 
 static void check_version(void) {
-    if (gpgme_check_version(GPGME_VERSION) == NULL) {
+    if (gpgme_check_version(GPGME_MIN_VERSION) == NULL) {
         die("gpgme_check_version() failed");
     }
 }
