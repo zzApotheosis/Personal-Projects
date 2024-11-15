@@ -11,13 +11,6 @@
 
 #define GPGME_VERSION "1.15.1"
 
-#define EXPECT_EQ(e, v) \
-    do { \
-        if (e != v) { \
-            die("Assertion failed"); \
-        } \
-    } while (0)
-
 static gpgme_ctx_t ctx = NULL;
 
 static void check_version(void) {
@@ -40,8 +33,8 @@ int listkeys(void) {
     gpgme_key_t key = NULL;
     gpgme_error_t e = 0;
 
-    e = gpgme_op_keylist_start (ctx, NULL, 0);
-    while (!e) {
+    e = gpgme_op_keylist_start(ctx, NULL, 0);
+    for (;!e;) {
         e = gpgme_op_keylist_next(ctx, &key);
         if (e)
             break;
@@ -59,5 +52,25 @@ int listkeys(void) {
         return 1;
     }
 
+    return 0;
+}
+
+int symm_encrypt(void) {
+    // TODO
+    return 0;
+}
+
+int asym_encrypt(void) {
+    // TODO
+    return 0;
+}
+
+int sign(void) {
+    // TODO
+    return 0;
+}
+
+int verify(void) {
+    // TODO
     return 0;
 }

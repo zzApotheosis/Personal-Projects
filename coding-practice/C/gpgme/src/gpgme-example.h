@@ -4,7 +4,10 @@
 void gpgme_example_init(void);
 void gpgme_example_deinit(void);
 
-void func1(void);
 int listkeys(void);
+int symm_encrypt(void);
+int asym_encrypt(void);
+int sign(void);
+int verify(void);
 
 #endif

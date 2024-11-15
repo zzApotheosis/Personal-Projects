@@ -24,6 +24,10 @@ int main(int argc, char * argv[]) {
      */
     flist = functionlist_new();
     functionlist_push(flist, listkeys);
+    functionlist_push(flist, symm_encrypt);
+    functionlist_push(flist, asym_encrypt);
+    functionlist_push(flist, sign);
+    functionlist_push(flist, verify);
     
     /*
      * Iterate functions
