@@ -30,6 +30,7 @@ void gpgme_example_deinit(void) {
 }
 
 int listkeys(void) {
+    fprintf(stderr, "\nRunning %s()\n", __func__);
     gpgme_key_t key = NULL;
     gpgme_error_t e = 0;
 
@@ -56,21 +57,29 @@ int listkeys(void) {
 }
 
 int symm_encrypt(void) {
+    fprintf(stderr, "\nRunning %s()\n", __func__);
     // TODO
+    fprintf(stderr, "TODO\n");
     return 0;
 }
 
 int asym_encrypt(void) {
+    fprintf(stderr, "\nRunning %s()\n", __func__);
     // TODO
+    fprintf(stderr, "TODO\n");
     return 0;
 }
 
 int sign(void) {
+    fprintf(stderr, "\nRunning %s()\n", __func__);
     // TODO
+    fprintf(stderr, "TODO\n");
     return 0;
 }
 
 int verify(void) {
+    fprintf(stderr, "\nRunning %s()\n", __func__);
     // TODO
+    fprintf(stderr, "TODO\n");
     return 0;
 }
