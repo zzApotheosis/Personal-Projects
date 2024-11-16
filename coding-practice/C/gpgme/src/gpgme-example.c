@@ -34,7 +34,28 @@ int listkeys(void) {
     gpgme_key_t key = NULL;
     gpgme_error_t e = 0;
 
+    fprintf(stderr, "ALL KEYS:\n");
     e = gpgme_op_keylist_start(ctx, NULL, 0);
+    for (;!e;) {
+        e = gpgme_op_keylist_next(ctx, &key);
+        if (e)
+            break;
+        fprintf(stderr, "%s:", key->subkeys->keyid);
+        if (key->uids && key->uids->name)
+            fprintf(stderr, " %s", key->uids->name);
+        if (key->uids && key->uids->email)
+            fprintf(stderr, " <%s>", key->uids->email);
+        fprintf(stderr, "\n");
+        gpgme_key_release(key);
+    }
+
+    if (gpg_err_code(e) != GPG_ERR_EOF) {
+        fprintf(stderr, "Cannot list keys: %s\n", gpgme_strerror(e));
+        return 1;
+    }
+
+    fprintf(stderr, "SECRET KEYS:\n");
+    e = gpgme_op_keylist_start(ctx, NULL, 1);
     for (;!e;) {
         e = gpgme_op_keylist_next(ctx, &key);
         if (e)
