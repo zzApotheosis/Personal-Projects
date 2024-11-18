@@ -1,8 +1,8 @@
 #ifndef GPGME_EXAMPLE_H
 #define GPGME_EXAMPLE_H
 
-void gpgme_example_init(void);
-void gpgme_example_deinit(void);
+void before_each(void);
+void after_each(void);
 
 int listkeys(void);
 int symm_encrypt(void);

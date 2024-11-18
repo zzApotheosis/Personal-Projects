@@ -13,8 +13,6 @@ int main(int argc, char * argv[]) {
     (void) argc;
     (void) argv;
 
-    gpgme_example_init();
-
     functionlist * flist = NULL;
     funcnode * fnode = NULL;
     int result = 0;
@@ -34,7 +32,9 @@ int main(int argc, char * argv[]) {
      */
     fnode = functionlist_pop(flist);
     for (;fnode != NULL;) {
+        before_each();
         result = funcnode_get_f(fnode)();
+        after_each();
         if (result)
             fprintf(stderr, "%s:%d fnode function failed. (%p)\n", __FILE__, __LINE__, (void *) fnode);
         funcnode_destroy(&fnode);
@@ -42,8 +42,6 @@ int main(int argc, char * argv[]) {
     }
 
     functionlist_destroy(&flist);
-
-    gpgme_example_deinit();
 
     return EXIT_SUCCESS;
 }

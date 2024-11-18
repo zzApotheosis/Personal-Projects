@@ -2,6 +2,7 @@
 #include <gpg-error.h>
 #include <gpgme-64.h>
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 #include <gpgme.h>
 
@@ -19,14 +20,22 @@ static void check_version(void) {
     }
 }
 
-void gpgme_example_init(void) {
+static void gpgme_example_init(void) {
     check_version();
     if (gpgme_new(&ctx) != GPG_ERR_NO_ERROR)
         die("gpgme_new() error");
 }
 
-void gpgme_example_deinit(void) {
+static void gpgme_example_deinit(void) {
     gpgme_release(ctx);
+}
+
+void before_each(void) {
+    gpgme_example_init();
+}
+
+void after_each(void) {
+    gpgme_example_deinit();
 }
 
 int listkeys(void) {
@@ -79,14 +88,59 @@ int listkeys(void) {
 
 int symm_encrypt(void) {
     fprintf(stderr, "\nRunning %s()\n", __func__);
-    // TODO
-    fprintf(stderr, "TODO\n");
+    const char plaintext_string[] = "Super cool data bro\n";
+    const char ciphertext_filename[] = "symmetric-ciphertext.gpg";
+    gpgme_error_t status = 0;
+    
+    gpgme_data_t ciphertext_file = NULL;
+    gpgme_data_new(&ciphertext_file);
+    gpgme_data_set_file_name(ciphertext_file, ciphertext_filename);
+
+    gpgme_data_t plaintext = NULL;
+    status = gpgme_data_new_from_mem(&plaintext, plaintext_string, sizeof(plaintext_string), 0);
+    if (status != GPG_ERR_NO_ERROR) {
+        fprintf(stderr, "error: %s\n", gpgme_strerror(status));
+        die("NOT GOOD");
+    }
+    
+    gpgme_data_t ciphertext = NULL;
+    gpgme_data_new(&ciphertext);
+
+    // Encryption operation
+    status = gpgme_op_encrypt(ctx, NULL, GPGME_ENCRYPT_SYMMETRIC, plaintext, ciphertext);
+    if (status != GPG_ERR_NO_ERROR) {
+        fprintf(stderr, "error: %s\n", gpgme_strerror(status));
+        die("NOT GOOD");
+    }
+    gpgme_data_seek(ciphertext, 0, SEEK_SET);
+    
+    char ciphertext_buffer[32];
+    FILE * fh = fopen(ciphertext_filename, "w+b");
+    if (fh == NULL)
+        die("NOT GOOD");
+    ssize_t data_result = 0;
+ciphertext_read:
+    memset(ciphertext_buffer, 0, sizeof(ciphertext_buffer));
+    if ((data_result = gpgme_data_read(ciphertext, ciphertext_buffer, sizeof(ciphertext_buffer))) > 0) {
+        fwrite(ciphertext_buffer, data_result, 1, fh);
+        goto ciphertext_read;
+    } else if (data_result < 0) {
+        fclose(fh);
+        die("NOT GOOD");
+    }
+    fclose(fh);
+
+    
+    gpgme_data_release(ciphertext);
+    gpgme_data_release(plaintext);
+    gpgme_data_release(ciphertext_file);
     return 0;
 }
 
 int asym_encrypt(void) {
     fprintf(stderr, "\nRunning %s()\n", __func__);
     // TODO
+    const char filename[] = "asymmetric-ciphtext.gpg";
     fprintf(stderr, "TODO\n");
     return 0;
 }
