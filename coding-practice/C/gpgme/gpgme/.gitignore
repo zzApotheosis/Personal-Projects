@@ -3,6 +3,6 @@
 
 # Exceptions
 !/.gitignore
-!/build.sh
 !/src/
 !/src/**
+!/meson.build
