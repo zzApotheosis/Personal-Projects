@@ -5,7 +5,7 @@
 #include <gcrypt.h>
 #include <sys/stat.h>
 
-#define NEED_LIBGCRYPT_VERSION "1.10.1"
+#define NEED_LIBGCRYPT_VERSION "1.10.0"
 
 unsigned char * read_file(const char fn[], unsigned long * data_len) {
     if (fn == NULL) {
