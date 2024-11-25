@@ -11,6 +11,48 @@ struct CoolStruct {
     int y;
 };
 
+CoolStruct * CoolStruct_new(void) {
+    CoolStruct * const self = (CoolStruct * const) malloc(1 * sizeof(CoolStruct));
+    if (self == NULL)
+        abort();
+    self->x = 0;
+    self->y = 0;
+    return self;
+}
+
+void CoolStruct_destroy(CoolStruct ** const self) {
+    if (self == NULL)
+        abort();
+    if (*self == NULL)
+        abort();
+    free(*self);
+    *self = NULL;
+}
+
+int CoolStruct_get_x(CoolStruct * const self) {
+    if (self == NULL)
+        abort();
+    return self->x;
+}
+
+int CoolStruct_get_y(CoolStruct * const self) {
+    if (self == NULL)
+        abort();
+    return self->y;
+}
+
+void CoolStruct_set_x(CoolStruct * self, const int x) {
+    if (self == NULL)
+        abort();
+    self->x = x;
+}
+
+void CoolStruct_set_y(CoolStruct * self, const int y) {
+    if (self == NULL)
+        abort();
+    self->y = y;
+}
+
 void cool_function(int i, char c, CoolStruct * const cs) {
     fprintf(stdout, "i = %d\n", i);
     fprintf(stdout, "c = %c\n", c);

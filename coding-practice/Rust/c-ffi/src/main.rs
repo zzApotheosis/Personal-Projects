@@ -26,10 +26,46 @@ fn main() -> Result<(), i32> {
         x = get_x();
     }
     println!("Rust x = {}", x);
-    return Ok(());
+
+    let s3: *mut CoolStruct;
+    let mut x: i32;
+    let mut y: i32;
+
+    unsafe {
+        s3 = CoolStruct_new();
+        x = CoolStruct_get_x(s3);
+        y = CoolStruct_get_y(s3);
+    }
+    println!("s3->x = {x}");
+    println!("s3->y = {y}");
+
+    unsafe {
+        CoolStruct_set_x(s3, 420);
+        CoolStruct_set_y(s3, 69);
+        x = CoolStruct_get_x(s3);
+        y = CoolStruct_get_y(s3);
+    }
+
+    println!("s3->x = {x}");
+    println!("s3->y = {y}");
+
+    println!("Before destroy: s3 = {s3:?}");
+    unsafe {
+        CoolStruct_destroy(&s3);
+    }
+    println!("After destroy: s3 = {s3:?}");
+
+    /* Ye, boi */
+    Ok(())
 }
 
 extern "C" {
+    fn CoolStruct_new() -> *mut CoolStruct;
+    fn CoolStruct_destroy(instance: *const *mut CoolStruct);
+    fn CoolStruct_get_x(instance: *const CoolStruct) -> i32;
+    fn CoolStruct_get_y(instance: *const CoolStruct) -> i32;
+    fn CoolStruct_set_x(instance: *mut CoolStruct, x: i32);
+    fn CoolStruct_set_y(instance: *mut CoolStruct, y: i32);
     fn cool_function(i: i32, c: i8, cs: *const CoolStruct);
     fn set_x(new_x: i32);
     fn get_x() -> i32;
