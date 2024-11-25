@@ -122,5 +122,8 @@ if [ -z "$(alias grep    > /dev/null 2>&1)" ]; then alias grep="grep --color=aut
 if [ -z "$(alias edit    > /dev/null 2>&1)" ]; then alias edit="${EDITOR}"; fi
 if [ -z "$(alias e       > /dev/null 2>&1)" ]; then alias e="edit"; fi
 
+# Utility aliases
+if [ -z "$(alias kdequit > /dev/null 2>&1)" ]; then alias kdequit="/usr/lib64/qt6/bin/qdbus org.kde.ksmserver /KSMServer logout 1 0 1"; fi
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
