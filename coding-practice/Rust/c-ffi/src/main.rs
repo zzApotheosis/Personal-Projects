@@ -1,10 +1,10 @@
 fn main() -> Result<(), i32> {
     let s1 = CoolStruct { x: 24, y: 11 };
     let mut s2 = CoolStruct { x: 42, y: 0 };
-    
+
     s1.twenty_five();
     s2.twenty_five();
-    
+
     s1.forty_two();
     s2.forty_two();
 
@@ -12,16 +12,16 @@ fn main() -> Result<(), i32> {
     s2.look_of_disapproval().unwrap();
 
     unsafe {
-        cool_function(s2.x, 'z' as cty::c_char, &s1);
-        cool_function(s1.x, 'S' as cty::c_char, &s2);
+        cool_function(s2.x, 'z' as i8, &s1);
+        cool_function(s1.x, 'S' as i8, &s2);
     }
 
-    let mut x: cty::c_int = 24;
+    let mut x: i32 = 24;
     println!("Rust x = {}", x);
     println!("Calling unsafe C functions!");
     unsafe {
         println!("From Rust, C static x = {}", get_x());
-        set_x(123 as cty::c_int);
+        set_x(123 as i32);
         println!("From Rust, C static x = {}", get_x());
         x = get_x();
     }
@@ -30,15 +30,15 @@ fn main() -> Result<(), i32> {
 }
 
 extern "C" {
-    fn cool_function(i: cty::c_int, c: cty::c_char, cs: *const CoolStruct);
-    fn set_x(new_x: cty::c_int);
-    fn get_x() -> cty::c_int;
+    fn cool_function(i: i32, c: i8, cs: *const CoolStruct);
+    fn set_x(new_x: i32);
+    fn get_x() -> i32;
 }
 
 #[repr(C)]
 struct CoolStruct {
-    pub x: cty::c_int,
-    pub y: cty::c_int,
+    pub x: i32,
+    pub y: i32,
 }
 
 trait CoolTrait {
@@ -83,7 +83,11 @@ impl TwentyFive for CoolStruct {
     fn twenty_five(&self) {
         match self.x {
             24 => {
-                println!("What's funnier than {}? {}. HEEEHEEHEHEHEHE", self.x, self.x + 1);
+                println!(
+                    "What's funnier than {}? {}. HEEEHEEHEHEHEHE",
+                    self.x,
+                    self.x + 1
+                );
             }
             _ => {
                 println!("{} isn't really funny at all :/", self.x);
