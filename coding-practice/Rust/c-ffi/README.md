@@ -8,6 +8,6 @@ how to build software by hand with given tools such as a compiler, archiver, and
 Note: This example is for Linux systems.
 
 > $ gcc -c -fPIC cool.c  
-> $ ar rcs libcool.a cool.o
-> $ rustc -L. -lstatic=cool -lgmp -oc-ffi main.rs
+> $ ar rcs libcool.a cool.o  
+> $ rustc -L. -lstatic=cool -lgmp -oc-ffi main.rs  
 > $ ./c-ffi
