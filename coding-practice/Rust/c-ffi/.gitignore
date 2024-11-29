@@ -6,3 +6,4 @@
 !/Cargo.toml
 !/build.rs
 !/src**
+!/README.md
