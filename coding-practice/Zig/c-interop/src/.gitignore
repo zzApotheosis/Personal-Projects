@@ -1,0 +1,9 @@
+*
+
+!/.gitignore
+!/c-structs.zig
+!/foo.c
+!/foo.h
+!/foo.zig
+!/main.c
+!/main.zig
