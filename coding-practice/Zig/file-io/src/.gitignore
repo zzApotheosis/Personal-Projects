@@ -1,0 +1,5 @@
+*
+
+!/.gitignore
+!/foo.zig
+!/main.zig
