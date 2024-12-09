@@ -40,6 +40,17 @@ void usage(const char * const arg0) {
   fprintf(stderr, "Usage: %s <num> <num>\n", arg0);
 }
 
+void format_expression(const int a, const int b, const int n) {
+  char operator = '+';
+  int format_a = a;
+  int format_b = b;
+  if (b < 0) {
+    operator = '-';
+    format_b *= -1;
+  }
+  fprintf(stderr, "%d %c %d = %d\n", format_a, operator, format_b, n);
+}
+
 int main(const int argc, const char * const * const argv) {
   if (argc < 3) {
     usage(argv[0]);
@@ -49,7 +60,7 @@ int main(const int argc, const char * const * const argv) {
   int a = parse_int(argv[1]);
   int b = parse_int(argv[2]);
 
-  fprintf(stderr, "%d + %d = %d\n", a, b, add(a, b));
+  format_expression(a, b, add(a, b));
   
   return EXIT_SUCCESS;
 }
