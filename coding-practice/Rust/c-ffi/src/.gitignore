@@ -4,5 +4,7 @@
 # Exceptions
 !/.gitignore
 !/main.rs
+!/main.c
 !/cool.c
 !/cool.h
+!/cool.rs
