@@ -23,3 +23,8 @@ In this example, we compile with GCC, archive with LLVM, and link with Zig.
 > $ llvm-ar rcs libfoo.a foo.o  
 > $ zig build-exe -I. -L. -lfoo -lc main.zig  
 > $ zig build-exe -I. -L. -lfoo -lc c-structs.zig
+
+We can also buidl the C example by hand.
+
+> $ zig build-obj -O ReleaseSmall foo.zig  
+> $ gcc -o c-calls-zig foo.o main.c
