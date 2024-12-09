@@ -9,5 +9,11 @@ Note: This example is for Linux systems.
 
 > $ gcc -c -fPIC cool.c  
 > $ ar rcs libcool.a cool.o  
-> $ rustc -L. -lstatic=cool -lgmp -oc-ffi main.rs  
-> $ ./c-ffi
+> $ rustc -L. -lstatic=cool -lgmp -orust-calls-c main.rs  
+> $ ./rust-calls-c
+
+Additionally, we can build the C example by hand.
+
+> $ rustc --crate-type staticlib cool.rs
+> $ gcc -oc-calls-rust libcool.a main.c
+> $ ./c-calls-rust
