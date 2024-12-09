@@ -14,6 +14,6 @@ Note: This example is for Linux systems.
 
 Additionally, we can build the C example by hand.
 
-> $ rustc --crate-type staticlib cool.rs
-> $ gcc -oc-calls-rust main.c libcool.a
+> $ rustc --crate-type staticlib cool.rs  
+> $ gcc -oc-calls-rust main.c libcool.a  
 > $ ./c-calls-rust
