@@ -25,16 +25,27 @@ pub fn readFiles(argc: u64, argv: []const [:0]const u8) !void {
 }
 
 fn readFile(file: std.fs.File) !void {
-    var stack_buffer: [4096]u8 = undefined;
-    @memset(&stack_buffer, 0);
-    var file_reader = std.io.bufferedReader(file.reader());
+    var file_reader = file.reader();
     var buffered_stdout = std.io.bufferedWriter(std.io.getStdOut().writer());
-    var reader = file_reader.reader();
-    while (true) {
-        const bytes_read = reader.read(&stack_buffer) catch |e| {
-            std.debug.print("{}\n", .{e});
-            return e;
+    l: while (true) {
+        const byte: u8 = file_reader.readByte() catch |e| {
+            switch (e) {
+                error.EndOfStream => {
+                    break :l;
+                },
+                else => {
+                    return e;
+                },
+            }
         };
-        _ = try buffered_stdout.writer().write(stack_buffer[0..bytes_read]);
+        _ = try buffered_stdout.writer().writeByte(byte);
+        // const bytes_read = file_reader.read(&stack_buffer) catch |e| {
+        //     std.debug.print("{}\n", .{e});
+        //     break;
+        // };
+        // _ = try buffered_stdout.writer().write(stack_buffer[0..bytes_read]);
+        // if (try file_reader.context.getPos() == try file_reader.context.getEndPos())
+        //     break;
     }
+    try buffered_stdout.flush();
 }
