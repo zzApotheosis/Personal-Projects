@@ -30,7 +30,7 @@ fn readFile(file: std.fs.File) !void {
     l: while (true) {
         const byte: u8 = file_reader.readByte() catch |e| {
             switch (e) {
-                error.EndOfStream => {
+                error.EndOfStream, error.BrokenPipe => {
                     break :l;
                 },
                 else => {
@@ -38,7 +38,15 @@ fn readFile(file: std.fs.File) !void {
                 },
             }
         };
-        _ = try buffered_stdout.writer().writeByte(byte);
+        _ = buffered_stdout.writer().writeByte(byte) catch |e| {
+            switch (e) {
+                error.BrokenPipe => {
+                    // Whatever, bro
+                    break :l;
+                },
+                else => return e,
+            }
+        };
         // const bytes_read = file_reader.read(&stack_buffer) catch |e| {
         //     std.debug.print("{}\n", .{e});
         //     break;
@@ -47,5 +55,12 @@ fn readFile(file: std.fs.File) !void {
         // if (try file_reader.context.getPos() == try file_reader.context.getEndPos())
         //     break;
     }
-    try buffered_stdout.flush();
+    buffered_stdout.flush() catch |e| {
+        switch (e) {
+            error.BrokenPipe => {
+                // OKAY BRO
+            },
+            else => return e,
+        }
+    };
 }
