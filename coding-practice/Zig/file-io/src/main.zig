@@ -4,14 +4,14 @@ const foo = @import("foo.zig");
 var argc: u64 = 0;
 var argv: std.ArrayList([:0]const u8) = undefined;
 
-pub fn main() !void {
+pub fn main() !u8 {
     try parseArgs();
     defer argv.deinit();
 
     foo.readFiles(argc, argv.items) catch |err| switch (err) {
         error.IllegalArguments => {
             try usage();
-            return err;
+            return 1;
         },
         else => return err,
     };
@@ -21,6 +21,7 @@ pub fn main() !void {
     // var f_writer = std.io.bufferedWriter(f.writer());
     // try f_writer.writer().print("ligma balls\n", .{});
     // try f_writer.flush();
+    return 0;
 }
 
 fn parseArgs() !void {
