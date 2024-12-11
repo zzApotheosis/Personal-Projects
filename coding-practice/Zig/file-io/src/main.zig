@@ -1,24 +1,42 @@
 const std = @import("std");
+const foo = @import("foo.zig");
+
+var argc: u64 = 0;
+var argv: std.ArrayList([:0]const u8) = undefined;
 
 pub fn main() !void {
-    // Prints to stderr (it's a shortcut based on `std.io.getStdErr()`)
-    std.debug.print("All your {s} are belong to us.\n", .{"codebase"});
+    try parseArgs();
+    defer argv.deinit();
 
-    // stdout is for the actual output of your application, for example if you
-    // are implementing gzip, then only the compressed bytes should be sent to
-    // stdout, not any debugging messages.
-    const stdout_file = std.io.getStdOut().writer();
-    var bw = std.io.bufferedWriter(stdout_file);
-    const stdout = bw.writer();
+    foo.readFiles(argc, argv.items) catch |err| switch (err) {
+        error.IllegalArguments => {
+            try usage();
+            return err;
+        },
+        else => return err,
+    };
 
-    try stdout.print("Run `zig build test` to run the tests.\n", .{});
-
-    try bw.flush(); // don't forget to flush!
+    // const f = try std.fs.cwd().createFile("test.txt", .{});
+    // defer f.close();
+    // var f_writer = std.io.bufferedWriter(f.writer());
+    // try f_writer.writer().print("ligma balls\n", .{});
+    // try f_writer.flush();
 }
 
-test "simple test" {
-    var list = std.ArrayList(i32).init(std.testing.allocator);
-    defer list.deinit(); // try commenting this out and see if zig detects the memory leak!
-    try list.append(42);
-    try std.testing.expectEqual(@as(i32, 42), list.pop());
+fn parseArgs() !void {
+    argc = 0;
+    argv = std.ArrayList([:0]const u8).init(std.heap.page_allocator);
+
+    var arg_iter = try std.process.argsWithAllocator(std.heap.page_allocator);
+    defer arg_iter.deinit();
+
+    // Save arguments into heap-allocated data structure
+    while (arg_iter.next()) |arg| {
+        argc += 1;
+        try argv.append(arg);
+    }
+}
+
+fn usage() !void {
+    try std.io.getStdErr().writer().print("Usage: {s} <file> <file> ...\n", .{argv.items[0]});
 }
