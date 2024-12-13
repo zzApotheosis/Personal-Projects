@@ -103,6 +103,7 @@ void cool_function(int i, char c, CoolStruct * const cs) {
     mpz_t gmp_num;
     mpz_init(gmp_num);
     gmp_printf("gmp_num = %Zd\n", gmp_num);
+    mpz_clear(gmp_num);
 
     fprintf(stdout, "\n");
 }
@@ -123,4 +124,5 @@ void print_bignum(const char * const s) {
     mpz_init(bignum);
     mpz_init_set_str(bignum, s, 10);
     gmp_printf("bignum = %Zd\n", bignum);
+    mpz_clear(bignum);
 }
