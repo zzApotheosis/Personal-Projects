@@ -17,8 +17,7 @@ fn main() -> Result<(), i32> {
         let s3: *mut CoolStruct = CoolStruct_new();
         CoolStruct_set_x(s3, 5);
         CoolStruct_set_y(s3, 7);
-        let mut msg: String = String::from("This is one cool string");
-        msg.push('\0'); // Gotta be NUL-terminated for C
+        let msg: String = String::from("This is one cool string\0");
         CoolStruct_set_msg(s3, msg.as_ptr());
         set_static_coolstruct(s3);
     }
@@ -102,8 +101,7 @@ fn main() -> Result<(), i32> {
 
     /* Use GMP to print a big-ass number */
     unsafe {
-        let mut huge_num: String = String::from("135792468000000690000004206900000133700000001");
-        huge_num.push('\0'); // C-style strings must be NUL-terminated
+        let huge_num: String = String::from("135792468000000690000004206900000133700000001\0");
         print_bignum(huge_num.as_ptr());
     }
 
