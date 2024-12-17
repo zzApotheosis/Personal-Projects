@@ -13,13 +13,21 @@ const Point_get_x = c_foo.Point_get_x;
 const Point_get_y = c_foo.Point_get_y;
 const Point_get_z = c_foo.Point_get_z;
 
+const ZigPoint = struct {
+    const Self = @This();
+
+    x: i32 = 0,
+    y: i32 = 0,
+    z: i32 = 0,
+};
+
 pub fn main() void {
     call_c_foo();
 }
 
 const POINT_COUNT: usize = 32_768;
-const POINT_MIN_RANGE: i32 = -5000;
 const POINT_MAX_RANGE: i32 = 5000;
+const POINT_MIN_RANGE: i32 = -POINT_MAX_RANGE;
 
 fn call_c_foo() void {
     const stdout = std.io.getStdOut();
@@ -93,6 +101,22 @@ fn call_c_foo() void {
     // Free the memory allocated to the Point objects
     for (0..points.len) |i| {
         Point_destroy(&points[i]);
+    }
+
+    const max_distance: f64 = 20.0;
+    std.io.getStdOut().writer().print("Searching for a randomized point that is less than {d:.3} distance from the origin...\n", .{max_distance}) catch {};
+    l: while (true) {
+        var point = ZigPoint{};
+        point.x = rand.intRangeAtMost(i32, POINT_MIN_RANGE, POINT_MAX_RANGE);
+        point.y = rand.intRangeAtMost(i32, POINT_MIN_RANGE, POINT_MAX_RANGE);
+        point.z = rand.intRangeAtMost(i32, POINT_MIN_RANGE, POINT_MAX_RANGE);
+
+        const distance = Point_distance(@as(?*Point, @ptrCast(&point)), origin);
+        if (distance <= max_distance) {
+            std.debug.print("Found a point that is very close to the origin ({d:.3}):\n", .{distance});
+            Point_dump(@as(?*Point, @ptrCast(&point)));
+            break :l;
+        }
     }
 }
 
