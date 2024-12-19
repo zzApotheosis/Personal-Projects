@@ -21,11 +21,12 @@ test "simple test" {
 }
 
 test "function pointers but not really lmao" {
-    var n: i32 = undefined;
-    const a: i32 = 10;
-    const b: i32 = 5;
-    foo.bar(i32, foo1, a, b, &n);
-    try std.testing.expectEqual(n, @as(i32, 15));
-    foo.bar(i32, foo2, a, b, &n);
-    try std.testing.expectEqual(n, @as(i32, 5));
+    const NUM_TYPE: type = i32;
+    var n: NUM_TYPE = undefined;
+    const a: NUM_TYPE = 10;
+    const b: NUM_TYPE = 5;
+    foo.bar(NUM_TYPE, foo1, a, b, &n);
+    try std.testing.expectEqual(n, @as(NUM_TYPE, 15));
+    foo.bar(NUM_TYPE, foo2, a, b, &n);
+    try std.testing.expectEqual(n, @as(NUM_TYPE, 5));
 }
