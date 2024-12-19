@@ -25,7 +25,7 @@ test "function pointers but not really lmao" {
     const a: i32 = 10;
     const b: i32 = 5;
     foo.bar(i32, foo1, a, b, &n);
-    try std.testing.expect(n == @as(i32, 15));
+    try std.testing.expectEqual(n, @as(i32, 15));
     foo.bar(i32, foo2, a, b, &n);
-    try std.testing.expect(n == @as(i32, 5));
+    try std.testing.expectEqual(n, @as(i32, 5));
 }
