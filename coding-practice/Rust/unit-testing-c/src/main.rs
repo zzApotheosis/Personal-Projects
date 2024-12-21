@@ -6,8 +6,8 @@
 #[allow(dead_code)]
 mod c {
     extern "C" {
-        pub fn test_add(_: &mut i32);
-        pub fn test_bad_add(_: &mut i32);
+        pub fn test_add(_: &mut ::std::os::raw::c_int);
+        pub fn test_bad_add(_: &mut ::std::os::raw::c_int);
     }
 }
 
@@ -22,7 +22,7 @@ mod tests {
 
     #[test]
     fn test_add() {
-        let mut result: i32 = 0;
+        let mut result: ::std::os::raw::c_int = 0;
         unsafe {
             c::test_add(&mut result);
         }
@@ -34,7 +34,7 @@ mod tests {
      */
     #[test]
     fn test_bad_add() {
-        let mut result: i32 = 0;
+        let mut result: ::std::os::raw::c_int = 0;
         unsafe {
             c::test_bad_add(&mut result);
         }
