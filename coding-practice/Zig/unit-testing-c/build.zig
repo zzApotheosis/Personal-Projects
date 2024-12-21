@@ -88,12 +88,14 @@ pub fn build(b: *std.Build) void {
     // const run_lib_unit_tests = b.addRunArtifact(lib_unit_tests);
 
     const lib_foo_unit_tests = b.addStaticLibrary(.{
-        .name = "libfoo-unit-tests",
+        .name = "foo-unit-tests",
         .target = target,
         .optimize = optimize,
     });
-    lib_foo_unit_tests.addCSourceFile(.{
-        .file = b.path("src/foo/test-foo.c"),
+    lib_foo_unit_tests.addCSourceFiles(.{
+        .files = &.{
+            "src/foo/test-foo.c",
+        },
         .flags = &.{},
     });
     lib_foo_unit_tests.linkLibrary(clib);
