@@ -13,13 +13,6 @@ fn foo2(comptime T: type, a: T, b: T) T {
     return a - b;
 }
 
-test "simple test" {
-    var list = std.ArrayList(i32).init(std.testing.allocator);
-    defer list.deinit(); // try commenting this out and see if zig detects the memory leak!
-    try list.append(42);
-    try std.testing.expectEqual(@as(i32, 42), list.pop());
-}
-
 test "function pointers but not really lmao" {
     const NUM_TYPE: type = i32;
     var n: NUM_TYPE = undefined;
