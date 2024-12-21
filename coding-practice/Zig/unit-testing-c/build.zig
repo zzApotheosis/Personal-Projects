@@ -34,7 +34,6 @@ pub fn build(b: *std.Build) void {
         .root_source_file = b.path("src/main.zig"),
         .target = target,
         .optimize = optimize,
-        .link_libc = true,
     });
     const clib = b.addStaticLibrary(.{
         .name = "clib",
@@ -48,7 +47,6 @@ pub fn build(b: *std.Build) void {
         },
         .flags = &.{},
     });
-    exe.linkLibrary(clib);
     exe.addIncludePath(b.path("src"));
 
     // This declares intent for the executable to be installed into the
