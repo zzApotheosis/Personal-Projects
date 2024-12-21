@@ -1,0 +1,10 @@
+*
+
+!/.gitignore
+!/README.md
+!/build.rs
+!/Cargo.toml
+!/src
+!/src/**
+
+*.o
