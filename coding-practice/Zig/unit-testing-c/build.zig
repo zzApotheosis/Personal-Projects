@@ -43,7 +43,7 @@ pub fn build(b: *std.Build) void {
     });
     clib.addCSourceFiles(.{
         .files = &.{
-            "src/c/foo.c",
+            "src/foo/foo.c",
         },
         .flags = &.{},
     });
@@ -87,6 +87,16 @@ pub fn build(b: *std.Build) void {
 
     // const run_lib_unit_tests = b.addRunArtifact(lib_unit_tests);
 
+    const lib_foo_unit_tests = b.addStaticLibrary(.{
+        .name = "libfoo-unit-tests",
+        .target = target,
+        .optimize = optimize,
+    });
+    lib_foo_unit_tests.addCSourceFile(.{
+        .file = b.path("src/foo/test-foo.c"),
+        .flags = &.{},
+    });
+    lib_foo_unit_tests.linkLibrary(clib);
     const exe_unit_tests = b.addTest(.{
         .root_source_file = b.path("src/main.zig"),
         .target = target,
@@ -94,7 +104,7 @@ pub fn build(b: *std.Build) void {
         .link_libc = true,
     });
     exe_unit_tests.addIncludePath(b.path("src"));
-    exe_unit_tests.linkLibrary(clib);
+    exe_unit_tests.linkLibrary(lib_foo_unit_tests);
 
     const run_exe_unit_tests = b.addRunArtifact(exe_unit_tests);
 
