@@ -2,7 +2,7 @@
 #include "foo.h"
 
 // Unit tests
-void test_add(int * const result) {
+void test_foo_test_add(int * const result) {
   *result = 1; // Assume fail
   int a = 10;
   int b = 5;
@@ -10,7 +10,7 @@ void test_add(int * const result) {
     *result = 0;
 }
 
-void test_bad_add(int * const result) {
+void test_foo_test_bad_add(int * const result) {
   *result = 1; // Assume fail
   int a = 10;
   int b = 5;

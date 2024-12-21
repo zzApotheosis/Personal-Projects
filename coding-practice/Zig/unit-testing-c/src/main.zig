@@ -9,12 +9,12 @@ pub fn main() !void {
 
 test "basic addition" {
     var result: i32 = undefined;
-    c.test_add(&result);
+    c.test_foo_test_add(&result);
     if (result != 0) return error.TestFailed;
 }
 
 test "expected failure" {
     var result: i32 = undefined;
-    c.test_bad_add(&result);
+    c.test_foo_test_bad_add(&result);
     if (result != 0) return error.TestFailed;
 }
