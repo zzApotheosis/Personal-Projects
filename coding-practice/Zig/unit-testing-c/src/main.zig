@@ -6,7 +6,7 @@ const test_add = c.test_add;
 const test_bad_add = c.test_bad_add;
 
 pub fn main() !void {
-    try std.io.getStdOut().writer().print("Fuck\n", .{});
+    try std.io.getStdOut().writer().print("Run `zig build test` to run the unit tests!\n", .{});
 }
 
 test "basic addition" {
