@@ -2,3 +2,5 @@
 
 !/.gitignore
 !/main.zig
+!/bst.zig
+!/node.zig
