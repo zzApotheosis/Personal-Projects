@@ -1,6 +1,5 @@
 const std = @import("std");
-const node = @import("node.zig");
-const Node = node.Node;
+const Node = @import("node.zig").Node;
 
 pub fn BST(comptime T: type) type {
     return struct {
@@ -19,12 +18,13 @@ pub fn BST(comptime T: type) type {
             if (self.head) |head| {
                 head[0].deinit();
                 self.allocator.free(head);
+                self.head = null;
             }
         }
 
         pub fn add(self: *Self, a: T) !void {
             if (self.head) |head| {
-                try addTraverse(head, a);
+                try traverseAdd(head, a);
             } else {
                 self.head = try self.allocator.alloc(Node(T), 1);
                 self.head.?[0] = Node(T).new(self.allocator);
@@ -32,18 +32,18 @@ pub fn BST(comptime T: type) type {
             }
         }
 
-        fn addTraverse(n: ?[]Node(T), a: T) !void {
+        fn traverseAdd(n: ?[]Node(T), a: T) !void {
             if (a < n.?[0].data) {
                 if (n.?[0].left == null) {
                     try n.?[0].setLeft(a);
                 } else {
-                    try addTraverse(n.?[0].left, a);
+                    try traverseAdd(n.?[0].left, a);
                 }
             } else {
                 if (n.?[0].right == null) {
                     try n.?[0].setRight(a);
                 } else {
-                    try addTraverse(n.?[0].right, a);
+                    try traverseAdd(n.?[0].right, a);
                 }
             }
         }
@@ -62,71 +62,71 @@ pub fn BST(comptime T: type) type {
         pub fn toArrayList(self: *const Self) !std.ArrayList(T) {
             var array_list: std.ArrayList(T) = std.ArrayList(T).init(self.allocator);
             if (self.head) |head|
-                try toArrayListTraverse(head[0], &array_list);
+                try traverseToArrayList(head[0], &array_list);
             return array_list;
         }
 
-        fn toArrayListTraverse(n: Node(T), array_list: *std.ArrayList(T)) !void {
+        fn traverseToArrayList(n: Node(T), array_list: *std.ArrayList(T)) !void {
             if (n.left) |left|
-                try toArrayListTraverse(left[0], array_list);
+                try traverseToArrayList(left[0], array_list);
             try array_list.append(n.data);
             if (n.right) |right|
-                try toArrayListTraverse(right[0], array_list);
+                try traverseToArrayList(right[0], array_list);
         }
 
         pub fn size(self: *const Self) usize {
             var n: usize = 0;
             if (self.head) |head|
-                sizeTraverse(head[0], &n);
+                traverseSize(head[0], &n);
             return n;
         }
 
-        fn sizeTraverse(n: Node(T), s: *usize) void {
+        fn traverseSize(n: Node(T), s: *usize) void {
             s.* += 1;
 
             if (n.left) |left|
-                sizeTraverse(left[0], s);
+                traverseSize(left[0], s);
 
             if (n.right) |right|
-                sizeTraverse(right[0], s);
+                traverseSize(right[0], s);
         }
 
         pub fn depth(self: *const Self, t: T) usize {
             var n: usize = 0;
             if (self.head) |head|
-                depthTraverse(head[0], t, 0, &n);
+                traverseDepth(head[0], t, 0, &n);
             return n;
         }
 
-        fn depthTraverse(n: Node(T), t: T, d: usize, s: *usize) void {
+        fn traverseDepth(n: Node(T), t: T, d: usize, s: *usize) void {
             if (n.data == t) {
                 s.* = d;
                 return;
             }
 
             if (n.left) |left|
-                depthTraverse(left[0], t, d + 1, s);
+                traverseDepth(left[0], t, d + 1, s);
 
             if (n.right) |right|
-                depthTraverse(right[0], t, d + 1, s);
+                traverseDepth(right[0], t, d + 1, s);
         }
 
         pub fn maxDepth(self: *const Self) usize {
             var n: usize = 0;
             if (self.head) |head|
-                maxDepthTraverse(head[0], 0, &n);
+                traverseMaxDepth(head[0], 0, &n);
             return n;
         }
 
-        fn maxDepthTraverse(n: Node(T), d: usize, s: *usize) void {
+        fn traverseMaxDepth(n: Node(T), d: usize, s: *usize) void {
             if (d > s.*)
                 s.* = d;
 
             if (n.left) |left|
-                maxDepthTraverse(left[0], d + 1, s);
+                traverseMaxDepth(left[0], d + 1, s);
 
             if (n.right) |right|
-                maxDepthTraverse(right[0], d + 1, s);
+                traverseMaxDepth(right[0], d + 1, s);
         }
 
         pub fn dump(self: *const Self, f: std.fs.File) !void {
@@ -146,6 +146,27 @@ pub fn BST(comptime T: type) type {
                 try recursiveDump(left, f);
             if (n[0].right) |right|
                 try recursiveDump(right, f);
+        }
+
+        pub fn balance(self: *Self) !void {
+            var array_list: std.ArrayList(T) = try self.toArrayList();
+            // This is unneeded because the memory owned by
+            // array_list is freed when toOwnedSlice() is called.
+            // defer array_list.deinit();
+            const a: []T = try array_list.toOwnedSlice();
+            defer self.allocator.free(a);
+            self.deinit();
+            try self.traverseBalance(a);
+        }
+
+        fn traverseBalance(self: *Self, a: []T) !void {
+            const middle: usize = a.len / 2;
+            if (a.len > 0)
+                try self.add(a[middle]);
+            if (a.len > 1) {
+                try self.traverseBalance(a[0..middle]);
+                try self.traverseBalance(a[middle + 1 .. a.len]);
+            }
         }
     };
 }

@@ -1,6 +1,5 @@
 const std = @import("std");
-const bst = @import("bst.zig");
-const BST = bst.BST;
+const BST = @import("bst.zig").BST;
 
 pub fn main() !void {
     const allocator = std.heap.c_allocator;
@@ -16,42 +15,28 @@ pub fn main() !void {
     // const ligma = struct {};
     // std.debug.print("{}\n", .{@TypeOf(ligma)});
 
-    var bst1: BST(i32) = BST(i32).new(allocator);
-    defer bst1.deinit();
-    try bst1.add(10);
-    try bst1.add(5);
-    try bst1.add(15);
-    try bst1.add(3);
-    try bst1.add(7);
-    try bst1.add(13);
-    try bst1.add(17);
-    try bst1.add(20);
-    try bst1.add(10);
-    try bst1.add(10);
-    try bst1.add(11);
-    try bst1.add(10);
-    std.debug.print("bst size: {}\n", .{bst1.size()});
-    std.debug.print("bst max depth: {}\n", .{bst1.maxDepth()});
-    std.debug.print("bst node <{}> depth: {}\n", .{
-        13,
-        bst1.depth(13),
-    });
-    try bst1.dump(std.io.getStdErr());
+    const value_of_interest: i32 = 420;
 
-    const array_list: std.ArrayList(i32) = try bst1.toArrayList();
-    defer array_list.deinit();
-    for (array_list.items) |e| {
-        std.debug.print("<{}>\n", .{e});
+    var bst: BST(i32) = BST(i32).new(allocator);
+    defer bst.deinit();
+    for (0..512) |i| {
+        try bst.add(@as(i32, @intCast(i)));
     }
+    std.debug.print("bst size: {}\n", .{bst.size()});
+    std.debug.print("bst max depth: {}\n", .{bst.maxDepth()});
+    std.debug.print("bst node <{}> depth: {}\n", .{
+        value_of_interest,
+        bst.depth(value_of_interest),
+    });
+    // try bst.dump(std.io.getStdErr());
 
-    var bst2: BST(i32) = BST(i32).new(allocator);
-    defer bst2.deinit();
-    try bst2.add(0);
-    std.debug.print("bst2 size: {}\n", .{bst2.size()});
-    std.debug.print("bst2 max depth: {}\n", .{bst2.maxDepth()});
-
-    var bst3: BST(i32) = BST(i32).new(allocator);
-    defer bst3.deinit();
-    std.debug.print("bst3 size: {}\n", .{bst3.size()});
-    std.debug.print("bst3 max depth: {}\n", .{bst3.maxDepth()});
+    try bst.balance();
+    std.debug.print("After binary tree rebalance...\n", .{});
+    std.debug.print("bst size: {}\n", .{bst.size()});
+    std.debug.print("bst max depth: {}\n", .{bst.maxDepth()});
+    std.debug.print("bst node <{}> depth: {}\n", .{
+        value_of_interest,
+        bst.depth(value_of_interest),
+    });
+    // try bst.dump(std.io.getStdErr());
 }
