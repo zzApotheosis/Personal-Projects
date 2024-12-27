@@ -15,28 +15,30 @@ pub fn main() !void {
     // const ligma = struct {};
     // std.debug.print("{}\n", .{@TypeOf(ligma)});
 
-    const value_of_interest: i32 = 420;
+    const key_of_interest: i32 = 15;
+    const limit: usize = 15;
 
-    var bst: BST(i32) = BST(i32).new(allocator);
+    var bst: BST(i32, i32) = BST(i32, i32).init(allocator);
     defer bst.deinit();
-    for (0..512) |i| {
-        try bst.add(@as(i32, @intCast(i)));
+    for (0..limit) |i| {
+        const n: i32 = @intCast(i);
+        try bst.add(n, @as(i32, @intCast(limit)) - n);
     }
     std.debug.print("bst size: {}\n", .{bst.size()});
     std.debug.print("bst max depth: {}\n", .{bst.maxDepth()});
     std.debug.print("bst node <{}> depth: {}\n", .{
-        value_of_interest,
-        bst.depth(value_of_interest),
+        key_of_interest,
+        bst.depth(key_of_interest),
     });
-    // try bst.dump(std.io.getStdErr());
+    try bst.dump(std.io.getStdErr());
 
     try bst.balance();
     std.debug.print("After binary tree rebalance...\n", .{});
     std.debug.print("bst size: {}\n", .{bst.size()});
     std.debug.print("bst max depth: {}\n", .{bst.maxDepth()});
     std.debug.print("bst node <{}> depth: {}\n", .{
-        value_of_interest,
-        bst.depth(value_of_interest),
+        key_of_interest,
+        bst.depth(key_of_interest),
     });
-    // try bst.dump(std.io.getStdErr());
+    try bst.dump(std.io.getStdErr());
 }

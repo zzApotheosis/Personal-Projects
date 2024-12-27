@@ -1,15 +1,16 @@
 const std = @import("std");
 
-pub fn Node(comptime T: type) type {
+pub fn Node(comptime K: type, comptime V: type) type {
     return struct {
         const Self = @This();
         allocator: std.mem.Allocator = undefined,
-        data: T = undefined,
-        left: ?[]Node(T) = null,
-        right: ?[]Node(T) = null,
+        key: K = undefined,
+        value: V = undefined,
+        left: ?[]Node(K, V) = null,
+        right: ?[]Node(K, V) = null,
 
-        pub fn new(allocator: std.mem.Allocator) Node(T) {
-            return Node(T){
+        pub fn init(allocator: std.mem.Allocator) Node(K, V) {
+            return Node(K, V){
                 .allocator = allocator,
             };
         }
@@ -25,39 +26,41 @@ pub fn Node(comptime T: type) type {
             }
         }
 
-        pub fn setLeft(self: *Self, new_left: ?T) !void {
-            if (new_left == null) {
+        pub fn setLeft(self: *Self, new_key: ?K, new_value: V) !void {
+            if (new_key == null) {
                 self.delLeft();
                 return;
             }
 
             if (self.left == null) {
-                self.left = try self.allocator.alloc(Node(T), 1);
-                self.left.?[0] = Node(T).new(self.allocator);
+                self.left = try self.allocator.alloc(Node(K, V), 1);
+                self.left.?[0] = Node(K, V).init(self.allocator);
             }
 
-            self.left.?[0].data = new_left.?;
+            self.left.?[0].key = new_key.?;
+            self.left.?[0].value = new_value;
         }
 
-        pub fn getLeft(self: *const Self) ?[]Node(T) {
+        pub fn getLeft(self: *const Self) ?[]Node(K, V) {
             return self.left;
         }
 
-        pub fn setRight(self: *Self, new_right: ?T) !void {
-            if (new_right == null) {
+        pub fn setRight(self: *Self, new_key: ?K, new_value: V) !void {
+            if (new_key == null) {
                 self.delRight();
                 return;
             }
 
             if (self.right == null) {
-                self.right = try self.allocator.alloc(Node(T), 1);
-                self.right.?[0] = Node(T).new(self.allocator);
+                self.right = try self.allocator.alloc(Node(K, V), 1);
+                self.right.?[0] = Node(K, V).init(self.allocator);
             }
 
-            self.right.?[0].data = new_right.?;
+            self.right.?[0].key = new_key.?;
+            self.right.?[0].value = new_value;
         }
 
-        pub fn getRight(self: *const Self) ?[]Node(T) {
+        pub fn getRight(self: *const Self) ?[]Node(K, V) {
             return self.right;
         }
 
@@ -71,12 +74,12 @@ pub fn Node(comptime T: type) type {
             self.right = null;
         }
 
-        pub fn setData(self: *Self, new_data: T) void {
-            self.data = new_data;
+        pub fn setData(self: *Self, new_data: K) void {
+            self.key = new_data;
         }
 
-        pub fn getData(self: *const Self) T {
-            return self.data;
+        pub fn getData(self: *const Self) K {
+            return self.key;
         }
     };
 }
