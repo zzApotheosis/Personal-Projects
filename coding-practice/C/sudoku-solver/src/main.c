@@ -36,15 +36,25 @@ int main(int argc, char * argv[]) {
   //board_set_cellgroup_from_given(board, "000050000", 2, 2);
 
   // Easy
-  board_set_cellgroup_from_given(board, "930010507", 0, 0);
-  board_set_cellgroup_from_given(board, "007004006", 1, 0);
-  board_set_cellgroup_from_given(board, "800905010", 2, 0);
-  board_set_cellgroup_from_given(board, "806200005", 0, 1);
-  board_set_cellgroup_from_given(board, "050409070", 1, 1);
-  board_set_cellgroup_from_given(board, "700008201", 2, 1);
-  board_set_cellgroup_from_given(board, "050402003", 0, 2);
-  board_set_cellgroup_from_given(board, "700100800", 1, 2);
-  board_set_cellgroup_from_given(board, "304060092", 2, 2);
+  // board_set_cellgroup_from_given(board, "930010507", 0, 0);
+  // board_set_cellgroup_from_given(board, "007004006", 1, 0);
+  // board_set_cellgroup_from_given(board, "800905010", 2, 0);
+  // board_set_cellgroup_from_given(board, "806200005", 0, 1);
+  // board_set_cellgroup_from_given(board, "050409070", 1, 1);
+  // board_set_cellgroup_from_given(board, "700008201", 2, 1);
+  // board_set_cellgroup_from_given(board, "050402003", 0, 2);
+  // board_set_cellgroup_from_given(board, "700100800", 1, 2);
+  // board_set_cellgroup_from_given(board, "304060092", 2, 2);
+
+  board_set_cellgroup_from_given(board, "001000290", 0, 0);
+  board_set_cellgroup_from_given(board, "208070040", 1, 0);
+  board_set_cellgroup_from_given(board, "900000038", 2, 0);
+  board_set_cellgroup_from_given(board, "700020400", 0, 1);
+  board_set_cellgroup_from_given(board, "405000906", 1, 1);
+  board_set_cellgroup_from_given(board, "006010003", 2, 1);
+  board_set_cellgroup_from_given(board, "370000009", 0, 2);
+  board_set_cellgroup_from_given(board, "090050307", 1, 2);
+  board_set_cellgroup_from_given(board, "064000200", 2, 2);
 
   // Medium
   //board_set_cellgroup_from_given(board, "070806005", 0, 0);

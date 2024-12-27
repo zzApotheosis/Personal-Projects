@@ -72,9 +72,14 @@ void board_print(FILE * fp, struct board * const self) {
     for (unsigned int j = 0; j < board_get_total_x_size(self); j++) {
       cell = board_get_cell(self, j, i);
       fprintf(fp, "%u", cell_get_value(cell));
+      if ((j + 1) % 3 == 0 && j != board_get_total_x_size(self) - 1)
+        fprintf(fp, " ");
     }
     fprintf(fp, "\n");
+    if ((i + 1) % 3 == 0 && i != board_get_total_y_size(self) - 1)
+      fprintf(fp, "\n");
   }
+  fprintf(fp, "\n");
 }
 
 /* Setters and Getters */
