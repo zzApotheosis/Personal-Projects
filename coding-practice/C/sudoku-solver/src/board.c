@@ -68,17 +68,49 @@ unsigned char board_get_cell_value(const struct board * const self, const size_t
 
 void board_print(FILE * fp, struct board * const self) {
   struct cell * cell = NULL;
+
+  /* Printing the top edge of the board */
+  fprintf(fp, "+");
   for (unsigned int i = 0; i < board_get_total_y_size(self); i++) {
+    fprintf(fp, "-");
+    if ((i + 1) % 3 == 0 && i != board_get_total_y_size(self) - 1)
+      fprintf(fp, "+");
+  }
+  fprintf(fp, "+");
+  fprintf(fp, "\n");
+
+  /* Printing the board contents */
+  for (unsigned int i = 0; i < board_get_total_y_size(self); i++) {
+    fprintf(fp, "|");
     for (unsigned int j = 0; j < board_get_total_x_size(self); j++) {
       cell = board_get_cell(self, j, i);
       fprintf(fp, "%u", cell_get_value(cell));
       if ((j + 1) % 3 == 0 && j != board_get_total_x_size(self) - 1)
-        fprintf(fp, " ");
+        fprintf(fp, "|");
     }
+    fprintf(fp, "|");
     fprintf(fp, "\n");
-    if ((i + 1) % 3 == 0 && i != board_get_total_y_size(self) - 1)
+
+    if ((i + 1) % 3 == 0 && i != board_get_total_y_size(self) - 1) {
+      fprintf(fp, "+");
+      for (unsigned int j = 0; j < board_get_total_y_size(self); j++) {
+        fprintf(fp, "-");
+        if ((j + 1) % 3 == 0 && j != board_get_total_y_size(self) - 1)
+          fprintf(fp, "+");
+      }
+      fprintf(fp, "+");
       fprintf(fp, "\n");
+    }
   }
+
+  /* Printing the bottom edge of the board */
+  fprintf(fp, "+");
+  for (unsigned int i = 0; i < board_get_total_y_size(self); i++) {
+    fprintf(fp, "-");
+    if ((i + 1) % 3 == 0 && i != board_get_total_y_size(self) - 1)
+      fprintf(fp, "+");
+  }
+  fprintf(fp, "+");
   fprintf(fp, "\n");
 }
 
