@@ -49,6 +49,26 @@ pub fn BST(comptime K: type, comptime V: type) type {
             }
         }
 
+        pub fn get(self: *const Self, k: K) !V {
+            return try traverseGet(self.head, k);
+        }
+
+        fn traverseGet(node: ?[]Node(K, V), k: K) !V {
+            if (node) |n| {
+                if (k == n[0].key) {
+                    return n[0].value;
+                }
+
+                if (k < n[0].key) {
+                    return try traverseGet(n[0].left, k);
+                } else {
+                    return try traverseGet(n[0].right, k);
+                }
+            } else {
+                return error.NoSuchKey;
+            }
+        }
+
         pub fn toString(self: *Self, allocator: std.mem.Allocator) []u8 {
             _ = self;
             var a: []u8 = allocator.alloc(u8, 20) catch {

@@ -3,26 +3,17 @@ const BST = @import("bst.zig").BST;
 
 pub fn main() !void {
     const allocator = std.heap.c_allocator;
+    const K: type = i32;
+    const V: type = i32;
 
-    // var node: Node(i32) = Node(i32).new(allocator);
-    // defer node.deinit();
-    // node.setData(5);
-    // try node.setLeft(7);
-    // try node.setLeft(8);
-    // try node.setRight(5);
-    // std.debug.print("data = {}\n", .{node.getData()});
+    const key_of_interest: K = 495;
+    const limit: usize = 512;
 
-    // const ligma = struct {};
-    // std.debug.print("{}\n", .{@TypeOf(ligma)});
-
-    const key_of_interest: i32 = 15;
-    const limit: usize = 15;
-
-    var bst: BST(i32, i32) = BST(i32, i32).init(allocator);
+    var bst = BST(K, V).init(allocator);
     defer bst.deinit();
     for (0..limit) |i| {
-        const n: i32 = @intCast(i);
-        try bst.add(n, @as(i32, @intCast(limit)) - n);
+        const n: K = @intCast(i);
+        try bst.add(n, @as(V, @intCast(limit)) - n);
     }
     std.debug.print("bst size: {}\n", .{bst.size()});
     std.debug.print("bst max depth: {}\n", .{bst.maxDepth()});
@@ -30,7 +21,7 @@ pub fn main() !void {
         key_of_interest,
         bst.depth(key_of_interest),
     });
-    try bst.dump(std.io.getStdErr());
+    // try bst.dump(std.io.getStdErr());
 
     try bst.balance();
     std.debug.print("After binary tree rebalance...\n", .{});
@@ -40,5 +31,5 @@ pub fn main() !void {
         key_of_interest,
         bst.depth(key_of_interest),
     });
-    try bst.dump(std.io.getStdErr());
+    // try bst.dump(std.io.getStdErr());
 }
