@@ -1,0 +1,6 @@
+*
+
+!/.gitignore
+!/main.zig
+!/sudoku/
+!/sudoku/**
