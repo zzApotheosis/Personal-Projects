@@ -34,24 +34,24 @@ pub const Board = struct {
         }
     }
 
-    pub fn getRow(self: *const Self, row: usize, vector: *[X_SIZE]u8) !void {
+    pub fn getRow(self: *const Self, row: usize, vector: *[X_SIZE]*const Cell) !void {
         if (row < 0 or row >= X_SIZE)
             return error.IllegalArguments;
         for (0..X_SIZE) |i|
-            vector[i] = self.cells[row][i].value;
+            vector[i] = &self.cells[row][i];
     }
 
-    pub fn getColumn(self: *const Self, column: usize, vector: *[Y_SIZE]u8) !void {
+    pub fn getColumn(self: *const Self, column: usize, vector: *[Y_SIZE]*const Cell) !void {
         if (column < 0 or column >= Y_SIZE)
             return error.IllegalArguments;
         for (0..Y_SIZE) |i|
-            vector[i] = self.cells[i][column].value;
+            vector[i] = &self.cells[i][column];
     }
 
-    pub fn getCellGroup(self: *const Self, group: usize, vector: *[X_SIZE]u8) !void {
+    pub fn getCellGroup(self: *const Self, group: usize, vector: *[X_SIZE]*const Cell) !void {
         if (group < 0 or group >= X_SIZE)
             return error.IllegalArguments;
-        var buffer: [X_SIZE]u8 = undefined;
+        var buffer: [X_SIZE]*const Cell = undefined;
         for (0..3) |i| {
             try self.getRow((group / 3) * 3 + i, &buffer);
             for (0..3) |j| {
