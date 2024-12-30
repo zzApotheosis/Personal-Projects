@@ -6,22 +6,23 @@ pub const Board = struct {
     const X_SIZE: usize = 9;
     const Y_SIZE: usize = 9;
     const CELLGROUP_DIVIDER: usize = 3;
+    const CELLGROUP_COUNT: usize = 9;
 
     cells: [Y_SIZE][X_SIZE]Cell = undefined,
 
-    pub fn init(self: *Self) void {
-        for (0..Y_SIZE) |y| {
-            for (0..X_SIZE) |x| {
-                self.cells[y][x] = Cell{};
-            }
-        }
-    }
+    // pub fn init(self: *Self) void {
+    //     for (0..Y_SIZE) |y| {
+    //         for (0..X_SIZE) |x| {
+    //             self.cells[y][x] = Cell{};
+    //         }
+    //     }
+    // }
 
     pub fn setBoard(self: *Self, data: [Y_SIZE][X_SIZE]u8) !void {
         // Check input data. Each value MUST be within bounds
         for (0..Y_SIZE) |y| {
             for (0..X_SIZE) |x| {
-                if (data[y][x] < 1 or data[y][x] > 9) return error.IllegalArguments;
+                if (data[y][x] < 0 or data[y][x] > 9) return error.IllegalArguments;
             }
         }
 
@@ -34,24 +35,24 @@ pub const Board = struct {
         }
     }
 
-    pub fn getRow(self: *const Self, row: usize, vector: *[X_SIZE]*const Cell) !void {
+    pub fn getRow(self: *Self, row: usize, vector: *[X_SIZE]*Cell) !void {
         if (row < 0 or row >= X_SIZE)
             return error.IllegalArguments;
         for (0..X_SIZE) |i|
             vector[i] = &self.cells[row][i];
     }
 
-    pub fn getColumn(self: *const Self, column: usize, vector: *[Y_SIZE]*const Cell) !void {
+    pub fn getColumn(self: *Self, column: usize, vector: *[Y_SIZE]*Cell) !void {
         if (column < 0 or column >= Y_SIZE)
             return error.IllegalArguments;
         for (0..Y_SIZE) |i|
             vector[i] = &self.cells[i][column];
     }
 
-    pub fn getCellGroup(self: *const Self, group: usize, vector: *[X_SIZE]*const Cell) !void {
+    pub fn getCellGroup(self: *Self, group: usize, vector: *[X_SIZE]*Cell) !void {
         if (group < 0 or group >= X_SIZE)
             return error.IllegalArguments;
-        var buffer: [X_SIZE]*const Cell = undefined;
+        var buffer: [X_SIZE]*Cell = undefined;
         for (0..3) |i| {
             try self.getRow((group / 3) * 3 + i, &buffer);
             for (0..3) |j| {
