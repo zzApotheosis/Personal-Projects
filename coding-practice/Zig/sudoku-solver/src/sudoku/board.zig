@@ -7,18 +7,12 @@ pub const Board = struct {
     const Y_SIZE: usize = 9;
     const CELLGROUP_DIVIDER: usize = 3;
     const CELLGROUP_COUNT: usize = 9;
+    const CELLS_PER_CELLGROUP: usize = 9;
+    pub const SolutionStatus = enum { normal, nonlinear, finished, err };
 
     cells: [Y_SIZE][X_SIZE]Cell = undefined,
 
-    // pub fn init(self: *Self) void {
-    //     for (0..Y_SIZE) |y| {
-    //         for (0..X_SIZE) |x| {
-    //             self.cells[y][x] = Cell{};
-    //         }
-    //     }
-    // }
-
-    pub fn setBoard(self: *Self, data: [Y_SIZE][X_SIZE]u8) !void {
+    pub fn init(self: *Self, data: [Y_SIZE][X_SIZE]u8) !void {
         // Check input data. Each value MUST be within bounds
         for (0..Y_SIZE) |y| {
             for (0..X_SIZE) |x| {
@@ -29,8 +23,93 @@ pub const Board = struct {
         // Set data
         for (0..Y_SIZE) |y| {
             for (0..X_SIZE) |x| {
+                @memset(&self.cells[y][x].possible_values, true); // Assume every value is possible initially
                 self.cells[y][x].given = data[y][x];
                 self.cells[y][x].value = data[y][x];
+            }
+        }
+
+        // Determine possible values
+        try self.determinePossibilities();
+    }
+
+    pub fn determinePossibilities(self: *Self) !void {
+        try self.determineRowPossibilities();
+        try self.determineColumnPossibilities();
+        try self.determineCellGroupPossibilities();
+    }
+
+    fn determineRowPossibilities(self: *Self) !void {
+        var cells: [X_SIZE]*Cell = undefined;
+        var known_values: [Cell.POSSIBLE_VALUES_MAX]bool = undefined;
+        for (0..Y_SIZE) |y| {
+            @memset(&known_values, false);
+            try self.getRow(y, &cells);
+            for (0..X_SIZE) |i| {
+                if (cells[i].value == 0) continue;
+                known_values[cells[i].value - 1] = true;
+            }
+
+            for (0..X_SIZE) |i| {
+                // If there already is a value in this cell, then zeroize the possible values vector
+                if (cells[i].value != 0) {
+                    @memset(&cells[i].possible_values, false);
+                    continue;
+                }
+
+                for (0..Cell.POSSIBLE_VALUES_MAX) |j| {
+                    if (known_values[j]) cells[i].possible_values[j] = false;
+                }
+            }
+        }
+    }
+
+    fn determineColumnPossibilities(self: *Self) !void {
+        var cells: [X_SIZE]*Cell = undefined;
+        var known_values: [Cell.POSSIBLE_VALUES_MAX]bool = undefined;
+        for (0..X_SIZE) |x| {
+            @memset(&known_values, false);
+            try self.getColumn(x, &cells);
+            for (0..Y_SIZE) |i| {
+                if (cells[i].value == 0) continue;
+                known_values[cells[i].value - 1] = true;
+            }
+
+            for (0..Y_SIZE) |i| {
+                // If there already is a value in this cell, then zeroize the possibl values vector
+                if (cells[i].value != 0) {
+                    @memset(&cells[i].possible_values, false);
+                    continue;
+                }
+
+                for (0..Cell.POSSIBLE_VALUES_MAX) |j| {
+                    if (known_values[j]) cells[i].possible_values[j] = false;
+                }
+            }
+        }
+    }
+
+    fn determineCellGroupPossibilities(self: *Self) !void {
+        var cells: [X_SIZE]*Cell = undefined;
+        var known_values: [Cell.POSSIBLE_VALUES_MAX]bool = undefined;
+        for (0..CELLGROUP_COUNT) |c| {
+            @memset(&known_values, false);
+            try self.getCellGroup(c, &cells);
+            for (0..CELLS_PER_CELLGROUP) |i| {
+                if (cells[i].value == 0) continue;
+                known_values[cells[i].value - 1] = true;
+            }
+
+            for (0..CELLS_PER_CELLGROUP) |i| {
+                // If there already is a value in this cell, then zeroize the possibl values vector
+                if (cells[i].value != 0) {
+                    @memset(&cells[i].possible_values, false);
+                    continue;
+                }
+
+                for (0..Cell.POSSIBLE_VALUES_MAX) |j| {
+                    if (known_values[j]) cells[i].possible_values[j] = false;
+                }
             }
         }
     }
@@ -61,12 +140,63 @@ pub const Board = struct {
         }
     }
 
+    pub fn solve(self: *Self) !void {
+        var solution_status = SolutionStatus.normal;
+        while (solution_status == SolutionStatus.normal) {
+            solution_status = try self.iterateSolution();
+        }
+        if (solution_status == SolutionStatus.nonlinear) {
+            solution_status = self.bruteForce();
+        }
+        if (solution_status != SolutionStatus.finished) return error.Unsolvable;
+    }
+
+    fn iterateSolution(self: *Self) !SolutionStatus {
+        var solution_status: SolutionStatus = SolutionStatus.nonlinear;
+        for (0..Y_SIZE) |y| {
+            for (0..X_SIZE) |x| {
+                if (self.cells[y][x].value != 0) continue; // We don't care about cells that are already populated
+
+                if (self.cells[y][x].getNumPossibleValues() == 0) continue;
+
+                // Only one possible value in this cell, so we set it
+                if (self.cells[y][x].getNumPossibleValues() <= 1) {
+                    self.cells[y][x].value = try self.cells[y][x].getNextPossibleValue(0) + 1;
+                    solution_status = SolutionStatus.normal;
+                    std.debug.print("Guaranteed value in cell ({}, {})\n", .{ x, y });
+                    continue;
+                }
+
+                // DEBUG
+                if (self.cells[y][x].getNumPossibleValues() <= 2) {
+                    // std.debug.print("Found two-way possibility candidate in cell ({}, {})\n", .{ x, y });
+                    continue;
+                }
+            }
+        }
+        try self.determinePossibilities();
+        return solution_status;
+    }
+
+    fn bruteForce(self: *Self) SolutionStatus {
+        // TODO
+        _ = self;
+        return SolutionStatus.finished;
+    }
+
     pub fn print(self: *const Self, f: std.fs.File) !void {
         const fw = f.writer();
         var cell: *const Cell = undefined;
         const corner_char: u8 = '+';
         const horizontal_edge_char: u8 = '-';
         const vertical_edge_char: u8 = '|';
+
+        // for (0..Y_SIZE) |y| {
+        //     for (0..X_SIZE) |x| {
+        //         std.debug.print("\nCell ({}, {})\n", .{ x, y });
+        //         try self.cells[y][x].print(std.io.getStdErr());
+        //     }
+        // }
 
         try fw.print("{c}", .{corner_char});
         for (0..Y_SIZE) |y| {
