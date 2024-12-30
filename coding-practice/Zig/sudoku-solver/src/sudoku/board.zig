@@ -163,7 +163,6 @@ pub const Board = struct {
                 if (self.cells[y][x].getNumPossibleValues() <= 1) {
                     self.cells[y][x].value = try self.cells[y][x].getNextPossibleValue(0) + 1;
                     solution_status = SolutionStatus.normal;
-                    std.debug.print("Guaranteed value in cell ({}, {})\n", .{ x, y });
                     continue;
                 }
 

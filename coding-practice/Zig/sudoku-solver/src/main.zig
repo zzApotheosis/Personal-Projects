@@ -1,8 +1,6 @@
 const std = @import("std");
 const Board = @import("sudoku/board.zig").Board;
 
-const Cell = @import("sudoku/cell.zig").Cell;
-
 pub fn main() !void {
     // var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     // const allocator = gpa.allocator();
@@ -31,30 +29,11 @@ pub fn main() !void {
         .{ 7, 0, 0, 5, 3, 0, 4, 0, 0 },
     });
 
-    var cells: [9]*Cell = undefined;
-    var values: [cells.len]u8 = undefined;
-
-    try board.getRow(0, &cells);
-    for (0..9) |i| {
-        values[i] = cells[i].value;
-    }
-    std.debug.print("Row 0: {any}\n", .{values});
-
-    try board.getColumn(4, &cells);
-    for (0..9) |i| {
-        values[i] = cells[i].value;
-    }
-    std.debug.print("Column 4: {any}\n", .{values});
-
-    try board.getCellGroup(8, &cells);
-    for (0..9) |i| {
-        values[i] = cells[i].value;
-    }
-    std.debug.print("CellGroup 8: {any}\n", .{values});
-
+    std.debug.print("Initial board:\n", .{});
     try board.print(std.io.getStdErr());
 
     // Solve the puzzle
     try board.solve();
+    std.debug.print("\nFinal board:\n", .{});
     try board.print(std.io.getStdErr());
 }
