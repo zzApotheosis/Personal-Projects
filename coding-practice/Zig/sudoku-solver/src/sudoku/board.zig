@@ -1,6 +1,12 @@
 const std = @import("std");
 const Cell = @import("cell.zig").Cell;
 
+const Decision = struct {
+    x: usize = undefined,
+    y: usize = undefined,
+    board: Board = undefined,
+};
+
 pub const Board = struct {
     const Self = @This();
     const X_SIZE: usize = 9;
@@ -10,9 +16,14 @@ pub const Board = struct {
     const CELLS_PER_CELLGROUP: usize = 9;
     pub const SolutionStatus = enum { normal, nonlinear, finished, err };
 
+    allocator: std.mem.Allocator = undefined,
     cells: [Y_SIZE][X_SIZE]Cell = undefined,
+    decision_stack: std.ArrayList(Decision) = undefined,
 
-    pub fn init(self: *Self, data: [Y_SIZE][X_SIZE]u8) !void {
+    pub fn init(self: *Self, allocator: std.mem.Allocator, data: [Y_SIZE][X_SIZE]u8) !void {
+        self.allocator = allocator;
+        self.decision_stack = std.ArrayList(Decision).init(allocator);
+
         // Check input data. Each value MUST be within bounds
         for (0..Y_SIZE) |y| {
             for (0..X_SIZE) |x| {
@@ -31,6 +42,10 @@ pub const Board = struct {
 
         // Determine possible values
         try self.determinePossibilities();
+    }
+
+    pub fn deinit(self: *Self) void {
+        self.decision_stack.deinit();
     }
 
     pub fn determinePossibilities(self: *Self) !void {
@@ -157,17 +172,17 @@ pub const Board = struct {
             for (0..X_SIZE) |x| {
                 if (self.cells[y][x].value != 0) continue; // We don't care about cells that are already populated
 
-                if (self.cells[y][x].getNumPossibleValues() == 0) continue;
+                if (self.cells[y][x].numPossibleValues() == 0) continue;
 
                 // Only one possible value in this cell, so we set it
-                if (self.cells[y][x].getNumPossibleValues() <= 1) {
-                    self.cells[y][x].value = try self.cells[y][x].getNextPossibleValue(0) + 1;
+                if (self.cells[y][x].numPossibleValues() <= 1) {
+                    self.cells[y][x].value = try self.cells[y][x].nextPossibleValue(0) + 1;
                     solution_status = SolutionStatus.normal;
                     continue;
                 }
 
                 // DEBUG
-                if (self.cells[y][x].getNumPossibleValues() <= 2) {
+                if (self.cells[y][x].numPossibleValues() <= 2) {
                     // std.debug.print("Found two-way possibility candidate in cell ({}, {})\n", .{ x, y });
                     continue;
                 }

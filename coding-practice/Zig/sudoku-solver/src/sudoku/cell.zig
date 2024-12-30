@@ -9,7 +9,7 @@ pub const Cell = struct {
     given: u8 = 0,
     possible_values: [POSSIBLE_VALUES_MAX]bool = .{false} ** POSSIBLE_VALUES_MAX,
 
-    pub fn getNumPossibleValues(self: *const Self) usize {
+    pub fn numPossibleValues(self: *const Self) usize {
         var n: usize = 0;
         for (0..self.possible_values.len) |i| {
             if (self.possible_values[i]) n += 1;
@@ -17,7 +17,7 @@ pub const Cell = struct {
         return n;
     }
 
-    pub fn getNextPossibleValue(self: *const Self, v: u8) !u8 {
+    pub fn nextPossibleValue(self: *const Self, v: u8) !u8 {
         for (v..self.possible_values.len) |i| {
             if (self.possible_values[i]) return @truncate(i);
         }

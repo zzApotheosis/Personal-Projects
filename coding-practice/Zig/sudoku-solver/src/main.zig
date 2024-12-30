@@ -2,8 +2,8 @@ const std = @import("std");
 const Board = @import("sudoku/board.zig").Board;
 
 pub fn main() !void {
-    // var gpa = std.heap.GeneralPurposeAllocator(.{}){};
-    // const allocator = gpa.allocator();
+    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    const allocator = gpa.allocator();
 
     var board: Board = Board{};
     // try board.init([9][9]u8{
@@ -17,7 +17,7 @@ pub fn main() !void {
     //     .{ 7, 7, 7, 8, 8, 8, 9, 9, 9 },
     //     .{ 7, 7, 7, 8, 8, 8, 9, 9, 9 },
     // });
-    try board.init([9][9]u8{
+    try board.init(allocator, [9][9]u8{
         .{ 0, 0, 8, 0, 5, 3, 0, 0, 2 },
         .{ 0, 0, 3, 0, 0, 0, 5, 6, 0 },
         .{ 2, 0, 5, 0, 9, 7, 0, 0, 3 },
@@ -28,6 +28,7 @@ pub fn main() !void {
         .{ 0, 8, 6, 0, 0, 0, 3, 0, 0 },
         .{ 7, 0, 0, 5, 3, 0, 4, 0, 0 },
     });
+    defer board.deinit();
 
     std.debug.print("Initial board:\n", .{});
     try board.print(std.io.getStdErr());
