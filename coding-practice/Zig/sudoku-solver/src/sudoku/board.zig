@@ -4,7 +4,8 @@ const Cell = @import("cell.zig").Cell;
 const Decision = struct {
     x: usize = undefined,
     y: usize = undefined,
-    board: Board = undefined,
+    val: u8 = undefined,
+    snapshot: [Board.Y_SIZE][Board.X_SIZE]Cell = undefined,
 };
 
 pub const Board = struct {
@@ -14,7 +15,12 @@ pub const Board = struct {
     const CELLGROUP_DIVIDER: usize = 3;
     const CELLGROUP_COUNT: usize = 9;
     const CELLS_PER_CELLGROUP: usize = 9;
-    pub const SolutionStatus = enum { normal, nonlinear, finished, err };
+    pub const SolutionStatus = enum {
+        normal,
+        nonlinear,
+        illegal,
+        finished,
+    };
 
     allocator: std.mem.Allocator = undefined,
     cells: [Y_SIZE][X_SIZE]Cell = undefined,
@@ -157,13 +163,29 @@ pub const Board = struct {
 
     pub fn solve(self: *Self) !void {
         var solution_status = SolutionStatus.normal;
-        while (solution_status == SolutionStatus.normal) {
+        while (solution_status != SolutionStatus.finished) {
             solution_status = try self.iterateSolution();
+
+            // Guaranteed solution
+            if (solution_status == SolutionStatus.normal) continue;
+
+            // Taking a small risk
+            if (solution_status == SolutionStatus.nonlinear) {
+                std.debug.print("DEBUG: Traversing non-linear path\n", .{});
+                try self.traverseNonLinear();
+                continue;
+            }
+
+            // Backtracking on a bad decision
+            if (solution_status == SolutionStatus.illegal) {
+                std.debug.print("DEBUG: Backtracking on previous decision\n", .{});
+                try self.backtrack();
+                continue;
+            }
         }
-        if (solution_status == SolutionStatus.nonlinear) {
-            solution_status = self.bruteForce();
-        }
-        if (solution_status != SolutionStatus.finished) return error.Unsolvable;
+        // while (solution_status == SolutionStatus.nonlinear) {
+        //     solution_status = try self.traverseNonLinear();
+        // }
     }
 
     fn iterateSolution(self: *Self) !SolutionStatus {
@@ -172,30 +194,107 @@ pub const Board = struct {
             for (0..X_SIZE) |x| {
                 if (self.cells[y][x].value != 0) continue; // We don't care about cells that are already populated
 
-                if (self.cells[y][x].numPossibleValues() == 0) continue;
-
                 // Only one possible value in this cell, so we set it
-                if (self.cells[y][x].numPossibleValues() <= 1) {
-                    self.cells[y][x].value = try self.cells[y][x].nextPossibleValue(0) + 1;
+                if (self.cells[y][x].numPossibleValues() == 1) {
+                    self.cells[y][x].value = try self.cells[y][x].nextPossibleValue();
                     solution_status = SolutionStatus.normal;
                     continue;
                 }
 
-                // DEBUG
-                if (self.cells[y][x].numPossibleValues() <= 2) {
-                    // std.debug.print("Found two-way possibility candidate in cell ({}, {})\n", .{ x, y });
+                if (self.cells[y][x].numPossibleValues() > 1) {
                     continue;
+                }
+
+                if (self.cells[y][x].numPossibleValues() == 0 and self.cells[y][x].value == 0) {
+                    solution_status = SolutionStatus.illegal;
+                    break;
                 }
             }
         }
-        try self.determinePossibilities();
+        if (solution_status != SolutionStatus.illegal)
+            try self.determinePossibilities();
+        if (self.emptyCellCount() == 0)
+            solution_status = SolutionStatus.finished;
         return solution_status;
     }
 
-    fn bruteForce(self: *Self) SolutionStatus {
-        // TODO
-        _ = self;
-        return SolutionStatus.finished;
+    fn traverseNonLinear(self: *Self) !void {
+        for (0..Y_SIZE) |y| {
+            for (0..X_SIZE) |x| {
+                if (self.cells[y][x].value != 0) continue;
+                if (self.cells[y][x].numPossibleValues() == 1) return error.LinearSolutionAvailable;
+                if (self.cells[y][x].numPossibleValues() == 2) {
+                    // Try the first 50/50 chance we find
+                    const val = try self.cells[y][x].nextPossibleValue();
+                    try self.snapshot(x, y, val);
+                    self.cells[y][x].value = val;
+                    break;
+                }
+
+                // TODO: Handle the case where the minimum possible values in the board is greater than 2
+            }
+        }
+        try self.determinePossibilities();
+
+        // if (self.cells[y][x].numPossibleValues() <= 2) {
+        //     try self.snapshot(x, y, self.cells[y][x].value);
+        //     self.cells[y][x].value = try self.cells[y][x].nextPossibleValue();
+        // }
+    }
+
+    fn backtrack(self: *Self) !void {
+        if (self.decision_stack.popOrNull()) |decision| {
+            // Restore the state of the board before the risky decision
+            for (0..Y_SIZE) |y| {
+                for (0..X_SIZE) |x| {
+                    self.cells[y][x] = decision.snapshot[y][x];
+                }
+            }
+
+            // Recall the coordinates where the risky decision was made
+            // and try the next possible value
+            try self.cells[decision.y][decision.x].setImpossibleValue(decision.val);
+            self.cells[decision.y][decision.x].value = try self.cells[decision.y][decision.x].nextPossibleValue();
+            try self.determinePossibilities();
+        } else return error.BacktrackError;
+    }
+
+    fn snapshot(self: *Self, x: usize, y: usize, val: u8) !void {
+        var decision: Decision = .{
+            .x = x,
+            .y = y,
+            .val = val,
+        };
+        for (0..Y_SIZE) |i| {
+            for (0..X_SIZE) |j| {
+                decision.snapshot[i][j] = self.cells[i][j];
+            }
+        }
+        try self.decision_stack.append(decision);
+    }
+
+    // fn bruteForce(self: *Self) SolutionStatus {
+    //     for (0..Y_SIZE) |y| {
+    //         for (0..X_SIZE) |x| {
+    //             if (self.cells[y][x].value != 0) continue;
+    //             if (self.cells[y][x].numPossibleValues() == 1) {}
+    //             if (self.cells[y][x].numPossibleValues() <= 2) {}
+    //         }
+    //     }
+    //     // TODO
+    //     // _ = self;
+    //     return SolutionStatus.finished;
+    // }
+
+    pub fn emptyCellCount(self: *const Self) usize {
+        var count: usize = 0;
+        for (0..Y_SIZE) |y| {
+            for (0..X_SIZE) |x| {
+                if (self.cells[y][x].value == 0)
+                    count += 1;
+            }
+        }
+        return count;
     }
 
     pub fn print(self: *const Self, f: std.fs.File) !void {

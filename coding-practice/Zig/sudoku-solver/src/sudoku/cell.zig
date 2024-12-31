@@ -17,11 +17,23 @@ pub const Cell = struct {
         return n;
     }
 
-    pub fn nextPossibleValue(self: *const Self, v: u8) !u8 {
-        for (v..self.possible_values.len) |i| {
-            if (self.possible_values[i]) return @truncate(i);
+    pub fn nextPossibleValue(self: *const Self) !u8 {
+        for (0..self.possible_values.len) |i| {
+            if (self.possible_values[i]) return @truncate(i + 1);
         }
         return error.NoValue;
+    }
+
+    pub fn setPossibleValue(self: *Self, v: u8) !void {
+        if (v < POSSIBLE_VALUES_MIN or v > POSSIBLE_VALUES_MAX)
+            return error.IllegalArgument;
+        self.possible_values[v - 1] = true;
+    }
+
+    pub fn setImpossibleValue(self: *Self, v: u8) !void {
+        if (v < POSSIBLE_VALUES_MIN or v > POSSIBLE_VALUES_MAX)
+            return error.IllegalArgument;
+        self.possible_values[v - 1] = false;
     }
 
     pub fn print(self: *const Self, f: std.fs.File) !void {
