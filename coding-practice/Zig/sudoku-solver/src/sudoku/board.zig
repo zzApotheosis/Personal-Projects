@@ -38,9 +38,9 @@ pub const Board = struct {
         }
 
         // Set data
+        self.initPossibilities();
         for (0..Y_SIZE) |y| {
             for (0..X_SIZE) |x| {
-                @memset(&self.cells[y][x].possible_values, true); // Assume every value is possible initially
                 self.cells[y][x].given = data[y][x];
                 self.cells[y][x].value = data[y][x];
             }
@@ -55,9 +55,18 @@ pub const Board = struct {
     }
 
     pub fn determinePossibilities(self: *Self) !void {
+        self.initPossibilities();
         try self.determineRowPossibilities();
         try self.determineColumnPossibilities();
         try self.determineCellGroupPossibilities();
+    }
+
+    fn initPossibilities(self: *Self) void {
+        for (0..Y_SIZE) |y| {
+            for (0..X_SIZE) |x| {
+                @memset(&self.cells[y][x].possible_values, if (self.cells[y][x].value == 0) true else false);
+            }
+        }
     }
 
     fn determineRowPossibilities(self: *Self) !void {
@@ -171,14 +180,12 @@ pub const Board = struct {
 
             // Taking a small risk
             if (solution_status == SolutionStatus.nonlinear) {
-                std.debug.print("DEBUG: Traversing non-linear path\n", .{});
                 try self.traverseNonLinear();
                 continue;
             }
 
             // Backtracking on a bad decision
             if (solution_status == SolutionStatus.illegal) {
-                std.debug.print("DEBUG: Backtracking on previous decision\n", .{});
                 try self.backtrack();
                 continue;
             }
@@ -190,108 +197,91 @@ pub const Board = struct {
 
     fn iterateSolution(self: *Self) !SolutionStatus {
         var solution_status: SolutionStatus = SolutionStatus.nonlinear;
-        for (0..Y_SIZE) |y| {
-            for (0..X_SIZE) |x| {
-                if (self.cells[y][x].value != 0) continue; // We don't care about cells that are already populated
+        _0: for (0..Y_SIZE) |y| {
+            _1: for (0..X_SIZE) |x| {
+                if (self.cells[y][x].value != 0) continue :_1; // We don't care about cells that are already populated
 
                 // Only one possible value in this cell, so we set it
                 if (self.cells[y][x].numPossibleValues() == 1) {
                     self.cells[y][x].value = try self.cells[y][x].nextPossibleValue();
                     solution_status = SolutionStatus.normal;
-                    continue;
+                    break :_0;
                 }
 
-                if (self.cells[y][x].numPossibleValues() > 1) {
-                    continue;
-                }
+                if (self.cells[y][x].numPossibleValues() > 1) continue :_1;
 
                 if (self.cells[y][x].numPossibleValues() == 0 and self.cells[y][x].value == 0) {
-                    solution_status = SolutionStatus.illegal;
-                    break;
+                    return SolutionStatus.illegal;
                 }
             }
         }
-        if (solution_status != SolutionStatus.illegal)
-            try self.determinePossibilities();
-        if (self.emptyCellCount() == 0)
+        try self.determinePossibilities();
+        if (self.emptyCellCount() == 0 and solution_status == SolutionStatus.normal)
             solution_status = SolutionStatus.finished;
         return solution_status;
     }
 
     fn traverseNonLinear(self: *Self) !void {
+        // Check the board for possible linear solutions
         for (0..Y_SIZE) |y| {
             for (0..X_SIZE) |x| {
                 if (self.cells[y][x].value != 0) continue;
                 if (self.cells[y][x].numPossibleValues() == 1) return error.LinearSolutionAvailable;
+            }
+        }
+
+        for (0..Y_SIZE) |y| {
+            for (0..X_SIZE) |x| {
+                if (self.cells[y][x].value != 0) continue;
                 if (self.cells[y][x].numPossibleValues() == 2) {
                     // Try the first 50/50 chance we find
                     const val = try self.cells[y][x].nextPossibleValue();
-                    try self.snapshot(x, y, val);
+                    try self.snapshot(.{
+                        .x = x,
+                        .y = y,
+                        .val = val,
+                        .snapshot = self.cells,
+                    });
                     self.cells[y][x].value = val;
-                    break;
+                    try self.determinePossibilities();
+                    return;
                 }
 
                 // TODO: Handle the case where the minimum possible values in the board is greater than 2
+                // unreachable;
             }
         }
-        try self.determinePossibilities();
-
-        // if (self.cells[y][x].numPossibleValues() <= 2) {
-        //     try self.snapshot(x, y, self.cells[y][x].value);
-        //     self.cells[y][x].value = try self.cells[y][x].nextPossibleValue();
-        // }
     }
 
     fn backtrack(self: *Self) !void {
         if (self.decision_stack.popOrNull()) |decision| {
             // Restore the state of the board before the risky decision
-            for (0..Y_SIZE) |y| {
-                for (0..X_SIZE) |x| {
-                    self.cells[y][x] = decision.snapshot[y][x];
-                }
-            }
+            self.cells = decision.snapshot;
 
             // Recall the coordinates where the risky decision was made
-            // and try the next possible value
+            // and invalidate the decision
             try self.cells[decision.y][decision.x].setImpossibleValue(decision.val);
+            const decisions: []Decision = self.decision_stack.allocatedSlice();
+            for (0..self.decision_stack.items.len) |i| {
+                // All snapshots need to be aware that this value in this cell is impossible
+                try decisions[i].snapshot[decision.y][decision.x].setImpossibleValue(decision.val);
+            }
+
+            // Try the next possible value after invalidating the previous decision
             self.cells[decision.y][decision.x].value = try self.cells[decision.y][decision.x].nextPossibleValue();
             try self.determinePossibilities();
         } else return error.BacktrackError;
     }
 
-    fn snapshot(self: *Self, x: usize, y: usize, val: u8) !void {
-        var decision: Decision = .{
-            .x = x,
-            .y = y,
-            .val = val,
-        };
-        for (0..Y_SIZE) |i| {
-            for (0..X_SIZE) |j| {
-                decision.snapshot[i][j] = self.cells[i][j];
-            }
-        }
-        try self.decision_stack.append(decision);
+    fn snapshot(self: *Self, d: Decision) !void {
+        try self.decision_stack.append(d);
     }
-
-    // fn bruteForce(self: *Self) SolutionStatus {
-    //     for (0..Y_SIZE) |y| {
-    //         for (0..X_SIZE) |x| {
-    //             if (self.cells[y][x].value != 0) continue;
-    //             if (self.cells[y][x].numPossibleValues() == 1) {}
-    //             if (self.cells[y][x].numPossibleValues() <= 2) {}
-    //         }
-    //     }
-    //     // TODO
-    //     // _ = self;
-    //     return SolutionStatus.finished;
-    // }
 
     pub fn emptyCellCount(self: *const Self) usize {
         var count: usize = 0;
         for (0..Y_SIZE) |y| {
             for (0..X_SIZE) |x| {
-                if (self.cells[y][x].value == 0)
-                    count += 1;
+                if (self.cells[y][x].value == 0) count += 1;
             }
         }
         return count;
@@ -303,13 +293,6 @@ pub const Board = struct {
         const corner_char: u8 = '+';
         const horizontal_edge_char: u8 = '-';
         const vertical_edge_char: u8 = '|';
-
-        // for (0..Y_SIZE) |y| {
-        //     for (0..X_SIZE) |x| {
-        //         std.debug.print("\nCell ({}, {})\n", .{ x, y });
-        //         try self.cells[y][x].print(std.io.getStdErr());
-        //     }
-        // }
 
         try fw.print("{c}", .{corner_char});
         for (0..Y_SIZE) |y| {
