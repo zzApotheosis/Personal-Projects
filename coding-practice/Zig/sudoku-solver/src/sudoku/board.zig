@@ -106,7 +106,7 @@ pub const Board = struct {
             }
 
             for (0..Y_SIZE) |i| {
-                // If there already is a value in this cell, then zeroize the possibl values vector
+                // If there already is a value in this cell, then zeroize the possible values vector
                 if (cells[i].value != 0) {
                     @memset(&cells[i].possible_values, false);
                     continue;
@@ -131,7 +131,7 @@ pub const Board = struct {
             }
 
             for (0..CELLS_PER_CELLGROUP) |i| {
-                // If there already is a value in this cell, then zeroize the possibl values vector
+                // If there already is a value in this cell, then zeroize the possible values vector
                 if (cells[i].value != 0) {
                     @memset(&cells[i].possible_values, false);
                     continue;
@@ -246,14 +246,30 @@ pub const Board = struct {
                     try self.determinePossibilities();
                     return;
                 }
+            }
+        }
 
-                // TODO: Handle the case where the minimum possible values in the board is greater than 2
-                // unreachable;
+        for (0..Y_SIZE) |y| {
+            for (0..X_SIZE) |x| {
+                if (self.cells[y][x].value != 0) continue;
+
+                const val = try self.cells[y][x].nextPossibleValue();
+                try self.snapshot(.{
+                    .x = x,
+                    .y = y,
+                    .val = val,
+                    .snapshot = self.cells,
+                });
+                self.cells[y][x].value = val;
+                try self.determinePossibilities();
+                return;
             }
         }
     }
 
     fn backtrack(self: *Self) !void {
+        std.debug.print("\nBacktracking\n", .{});
+        try self.print(std.io.getStdErr());
         if (self.decision_stack.popOrNull()) |decision| {
             // Restore the state of the board before the risky decision
             self.cells = decision.snapshot;
@@ -262,10 +278,9 @@ pub const Board = struct {
             // and invalidate the decision
             try self.cells[decision.y][decision.x].setImpossibleValue(decision.val);
             const decisions: []Decision = self.decision_stack.allocatedSlice();
-            for (0..self.decision_stack.items.len) |i| {
+            for (0..self.decision_stack.items.len) |i|
                 // All snapshots need to be aware that this value in this cell is impossible
                 try decisions[i].snapshot[decision.y][decision.x].setImpossibleValue(decision.val);
-            }
 
             // Try the next possible value after invalidating the previous decision
             self.cells[decision.y][decision.x].value = try self.cells[decision.y][decision.x].nextPossibleValue();
