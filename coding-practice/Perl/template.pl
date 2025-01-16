@@ -21,10 +21,10 @@ sub main {
     my $exit_code = 0;
     
     # Do code
-    print(STDOUT "Script name: $script_name\n");
-    print(STDOUT "Script path: $script_path\n");
-    print(STDOUT "Script dir: $script_dir\n");
-    print(STDOUT "Original cwd: $original_cwd\n");
+    STDERR->print("Script name: $script_name\n");
+    STDERR->print("Script path: $script_path\n");
+    STDERR->print("Script dir: $script_dir\n");
+    STDERR->print("Original cwd: $original_cwd\n");
     
     # Done
     return $exit_code;
