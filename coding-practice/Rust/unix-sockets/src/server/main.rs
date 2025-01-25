@@ -4,7 +4,7 @@ use std::thread;
 
 const SOCKET: &str = "/tmp/rustsock";
 
-fn handle_client(stream: UnixStream) -> std::io::Result<()> {
+fn handle_client(stream: UnixStream, id: u64) -> std::io::Result<()> {
     let mut stream_reader = std::io::BufReader::new(&stream);
     let mut stream_writer = std::io::BufWriter::new(&stream);
 
@@ -29,7 +29,7 @@ fn handle_client(stream: UnixStream) -> std::io::Result<()> {
         if msg.len() == 0usize {
             break;
         }
-        println!("Received message: {msg}");
+        eprintln!("{id}: {msg}");
 
         /*
          * Echo the message back to the client.
@@ -55,13 +55,16 @@ fn main() -> std::io::Result<()> {
     let listener = UnixListener::bind(SOCKET)?;
 
     // accept connections and process them, spawning a new thread for each one
+    let mut connections = 0u64;
     for stream in listener.incoming() {
         match stream {
             Ok(stream) => {
                 /* connection succeeded */
+                connections += 1;
+                eprintln!("New client ({connections}) connected");
                 thread::spawn(move || {
-                    handle_client(stream).expect("NOT GOOD");
-                    println!("Client finished");
+                    handle_client(stream, connections).expect("NOT GOOD");
+                    eprintln!("Client ({connections}) finished");
                 });
             }
 
