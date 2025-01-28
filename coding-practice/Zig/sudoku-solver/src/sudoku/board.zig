@@ -182,6 +182,8 @@ pub const Board = struct {
             if (solution_status == SolutionStatus.nonlinear) {
                 try self.traverseNonLinear();
                 continue;
+                // _ = try self.bruteForce(self.cells);
+                // return;
             }
 
             // Backtracking on a bad decision
@@ -265,6 +267,68 @@ pub const Board = struct {
                 return;
             }
         }
+    }
+
+    fn bruteForce(self: *Self, grid: [Y_SIZE][X_SIZE]Cell) !bool {
+        var test_grid: [Y_SIZE][X_SIZE]Cell = grid;
+        var x: usize = undefined;
+        var y: usize = undefined;
+
+        nextEmptyCell(
+            grid,
+            &x,
+            &y,
+        ) catch |e| switch (e) {
+            error.NoEmptyCell => return true,
+            else => return e,
+        };
+
+        for (Cell.POSSIBLE_VALUES_MIN..Cell.POSSIBLE_VALUES_MAX + 1) |i| {
+            if (try self.valueIsLegal(x, y, @truncate(i))) {
+                test_grid[y][x].value = @truncate(i);
+                if (try self.bruteForce(test_grid)) {
+                    return true;
+                }
+            }
+        }
+
+        return error.NoSolution;
+    }
+
+    fn nextEmptyCell(grid: [Y_SIZE][X_SIZE]Cell, col: *usize, row: *usize) error{NoEmptyCell}!void {
+        for (0..Y_SIZE) |y| {
+            for (0..X_SIZE) |x| {
+                if (grid[y][x].value == 0) {
+                    col.* = x;
+                    row.* = y;
+                    return;
+                }
+            }
+        }
+        return error.NoEmptyCell;
+    }
+
+    fn valueIsLegal(self: *Self, col: usize, row: usize, val: u8) !bool {
+        const VECTOR_SIZE: usize = 9;
+        var cellvector: [VECTOR_SIZE]*Cell = undefined;
+
+        // Check for a value within bounds
+        if (val < Cell.POSSIBLE_VALUES_MIN or val > Cell.POSSIBLE_VALUES_MAX) return false;
+
+        // Check the row for the given value
+        try self.getRow(row, &cellvector);
+        for (0..cellvector.len) |i| if (cellvector[i].value == val) return false;
+
+        // Check the column for the given value
+        try self.getColumn(col, &cellvector);
+        for (0..cellvector.len) |i| if (cellvector[i].value == val) return false;
+
+        // Check the cell group for the given value
+        try self.getCellGroup((row / 3) * 3 + (col / 3), &cellvector);
+        for (0..cellvector.len) |i| if (cellvector[i].value == val) return false;
+
+        // Value appears to be valid
+        return true;
     }
 
     fn backtrack(self: *Self) !void {
