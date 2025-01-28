@@ -4,7 +4,7 @@
 import sys
 
 # Main
-class Main:
+class Main(object):
     # Class imports
     import os
 
@@ -21,13 +21,18 @@ class Main:
         exit_code = 0
         
         # Do code
+        Main()
+        
+        # Done
+        return exit_code
+
+    # Constructor
+    def __init__(self):
+        super(Main, self).__init__()
         sys.stdout.write("Executable name: " + Main.exec_name + "\n")
         sys.stdout.write("Executable path: " + Main.exec_path + "\n")
         sys.stdout.write("Executable dir: " + Main.exec_dir + "\n")
         sys.stdout.write("Original cwd: " + Main.original_cwd + "\n")
-        
-        # Done
-        return exit_code
 
 # Execute Main
 if __name__ == "__main__":
