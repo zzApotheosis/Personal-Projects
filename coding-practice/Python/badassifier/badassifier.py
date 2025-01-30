@@ -13,7 +13,7 @@ class Main(object):
     exec_dir: str = os.path.dirname(os.path.realpath(__file__))
     original_cwd: str = os.getcwd()
     min_chance: float = 0.0
-    max_chance: float = 1.0
+    max_chance: float = 10.0
     
     # Main method
     @staticmethod
@@ -41,7 +41,7 @@ class Main(object):
                             action = 'append',
                             required = False)
         parser.add_argument('--chance',
-                            help = 'A float value representing the chance that a badass word is inserted into the text. Min value = ' + str(Main.min_chance) + ', max value = ' + str(Main.max_chance) + '',
+                            help = 'A float value representing the chance that a badass word is inserted into the text. Min value = ' + str(Main.min_chance) + ', max value = ' + str(Main.max_chance) + '. Each multiple of 1.0 adds a guaranteed chance to print a badass word.',
                             action = 'store',
                             required = False)
         parser.add_argument('-o', '--output',
@@ -95,8 +95,12 @@ class Main(object):
                 fh.write(" ")
             fh.write(tokenized_line[i])
 
-            if i != len(tokenized_line) - 1 and not Main.sentence_end(tokenized_line[i]) and random.random() < self.__badass_word_chance:
-                fh.write(" " + BadassWords.get_word())
+            if i != len(tokenized_line) - 1 and not Main.sentence_end(tokenized_line[i]):
+                chance = self.__badass_word_chance
+                while chance > 0.0:
+                    if random.random() < chance:
+                        fh.write(" " + BadassWords.get_word())
+                    chance -= 1.0
 
         fh.write("\n")
         
@@ -136,7 +140,7 @@ class Main(object):
 class BadassWords(object):
     #word_list = ('motherfucker', 'goddamn', 'badass', 'fuck', 'bastard', 'fuckin sick', 'motherfuckin', 'piece of shit')
     #word_list = ('motherfucker', 'goddamn', 'badass', 'fuck', 'bastard', 'fuckin sick', 'motherfuckin', 'shit')
-    word_list = ('goddamn', 'badass')
+    word_list = ('goddamn', 'badass', 'fuckin')
 
     # Get a pretty badass word
     @staticmethod
