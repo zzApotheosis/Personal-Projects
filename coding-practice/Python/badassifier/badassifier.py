@@ -4,6 +4,7 @@
 import sys, os
 import argparse
 import random
+import time
 
 # Main Class
 class Main(object):
@@ -14,6 +15,7 @@ class Main(object):
     original_cwd: str = os.getcwd()
     min_chance: float = 0.0
     max_chance: float = 10.0
+    slow_print_interval: float = 0.15
     
     # Main method
     @staticmethod
@@ -26,8 +28,11 @@ class Main(object):
     # Constructor
     def __init__(self):
         super(Main, self).__init__()
-        self.__badass_word_chance = 0.10
         self.__result = 0
+        self.__files = None
+        self.__badass_word_chance = 0.10
+        self.__output_file = None
+        self.__slow_print = False
 
     # Arguments parsing method
     def parse_args(self):
@@ -48,6 +53,10 @@ class Main(object):
                             help = 'An output file for the badassified text. Defaults to stdout.',
                             action = 'store',
                             required = False)
+        parser.add_argument('--slow-print',
+                            help = 'Slowly print the output. Obviously for dramatic effect. Not compatible with --output.',
+                            action = 'store_true',
+                            required = False)
         args = parser.parse_args()
 
         self.files = args.file
@@ -61,6 +70,11 @@ class Main(object):
             self.__badass_word_chance = chance
 
         self.__output_file = args.output
+        self.__slow_print = args.slow_print
+
+        if self.__slow_print and self.__output_file is not None:
+            parser.print_help()
+            sys.exit(1)
 
     # Badassifier method
     def badassifier(self):
@@ -94,12 +108,18 @@ class Main(object):
             if i != 0:
                 fh.write(" ")
             fh.write(tokenized_line[i])
+            if self.__slow_print:
+                fh.flush()
+                time.sleep(Main.slow_print_interval)
 
             if i != len(tokenized_line) - 1 and not Main.sentence_end(tokenized_line[i]):
                 chance = self.__badass_word_chance
                 while chance > Main.min_chance:
                     if random.random() < chance:
                         fh.write(" " + BadassWords.get_word())
+                        if self.__slow_print:
+                            fh.flush()
+                            time.sleep(Main.slow_print_interval)
                     chance -= 1.0
 
         fh.write("\n")
