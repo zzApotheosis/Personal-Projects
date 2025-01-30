@@ -97,7 +97,7 @@ class Main(object):
 
             if i != len(tokenized_line) - 1 and not Main.sentence_end(tokenized_line[i]):
                 chance = self.__badass_word_chance
-                while chance > 0.0:
+                while chance > Main.min_chance:
                     if random.random() < chance:
                         fh.write(" " + BadassWords.get_word())
                     chance -= 1.0
