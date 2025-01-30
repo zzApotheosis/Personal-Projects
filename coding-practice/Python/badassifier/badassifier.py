@@ -82,6 +82,10 @@ class Main(object):
                     for line in f:
                         self.badassify_line(fh = output, line = line)
 
+        # Close output file if exists
+        if self.__output_file is not None:
+            output.close()
+
     # Badassify a given line
     def badassify_line(self, fh = None, line = None):
         tokenized_line = line.split()
