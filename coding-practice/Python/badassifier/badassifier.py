@@ -94,7 +94,10 @@ class Main(object):
                 with open(file, 'r') as f:
                     # Iterate over all lines in the file
                     for line in f:
-                        self.badassify_line(fh = output, line = line)
+                        try:
+                            self.badassify_line(fh = output, line = line)
+                        except:
+                            break
 
         # Close output file if exists
         if self.__output_file is not None:
