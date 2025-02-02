@@ -14,7 +14,7 @@ fn main() {
 
     /* Standard immutable references */
     let c: u32 = 69;
-    let c_ref = &c;
+    let c_ref: &u32 = &c;
     println!("c = {}", *c_ref);
     //(*c_ref) += 1; // This won't work!
 }
