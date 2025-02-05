@@ -84,8 +84,8 @@ fn main() -> Result<(), i32> {
     println!("s3->y = {y}");
 
     unsafe {
-        CoolStruct_set_x(s3, 420);
-        CoolStruct_set_y(s3, 69);
+        CoolStruct_set_x(s3, 25);
+        CoolStruct_set_y(s3, 42);
         x = CoolStruct_get_x(s3);
         y = CoolStruct_get_y(s3);
     }
@@ -99,7 +99,7 @@ fn main() -> Result<(), i32> {
     }
     println!("After destroy: s3 = {s3:?}");
 
-    /* Use GMP to print a big-ass number */
+    /* Use GMP to print a huge number */
     unsafe {
         let huge_num: String = String::from("135792468000000690000004206900000133700000001\0");
         print_bignum(huge_num.as_ptr());
