@@ -142,7 +142,7 @@ trait GuardianOfTheGalaxy {
     fn forty_two(&self);
 }
 
-trait TwentyFive {
+trait SpongeBob {
     fn twenty_five(&self);
 }
 
@@ -171,7 +171,7 @@ impl GuardianOfTheGalaxy for CoolStruct {
     }
 }
 
-impl TwentyFive for CoolStruct {
+impl SpongeBob for CoolStruct {
     fn twenty_five(&self) {
         match self.x {
             24 => {
