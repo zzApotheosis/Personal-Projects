@@ -35,6 +35,8 @@ fn main() -> std::io::Result<()> {
     //    std::thread::sleep(DELAY);
     //}
     //println!();
+    
+    eprintln!("Press Ctrl+D to close connection");
 
     'client_loop: loop {
         // Read stdin
@@ -44,8 +46,13 @@ fn main() -> std::io::Result<()> {
         ::std::io::stdin().read_line(&mut data).ok();
 
         // Break if EOF
-        if data.is_empty() {
+        if data.len() == 0 {
             break 'client_loop;
+        }
+
+        // If it was just a newline, continue
+        if data == "\n" {
+            continue;
         }
 
         // Send data to server

@@ -21,14 +21,14 @@ fn handle_client(stream: UnixStream, id: u64) -> std::io::Result<()> {
          */
         let mut msg: String = String::new();
         stream_reader.read_line(&mut msg)?;
-        let msg = msg.trim();
 
         /*
          * Check for empty string (that's the signal to quit).
          */
-        if msg.len() == 0usize {
+        if msg.len() <= 1usize {
             break;
         }
+        let msg = msg.trim();
         eprintln!("{id}: {msg}");
 
         /*
