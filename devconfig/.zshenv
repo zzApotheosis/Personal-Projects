@@ -23,14 +23,12 @@ export PATH
 #export HOSTAR="llvm-ar"
 #export HOSTLD="lld"
 ##export HOSTLD="ld.lld"
-#export CC="zig cc"
-#export CXX="zig c++"
 
 # GnuPG TTY
 export GPG_TTY=${TTY}
 
 # Declare Preferred Editor
-export EDITOR="hx"
-#export EDITOR="nvim"
+#export EDITOR="hx"
+export EDITOR="nvim"
 #export EDITOR="emacs"
 #export EDITOR="emacsclient -s ${HOME}/.emacs.d/.socket -c"
