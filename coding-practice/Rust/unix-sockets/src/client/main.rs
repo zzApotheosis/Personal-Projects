@@ -47,6 +47,7 @@ fn main() -> std::io::Result<()> {
 
         // Break if EOF
         if data.len() == 0 {
+            eprint!("\n");
             break 'client_loop;
         }
 
