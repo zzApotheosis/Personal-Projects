@@ -1,2 +1,2 @@
 # Ligma
-write(stdout, "Hello, world!\n")
+stdout.write("Hello, world!\n")
