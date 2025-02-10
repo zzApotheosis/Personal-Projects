@@ -7,4 +7,4 @@ project('hello-world', 'c',
 
 lib = library('foo', ['foo.c'], version : '0.0.1', soversion : '0')
 
-executable('hello-world', ['main.c'], link_with : lib)
+executable(meson.project_name(), ['main.c'], link_with : lib)
