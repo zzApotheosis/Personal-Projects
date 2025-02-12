@@ -1,0 +1,58 @@
+#!/bin/perl
+
+# To be honest, there's probably a much better way to do this
+# But for the sake of personal documentation, this is a simple
+# example to dynamically load Perl modules at runtime without
+# hardcoding Perl module names
+#
+# NOTE: This obviously introduces the ability to inject arbitrary
+# Perl code into this program. Be careful with this approach!!!
+
+package Main;
+
+use strict;
+use warnings;
+use FindBin;
+use Cwd;
+
+my $exec_name = "$FindBin::RealScript";
+my $exec_path = "$FindBin::RealBin/$FindBin::RealScript";
+my $exec_dir = "$FindBin::RealBin";
+my $original_cwd = getcwd();
+
+use lib "$FindBin::RealBin/lib";
+
+sub main {
+  my $exit_code = 0;
+  my @modules;
+  my @namespaced_modules;
+
+  chdir("lib");
+  @modules = glob("CoolPackage/*.pm");
+  chdir($original_cwd);
+
+  foreach (@modules) {
+    eval {
+      require $_;
+    } or do {
+      my $errstr = $!;
+      Carp::cluck($errstr);
+      next;
+    };
+    
+    my $namespaced_module = $_;
+    $namespaced_module =~ s/\//::/g;
+    $namespaced_module =~ s/\.pm$//g;
+    push(@namespaced_modules, $namespaced_module);
+  }
+
+  foreach (@namespaced_modules) {
+    $_->load();
+  }
+
+  return $exit_code;
+}
+
+1;
+
+exit(Main::main());
