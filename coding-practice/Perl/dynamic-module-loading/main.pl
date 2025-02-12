@@ -59,6 +59,7 @@ sub main {
     eval {
       $_->load();
     } or do {
+      warn($!);
       warn("$_ does not implement load()");
       next;
     };
