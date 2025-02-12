@@ -14,6 +14,7 @@ use strict;
 use warnings;
 use FindBin;
 use Cwd;
+use File::Find;
 
 my $exec_name = "$FindBin::RealScript";
 my $exec_path = "$FindBin::RealBin/$FindBin::RealScript";
@@ -27,18 +28,26 @@ sub main {
   my @modules;
   my @namespaced_modules;
 
-  chdir("lib");
-  @modules = glob("CoolPackage/*.pm");
+  chdir("$FindBin::RealBin/lib") or die($!);
+  find({
+    no_chdir => 1,
+    wanted => sub {
+      if (-d $File::Find::name) {
+        return;
+      }
+
+      if ($File::Find::name =~ /\.pm$/) {
+        my $module = $File::Find::name;
+        $module =~ s/^\.\///g;
+        push(@modules, $module);
+      }
+    },
+  },
+  '.');
   chdir($original_cwd);
 
   foreach (@modules) {
-    eval {
-      require $_;
-    } or do {
-      my $errstr = $!;
-      Carp::cluck($errstr);
-      next;
-    };
+    require($_);
     
     my $namespaced_module = $_;
     $namespaced_module =~ s/\//::/g;
