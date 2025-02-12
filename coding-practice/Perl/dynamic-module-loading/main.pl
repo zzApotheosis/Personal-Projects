@@ -56,7 +56,12 @@ sub main {
   }
 
   foreach (@namespaced_modules) {
-    $_->load();
+    eval {
+      $_->load();
+    } or do {
+      warn("$_ does not implement load()");
+      next;
+    };
   }
 
   return $exit_code;
