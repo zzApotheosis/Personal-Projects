@@ -163,7 +163,7 @@ class Main(object):
 class BadassWords(object):
     #word_list = ('motherfucker', 'goddamn', 'badass', 'fuck', 'bastard', 'fuckin sick', 'motherfuckin', 'piece of shit')
     #word_list = ('motherfucker', 'goddamn', 'badass', 'fuck', 'bastard', 'fuckin sick', 'motherfuckin', 'shit')
-    word_list = ('goddamn', 'badass', 'fuckin')
+    word_list = ('goddamn', 'badass', 'motherfuckin')
 
     # Get a pretty badass word
     @staticmethod
