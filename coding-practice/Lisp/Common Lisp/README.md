@@ -1,4 +1,4 @@
-# Common Lisp
+# ANSI Common Lisp
 Lately, I have been growing more interested in learning why the Lisp family of languages has been widely regarded as some of the most powerful languages ever invented. What
 originally got me interested in Lisp languages in the first place was Emacs Lisp. I have heard of countless stories of people swearing that absolutely everything is possible
 with Emacs because it is essentially just a small program written in C that supports an entire environment above it in Lisp, namely Emacs Lisp. It can do absolutely anything.
