@@ -5,6 +5,6 @@
  )
  )
 
-(dolist (n '(0 1 5 69))
+(dolist (n (list 0 1 5 69))
  (format t "~a! = ~a~%" n (factorial n))
  )
