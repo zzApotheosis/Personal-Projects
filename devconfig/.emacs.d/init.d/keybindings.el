@@ -36,5 +36,5 @@
 				 (switch-to-buffer "*scratch*")
 				 ))
 (keymap-global-set "C-x c m r" #'rename-uniquely)
-(keympa-global-set "M-n" #'scroll-up-line)
+(keymap-global-set "M-n" #'scroll-up-line)
 (keymap-global-set "M-p" #'scroll-down-line)
