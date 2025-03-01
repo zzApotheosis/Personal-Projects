@@ -1,5 +1,5 @@
 ;; Load another Lisp file for use
-(load "my-package.lisp")
+(load (merge-pathnames "my-package.lisp" "my-package/"))
 
 ;; Redefine namespace and/or package scope
 (in-package :common-lisp-user) ;; NOTE, :cl-user is an alias for :common-lisp-user
