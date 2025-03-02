@@ -35,7 +35,9 @@
     (dotimes (i *thread-count*)
       (push (sb-thread:make-thread #'increment-counter
 				   :name (format nil "Thread-~d" i)
-				   :arguments (list i)) threads))
+				   :arguments (list i))
+	    threads)
+      )
 
     ;; Join threads after completion
     (dolist (thread threads)
