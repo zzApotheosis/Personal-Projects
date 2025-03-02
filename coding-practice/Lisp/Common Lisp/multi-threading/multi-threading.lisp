@@ -6,8 +6,8 @@
 
 (defparameter *shared-counter* 0)
 (defparameter *counter-lock* (sb-thread:make-mutex :name "counter-lock"))
-(defparameter *thread-count* 5)
-(defparameter *increments-per-thread* 1000)
+(defparameter *thread-count* 10)
+(defparameter *increments-per-thread* 100)
 (defparameter *wait-period* (/ 100000000 *thread-count*)) ; A time period to wait between write operations
 
 (defun increment-counter (id)
