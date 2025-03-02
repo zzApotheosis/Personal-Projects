@@ -32,6 +32,7 @@
                                (write-line line stream)
                                (force-output stream))
                        )
+		      )
                     
 
                       ;; Ensure client socket is closed
@@ -39,7 +40,6 @@
                        (socket-close client-socket)
                        )
                       (format t "Client disconnected~%")
-                     )
                 )
               )
             )
