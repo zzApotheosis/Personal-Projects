@@ -4,5 +4,5 @@ SBCL natively supports a foreign function interface to load shared objects at ru
 # Building and Running this Example
 Use these steps to build and run this FFI example on Linux systems. This will also probably work on Darwin and BSD systems as well.
 
-> gcc -shared -fPIC -o libfoo.so foo.c
+> gcc -shared -fPIC -o libfoo.so foo.c  
 > ./ffi.sh
