@@ -4,7 +4,7 @@
 
 #[no_mangle]
 pub fn my_add(a: i32, b: i32) -> i32 {
-    eprintln!("Adding numbers in Rust!");
+    eprintln!("Adding numbers in Rust! {} + {}", a, b);
     a + b
 }
 
