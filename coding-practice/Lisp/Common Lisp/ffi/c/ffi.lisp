@@ -48,3 +48,26 @@
     (format t "~a~%" e)
     )
   )
+
+;; Define the C function strlen
+(sb-alien:define-alien-routine "strlen" sb-alien:size-t
+  (str (* sb-alien:char)))
+
+;; Function to pass a Lisp string to strlen
+(defun lisp-string-length (lisp-string)
+  (check-type lisp-string string) ; Ensure input is a string
+  (sb-alien:with-alien ((c-string (* sb-alien:char)))
+    ;; Convert Lisp string to C string (nul-terminated)
+    (setf c-string (sb-alien:make-alien-string lisp-string))
+    (unwind-protect
+         (sb-alien:alien-funcall (sb-alien:extern-alien "strlen" (function sb-alien:size-t (* sb-alien:char)))
+                                 c-string)
+      ;; Free the allocated C string
+      (sb-alien:free-alien c-string))))
+
+;; Test it
+(let ((msgs '("hello world!" "hugh mungus wot?")))
+  (dolist (msg msgs)
+    (format t "Length of ~s: ~d~%" msg (lisp-string-length msg))
+    )
+  )
