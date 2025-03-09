@@ -3,6 +3,9 @@
 ;; Apparently this used to be required, but sb-alien is a native part of SBCL so it's already built-in now
 ;;(require :sb-alien)
 
+;; Make sure we have a different RNG seed each time this is invoked
+(setf *random-state* (make-random-state t))
+
 (handler-case
     (progn
       (sb-alien:load-shared-object "./libfoo.so")
@@ -11,13 +14,11 @@
 	(a sb-alien:int)
 	)
 
-      (let ((a-nums '(5 6 2 -15 420
-		      ;; 123456789999 ;; SBCL won't allow you to use numbers that aren't valid 32-bit integers :)
-		      ))
+      (let ((iter 10)
+	    (max-num 110)
 	    )
-
-	(loop for i from 0 below (length a-nums) do
-	      (let ((a (nth i a-nums))
+	(loop for i from 0 below iter do
+	      (let ((a (random (1+ max-num)))
 		    )
 		(format t "zig_foo(~a)~%" a)
 		(zig-foo a)
