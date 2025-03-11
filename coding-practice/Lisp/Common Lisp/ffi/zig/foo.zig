@@ -2,9 +2,6 @@ const std = @import("std");
 
 pub export fn zig_foo(x: i32) callconv(.C) void {
     const stdout = std.io.getStdOut();
-    stdout.writer().print("Hello from Zig!\n", .{}) catch |e| {
-        std.log.err("{}", .{e});
-    };
     var buffer: [64:0]u8 = undefined;
     var msg: [:0]u8 = undefined;
     if (x < 60) {
