@@ -1,0 +1,58 @@
+;; First, ensure the package is loaded
+(require 'sb-posix)
+
+(defun list-exported-symbols (package-name)
+  "List all exported symbols from a given package, categorized by type."
+  (let ((functions '())
+        (macros '())
+        (variables '())
+        (others '()))
+    
+    ;; Iterate over all external symbols in the package
+    (do-external-symbols (symbol (find-package package-name))
+      (cond
+        ;; Check if it's a function
+        ((and (fboundp symbol)
+              (not (macro-function symbol))
+              (not (special-operator-p symbol)))
+         (push symbol functions))
+        
+        ;; Check if it's a macro
+        ((macro-function symbol)
+         (push symbol macros))
+        
+        ;; Check if it's a special variable
+        ((boundp symbol)
+         (push symbol variables))
+        
+        ;; Everything else
+        (t
+         (push symbol others))))
+    
+    ;; Sort each list alphabetically
+    (setf functions (sort functions #'string< :key #'symbol-name))
+    (setf macros (sort macros #'string< :key #'symbol-name))
+    (setf variables (sort variables #'string< :key #'symbol-name))
+    (setf others (sort others #'string< :key #'symbol-name))
+    
+    ;; Print results
+    (format t "~%Exported Functions (~D):~%" (length functions))
+    (dolist (fn functions)
+      (format t "  ~A~%" fn))
+    
+    (format t "~%Exported Macros (~D):~%" (length macros))
+    (dolist (macro macros)
+      (format t "  ~A~%" macro))
+    
+    (format t "~%Exported Variables (~D):~%" (length variables))
+    (dolist (var variables)
+      (format t "  ~A~%" var))
+    
+    (format t "~%Other Exported Symbols (~D):~%" (length others))
+    (dolist (other others)
+      (format t "  ~A~%" other))
+    
+    (values)))
+
+;; Call the function for sb-posix
+(list-exported-symbols :sb-posix)
