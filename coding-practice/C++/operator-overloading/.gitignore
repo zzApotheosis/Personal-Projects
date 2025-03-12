@@ -1,0 +1,5 @@
+*
+!/.gitignore
+!/main.cpp
+!/foo.hpp
+!/foo.cpp
