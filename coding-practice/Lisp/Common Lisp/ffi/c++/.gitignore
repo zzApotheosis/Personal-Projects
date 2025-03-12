@@ -1,0 +1,7 @@
+*
+!/.gitignore
+!/README.md
+!/ffi.lisp
+!/ffi.sh
+!/foo.cpp
+!/foo.hpp
