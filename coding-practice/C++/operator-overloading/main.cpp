@@ -19,6 +19,9 @@ int main(void)
   Foo::MyClass a("Steven", 94);
   Foo::MyClass b("Ligma", 42);
 
+  std::cerr << "a = Foo::MyClass(\"Steven\", 94)" << std::endl;
+  std::cerr << "b = Foo::MyClass(\"Ligma\", 42)" << std::endl;
+
   MY_COND(a > b);
   MY_COND(a < b);
   MY_COND(a >= b);
