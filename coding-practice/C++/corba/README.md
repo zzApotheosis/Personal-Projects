@@ -9,12 +9,12 @@ Build the skeleton classes from the IDL definitions. This will produce the skele
 
 In one terminal, run these commands to build and run the echo server.
 
-> $ clang++ `pkg-config --cflags --libs omniORB4` -o echo-server echo-server.cc echoSK.cc  
+> $ clang++ \`pkg-config --cflags --libs omniORB4\` -o echo-server echo-server.cc echoSK.cc  
 > $ ./echo-server
 
 In a second terminal, run these commands to build and run the client.
 
-> $ clang++ `pkg-config --cflags --libs omniORB4` -o echo-client echo-client.cc echoSK.cc  
+> $ clang++ \`pkg-config --cflags --libs omniORB4\` -o echo-client echo-client.cc echoSK.cc  
 > $ ./echo-client
 
 See that the client sends and receives a message with CORBA.
