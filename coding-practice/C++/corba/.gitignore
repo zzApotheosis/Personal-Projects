@@ -1,0 +1,6 @@
+*
+!/.gitignore
+!/README.md
+!/echo.idl
+!/echo-server.cc
+!/echo-client.cc
