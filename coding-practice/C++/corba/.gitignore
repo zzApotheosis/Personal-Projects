@@ -4,3 +4,7 @@
 !/echo.idl
 !/echo-server.cc
 !/echo-client.cc
+
+!/message.idl
+!/message-server.cc
+!/message-client.cc

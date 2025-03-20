@@ -1,0 +1,10 @@
+module MessageModule {
+    struct MyMessage {
+        long id;
+        string text;
+    };
+
+    interface Echo {
+        MyMessage echoMessage(in MyMessage msg);
+    };
+};
