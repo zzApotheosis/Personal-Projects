@@ -24,7 +24,7 @@ int get_data(void) {
 void _execvp(void)
 {
   char * cmd = "sbcl";
-  char * args[] = {cmd, "--version", NULL};
+  char * args[] = {cmd, NULL};
   int result = execvp(cmd, args);
   if (result != 0)
     {
