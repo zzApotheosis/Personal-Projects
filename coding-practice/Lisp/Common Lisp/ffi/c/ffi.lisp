@@ -15,6 +15,7 @@
 	(a sb-alien:int)
 	)
       (sb-alien:define-alien-routine "get_data" sb-alien:int)
+      (sb-alien:define-alien-routine ("_execvp" my-execvp) sb-alien:void)
 
       (let ((a-nums '(5 6 2 -15 420
 		      ;; 123456789999 ;; SBCL won't allow you to use numbers that aren't valid 32-bit integers :)
@@ -42,6 +43,9 @@
 	      (format t "After setting data, static data = ~a~%" (get-data))
 	      )
 	)
+
+      (format t "Invoking execvp()!~%")
+      (my-execvp)
       )
 
   (error (e)
