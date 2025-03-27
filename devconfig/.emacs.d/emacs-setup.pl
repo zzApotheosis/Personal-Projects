@@ -103,6 +103,10 @@ sub init
 	$home_dir = $ENV{APPDATA};
 	$os_type = DOS;
     }
+    else
+    {
+	die('Unrecognized OS: ' . $^O);
+    }
 
     # Populate variables
     $emacs_dir = "$home_dir/.emacs.d";
