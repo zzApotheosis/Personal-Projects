@@ -3,4 +3,4 @@
 !/README.md
 !/ffi.lisp
 !/ffi.sh
-!/foo.c
+!/foo.go
