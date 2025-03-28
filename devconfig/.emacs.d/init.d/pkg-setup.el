@@ -19,6 +19,7 @@
 (setq-default pkg-installed-vterm-p nil)
 (setq-default pkg-installed-yasnippet-p nil)
 (setq-default pkg-installed-go-mode-p nil)
+(setq-default pkg-installed-d-mode-p nil)
 (setq-default pkg-installed-fakepkg-p nil)
 
 (let (
@@ -41,6 +42,7 @@
   (load-file (concat pkg-setup-dir "/setup-erc.el"))
   (load-file (concat pkg-setup-dir "/setup-eshell.el"))
   (load-file (concat pkg-setup-dir "/setup-go-mode.el"))
+  (load-file (concat pkg-setup-dir "/setup-d-mode.el"))
 
   ;; Non GNU ELPA packages (generally these are on MELPA but I'd prefer to manage them myself. See emacs-setup.pl)
   (when (or
