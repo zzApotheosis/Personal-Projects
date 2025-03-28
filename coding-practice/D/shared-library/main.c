@@ -3,7 +3,7 @@
 
 int main() {
     // Open the shared library
-    void* handle = dlopen("./libmathlib.so", RTLD_LAZY);
+    void* handle = dlopen("./libfoo.so", RTLD_LAZY);
     if (!handle) {
         fprintf(stderr, "Error: %s\n", dlerror());
         return 1;

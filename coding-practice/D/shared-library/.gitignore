@@ -1,5 +1,5 @@
 *
 !/.gitignore
 !/README.md
-!/mathlib.d
+!/foo.d
 !/main.c
