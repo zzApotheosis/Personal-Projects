@@ -12,7 +12,7 @@ int main(void)
 
   dlerror();
 
-  void (* cpp_func)(void) = dlsym(dl_handle, "cpp_func");
+  void (* const cpp_func)(void) = (void (* const)(void)) dlsym(dl_handle, "cpp_func");
   char * error = dlerror();
   if (error != NULL)
     {

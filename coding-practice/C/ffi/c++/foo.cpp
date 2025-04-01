@@ -10,7 +10,7 @@ namespace Foo {
   class MyClass {
   private:
     D data;
-    std::string name;
+    N name;
 
   public:
     MyClass(const D d, const N n) :
