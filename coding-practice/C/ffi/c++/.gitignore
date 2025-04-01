@@ -2,5 +2,7 @@
 !/.gitignore
 !/README.md
 !/main.c
+!/direct-access.c
 !/foo.cpp
+!/foo.h
 !/foo.hpp

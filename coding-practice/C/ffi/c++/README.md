@@ -6,4 +6,6 @@ C++ - being a sophisticated extension of C - is capable of exporting compatible 
 
 > $ clang++ -shared -fPIC -o libfoo.so foo.cpp  
 > $ clang -o main main.c  
-> $ ./main
+> $ clang -L. -lfoo -o direct-access direct-access.c  
+> $ ./main  
+> $ LD_LIBRARY_PATH=. ./direct-access
