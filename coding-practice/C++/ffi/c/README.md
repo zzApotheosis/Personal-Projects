@@ -4,6 +4,6 @@ C++ - being a sophisticated extension of C - is capable of using compatible func
 
 # Building this example
 
-> $ clang -shared -fPIC -o libfoo.so foo.c
-> $ clang++ -o main main.cpp
+> $ clang -shared -fPIC -o libfoo.so foo.c  
+> $ clang++ -o main main.cpp  
 > $ ./main
