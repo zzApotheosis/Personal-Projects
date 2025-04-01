@@ -10,7 +10,7 @@ int main(void)
       return 1;
     }
 
-  int (* add)(const int, const int) = (int (*)(const int, const int)) dlsym(dl_handle, "add");
+  int (* const add)(const int, const int) = (int (* const)(const int, const int)) dlsym(dl_handle, "add");
   char * error = dlerror();
   if (error != NULL)
     {
@@ -19,7 +19,7 @@ int main(void)
       return 1;
     }
   
-  void (* out)(const char * const, const unsigned long) = (void (*)(const char * const, const unsigned long)) dlsym(dl_handle, "out");
+  void (* const out)(const char * const, const unsigned long) = (void (* const)(const char * const, const unsigned long)) dlsym(dl_handle, "out");
   error = dlerror();
   if (error != NULL)
     {
