@@ -33,4 +33,6 @@ int main(void)
 
   std::string data = "This is one coooooooooool string, bro.\n";
   out(data.c_str(), data.length());
+
+  dlclose(dl_handle);
 }
