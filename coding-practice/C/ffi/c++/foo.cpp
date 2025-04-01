@@ -6,30 +6,31 @@
 
 namespace Foo {
 
-  template<typename T>
+  template<typename D, typename N>
   class MyClass {
   private:
-    T data;
+    D data;
     std::string name;
 
   public:
-    MyClass(const T data, const std::string name) :
-      data(data),
-      name(name)
+    MyClass(const D d, const N n) :
+      data(d),
+      name(n)
     {
       std::cout << "Entering constructor for MyClass!" << std::endl;
     }
+    
     virtual ~MyClass(void)
     {
       std::cout << "Entering destructor for MyClass!" << std::endl;
     }
 
-    T & get_data(void)
+    D & get_data(void)
     {
       return this->data;
     }
 
-    std::string & get_name(void)
+    N & get_name(void)
     {
       return this->name;
     }
@@ -37,21 +38,23 @@ namespace Foo {
 
 }
 
+using namespace std;
+
 void cpp_func(void)
 {
-  Foo::MyClass<int> obj = Foo::MyClass(42, "Alice");
-  std::cout << "obj.get_data() = " << obj.get_data() << std::endl;
-  std::cout << "obj.get_name() = " << obj.get_name() << std::endl;
+  Foo::MyClass<int, string> obj = Foo::MyClass(42, string("Alice"));
+  cout << "obj.get_data() = " << obj.get_data() << endl;
+  cout << "obj.get_name() = " << obj.get_name() << endl;
 
   obj.get_data() += 10;
-  std::cout << "obj.get_data() = " << obj.get_data() << std::endl;
-  std::cout << "obj.get_name() = " << obj.get_name() << std::endl;
+  cout << "obj.get_data() = " << obj.get_data() << endl;
+  cout << "obj.get_name() = " << obj.get_name() << endl;
 
-  Foo::MyClass<std::string> obj2 = Foo::MyClass(std::string("Template data!"), "Bob");
-  std::cout << "obj2.get_data() = " << obj2.get_data() << std::endl;
-  std::cout << "obj2.get_name() = " << obj2.get_name() << std::endl;
+  Foo::MyClass<string, string> obj2 = Foo::MyClass(string("Template data!"), string("Bob"));
+  cout << "obj2.get_data() = " << obj2.get_data() << endl;
+  cout << "obj2.get_name() = " << obj2.get_name() << endl;
 
   obj2.get_data() = "Updated template data!";
-  std::cout << "obj2.get_data() = " << obj2.get_data() << std::endl;
-  std::cout << "obj2.get_name() = " << obj2.get_name() << std::endl;
+  cout << "obj2.get_data() = " << obj2.get_data() << endl;
+  cout << "obj2.get_name() = " << obj2.get_name() << endl;
 }
