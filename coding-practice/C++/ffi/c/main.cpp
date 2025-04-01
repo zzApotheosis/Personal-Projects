@@ -1,12 +1,14 @@
 #include <iostream>
 #include <dlfcn.h>
 
+using namespace std;
+
 int main(void)
 {
   void * dl_handle = dlopen("./libfoo.so", RTLD_LAZY);
   if (!dl_handle)
     {
-      std::cerr << "Error: " << dlerror() << std::endl;
+      cerr << "Error: " << dlerror() << endl;
       return 1;
     }
 
@@ -14,7 +16,7 @@ int main(void)
   char * error = dlerror();
   if (error != NULL)
     {
-      std::cerr << "Error: " << error << std::endl;
+      cerr << "Error: " << error << endl;
       dlclose(dl_handle);
       return 1;
     }
@@ -23,15 +25,15 @@ int main(void)
   error = dlerror();
   if (error != NULL)
     {
-      std::cerr << "Error: " << error << std::endl;
+      cerr << "Error: " << error << endl;
       dlclose(dl_handle);
       return 1;
     }
 
   int a = 1, b = 2;
-  std::cout << a << " + " << b << " = " << add(a, b) << std::endl;
+  cout << a << " + " << b << " = " << add(a, b) << endl;
 
-  std::string data = "This is one coooooooooool string, bro.\n";
+  string data = "This is one coooooooooool string, bro.\n";
   out(data.c_str(), data.length());
 
   dlclose(dl_handle);
