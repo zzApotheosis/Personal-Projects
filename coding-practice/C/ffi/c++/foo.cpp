@@ -43,7 +43,15 @@ void cpp_func(void)
   std::cout << "obj.get_data() = " << obj.get_data() << std::endl;
   std::cout << "obj.get_name() = " << obj.get_name() << std::endl;
 
+  obj.get_data() += 10;
+  std::cout << "obj.get_data() = " << obj.get_data() << std::endl;
+  std::cout << "obj.get_name() = " << obj.get_name() << std::endl;
+
   Foo::MyClass<std::string> obj2 = Foo::MyClass(std::string("Template data!"), "Bob");
+  std::cout << "obj2.get_data() = " << obj2.get_data() << std::endl;
+  std::cout << "obj2.get_name() = " << obj2.get_name() << std::endl;
+
+  obj2.get_data() = "Updated template data!";
   std::cout << "obj2.get_data() = " << obj2.get_data() << std::endl;
   std::cout << "obj2.get_name() = " << obj2.get_name() << std::endl;
 }
