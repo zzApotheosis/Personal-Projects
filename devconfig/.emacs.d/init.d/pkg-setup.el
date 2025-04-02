@@ -21,6 +21,7 @@
 (setq-default pkg-installed-go-mode-p nil)
 (setq-default pkg-installed-d-mode-p nil)
 (setq-default pkg-installed-nim-mode-p nil)
+(setq-default pkg-installed-zig-mode-p nil)
 (setq-default pkg-installed-fakepkg-p nil)
 
 (let (
@@ -58,4 +59,5 @@
   (load-file (concat pkg-setup-dir "/setup-protobuf.el"))
   (load-file (concat pkg-setup-dir "/setup-eldoc-box.el"))
   (load-file (concat pkg-setup-dir "/setup-nim-mode.el"))
+  (load-file (concat pkg-setup-dir "/setup-zig-mode.el"))
   )
