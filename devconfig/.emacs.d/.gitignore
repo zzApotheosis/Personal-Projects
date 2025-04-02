@@ -1,8 +1,9 @@
-/*
+*
 
 !/.gitignore
 !/eshell
 !/init.el
-!/init.d
+!/init.d/
+!/init.d/**
 !/notes.org
 !/emacs-setup.pl

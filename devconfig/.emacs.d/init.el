@@ -2,6 +2,7 @@
 (let (
       (init-dir (concat user-emacs-directory "/init.d/"))
       )
+  (load-file (concat init-dir "/macros.el"))
   (load-file (concat init-dir "/functions.el"))
   (load-file (concat init-dir "/basic-settings.el"))
   (load-file (concat init-dir "/pkg-setup.el"))
@@ -21,7 +22,9 @@
  '(custom-safe-themes
    '("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476"
      default))
- '(package-selected-packages nil))
+ '(package-selected-packages
+   '(company d-mode dash evil flycheck go-mode goto-chg magit multishell
+	     rust-mode spacemacs-theme vertico yasnippet)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
