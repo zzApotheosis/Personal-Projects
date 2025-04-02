@@ -12,6 +12,17 @@
 	      (eldoc-box-hover-at-point-mode t))
             ))
 
+;; Define hook for rust-mode
+(when pkg-installed-rust-mode-p
+  (add-hook 'rust-mode-hook
+	    (lambda ()
+	      (when pkg-installed-eglot-p
+		(eglot-ensure)
+		)
+	      )
+	    )
+  )
+
 ;; Define hook for prog-mode
 (add-hook 'prog-mode-hook
           (lambda ()
