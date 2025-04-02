@@ -45,6 +45,7 @@
   (load-file (concat pkg-setup-dir "/setup-eshell.el"))
   (load-file (concat pkg-setup-dir "/setup-go-mode.el"))
   (load-file (concat pkg-setup-dir "/setup-d-mode.el"))
+  (load-file (concat pkg-setup-dir "/setup-zig-mode.el"))
 
   ;; Non GNU ELPA packages (generally these are on MELPA but I'd prefer to manage them myself. See emacs-setup.pl)
   (when (or
@@ -59,5 +60,4 @@
   (load-file (concat pkg-setup-dir "/setup-protobuf.el"))
   (load-file (concat pkg-setup-dir "/setup-eldoc-box.el"))
   (load-file (concat pkg-setup-dir "/setup-nim-mode.el"))
-  (load-file (concat pkg-setup-dir "/setup-zig-mode.el"))
   )
