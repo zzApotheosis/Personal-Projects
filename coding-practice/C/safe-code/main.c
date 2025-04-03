@@ -23,6 +23,10 @@ int main(void)
   // Print the string.
   printf("%s\n", my_string);
 
+  // Unsigned integer with fixed width.
+  uint32_t my_uint = 0;
+  fprintf(stderr, "This is a pretty awesome unsigned integer: %u\n", my_uint);
+
   // Return success.
   return 0;
 }
