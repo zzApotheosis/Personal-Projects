@@ -32,6 +32,25 @@
 	(macroexpand-1 '(my-debug (format t "one frick~%") (format t "two frick~%")))
 	)
 
+;; A simple macro to perform code in another working directory temporarily
+(require 'sb-posix)
+(defmacro with-chdir (new-dir &rest body)
+  `(let ((old-dir (sb-posix:getcwd)))
+     (sb-posix:chdir ,new-dir)
+     ,@body
+     (sb-posix:chdir old-dir)
+     )
+  )
+
+(format t "with-chdir example:~%")
+(format t "cwd = ~a~%" (sb-posix:getcwd))
+(with-chdir "/tmp"
+  (format t "cwd = ~a~%" (sb-posix:getcwd))
+  (format t "Nice!~%")
+  )
+(format t "cwd = ~a~%" (sb-posix:getcwd))
+(format t "~%")
+
 ;; A simple assertion macro
 ;; Also, I just figured out that (defmacro) is a special operator, which is neither a macro nor a function. Wild!
 (defmacro expect (test-expr err-expr)
