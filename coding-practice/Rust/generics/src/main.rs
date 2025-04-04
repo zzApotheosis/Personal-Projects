@@ -1,11 +1,11 @@
-fn main() {
-    println!("Hello, world!");
-    let foo = foo::Bar::new(String::from("ligma"));
-    println!("foo = {foo}");
-
-    let bar = foo::Bar::new(69i32);
-    println!("bar = {}", bar.get_data());
-}
+//fn main() {
+//    println!("Hello, world!");
+//    let foo = foo::Bar::new(String::from("ligma"));
+//    println!("foo = {foo}");
+//
+//    let bar = foo::Bar::new(69i32);
+//    println!("bar = {}", bar.get_data());
+//}
 
 mod foo {
     /*
@@ -114,6 +114,15 @@ mod foo {
     #[cfg(test)]
     mod tests {
 	use super::*;
+
+	#[test]
+	fn test_foo_bar() {
+	    let foo = Bar::new(String::from("ligma"));
+	    assert_eq!(foo.data, "ligma".to_string());
+
+	    let bar = Bar::new(69i32);
+	    assert_eq!(*bar.get_data(), 69);
+	}
 
 	#[test]
 	fn test_stack() {
