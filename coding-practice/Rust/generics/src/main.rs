@@ -18,8 +18,9 @@ mod foo {
 	    Bar{data}
 	}
 
-	pub fn get_data(&self) -> & D {
-	    &self.data
+	pub fn get_data(&self) -> D
+	where D: std::clone::Clone {
+	    self.data.clone()
 	}
     }
 
