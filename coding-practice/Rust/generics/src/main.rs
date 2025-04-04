@@ -1,11 +1,6 @@
-//fn main() {
-//    println!("Hello, world!");
-//    let foo = foo::Bar::new(String::from("ligma"));
-//    println!("foo = {foo}");
-//
-//    let bar = foo::Bar::new(69i32);
-//    println!("bar = {}", bar.get_data());
-//}
+fn main() {
+    eprintln!("Run `cargo test` to execute the unit tests in this example.");
+}
 
 mod foo {
     /*
