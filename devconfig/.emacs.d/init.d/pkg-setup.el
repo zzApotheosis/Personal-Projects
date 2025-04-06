@@ -23,29 +23,35 @@
 (setq-default pkg-installed-nim-mode-p nil)
 (setq-default pkg-installed-zig-mode-p nil)
 (setq-default pkg-installed-fakepkg-p nil)
+(setq-default pkg-installed-markdown-mode-p nil)
 
 (let (
       (pkg-setup-dir (concat user-emacs-directory "/init.d/pkg-setup.d/"))
       (user-pkgs-dir (concat user-emacs-directory "/pkgs/"))
+      (setup-files '("setup-spacemacs-theme.el"
+		     "setup-company.el"
+		     "setup-dash.el"
+		     "setup-evil.el"
+		     "setup-flycheck.el"
+		     "setup-goto-chg.el"
+		     "setup-magit.el"
+		     "setup-multishell.el"
+		     "setup-org.el"
+		     "setup-rust-mode.el"
+		     "setup-vertico.el"
+		     "setup-yasnippet.el"
+		     "setup-erc.el"
+		     "setup-eshell.el"
+		     "setup-go-mode.el"
+		     "setup-d-mode.el"
+		     "setup-zig-mode.el"
+		     "setup-markdown-mode.el"))
       )
-  (load-file (concat pkg-setup-dir "/setup-spacemacs-theme.el"))
-  (load-file (concat pkg-setup-dir "/setup-company.el"))
-  (load-file (concat pkg-setup-dir "/setup-dash.el"))
-  (load-file (concat pkg-setup-dir "/setup-eglot.el"))
-  (load-file (concat pkg-setup-dir "/setup-evil.el"))
-  (load-file (concat pkg-setup-dir "/setup-flycheck.el"))
-  (load-file (concat pkg-setup-dir "/setup-goto-chg.el"))
-  (load-file (concat pkg-setup-dir "/setup-magit.el"))
-  (load-file (concat pkg-setup-dir "/setup-multishell.el"))
-  (load-file (concat pkg-setup-dir "/setup-org.el"))
-  (load-file (concat pkg-setup-dir "/setup-rust-mode.el"))
-  (load-file (concat pkg-setup-dir "/setup-vertico.el"))
-  (load-file (concat pkg-setup-dir "/setup-yasnippet.el"))
-  (load-file (concat pkg-setup-dir "/setup-erc.el"))
-  (load-file (concat pkg-setup-dir "/setup-eshell.el"))
-  (load-file (concat pkg-setup-dir "/setup-go-mode.el"))
-  (load-file (concat pkg-setup-dir "/setup-d-mode.el"))
-  (load-file (concat pkg-setup-dir "/setup-zig-mode.el"))
+
+  ;; Load user-defined setup files
+  (dolist (setup-file setup-files)
+    (load-file (concat pkg-setup-dir "/" setup-file))
+    )
 
   ;; Non GNU ELPA packages (generally these are on MELPA but I'd prefer to manage them myself. See emacs-setup.pl)
   (when (or
