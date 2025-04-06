@@ -1,29 +1,30 @@
 ;; Define variables to use later
-(setq-default pkg-installed-company-p nil)
-(setq-default pkg-installed-compat-p nil)
-(setq-default pkg-installed-dash-p nil)
-(setq-default pkg-installed-eglot-p nil)
-(setq-default pkg-installed-eldoc-p nil)
-(setq-default pkg-installed-erc-p nil)
-(setq-default pkg-installed-evil-p nil)
-(setq-default pkg-installed-flycheck-p nil)
-(setq-default pkg-installed-goto-chg-p nil)
-(setq-default pkg-installed-magit-p nil)
-(setq-default pkg-installed-multishell-p nil)
-(setq-default pkg-installed-neotree-p nil)
-(setq-default pkg-installed-org-p nil)
-(setq-default pkg-installed-protobuf-p nil)
-(setq-default pkg-installed-rust-mode-p nil)
-(setq-default pkg-installed-spacemacs-common-p nil)
-(setq-default pkg-installed-vertico-p nil)
-(setq-default pkg-installed-vterm-p nil)
-(setq-default pkg-installed-yasnippet-p nil)
-(setq-default pkg-installed-go-mode-p nil)
-(setq-default pkg-installed-d-mode-p nil)
-(setq-default pkg-installed-nim-mode-p nil)
-(setq-default pkg-installed-zig-mode-p nil)
-(setq-default pkg-installed-fakepkg-p nil)
-(setq-default pkg-installed-markdown-mode-p nil)
+(setq-default pkg-installed-company-p nil
+              pkg-installed-compat-p nil
+              pkg-installed-dash-p nil
+              pkg-installed-eglot-p nil
+              pkg-installed-eldoc-p nil
+              pkg-installed-erc-p nil
+              pkg-installed-evil-p nil
+              pkg-installed-flycheck-p nil
+              pkg-installed-goto-chg-p nil
+              pkg-installed-magit-p nil
+              pkg-installed-multishell-p nil
+              pkg-installed-neotree-p nil
+              pkg-installed-org-p nil
+              pkg-installed-protobuf-p nil
+              pkg-installed-rust-mode-p nil
+              pkg-installed-spacemacs-common-p nil
+              pkg-installed-vertico-p nil
+              pkg-installed-vterm-p nil
+              pkg-installed-yasnippet-p nil
+              pkg-installed-go-mode-p nil
+              pkg-installed-d-mode-p nil
+              pkg-installed-nim-mode-p nil
+              pkg-installed-zig-mode-p nil
+              pkg-installed-markdown-mode-p nil
+              
+              pkg-installed-fakepkg-p nil)
 
 (let (
       (pkg-setup-dir (concat user-emacs-directory "/init.d/pkg-setup.d/"))
@@ -31,6 +32,7 @@
       (setup-files '("setup-spacemacs-theme.el"
 		     "setup-company.el"
 		     "setup-dash.el"
+                     "setup-eglot.el"
 		     "setup-evil.el"
 		     "setup-flycheck.el"
 		     "setup-goto-chg.el"
