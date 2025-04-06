@@ -117,7 +117,7 @@ mod foo {
 	    assert_eq!(foo.data, "ligma".to_string());
 
 	    let bar = Bar::new(69i32);
-	    assert_eq!(*bar.get_data(), 69);
+	    assert_eq!(bar.get_data(), 69);
 	}
 
 	#[test]
