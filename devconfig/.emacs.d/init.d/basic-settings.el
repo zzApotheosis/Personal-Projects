@@ -9,7 +9,7 @@
 (global-auto-revert-mode t)
 (show-paren-mode t)
 (global-ede-mode t)
-(global-hl-line-mode)
+;;(global-hl-line-mode)
 
 ;; Confirm when quitting emacs
 (setq-default confirm-kill-emacs #'y-or-n-p)

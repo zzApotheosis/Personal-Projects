@@ -1,3 +1,10 @@
+;; Define common hook for text-based buffers
+(add-hook 'text-mode-hook
+	  (lambda ()
+	    ;;(hl-line-mode nil)
+	    )
+	  )
+
 ;; Define hook for c-mode-common
 (add-hook 'c-mode-common-hook
           (lambda ()
@@ -43,6 +50,7 @@
 	    (when pkg-installed-company-p
 	      (company-mode t)
 	      )
+	    (hl-line-mode nil)
             ))
 
 ;; Define hook for dired-mode
