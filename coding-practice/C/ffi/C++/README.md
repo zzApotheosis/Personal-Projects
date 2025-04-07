@@ -4,8 +4,8 @@ C++ - being a sophisticated extension of C - is capable of exporting compatible 
 
 # Building this example
 
-> $ clang++ -shared -fPIC -o libfoo.so foo.cpp  
-> $ clang -o main main.c  
-> $ clang -L. -lfoo -o direct-access direct-access.c  
-> $ ./main  
-> $ LD_LIBRARY_PATH=. ./direct-access
+> $ `clang++ foo.cpp -o libfoo.so -shared -fPIC`  
+> $ `clang main.c -o main`  
+> $ `clang direct-access.c -o direct-access -L. -lfoo -Wl,-rpath='$ORIGIN:$ORIGIN/../lib'`  
+> $ `./main`  
+> $ `./direct-access`
