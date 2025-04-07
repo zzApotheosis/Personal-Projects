@@ -23,4 +23,4 @@ This is an example to build the code so that it requires LD\_LIBRARY\_PATH to ru
 > There should be neither RPATH nor RUNPATH!  
 > $ `./main`  
 > `./main` should fail because the dynamic loader can't find its required libraries to run. We can fix it by specifying LD\_LIBRARY\_PATH.  
-> $ `LD\_LIBRARY\_PATH=. ./main`
+> $ `LD_LIBRARY_PATH=. ./main`
