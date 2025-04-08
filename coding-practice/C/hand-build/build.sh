@@ -18,3 +18,6 @@ llvm-mc foo.s -filetype=obj -o foo.o
 
 # Machine Code -> Linked Executable
 clang main.o foo.o -o main
+
+# Strip unnecessary symbols from final output
+strip -s main
