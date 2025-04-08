@@ -1,0 +1,6 @@
+*
+!/.gitignore
+!/README.md
+!/main.c
+!/foo.c
+!/foo.h
