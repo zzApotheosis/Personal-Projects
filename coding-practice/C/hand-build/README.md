@@ -128,8 +128,6 @@ Expected:
 > `5^2 = 25`  
 > `Hello, Manual Build!`
 
-## Closing Statement
+## Helper Scripts
 
-I hope this was helpful to understand all the abstractions and convenience that technological pioneers have done for us over the past several decades.
-
-For a final challenge, can you figure out how to build `foo.c` into a shared object instead of linking with `main.c`?
+For convenience, I have also included two helper scripts to build this example on Unix-like systems. `build.sh` will produce a single executable `main` along with all the intermediary files. `build-with-so.sh` will produce a shared object `libfoo.so` and executable `main`.

@@ -4,3 +4,5 @@
 !/main.c
 !/foo.c
 !/foo.h
+!/build.sh
+!/build-with-so.sh
