@@ -40,10 +40,15 @@ This converts the original source code into preprocessed code.
 
 ### Compiling
 
-These next steps convert the preprocessed code into Assembly.
+These next steps convert the preprocessed code into LLVM's Intermediary Representation (IR) format.
 
-- `clang -S main.i -o main.s`
-- `clang -S foo.i -o foo.s`
+- `clang -S -emit-llvm main.i -o main.ll`
+- `clang -S -emit-llvm foo.i -o foo.ll`
+
+Next, these steps convert LLVM IR to Assembly.
+
+- `llc main.ll -o main.s`
+- `llc foo.ll -o foo.s`
 
 ### Assembling
 
@@ -54,12 +59,77 @@ The LLVM assembler converts the Assembly source text into machine code.
 
 ### Linking
 
-Finally, the linker maps memory spaces together so the final output is ready to load into memory for execution.
+Finally, the linker maps memory spaces together so the final output is ready to load into memory for execution. This final step is very complicated because it is highly dependent on the system it runs on. It will be much easier to ask the compiler `clang` what it "would" invoke in order to finally link the compiled object files into a ready-to-execute format.
 
-- `ld.lld main.o foo.o -o main`
+- `clang -### main.o foo.o -o main`
+
+Then copy the command it produces and replace the first token of the command with `ld.lld`. This is the LLVM linker. It's possible that Clang would invoke another linker on the system, especially if GCC is also installed. Both approaches would work just fine, but this example is strictly adhering to LLVM technologies.
+
+Invoking the long command should yield a `main` binary executable file.
+
+Or, it may be easier to just invoke `clang` to finish the job for us.
+
+- `clang main.o foo.o -o main`
+
+### Execution
+
+With the final product of the linker, we can now load it into memory for execution.
+
+- `./main`
+
+Expected:
+> `5^2 = 25`  
+> `Hello, Manual Build!`
+
+## GCC Toolchain
+
+This shows how to use the GCC toolchain to preprocess, compile, assemble, and link this example project.
+
+### Preprocessing
+
+This converts the original source code into preprocessed code.
+
+- `gcc -E main.c -o main.i`
+- `gcc -E foo.c -o foo.i`
+
+### Compiling
+
+These next steps convert the preprocessed code directly to Assembly.
+
+- `gcc -S main.i -o main.s`
+- `gcc -S foo.i -o foo.s`
+
+### Assembling
+
+The GNU Assembler converts the Assembly source text into machine code.
+
+- `as main.s -o main.o`
+- `as foo.s -o foo.o`
+
+### Linking
+
+Finally, the linker maps memory spaces together so the final output is ready to load into memory for execution. This final step is very complicated because it is highly dependent on the system it runs on. It will be much easier to ask the compiler `gcc` what it "would" invoke in order to finally link the compiled object files into a ready-to-execute format.
+
+- `gcc -### main.o foo.o -o main`
+
+Then copy the command it produces and replace the first token of the command with `ld`. It's possible it will already be an `ld` command. This is the GNU Linker. It's possible that GCC would invoke another linker on the system. In theory, the linker shouldn't matter too much, so long as the final binary output is able to load into memory and execute instructions. At the time of writing this, my GCC setup showed a `collect2` command of some sort, which also worked, but I found that replacing `collect2` with `ld` worked just fine.
+
+Or, it may be easier to just invoke `gcc` to finish the job for us, since the linker of choice doesn't matter that much, so long as `gcc` invokes one of them.
+
+- `gcc main.o foo.o -o main`
+
+### Execution
+
+With the final product of the linker, we can now load it into memory for execution.
+
+- `./main`
+
+Expected:
+> `5^2 = 25`  
+> `Hello, Manual Build!`
 
 ## Closing Statement
 
 I hope this was helpful to understand all the abstractions and convenience that technological pioneers have done for us over the past several decades.
 
-For a final challenge, can you figure out how to build `foo.c` into a shared object instead of an executable with `main.c`?
+For a final challenge, can you figure out how to build `foo.c` into a shared object instead of linking with `main.c`?
