@@ -1,18 +1,14 @@
 #ifndef TEMPLATE_H
 #define TEMPLATE_H
 
-#include <stdio.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
+  
+  int foo(const int, const int);
 
-#define warn(f, msg)\
-        do {\
-                fprintf(f, "%s:%d %s\n", __FILE__, __LINE__, msg);\
-                fflush(f);\
-        } while (0);
-
-#define die(f, msg)\
-        do {\
-                warn(f, msg);\
-                abort();\
-        } while (0);
+#ifdef __cplusplus
+}
+#endif
 
 #endif
