@@ -1,3 +1,4 @@
+#include <climits>
 #include <grpcpp/grpcpp.h>
 #include <iostream>
 #include <memory>
@@ -9,20 +10,23 @@ using namespace std;
 
 class EchoServiceImpl : public EchoService::Service
 {
-private:
-
-  int n = 0;
-
 public:
-  grpc::Status Echo(grpc::ServerContext * const ctx, const EchoRequest * const req, EchoResponse * const res)
+  grpc::Status echo(grpc::ServerContext * const ctx, const EchoRequest * const req, EchoResponse * const res)
   {
+    if (n == ULONG_LONG_MAX)
+      n = 0; // No buffer overflows allowed
+    
     string msg = req->msg();
     msg += ' ';
     msg += to_string(n++);
     cerr << "Responding to 'echo' request with message: '" << msg << "'\n";
     res->set_msg(std::move(msg));
+    
     return grpc::Status::OK;
   }
+
+private:
+  unsigned long long int n = 0;
 };
 
 int main(int argc, char **argv)

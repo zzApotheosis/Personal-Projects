@@ -22,7 +22,7 @@ int main(int argc, char **argv)
     EchoResponse resp;
     EchoRequest req;
     req.set_msg("Hello");
-    grpc::Status status = stub->Echo(&ctx, req, &resp);
+    grpc::Status status = stub->echo(&ctx, req, &resp);
 
     if (status.ok()) {
       cerr << "Response message: " << resp.msg() << '\n';
