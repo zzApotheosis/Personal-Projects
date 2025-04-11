@@ -1,5 +1,6 @@
 #include <grpcpp/grpcpp.h>
 #include <iostream>
+#include <memory>
 #include <string>
 
 #include "echo.grpc.pb.h"
@@ -8,7 +9,12 @@ using namespace std;
 
 class EchoServiceImpl : public EchoService::Service
 {
-  grpc::Status Echo(grpc::ServerContext *ctx, const EchoRequest *req, EchoResponse *res)
+private:
+
+  int n = 0;
+
+public:
+  grpc::Status Echo(grpc::ServerContext * const ctx, const EchoRequest * const req, EchoResponse * const res)
   {
     string msg = req->msg();
     msg += ' ';
@@ -17,8 +23,6 @@ class EchoServiceImpl : public EchoService::Service
     res->set_msg(std::move(msg));
     return grpc::Status::OK;
   }
-
-  int n = 0;
 };
 
 int main(int argc, char **argv)
@@ -33,7 +37,7 @@ int main(int argc, char **argv)
   grpc::ServerBuilder builder;
   builder.AddListeningPort(argv[1], grpc::InsecureServerCredentials());
   builder.RegisterService(&service);
-  auto server = builder.BuildAndStart();
+  std::unique_ptr<grpc::Server> server = builder.BuildAndStart();
   if (!server) {
     cerr << "failed to create server.\n";
     return 1;

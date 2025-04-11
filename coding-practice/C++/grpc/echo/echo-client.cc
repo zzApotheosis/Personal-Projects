@@ -14,10 +14,10 @@ int main(int argc, char **argv)
       return 1;
     }
 
-  auto channel = grpc::CreateChannel(argv[1], grpc::InsecureChannelCredentials());
-  auto stub = EchoService::NewStub(channel);
+  std::shared_ptr<grpc::Channel> channel = grpc::CreateChannel(argv[1], grpc::InsecureChannelCredentials());
+  std::unique_ptr<EchoService::Stub> stub = EchoService::NewStub(channel);
 
-  while (true) {
+  for (;;) {
     grpc::ClientContext ctx;
     EchoResponse resp;
     EchoRequest req;
