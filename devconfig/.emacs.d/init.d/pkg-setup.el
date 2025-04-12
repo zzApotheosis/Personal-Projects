@@ -23,6 +23,7 @@
               pkg-installed-nim-mode-p nil
               pkg-installed-zig-mode-p nil
               pkg-installed-markdown-mode-p nil
+	      pkg-installed-cmake-mode-p nil
               
               pkg-installed-fakepkg-p nil)
 
@@ -47,7 +48,8 @@
 		     "setup-go-mode.el"
 		     "setup-d-mode.el"
 		     "setup-zig-mode.el"
-		     "setup-markdown-mode.el"))
+		     "setup-markdown-mode.el"
+		     ))
       )
 
   ;; Load user-defined setup files
@@ -64,6 +66,7 @@
     ;; lmao Windows you suuuuuucccccckkkkkk
     (load-file (concat pkg-setup-dir "/setup-vterm.el"))
     )
+  (load-file (concat pkg-setup-dir "/setup-cmake-mode.el"))
   (load-file (concat pkg-setup-dir "/setup-neotree.el"))
   (load-file (concat pkg-setup-dir "/setup-protobuf.el"))
   (load-file (concat pkg-setup-dir "/setup-eldoc-box.el"))
