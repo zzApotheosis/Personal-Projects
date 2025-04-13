@@ -18,4 +18,6 @@ function(create_install_symlinks)
   )
 endfunction()
 
-
+function(set_rpath path)
+  set(CMAKE_INSTALL_RPATH "${path}" CACHE STRING "Global RPATH for installed targets")
+endfunction()
