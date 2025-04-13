@@ -18,6 +18,12 @@ case "${BUILD_TYPE}" in
 	;;
 esac
 
+make_package() {
+    cd "${BUILD_DIR}"
+    cpack
+    cd "${EXEC_DIR}"
+}
+
 # Invoke CMake
 cmake \
     -B "${BUILD_DIR}" \
@@ -28,4 +34,6 @@ cmake \
     &&
     
     cmake --build "${BUILD_DIR}" &&
-    cmake --install "${BUILD_DIR}" ${STRIP}
+    cmake --install "${BUILD_DIR}" ${STRIP} &&
+    make_package
+
