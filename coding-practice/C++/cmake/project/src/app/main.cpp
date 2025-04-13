@@ -12,7 +12,7 @@ int main(const int argc, const char * const * const argv)
     }
 
   Foo<unsigned long long int> foo;
-  for (unsigned long long int i = 0; i < 100; i++)
+  for (unsigned long long int i = 0; i < 5; i++)
     {
       const int j = foo.foo();
       std::cerr << "foo.foo() = " << j << std::endl;
