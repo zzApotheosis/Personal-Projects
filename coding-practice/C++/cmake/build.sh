@@ -3,11 +3,20 @@
 EXEC_PATH=`realpath "${0}"`
 EXEC_DIR=`dirname ${EXEC_PATH}`
 
-BUILD_TYPE="Debug" # Change to "Release" or "MinSizeRel" for smaller executables
+BUILD_TYPE="Release" # Change to "Debug" or "MinSizeRel" or another build type for different compilation configurations
 CMAKE_GENERATOR="Ninja" # Change to "Unix Makefiles" if Ninja unavailable
 PROJECT_DIR="${EXEC_DIR}/project"
 BUILD_DIR="${EXEC_DIR}/.build"
 INSTALL_DIR="${EXEC_DIR}/.install"
+
+case "${BUILD_TYPE}" in
+    "Release" | "MinSizeRel")
+	STRIP="--strip"
+	;;
+    *)
+	STRIP=
+	;;
+esac
 
 # Invoke CMake
 cmake \
@@ -19,4 +28,4 @@ cmake \
     &&
     
     cmake --build "${BUILD_DIR}" &&
-    cmake --install "${BUILD_DIR}"
+    cmake --install "${BUILD_DIR}" ${STRIP}

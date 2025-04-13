@@ -12,5 +12,3 @@ add_subdirectory(cmake)
 
 # Recurse into project directories
 add_subdirectory(src)
-
-# Build top-level targets (dependencies will be automatically built)
