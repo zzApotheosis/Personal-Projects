@@ -29,3 +29,9 @@ set(
   "${CMAKE_CURRENT_LIST_DIR}"
 )
 set_property(TARGET foo PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${foo_INCLUDE_DIRS})
+
+# Define installation path relative to CMAKE_INSTALL_PREFIX
+install(
+  TARGETS foo
+  DESTINATION "lib64"
+)

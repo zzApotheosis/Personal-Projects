@@ -20,3 +20,9 @@ set(
   "${CMAKE_CURRENT_LIST_DIR}"
 )
 set_property(TARGET bar PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${bar_INCLUDE_DIRS})
+
+# Define installation path relative to CMAKE_INSTALL_PREFIX
+install(
+  TARGETS bar
+  DESTINATION "lib64"
+)
