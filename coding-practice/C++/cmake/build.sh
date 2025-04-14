@@ -4,7 +4,7 @@ EXEC_PATH=`realpath "${0}"`
 EXEC_DIR=`dirname ${EXEC_PATH}`
 
 BUILD_TYPE="Release" # Change to "Debug" or "MinSizeRel" or another build type for different compilation configurations
-CMAKE_GENERATOR="Ninja" # Change to "Unix Makefiles" if Ninja unavailable
+CMAKE_GENERATOR="Unix Makefiles"
 PROJECT_DIR="${EXEC_DIR}/project"
 BUILD_DIR="${EXEC_DIR}/.build"
 INSTALL_DIR="${EXEC_DIR}/.install"
