@@ -5,3 +5,5 @@
 !/echo-server.cc
 !/echo-client.cc
 
+!/project/
+!/project/**
