@@ -1,3 +1,10 @@
-interface Echo {
-    string echoString(in string mesg);
+module MessageModule {
+    struct MyMessage {
+        long id;
+        string text;
+    };
+
+    interface Echo {
+        MyMessage echoMessage(in MyMessage msg);
+    };
 };
