@@ -1,0 +1,4 @@
+*
+!/.gitignore
+!/file-io.lisp
+!/file-io.sh
