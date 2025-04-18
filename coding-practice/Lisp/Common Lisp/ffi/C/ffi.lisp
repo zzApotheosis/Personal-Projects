@@ -44,8 +44,58 @@
 	      )
 	)
 
-      (format t "Invoking execvp(), this will start a SBCL REPL. Press Ctrl+D or enter (quit) to exit.~%")
-      (my-execvp)
+      ;; Experimenting with sb-alien types, e.g., void pointers, address referencing, type coercion, etc.
+      ;; The equivalent of C's (void *) type in Common Lisp is (* t).
+      (sb-alien:define-alien-routine "process_void_ptr" sb-alien:void
+	(p (* t)))
+
+      (sb-alien:with-alien ((frick (sb-alien:unsigned 8) 0)
+			    )
+	(format t "~%Passing Lisp-allocated memory to C!~%")
+	(loop with limit = 5 for i from 0 below limit
+	      do
+	      (incf frick)
+	      (process-void-ptr (sb-alien:addr frick))
+	      )
+	(format t "~%")
+	)
+
+      ;; In this example, I wrote some C functions that can change the behavior of invoke()
+      ;; through the select() function.
+      (sb-alien:define-alien-routine "invoke" (sb-alien:integer 32)
+	(a (sb-alien:integer 32))
+	(b (sb-alien:integer 32)))
+      (sb-alien:define-alien-routine ("_select" select) sb-alien:void
+	(f (sb-alien:unsigned 32))
+	)
+      (sb-alien:with-alien ((a (sb-alien:integer 32) 20)
+			    (b (sb-alien:integer 32) 13))
+	
+	(format t "\"Selecting\" functions in C and calling invoke()~%")
+	
+	;; Test add()
+	(select 0)
+	(format t "~a + ~a = ~a~%" a b (invoke a b))
+
+	;; Test sub()
+	(select 1)
+	(format t "~a - ~a = ~a~%" a b (invoke a b))
+
+	;; Test mul()
+	(select 2)
+	(format t "~a * ~a = ~a~%" a b (invoke a b))
+
+	;; Test div()
+	(select 3)
+	(format t "~a / ~a = ~a~%" a b (invoke a b))
+
+	;; Test mod()
+	(select 4)
+	(format t "~a % ~a = ~a~%" a b (invoke a b))
+	
+	(format t "~%")
+	)
+      
       )
 
   (error (e)
@@ -75,3 +125,7 @@
     (format t "Length of ~s: ~d~%" msg (lisp-string-length msg))
     )
   )
+
+
+(format t "Invoking execvp(), this will start a SBCL REPL. Press Ctrl+D or enter (quit) to exit.~%")
+;;(my-execvp)
