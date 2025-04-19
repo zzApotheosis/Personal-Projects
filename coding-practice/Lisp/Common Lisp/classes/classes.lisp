@@ -11,9 +11,9 @@
 	)
     (format t "Point \"~a\" coordinates: X=~A, Y=~A, Z=~A~%"
 	    (object-name p)
-	    (x p)
-	    (y p)
-	    (z p)
+	    (point-x p)
+	    (point-y p)
+	    (point-z p)
 	    )
     )
   )
@@ -26,9 +26,9 @@
 
 ;; Point Class
 (defclass point (object)
-  ((x :initarg :x :accessor x :initform 0 :documentation "The X coordinate value.")
-   (y :initarg :y :accessor y :initform 0 :documentation "The Y coordinate value.")
-   (z :initarg :z :accessor z :initform 0 :documentation "The Z coordinate value.")
+  ((x :initarg :x :accessor point-x :initform 0 :documentation "The X coordinate value.")
+   (y :initarg :y :accessor point-y :initform 0 :documentation "The Y coordinate value.")
+   (z :initarg :z :accessor point-z :initform 0 :documentation "The Z coordinate value.")
    )
   )
 
