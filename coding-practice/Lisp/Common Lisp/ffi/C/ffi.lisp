@@ -128,4 +128,4 @@
 
 
 (format t "Invoking execvp(), this will start a SBCL REPL. Press Ctrl+D or enter (quit) to exit.~%")
-;;(my-execvp)
+(my-execvp)
