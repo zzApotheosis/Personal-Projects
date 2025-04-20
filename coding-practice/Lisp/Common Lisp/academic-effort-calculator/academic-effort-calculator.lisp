@@ -36,7 +36,14 @@
 	   )
 	  )
 
-    (format t "~a~%" (course-required-effort my-course))
+    (let ((*standard-output* *error-output*)
+	  (total (course-total-grade my-course)))
+      (format t "Course progress: ~a/~a~%" (course-current-progress my-course) total)
+      (format t "Current absolute grade: ~a/~a~%" (course-current-grade my-course) total)
+      (format t "Current relative grade: ~a/~a~%" (course-current-relative-grade my-course) total)
+      (format t "Desired grade: ~a/~a~%" (course-desired-grade my-course) total)
+      (format t "Required effort: ~a~%" (course-required-effort my-course))
+      )
     )
   )
 
