@@ -4,7 +4,10 @@ use strict;
 use warnings;
 
 sub load {
-  STDERR->print("Reached " . (caller(0))[3] . "\n");
+    my $msg = "Reached " . (caller(0))[3];
+    STDERR->print("$msg\n");
+    my $callback = $_[1];
+    $callback->($msg);
 }
 
 1;
