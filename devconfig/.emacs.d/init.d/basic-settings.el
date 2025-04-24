@@ -1,7 +1,7 @@
 ;; These are the basic settings
 (unless (display-graphic-p) (xterm-mouse-mode t))
 (setq-default inhibit-startup-screen t)
-(indent-tabs-mode 0)
+(setq-default indent-tabs-mode nil)
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
