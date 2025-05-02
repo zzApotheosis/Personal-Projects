@@ -1,0 +1,19 @@
+FROM fedora:latest
+
+RUN dnf install -y \
+  gcc \
+  glibc-devel \
+  make \
+  meson \
+  ninja-build \
+  && dnf clean all
+
+WORKDIR /build
+
+COPY . .
+
+RUN meson setup builddir
+RUN meson compile -C builddir
+
+RUN mkdir -p /output
+RUN cp -rf builddir/my_c_project /output
