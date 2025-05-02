@@ -1,0 +1,10 @@
+#FROM almalinux:8
+FROM fedora:latest
+
+RUN dnf install -y glibc
+
+WORKDIR /app
+
+COPY --from=localhost/my_c_project_builder /output/my_c_project /app/my_c_project
+
+CMD ["/app/my_c_project"]

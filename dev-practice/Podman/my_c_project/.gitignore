@@ -1,0 +1,9 @@
+*
+!/.gitignore
+!/README.md
+!/Dockerfile.builder
+!/Dockerfile.runtime
+!/meson.build
+
+!/src/
+!/src/**
