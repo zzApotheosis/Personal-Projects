@@ -16,4 +16,4 @@ RUN meson setup builddir
 RUN meson compile -C builddir
 
 RUN mkdir -p /output
-RUN cp -rf builddir/my_c_project /output
+RUN cp -rf builddir/my-c-project /output
