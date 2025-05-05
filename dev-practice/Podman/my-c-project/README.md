@@ -1,7 +1,7 @@
 # Meson and Podman Example
 
 > $ podman system reset  
-> $ podman -t my\_c\_project\_builder -f Dockerfile.builder .  
-> $ podman -t my\_c\_project\_runtime -f Dockerfile.runtime .  
+> $ podman -t my-c-project-builder -f builder.docker .  
+> $ podman -t my-c-project-runtime -f runtime.docker .  
 > $ podman image list --all  
-> $ podman run --rm localhost/my\_c\_project\_runtime
+> $ podman run --rm localhost/my-c-project-runtime
