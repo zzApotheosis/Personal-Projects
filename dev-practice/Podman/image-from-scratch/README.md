@@ -3,7 +3,7 @@
 Note that the rootfs directory only exists as a representation of a real root filesystem. This example will only work if rootfs is populated with the appropriate FHS-compliant directories and
 files. In my prototyping, I set up a real RHEL 7 virtual machine and used the following commands to synchronize all the necessary files and directories to rootfs.
 
-> $ ssh root@<vm-address> 'tar --create --directory / etc root bin sbin lib lib64 opt usr var tmp' | dd status=progress | tar --extract --directory rootfs && mkdir -pv rootfs/home
+> $ ssh root@[vm-address] 'tar --create --directory / etc root bin sbin lib lib64 opt usr var tmp' | dd status=progress | tar --extract --directory rootfs && mkdir -pv rootfs/home
 
 After creating a copy of a good working filesystem, we can invoke Podman to create our custom base image.
 
