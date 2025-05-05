@@ -1,0 +1,14 @@
+FROM localhost/rhel7-custom-base
+
+LABEL maintainer="liggamuhballz@gmail.com"
+
+RUN cmake --version
+
+COPY project /app
+
+WORKDIR /app/.build
+RUN cmake ../src
+RUN cmake --build .
+
+# The default entrypoint is /bin/sh or some shell equivalent
+#ENTRYPOINT ["/bin/sh"]

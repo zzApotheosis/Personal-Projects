@@ -1,0 +1,42 @@
+#FROM centos:centos7
+FROM scratch
+
+LABEL maintainer="zzApotheosis@gmail.com"
+
+#RUN yum -y update
+#RUN yum -y install epel-release
+#RUN yum -y install \
+#      gcc \
+#      make \
+#      wget \
+#      curl \
+#      git \
+#      vim \
+#      openssl-devel \
+#      bzip2-devel \
+#      readline-devel \
+#      zlib-devel \
+#      meson \
+#      cmake \
+#      ninja-build
+#RUN yum clean all
+
+#WORKDIR /app
+
+COPY rootfs /
+#COPY project /app
+#
+#WORKDIR /app/.build
+#RUN cmake -S ../src
+#RUN cmake --build .
+#
+#RUN mkdir -pv /app/bin
+#RUN cp -rf my-app /app/bin/my-app
+#
+#RUN ln -sf /app/bin/my-app /usr/bin/my-app
+
+#ENTRYPOINT ["/bin/sh", "-c", "echo 'Fuck'"]
+ENTRYPOINT ["/bin/bash"]
+#CMD ["/app/bin/my-app"]
+
+

@@ -1,0 +1,14 @@
+FROM localhost/rhel7-custom-base
+
+LABEL maintainer="liggamuhballz@gmail.com"
+
+WORKDIR /app
+
+COPY --from=localhost/project-builder /app/.build/my-app /app/bin/my-app
+
+RUN chmod 755 /app /app/bin /app/bin/my-app
+RUN ln -sf /app/bin/my-app /usr/bin/my-app
+
+ENTRYPOINT ["my-app"]
+
+

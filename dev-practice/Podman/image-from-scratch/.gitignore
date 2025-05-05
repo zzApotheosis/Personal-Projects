@@ -1,0 +1,12 @@
+*
+
+!/.gitignore
+!/project-builder.docker
+!/project-runtime.docker
+!/README.md
+!/rhel7-custom-base.docker
+
+!/project/
+!/project/**
+!/rootfs/
+!/rootfs/**
