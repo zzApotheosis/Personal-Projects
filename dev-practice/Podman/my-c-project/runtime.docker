@@ -5,6 +5,6 @@ RUN dnf install -y glibc
 
 WORKDIR /app
 
-COPY --from=localhost/my_c_project_builder /output/my_c_project /app/my-c-project
+COPY --from=localhost/my-c-project-builder /output/my-c-project /app/my-c-project
 
-CMD ["/app/my_c_project"]
+CMD ["/app/my-c-project"]
