@@ -5,14 +5,14 @@ files. In my prototyping, I set up a real RHEL 7 virtual machine and used the fo
 
 > $ ssh root@[vm-address] 'tar --create --directory / etc root bin sbin lib lib64 opt usr var tmp' | dd status=progress | tar --extract --directory rootfs && mkdir -pv rootfs/home
 
-After creating a copy of a good working filesystem, we can invoke Podman to create our custom base image.
+After creating a copy of a good working filesystem, we can invoke Podman to create our custom base image. Alternatively, we can use Buildah directly, since Podman uses Buildah underneath to build the OCI-compliant image.
 
-> $ podman build -t rhel7-custom-base -f rhel7-custom-base.docker
+> $ [podman/buildah] build -t rhel7-custom-base -f rhel7-custom-base.docker
 
 Then the rest of the project build is straightforward.
 
-> $ podman build -t project-builder -f project-builder.docker  
-> $ podman build -t project-runtime -f project-runtime.docker  
+> $ [podman/buildah] build -t project-builder -f project-builder.docker  
+> $ [podman/buildah] build -t project-runtime -f project-runtime.docker  
 > $ podman run --rm localhost/project-runtime:latest one two three
 
 ## A note about ENTRYPOINT and CMD
