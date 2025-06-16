@@ -1,4 +1,5 @@
 # ANSI Common Lisp
+
 Lately, I have been growing more interested in learning why the Lisp family of languages has been widely regarded as some of the most powerful languages ever invented. What
 originally got me interested in Lisp languages in the first place was Emacs Lisp. I have heard of countless stories of people swearing that absolutely everything is possible
 with Emacs because it is essentially just a small program written in C that supports an entire environment above it in Lisp, namely Emacs Lisp. It can do absolutely anything.
@@ -8,13 +9,20 @@ or why all the deep wizards of the Church of Emacs swear it is the greatest thin
 means to learn and understand more about Lisp so that I may one day reach that same runner's high that so many others have claimed to reach.
 
 # Resources
-Common Lisp, https://lisp-lang.org/ \
-Practical Common Lisp, https://gigamonkeys.com/book/ \
-ANSI Common Lisp, https://paulgraham.com/acl.html \
-On Lisp, https://paulgraham.com/onlisp.html \
-Let Over Lambda, https://letoverlambda.com/ \
-SBCL Manual, https://www.sbcl.org/manual/ \
-CLiki, https://www.cliki.net/
+
+[Common Lisp](https://lisp-lang.org/)  
+[Practical Common Lisp](https://gigamonkeys.com/book/)  
+[ANSI Common Lisp](https://paulgraham.com/acl.html)  
+[On Lisp](https://paulgraham.com/onlisp.html)  
+[Let Over Lambda](https://letoverlambda.com/)  
+[SBCL Manual](https://www.sbcl.org/manual/)  
+[CLiki](https://www.cliki.net/)
+
+# Reference
+
+[Common Lisp HyperSpec](https://www.lispworks.com/documentation/HyperSpec/Front/index.htm)  
+[Lisp Docs](https://lisp-docs.github.io/)
 
 # Tips
-(describe #'function-name)
+
+`(describe #'function-name)`
