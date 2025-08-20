@@ -5,25 +5,69 @@
 #include <string.h> // For strerror()
 #include <errno.h>  // For errno
 
-int main(void)
+static FILE * stream = NULL;
+
+void show_endianness(int * const exit_code)
 {
-  FILE * const stream = stderr;
-  const unsigned char * index = NULL;
+  const unsigned int x = 0x00000001; // 1 is a good, simple number to determine endianness
+  const unsigned char * const index = (const unsigned char * const) &x;
+
+  const unsigned char first_byte = index[0];
+  const unsigned char last_byte = index[sizeof(const unsigned int) - 1];
+  const unsigned char least_significant_byte = (x & 0xFF);
+
+  if (first_byte == last_byte)
+    {
+      fprintf(stream, "Cannot determine endianness from sample data (%u). First byte and last byte are equivalent\n", x);
+      if (exit_code != NULL)
+        *exit_code |= EXIT_FAILURE;
+      return;
+    }
+  
+  if (least_significant_byte == first_byte)
+    {
+      fprintf(stream, "This system is little-endian!\n");
+    }
+  else if (least_significant_byte == last_byte)
+    {
+      fprintf(stream, "This system is big-endian!\n");
+    }
+  else
+    {      
+      fprintf(stream, "Cannot determine endianness\n");
+      if (exit_code != NULL)
+        *exit_code |= EXIT_FAILURE;
+    }
+}
+
+void show_epoch_time(int * const exit_code)
+{
   time_t t = 0;
-  time(&t);
+  
   if (time(&t) == ((time_t) -1))
     {
       fprintf(stream, "%s\n", strerror(errno));
-      return EXIT_FAILURE;
+      if (exit_code != NULL)
+        *exit_code |= EXIT_FAILURE;
+      return;
     }
   
-  index = (const unsigned char *) &t;
+  const unsigned char * index = (const unsigned char *) &t;
 
   fprintf(stream, "Time in seconds since the Epoch, represented as [%lu] bytes:\n", sizeof(time_t));
   for (unsigned int i = 0; i < sizeof(time_t); i++)
     {
-      fprintf(stderr, "[%02x]", index[i]);
+      fprintf(stream, "[%02x]", index[i]);
       if ((i + 1) % 8 == 0)
-        fprintf(stderr, "\n");
+        fprintf(stream, "\n");
     }
+}
+
+int main(void)
+{
+  int exit_code = EXIT_SUCCESS;
+  stream = stderr;
+  show_endianness(&exit_code);
+  show_epoch_time(&exit_code);
+  return exit_code;
 }
