@@ -67,7 +67,7 @@ void show_epoch_time(int * const exit_code)
       fprintf(stream, "[%p] = %08b", (const void * const) &index[i], index[i]);
       if (i == year_2038_index)
         {
-          fprintf(stream, " <-- When this byte is > 10000000, the world has experienced the 2038 problem. See https://en.wikipedia.org/wiki/Year_2038_problem");
+          fprintf(stream, " <-- When this byte is >= 10000000, the world has experienced the 2038 problem. See https://en.wikipedia.org/wiki/Year_2038_problem");
         }
       fprintf(stream, "\n");
     }
