@@ -49,7 +49,7 @@ void show_endianness(int * const exit_code)
 void show_epoch_time(int * const exit_code)
 {
   time_t t = 0;
-  const unsigned long int year_2038_index = (endianness == LITTLE) ? 4 : 3; /* The specific byte that represents the year 2038 problem will be in a different index depending on little/big endianness */
+  const unsigned long int year_2038_index = (endianness == LITTLE) ? 3 : 4; /* The specific byte that represents the year 2038 problem will be in a different index depending on little/big endianness */
   
   if (time(&t) == ((time_t) -1))
     {
@@ -64,10 +64,10 @@ void show_epoch_time(int * const exit_code)
   fprintf(stream, "Time in seconds since the Epoch, represented as [%lu] bytes:\n", sizeof(time_t));
   for (unsigned int i = 0; i < sizeof(time_t); i++)
     {
-      fprintf(stream, "[%p] = %02x", (const void * const) &index[i], index[i]);
+      fprintf(stream, "[%p] = %08b", (const void * const) &index[i], index[i]);
       if (i == year_2038_index)
         {
-          fprintf(stream, " <-- When this byte is > 0, the world has experienced the 2038 problem. See https://en.wikipedia.org/wiki/Year_2038_problem");
+          fprintf(stream, " <-- When this byte is > 10000000, the world has experienced the 2038 problem. See https://en.wikipedia.org/wiki/Year_2038_problem");
         }
       fprintf(stream, "\n");
     }
