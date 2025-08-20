@@ -5,7 +5,11 @@
 #include <string.h> // For strerror()
 #include <errno.h>  // For errno
 
+#define LITTLE 0
+#define BIG 1
+
 static FILE * stream = NULL;
+static unsigned int endianness = 0;
 
 void show_endianness(int * const exit_code)
 {
@@ -27,10 +31,12 @@ void show_endianness(int * const exit_code)
   if (least_significant_byte == first_byte)
     {
       fprintf(stream, "This system is little-endian!\n");
+      endianness = LITTLE;
     }
   else if (least_significant_byte == last_byte)
     {
       fprintf(stream, "This system is big-endian!\n");
+      endianness = BIG;
     }
   else
     {      
@@ -43,6 +49,7 @@ void show_endianness(int * const exit_code)
 void show_epoch_time(int * const exit_code)
 {
   time_t t = 0;
+  const unsigned long int year_2038_index = (endianness == LITTLE) ? 4 : 3; /* The specific byte that represents the year 2038 problem will be in a different index depending on little/big endianness */
   
   if (time(&t) == ((time_t) -1))
     {
@@ -57,9 +64,12 @@ void show_epoch_time(int * const exit_code)
   fprintf(stream, "Time in seconds since the Epoch, represented as [%lu] bytes:\n", sizeof(time_t));
   for (unsigned int i = 0; i < sizeof(time_t); i++)
     {
-      fprintf(stream, "[%02x]", index[i]);
-      if ((i + 1) % 8 == 0)
-        fprintf(stream, "\n");
+      fprintf(stream, "[%p] = %02x", (const void * const) &index[i], index[i]);
+      if (i == year_2038_index)
+        {
+          fprintf(stream, " <-- When this byte is > 0, the world has experienced the 2038 problem. See https://en.wikipedia.org/wiki/Year_2038_problem");
+        }
+      fprintf(stream, "\n");
     }
 }
 
