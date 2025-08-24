@@ -4,28 +4,43 @@ I always forget the basics for GDB usage. I'm terrible like that. So instead of 
 
 ## Invoking GDB
 
-`gdb <executable file> <core file>`
-
-In this context, <executable file> is the original executable binary file that produced the <core file>.
+For analyzing memory dumps: `gdb <executable file> <core file>`
+For currently running processes: `gdb -p <pid>`
+To run the program under GDB control: `gdb <executable file>`
 
 ## Showing the current backtrace
 
+`backtrace`
+`bt`
 `bt full`
 
 ## Showing available threads
 
 `info threads`
 `i threads`
+`i th`
 
 ## Selecting a different thread
 
 `thread <n>`
+`t <n>`
 
 ## Showing the code around the current frame
 
 `list`
+`list .`
 `list <function name>`
 
-To reset the 'list' cursor: `list .`
+## Moving up and down the call stack
+
+`frame`
+`f`
+`f <n>`
+
+## Showing current variables
+
+For variables scoped to the current frame: `info locals`
+For all known variables (kind of useless): `info variables`
+For all known variables matching a regular expression pattern: `i va <regex>`
 
 
