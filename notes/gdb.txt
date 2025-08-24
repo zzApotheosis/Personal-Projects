@@ -1,0 +1,31 @@
+# GNU Debugger Cheat Sheet
+
+I always forget the basics for GDB usage. I'm terrible like that. So instead of Googling how to analyze memory dumps every time I write terrible code, I created this Markdown cheat sheet for GDB so I can reference it every time I write terrible code in the future.
+
+## Invoking GDB
+
+`gdb <executable file> <core file>`
+
+In this context, <executable file> is the original executable binary file that produced the <core file>.
+
+## Showing the current backtrace
+
+`bt full`
+
+## Showing available threads
+
+`info threads`
+`i threads`
+
+## Selecting a different thread
+
+`thread <n>`
+
+## Showing the code around the current frame
+
+`list`
+`list <function name>`
+
+To reset the 'list' cursor: `list .`
+
+
