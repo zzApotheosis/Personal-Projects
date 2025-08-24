@@ -1,7 +1,9 @@
 ;; Define common hook for text-based buffers
 (add-hook 'text-mode-hook
           (lambda ()
-            (unless (display-graphic-p) (hl-line-mode nil))
+            (when (display-graphic-p)
+              (hl-line-mode nil)
+              )
             )
           )
 
@@ -50,7 +52,9 @@
             (when pkg-installed-company-p
               (company-mode t)
               )
-            (unless (display-graphic-p) (hl-line-mode nil))
+            (when (display-graphic-p)
+              (hl-line-mode nil)
+              )
             ))
 
 ;; Define hook for dired-mode
