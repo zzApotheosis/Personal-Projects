@@ -63,16 +63,18 @@ sub parse_args {
         Main::print_help();
         exit 1;
     }
-
-    my $arg0 = shift(@ARGV);
-    if ($arg0 eq 'split') {
-        $mode = MODE_SPLIT;
-    } elsif ($arg0 eq 'join') {
-        $mode = MODE_JOIN;
-    } else {
-        STDERR->write("Unknown mode '$arg0'.\n");
-        Main::print_help();
-        exit 1;
+    
+    {
+        my $arg0 = shift(@ARGV);
+        if ($arg0 eq 'split') {
+            $mode = MODE_SPLIT;
+        } elsif ($arg0 eq 'join') {
+            $mode = MODE_JOIN;
+        } else {
+            STDERR->write("Unknown mode '$arg0'.\n");
+            Main::print_help();
+            exit 1;
+        }
     }
     
     if (scalar(@in) == 0 && (scalar(@ARGV) == 0 && $mode != MODE_JOIN)) {
@@ -87,7 +89,7 @@ sub parse_args {
         exit 1;
     }
 
-    if (scalar(@out) == 0) {
+    if (scalar(@out) == 0 && $count == 0) {
         STDERR->write("No output files specified.\n");
         Main::print_help();
         exit 1;
