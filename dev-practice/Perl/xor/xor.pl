@@ -113,7 +113,7 @@ sub parse_args {
     }
 
     if ($mode == MODE_SPLIT) {
-        my $digit_length = length($count);
+        my $digit_length = length($count - 1);
         for (my $i = 0; $i < $count; $i++) {
             push(@outputs, {path => sprintf("%s.%0${digit_length}d", $inputs[0]->{path}, $i), data => undef});
         }
