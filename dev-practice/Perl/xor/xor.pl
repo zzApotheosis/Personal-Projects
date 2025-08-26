@@ -44,11 +44,13 @@ sub parse_args {
     my $help = 0;
     my @in = ();
     my @out = ();
+    my $count = 0;
     
     GetOptions(
         'h|help' => \$help,
         'i|input=s' => \@in,
         'o|output=s' => \@out,
+        'c|count=i' => \$count,
         );
 
     if ($help) {
@@ -62,18 +64,25 @@ sub parse_args {
         exit 1;
     }
 
-    if ($ARGV[0] eq 'split') {
+    my $arg0 = shift(@ARGV);
+    if ($arg0 eq 'split') {
         $mode = MODE_SPLIT;
-    } elsif ($ARGV[0] eq 'join') {
+    } elsif ($arg0 eq 'join') {
         $mode = MODE_JOIN;
     } else {
-        STDERR->write("Unknown mode '$ARGV[0]'.\n");
+        STDERR->write("Unknown mode '$arg0'.\n");
         Main::print_help();
         exit 1;
     }
     
-    if (scalar(@in) == 0) {
+    if (scalar(@in) == 0 && (scalar(@ARGV) == 0 && $mode != MODE_JOIN)) {
         STDERR->write("No input files specified.\n");
+        Main::print_help();
+        exit 1;
+    }
+
+    if (scalar(@out) > 0 && $count > 0) {
+        STDERR->write("Cannot specify -o and -c together.\n");
         Main::print_help();
         exit 1;
     }
@@ -84,12 +93,34 @@ sub parse_args {
         exit 1;
     }
 
+    my $extra_paths;
+    $extra_paths = \@outputs if $mode == MODE_SPLIT;
+    $extra_paths = \@inputs if $mode == MODE_JOIN;
+    $extra_paths = \@inputs if $mode == MODE_SPLIT && $count > 0;
+
+    while (scalar(@ARGV) > 0) {
+        push(@$extra_paths, {path => shift(@ARGV), data => undef});
+    }
+
     foreach (@in) {
         push(@inputs, {path => $_, data => undef});
     }
 
     foreach (@out) {
         push(@outputs, {path => $_, data => undef});
+    }
+
+    if ($mode == MODE_SPLIT) {
+        my $digit_length = length($count);
+        for (my $i = 0; $i < $count; $i++) {
+            push(@outputs, {path => sprintf("%s.%0${digit_length}d", $inputs[0]->{path}, $i), data => undef});
+        }
+    }
+
+    # Final check for inputs and outputs
+    if (scalar(@inputs) == 0 || scalar(@outputs) == 0) {
+        Main::print_help();
+        exit 1;
     }
 }
 
@@ -100,6 +131,8 @@ sub print_help {
     STDERR->write("    -h, --help              Show this help prompt and exit.\n");
     STDERR->write("    -i, --input <file>      Specify one or more input files.\n");
     STDERR->write("    -o, --output <file>     Specify one or more output files.\n");
+    STDERR->write("    -c, --count <n>         Used in split operations only, without specifying --output.\n");
+    STDERR->write("                            Splits the input given by --input into <n> outputs.\n");
 }
 
 sub read {
