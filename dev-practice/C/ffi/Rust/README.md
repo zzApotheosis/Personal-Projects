@@ -6,7 +6,8 @@ Rust is capable of exporting functions with a C-style ABI. This example shows ho
 
 ## Static Linking
 > $ `rustc --crate-type staticlib foo.rs`  
-> $ `clang -omain main.c libfoo.a`  
+> $ `clang main.c libfoo.a -o main`  
+> This would also work: `clang main.c -L. -lfoo -o main`  
 > $ `./main`
 
 ## Dynamic Linking
