@@ -12,5 +12,5 @@ Rust is capable of exporting functions with a C-style ABI. This example shows ho
 
 ## Dynamic Linking
 > $ `rustc --crate-type dylib foo.rs`  
-> $ `clang main.c -L. -lfoo -rpath '$ORIGIN' -o main`  
+> $ `clang main.c -L. -lfoo -Wl,-rpath,'$ORIGIN' -o main`  
 > $ `./main`
