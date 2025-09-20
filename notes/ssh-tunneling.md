@@ -12,8 +12,8 @@ In this command, the `listening port` is the port on the local machine to listen
 
 > `$ ssh <user>@<host> -L <listening port>:<target IP>:<target port>`
 
-In this command, the `listening port` is the port on the remote machine to listen on. The `target IP` and `target port` are the IP address and port to forward traffic to from the local machine's perspective.
-
 ## Reverse tunneling
+
+In this command, the `listening port` is the port on the remote machine to listen on. The `target IP` and `target port` are the IP address and port to forward traffic to from the local machine's perspective.
 
 > `$ ssh <user>@<host> -R <listening port>:<target IP>:<target port>`
