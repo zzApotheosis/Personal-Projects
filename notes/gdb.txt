@@ -43,4 +43,33 @@ For variables scoped to the current frame: `info locals`
 For all known variables (kind of useless): `info variables`
 For all known variables matching a regular expression pattern: `i va <regex>`
 
+## Setting Breakpoints
+
+`breakpoint <point>`
+
+## Listing Breakpoints
+
+`info breakpoints`
+
+## Deleting Breakpoints
+
+`delete <point>`
+
+## Step Into
+
+Use this to "step into" functions. This will iterate the instruction pointer and descend into function calls as well.
+
+`step`
+
+## Next
+
+Use this to run your code line by line without descending into function calls.
+
+`next`
+
+## Super useful
+
+Finally... the secret sauce.
+
+`tui enable`
 
