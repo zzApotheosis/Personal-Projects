@@ -20,6 +20,7 @@ means to learn and understand more about Lisp so that I may one day reach that s
 
 # Reference
 
+[Common Lisp the Language](https://www.cs.cmu.edu/Groups/AI/html/cltl/cltl2.html)
 [Common Lisp HyperSpec](https://www.lispworks.com/documentation/HyperSpec/Front/index.htm)  
 [Lisp Docs](https://lisp-docs.github.io/)
 
