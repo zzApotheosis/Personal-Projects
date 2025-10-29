@@ -4,8 +4,6 @@
 
 #include "foo.h"
 
-#define PROJECT_NAME "meson"
-
 int main(int argc, char **argv) {
     if (argc != 1) {
         printf("%s takes no arguments.\n", argv[0]);

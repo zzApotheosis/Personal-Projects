@@ -1,10 +1,10 @@
 # See https://mesonbuild.com/index.html
 
-project('meson', 'c',
+project('mesonexample', 'c',
   version : '0.1',
   default_options : ['warning_level=3']
 )
 
 lib = library('foo', ['foo.c'], version : '0.0.1', soversion : '0')
 
-executable('meson_example', ['main.c'], link_with : lib)
+exe = executable(meson.project_name(), ['main.c'], link_with : lib, c_args : ['-DPROJECT_NAME="' + meson.project_name() + '"'])
