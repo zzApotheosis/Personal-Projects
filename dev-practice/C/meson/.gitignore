@@ -1,2 +1,8 @@
-# Ignore build directory
-build
+# Ignore all
+*
+
+# Except this
+!/.gitignore
+!/build.sh
+!/src/
+!/src/**
