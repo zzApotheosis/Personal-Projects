@@ -121,7 +121,8 @@ if [ -z "$(alias l       > /dev/null 2>&1)" ]; then alias l="ls -lah"; fi
 if [ -z "$(alias grep    > /dev/null 2>&1)" ]; then alias grep="grep --color=auto"; fi
 if [ -z "$(alias edit    > /dev/null 2>&1)" ]; then alias edit="${EDITOR}"; fi
 if [ -z "$(alias e       > /dev/null 2>&1)" ]; then alias e="edit"; fi
-if [ -z "$(alias ec      > /dev/null 2>&1)" ]; then alias ec="emacsclient"; fi
+if [ -z "$(alias ec      > /dev/null 2>&1)" ]; then alias ec="emacsclient -c"; fi
+if [ -z "$(alias ecnw    > /dev/null 2>&1)" ]; then alias ecnw="emacsclient -c -nw"; fi
 
 # Utility aliases
 if [ -z "$(alias kdequit > /dev/null 2>&1)" ]; then alias kdequit="/usr/lib64/qt6/bin/qdbus org.kde.ksmserver /KSMServer logout 1 0 1"; fi
