@@ -219,7 +219,8 @@ int client(const char * const server_addr, const char * const port_str, const ch
    * verification fails. Virtually all clients should do this unless you
    * really know what you are doing.
    */
-  SSL_CTX_set_verify(ctx, SSL_VERIFY_PEER, NULL);
+  //SSL_CTX_set_verify(ctx, SSL_VERIFY_PEER, NULL);
+  SSL_CTX_set_verify(ctx, SSL_VERIFY_NONE, NULL);
 
   /* Use the default trusted certificate store */
   //if (!SSL_CTX_set_default_verify_paths(ctx))
