@@ -1,0 +1,10 @@
+# Ignore all
+*
+
+# Except this
+!/.gitignore
+!/build.sh
+!/src/
+!/src/**
+!/openssl.cfg
+!/cert-gen.sh
