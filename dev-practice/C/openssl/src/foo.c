@@ -362,8 +362,6 @@ int client(const char * const server_addr, const char * const port_str)
   size_t written = 0;
   char buf[BUFSIZE];
   memset(buf, 0, BUFSIZE);
-  snprintf(buf, BUFSIZE, "Hello, OpenSSL example!\n");
-  const size_t expected_response_bytes = strnlen(buf, BUFSIZE);
   //const char * request_start = "GET / HTTP/1.0\r\nConnection: close\r\nHost: ";
   //const char * request_end = "\r\n\r\n";
   
@@ -383,34 +381,28 @@ int client(const char * const server_addr, const char * const port_str)
   //    fprintf(stderr, "Failed to write end of HTTP request\n");
   //    goto end;
   //  }
-  if (!SSL_write_ex(ssl, buf, strnlen(buf, BUFSIZE), &written))
-    {
-      fprintf(stderr, "Failed to write to SSL socket\n");
-      goto end;
-    }
-  memset(buf, 0, BUFSIZE);
 
-  size_t readbytes = 0, total_response_bytes = 0;
+  size_t readbytes = 0;
   
   /*
    * Get up to sizeof(buf) bytes of the response. We keep reading until the
    * server closes the connection.
    */
-  for (;SSL_read_ex(ssl, buf, sizeof(buf), &readbytes);) {
-    /*
-     * OpenSSL does not guarantee that the returned data is a string or
-     * that it is NUL terminated so we use fwrite() to write the exact
-     * number of bytes that we read. The data could be non-printable or
-     * have NUL characters in the middle of it. For this simple example
-     * we're going to print it to stdout anyway.
-     */
-    fwrite(buf, 1, readbytes, stdout);
-    total_response_bytes += readbytes;
-    if (total_response_bytes >= expected_response_bytes)
-      break;
-  }
-  /* In case the response didn't finish with a newline we add one now */
-  fprintf(stdout, "\n");
+  //for (;SSL_read_ex(ssl, buf, sizeof(buf), &readbytes);) {
+  //  /*
+  //   * OpenSSL does not guarantee that the returned data is a string or
+  //   * that it is NUL terminated so we use fwrite() to write the exact
+  //   * number of bytes that we read. The data could be non-printable or
+  //   * have NUL characters in the middle of it. For this simple example
+  //   * we're going to print it to stdout anyway.
+  //   */
+  //  fwrite(buf, 1, readbytes, stdout);
+  //  total_response_bytes += readbytes;
+  //  if (total_response_bytes >= expected_response_bytes)
+  //    break;
+  //}
+  ///* In case the response didn't finish with a newline we add one now */
+  //fprintf(stdout, "\n");
 
   /* Let's do a user input driven echo loop */
   fprintf(stderr, "Enter Ctrl+D to quit.\n");
@@ -511,13 +503,8 @@ int client(const char * const server_addr, const char * const port_str)
   return result;
 }
 
-void do_server(int argc, char ** argv)
+void do_server(int argc, char * argv[])
 {
-  fprintf(stderr, "This is the server!\n");
-  for (int i = 0; i < argc; i++)
-    fprintf(stderr, "%s\n", argv[i]);
-  fprintf(stderr, "\n");
-
   if (argc < 4)
     {
       fprintf(stderr, "Usage: %s <port> <certificate chain> <private key>\n", argv[0]);
@@ -527,12 +514,8 @@ void do_server(int argc, char ** argv)
   server(argv[1], argv[2], argv[3]);
 }
 
-void do_client(int argc, char ** argv)
+void do_client(int argc, char * argv[])
 {
-  fprintf(stderr, "This is the client!\n");
-  for (int i = 0; i < argc; i++)
-    fprintf(stderr, "%s\n", argv[i]);
-
   if (argc < 3)
     {
       fprintf(stderr, "Usage: %s <server address> <port>\n", argv[0]);
