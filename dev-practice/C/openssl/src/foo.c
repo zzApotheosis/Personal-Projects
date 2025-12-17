@@ -163,7 +163,7 @@ int server(const char * port_str,
       fprintf(stderr, "New client connected.\n");
 
       SSL * const ssl = SSL_new(ctx);
-      if (ctx == NULL)
+      if (ssl == NULL)
         {
           fprintf(stderr, "SSL_new failed\n");
           BIO_free(client);
