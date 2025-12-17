@@ -202,7 +202,7 @@ int server(const char * port_str,
   return 0;
 }
 
-int client(const char * const server_addr, const char * const port_str, const char * const cert_pem)
+int client(const char * const server_addr, const char * const port_str)
 {
   int result = EXIT_SUCCESS;
   
@@ -227,18 +227,18 @@ int client(const char * const server_addr, const char * const port_str, const ch
   SSL_CTX_set_verify(ctx, SSL_VERIFY_NONE, NULL);
 
   /* Use the default trusted certificate store */
-  //if (!SSL_CTX_set_default_verify_paths(ctx))
-  //  {
-  //    fprintf(stderr, "Failed to set the default trusted certificate store\n");
-  //    goto end;
-  //  } 
+  if (!SSL_CTX_set_default_verify_paths(ctx))
+    {
+      fprintf(stderr, "Failed to set the default trusted certificate store\n");
+      goto end;
+    } 
 
   /* Use a custom trusted certificate store */
-  if (SSL_CTX_load_verify_locations(ctx, cert_pem, NULL) <= 0)
-    {
-      fprintf(stderr, "SSL_CTX_load_verify_locations failed\n");
-      goto end;
-    }
+  //if (SSL_CTX_load_verify_locations(ctx, cert_pem, NULL) <= 0)
+  //  {
+  //    fprintf(stderr, "SSL_CTX_load_verify_locations failed\n");
+  //    goto end;
+  //  }
 
   /*
    * TLSv1.1 or earlier are deprecated by IETF and are generally to be
@@ -326,11 +326,11 @@ int client(const char * const server_addr, const char * const port_str, const ch
    * Tell the server during the handshake which hostname we are attempting
    * to connect to in case the server supports multiple hosts.
    */
-  if (!SSL_set_tlsext_host_name(ssl, server_addr))
-    {
-      fprintf(stderr, "Failed to set the SNI hostname\n");
-      goto end;
-    }
+  //if (!SSL_set_tlsext_host_name(ssl, server_addr))
+  //  {
+  //    fprintf(stderr, "Failed to set the SNI hostname\n");
+  //    goto end;
+  //  }
 
   /*
    * Ensure we check during certificate verification that the server has
@@ -338,11 +338,11 @@ int client(const char * const server_addr, const char * const port_str, const ch
    * Virtually all clients should do this unless you really know what you
    * are doing.
    */
-  if (!SSL_set1_host(ssl, server_addr))
-    {
-      fprintf(stderr, "Failed to set the certificate verification hostname");
-      goto end;
-    }
+  //if (!SSL_set1_host(ssl, server_addr))
+  //  {
+  //    fprintf(stderr, "Failed to set the certificate verification hostname");
+  //    goto end;
+  //  }
 
   /* Do the handshake with the server */
   if (SSL_connect(ssl) < 1)
@@ -412,7 +412,7 @@ int client(const char * const server_addr, const char * const port_str, const ch
   /* In case the response didn't finish with a newline we add one now */
   fprintf(stdout, "\n");
 
-  /* Let's do a user-input driven echo loop */
+  /* Let's do a user input driven echo loop */
   fprintf(stderr, "Enter Ctrl+D to quit.\n");
   for (;;)
     {
@@ -533,11 +533,11 @@ void do_client(int argc, char ** argv)
   for (int i = 0; i < argc; i++)
     fprintf(stderr, "%s\n", argv[i]);
 
-  if (argc < 4)
+  if (argc < 3)
     {
-      fprintf(stderr, "Usage: %s <server address> <port> <server certificate file>\n", argv[0]);
+      fprintf(stderr, "Usage: %s <server address> <port>\n", argv[0]);
       return;
     }
 
-  client(argv[1], argv[2], argv[3]);
+  client(argv[1], argv[2]);
 }
