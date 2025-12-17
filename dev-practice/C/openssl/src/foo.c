@@ -138,6 +138,7 @@ int server(const char * port_str,
            const char * key_pem)
 {
   unsigned char buffer[BUFSIZE];
+  memset(buffer, 0, BUFSIZE);
   SSL_CTX * ctx;
   size_t nread = 0, nwritten = 0, total = 0;
 
@@ -149,6 +150,7 @@ int server(const char * port_str,
   BIO * const bio = get_socket(port_str);
 
   /* Server loop */
+  fprintf(stderr, "Listening for connections...\n");
   for (;;)
     {
       if (BIO_do_accept(bio) <= 0)
@@ -180,9 +182,11 @@ int server(const char * port_str,
       /* Echo client input */
       for (;SSL_read_ex(ssl, buffer, sizeof(buffer), &nread) > 0;)
         {
+          fprintf(stderr, "Client said: %s", buffer);
           if (SSL_write_ex(ssl, buffer, nread, &nwritten) > 0 && nwritten == nread)
             {
               total += nwritten;
+              memset(buffer, 0, BUFSIZE);
               continue;
             }
           fprintf(stderr, "Error echoing client input.\n");
@@ -352,29 +356,38 @@ int client(const char * const server_addr, const char * const port_str, const ch
       goto end;
     }
 
-  size_t written;
-  const char * request_start = "GET / HTTP/1.0\r\nConnection: close\r\nHost: ";
-  const char * request_end = "\r\n\r\n";
+  size_t written = 0;
+  char buf[BUFSIZE];
+  memset(buf, 0, BUFSIZE);
+  snprintf(buf, BUFSIZE, "Hello, OpenSSL example!\n");
+  const size_t expected_response_bytes = strnlen(buf, BUFSIZE);
+  //const char * request_start = "GET / HTTP/1.0\r\nConnection: close\r\nHost: ";
+  //const char * request_end = "\r\n\r\n";
   
   /* Write an HTTP GET request to the peer */
-  if (!SSL_write_ex(ssl, request_start, strlen(request_start), &written))
+  //if (!SSL_write_ex(ssl, request_start, strlen(request_start), &written))
+  //  {
+  //    fprintf(stderr, "Failed to write start of HTTP request\n");
+  //    goto end;
+  //  }
+  //if (!SSL_write_ex(ssl, server_addr, strlen(server_addr), &written))
+  //  {
+  //    fprintf(stderr, "Failed to write hostname in HTTP request\n");
+  //    goto end;
+  //  }
+  //if (!SSL_write_ex(ssl, request_end, strlen(request_end), &written))
+  //  {
+  //    fprintf(stderr, "Failed to write end of HTTP request\n");
+  //    goto end;
+  //  }
+  if (!SSL_write_ex(ssl, buf, strnlen(buf, BUFSIZE), &written))
     {
-      fprintf(stderr, "Failed to write start of HTTP request\n");
+      fprintf(stderr, "Failed to write to SSL socket\n");
       goto end;
     }
-  if (!SSL_write_ex(ssl, server_addr, strlen(server_addr), &written))
-    {
-      fprintf(stderr, "Failed to write hostname in HTTP request\n");
-      goto end;
-    }
-  if (!SSL_write_ex(ssl, request_end, strlen(request_end), &written))
-    {
-      fprintf(stderr, "Failed to write end of HTTP request\n");
-      goto end;
-    }
+  memset(buf, 0, BUFSIZE);
 
   size_t readbytes = 0, total_response_bytes = 0;
-  char buf[BUFSIZE] = {0};
   
   /*
    * Get up to sizeof(buf) bytes of the response. We keep reading until the
@@ -390,11 +403,45 @@ int client(const char * const server_addr, const char * const port_str, const ch
      */
     fwrite(buf, 1, readbytes, stdout);
     total_response_bytes += readbytes;
-    if (total_response_bytes >= strlen(request_start) + strlen(server_addr) + strlen(request_end))
+    if (total_response_bytes >= expected_response_bytes)
       break;
   }
   /* In case the response didn't finish with a newline we add one now */
   fprintf(stdout, "\n");
+
+  /* Let's do a user-input driven echo loop */
+  fprintf(stderr, "Enter Ctrl+D to quit.\n");
+  for (;;)
+    {
+      /* Reset the buffer */
+      memset(buf, 0, BUFSIZE);
+      written = 0;
+      readbytes = 0;
+      
+      /* Get user input */
+      fprintf(stderr, "> ");
+      //fflush(stderr);
+      fgets(buf, BUFSIZE, stdin);
+
+      if (feof(stdin))
+        {
+          fprintf(stderr, "\n");
+          break;
+        }
+
+      /* Send the data over the wire */
+      SSL_write_ex(ssl, buf, strnlen(buf, BUFSIZE), &written);
+
+      /* Receive response */
+      memset(buf, 0, BUFSIZE);
+    read_more:
+      SSL_read_ex(ssl, &buf[readbytes], sizeof(buf) - readbytes, &readbytes);
+      if (readbytes != written)
+        goto read_more;
+
+      /* Output response */
+      fwrite(buf, 1, strnlen(buf, BUFSIZE), stdout);
+    }
 
   /* Close the connection */
   //if (SSL_shutdown(ssl) == 0)
@@ -448,6 +495,7 @@ int client(const char * const server_addr, const char * const port_str, const ch
    */
   SSL_free(ssl);
   SSL_CTX_free(ctx);
+  
  end:
   /*
    * If something bad happened then we will dump the contents of the
