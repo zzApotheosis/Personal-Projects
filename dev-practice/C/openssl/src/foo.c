@@ -267,7 +267,10 @@ int client(const char * const server_addr, const char * const port_str, const ch
    */
   if (!BIO_lookup_ex(server_addr, port_str, BIO_LOOKUP_CLIENT, AF_INET, SOCK_STREAM, 0,
                      &res))
-    return 0;
+    {
+      fprintf(stderr, "BIO_lookup_ex failed\n");
+      return 0;
+    }
   
   /*
    * Loop through all the possible addresses for the server and find one
