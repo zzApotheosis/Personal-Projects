@@ -1,8 +1,14 @@
-# Ignore build directory
-build
+# Ignore everything
+*
 
-# Ignore all build-related files
-*.o
-*.so
-*.a
-a.out
+# With Exceptions
+!/.gitignore
+!/README.md
+!/build.sh
+!/cert-gen.sh
+!/dtls_example.pcapng
+!/tls_example.pcapng
+
+!/src/
+!/src/**
+
