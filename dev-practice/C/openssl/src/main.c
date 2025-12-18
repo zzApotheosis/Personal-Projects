@@ -17,6 +17,4 @@ int main(int argc, char **argv) {
 #if ROLE == ROLE_CLIENT
   do_client(argc, argv);
 #endif
-
-  return 0;
 }
