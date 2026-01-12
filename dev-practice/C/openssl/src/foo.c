@@ -150,22 +150,27 @@ int server(const char * port_str,
   BIO * const bio = get_socket(port_str);
 
   /* Server loop */
+  unsigned int client_id = 0;
   fprintf(stderr, "Listening for connections...\n");
   for (;;)
     {
       if (BIO_do_accept(bio) <= 0)
         continue;
 
-      nread = 0;
-      nwritten = 0;
-      total = 0;
       BIO * const client = BIO_pop(bio);
-      fprintf(stderr, "New client connected.\n");
+      fprintf(stderr, "[%u] New client connected.\n", client_id);
+
+      /* Fork to serve other clients */
+      if (fork() > 0)
+        {
+          client_id++;
+          continue;
+        }
 
       SSL * const ssl = SSL_new(ctx);
       if (ssl == NULL)
         {
-          fprintf(stderr, "SSL_new failed\n");
+          fprintf(stderr, "[%u] SSL_new failed\n", client_id);
           BIO_free(client);
           continue;
         }
@@ -174,7 +179,7 @@ int server(const char * port_str,
       /* Attempt handshake with client */
       if (SSL_accept(ssl) <= 0)
         {
-          fprintf(stderr, "SSL_accept failed\n");
+          fprintf(stderr, "[%u] SSL_accept failed\n", client_id);
           SSL_free(ssl);
           continue;
         }
@@ -182,20 +187,21 @@ int server(const char * port_str,
       /* Echo client input */
       for (;SSL_read_ex(ssl, buffer, sizeof(buffer), &nread) > 0;)
         {
-          fprintf(stderr, "Client said: %s", buffer);
+          fprintf(stderr, "[%u] Client said: %s", client_id, buffer);
           if (SSL_write_ex(ssl, buffer, nread, &nwritten) > 0 && nwritten == nread)
             {
               total += nwritten;
               memset(buffer, 0, BUFSIZE);
               continue;
             }
-          fprintf(stderr, "Error echoing client input.\n");
+          fprintf(stderr, "[%u] Error echoing client input.\n", client_id);
           break;
         }
 
       /* Close connection and free memory */
-      fprintf(stderr, "Client connection closed, %zu bytes sent\n", total);
+      fprintf(stderr, "[%u] Client connection closed, %zu bytes sent\n", client_id, total);
       SSL_free(ssl);
+      exit(0);
     }
   
   SSL_CTX_free(ctx);
@@ -465,23 +471,23 @@ int client(const char * const server_addr, const char * const port_str)
    * The peer already shutdown gracefully (we know this because of the
    * SSL_ERROR_ZERO_RETURN above). We should do the same back.
    */
-  int ret = SSL_shutdown(ssl);
-  if (ret == 0)
-    {
-      SSL_read(ssl, buf, sizeof(buf));
-      //ret = SSL_shutdown(ssl);
-      //if (ret < 1)
-      //  {
-      //    /*
-      //     * ret < 0 indicates an error. ret == 0 would be unexpected here
-      //     * because that means "we've sent a close_notify and we're waiting
-      //     * for one back". But we already know we got one from the peer
-      //     * because of the SSL_ERROR_ZERO_RETURN above.
-      //     */
-      //    fprintf(stderr, "Error shutting down\n");
-      //    goto end;
-      //  }
-    }
+  SSL_shutdown(ssl);
+  //if (ret == 0)
+  //  {
+  //    SSL_read(ssl, buf, sizeof(buf));
+  //    //ret = SSL_shutdown(ssl);
+  //    //if (ret < 1)
+  //    //  {
+  //    //    /*
+  //    //     * ret < 0 indicates an error. ret == 0 would be unexpected here
+  //    //     * because that means "we've sent a close_notify and we're waiting
+  //    //     * for one back". But we already know we got one from the peer
+  //    //     * because of the SSL_ERROR_ZERO_RETURN above.
+  //    //     */
+  //    //    fprintf(stderr, "Error shutting down\n");
+  //    //    goto end;
+  //    //  }
+  //  }
   
   /*
    * Free the resources we allocated. We do not free the BIO object here
