@@ -4,7 +4,7 @@
 
 #include "foo.h"
 
-int main(int argc, char **argv) {
+int main(void) {
   fprintf(stderr, "This is project %s.\n", PROJECT_NAME);
 
   library_function(42);
