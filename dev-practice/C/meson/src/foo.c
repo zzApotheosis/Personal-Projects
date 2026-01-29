@@ -4,6 +4,6 @@
 
 #include "foo.h"
 
-void library_function(int x) {
-    fprintf(stdout, "Library function received integer: %d\n", x);
+void library_function(const int x) {
+    fprintf(stderr, "Library function received integer: %d\n", x);
 }
