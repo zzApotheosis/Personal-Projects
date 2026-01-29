@@ -1,6 +1,6 @@
 # See https://mesonbuild.com/index.html
 
-project('semaphore-example', 'c',
+project('posix-semaphores-example', 'c',
   version: '0.1',
   default_options: ['warning_level=3']
 )
