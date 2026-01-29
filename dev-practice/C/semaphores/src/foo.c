@@ -79,17 +79,19 @@ static void parent_process(const pid_t cpid)
   strncpy(shm, "Is this the Krusty Krab?", SHM_SIZE);
   ((char * const) shm)[SHM_SIZE - 1] = '\0';
 
+  /* Unmap shared memory region (not needed anymore) */
+  if (munmap(shm, SHM_SIZE) < 0)
+    {
+      perror("munmap");
+      return;
+    }
+
   /* TODO: Initialize semaphore within shared memory region */
 
   /* Join child pid */
   waitpid(cpid, NULL, 0);
 
   /* Clean up */
-  if (munmap(shm, SHM_SIZE) < 0)
-    {
-      perror("munmap");
-      return;
-    }
   if (shm_unlink(SHM_NAME) < 0)
     {
       perror("shm_unlink");
