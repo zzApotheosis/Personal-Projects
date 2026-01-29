@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -103,6 +104,13 @@ int main(void)
     }
   if ((NUM_THREADS % BREAK_NUM) != 0)
     fprintf(stderr, "\n");
+
+  /* The counter values should sum to MAX_VALUE */
+  unsigned int total = 0;
+  for (int i = 0; i < NUM_THREADS; i++)
+    total += counters[i];
+  assert(total == MAX_VALUE);
+  
   fprintf(stdout, "Main thread finished\n");
   return EXIT_SUCCESS;
 }
