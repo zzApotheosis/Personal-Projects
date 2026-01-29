@@ -27,12 +27,18 @@
 #define MAX_SLEEP_TIME 5000
 #endif
 
+#ifndef BREAK_NUM
+#define BREAK_NUM 8
+#endif
+
 static int thread_count = 0;
 static pthread_mutex_t thread_count_mutex = PTHREAD_MUTEX_INITIALIZER;
 static int data = 0;
 static pthread_mutex_t data_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 static pthread_cond_t data_incremented = PTHREAD_COND_INITIALIZER;
+
+static unsigned int counters[NUM_THREADS] = {0};
 
 void * thread_main(void * arg)
 {
@@ -41,7 +47,6 @@ void * thread_main(void * arg)
   int thread_id = thread_count++;
   pthread_mutex_unlock(&thread_count_mutex);
 
-  size_t contribution_counter = 0;
   fprintf(stdout, "Initializing thread #%d\n", thread_id);
 
   /* We are now at the mercy of the kernel scheduler */
@@ -55,8 +60,8 @@ void * thread_main(void * arg)
           break;
         }
       data++;
-      fprintf(stdout, "Thread #%02d incremented the shared data to %06d; this thread has contributed %06lu times\n",
-              thread_id, data, ++contribution_counter);
+      fprintf(stdout, "Thread #%02d incremented the shared data to %06d; this thread has contributed %06u times\n",
+              thread_id, data, ++counters[thread_id]);
       pthread_mutex_unlock(&data_mutex);
       pthread_cond_broadcast(&data_incremented);
     }
@@ -84,10 +89,20 @@ int main(void)
   pthread_mutex_unlock(&data_mutex);
         
   for (int i = 0; i < NUM_THREADS; i++)
+    pthread_join(threads[i], NULL);
+
+  /* Show thread statistics */
+  fprintf(stderr, "\033[4mThread statistics\033[m [thread num : contribution count]\n");
+  for (int i = 0; i < NUM_THREADS; i++)
     {
-      fprintf(stdout, "Joining thread #%d\n", i);
-      pthread_join(threads[i], NULL);
+      fprintf(stderr, "[%02d:%03u]", i, counters[i]);
+      if (((i + 1) % BREAK_NUM) == 0)
+        fprintf(stderr, "\n");
+      else
+        fprintf(stderr, " ");
     }
+  if ((NUM_THREADS % BREAK_NUM) != 0)
+    fprintf(stderr, "\n");
   fprintf(stdout, "Main thread finished\n");
   return EXIT_SUCCESS;
 }
