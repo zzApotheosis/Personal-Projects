@@ -3,6 +3,6 @@ project('message-queues', 'c',
   default_options : ['warning_level=3']
 )
 
-executable('client', ['client.c'], link_args : '-lrt')
-executable('server', ['server.c'], link_args : '-lrt')
-executable('multithreaded', ['multithreaded.c'], link_args : '-lrt')
+executable('client', ['client.c'], link_args: '-lrt', install: true)
+executable('server', ['server.c'], link_args: '-lrt', install: true)
+executable('multithreaded', ['multithreaded.c'], link_args: '-lrt', install: true)
