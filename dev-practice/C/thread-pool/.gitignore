@@ -4,5 +4,6 @@
 # Except this
 !/.gitignore
 !/build.sh
+!/collect-stats.py
 !/src/
 !/src/**
