@@ -10,7 +10,7 @@
 #include "thread-pool.h"
 
 #define N_THREADS 32
-#define MULTIPLIER 65536
+#define MULTIPLIER 8192
 
 /* Shared data */
 static unsigned long int shared_data = 0;
@@ -19,7 +19,7 @@ static pthread_mutex_t shared_mutex = PTHREAD_MUTEX_INITIALIZER;
 static void example_job(void * arg)
 {
   if (arg) {}
-#ifdef DEBUG_LEVEL
+#ifdef EMIT_STATS
   unsigned long int contribution_count = 0;
 #endif
   for (;;)
@@ -31,7 +31,7 @@ static void example_job(void * arg)
           break;
         }
       shared_data += 1;
-#ifdef DEBUG_LEVEL // See meson.build to enable debug output
+#ifdef EMIT_STATS // See meson.build to enable statistics output
       contribution_count += 1;
       fprintf(stdout, "{\"thread-id\": %lu, \"data\": %lu, \"contributions\": %lu}\n", pthread_self(), shared_data, contribution_count);
 #endif

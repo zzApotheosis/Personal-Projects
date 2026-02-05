@@ -29,5 +29,12 @@ class Main(object):
         for key in sorted(counts.keys()):
             sys.stdout.write("Thread [{}] contributed {} times\n".format(key, counts[key]))
 
+        sys.stdout.write("There were {} unique threads reported\n".format(len(counts.keys())))
+
+        total: int = 0
+        for key in counts.keys():
+            total += counts[key]
+        sys.stdout.write("The final value was: {}\n".format(total))
+
 if __name__ == '__main__':
     sys.exit(Main.main())
