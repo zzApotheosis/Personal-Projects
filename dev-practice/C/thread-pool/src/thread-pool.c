@@ -74,22 +74,21 @@ thread_pool_t * thread_pool_new(const size_t n_threads)
   if (instance == NULL)
     abort();
 
-  pthread_mutex_init(&instance->job_mutex, NULL);
-  pthread_cond_init(&instance->job_condition, NULL);
-  //instance->quit = 0; // Maybe not needed because of calloc
+  if (pthread_mutex_init(&instance->job_mutex, NULL) != 0)
+    abort();
+  if (pthread_cond_init(&instance->job_condition, NULL) != 0)
+    abort();
 
   STAILQ_INIT(&instance->threads);
   STAILQ_INIT(&instance->job_queue);
 
   for (unsigned int i = 0; i < n_threads; i++)
     {
-      struct thread_pool_node * const node = (struct thread_pool_node * const) malloc(1 * sizeof(struct thread_pool_node));
+      struct thread_pool_node * const node = (struct thread_pool_node * const) calloc(1, sizeof(struct thread_pool_node));
       if (node == NULL)
         abort();
-
-      /* Create new thread */
-      pthread_create(&node->thread, NULL, thread_pool_main, instance);
-      
+      if (pthread_create(&node->thread, NULL, thread_pool_main, instance) != 0)
+        abort();
       STAILQ_INSERT_TAIL(&instance->threads, node, thread_pool_nodes);
     }
 
@@ -98,7 +97,7 @@ thread_pool_t * thread_pool_new(const size_t n_threads)
 
 void thread_pool_destroy(thread_pool_t ** const instance)
 {
-  if (instance == NULL)
+  if (instance == NULL || (*instance) == NULL)
     abort();
   pthread_mutex_lock(&(*instance)->job_mutex);
   (*instance)->quit = 1;
