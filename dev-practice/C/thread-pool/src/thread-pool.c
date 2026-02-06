@@ -79,6 +79,8 @@ thread_pool_t * thread_pool_new(const size_t n_threads)
   //instance->quit = 0; // Maybe not needed because of calloc
 
   STAILQ_INIT(&instance->threads);
+  STAILQ_INIT(&instance->job_queue);
+
   for (unsigned int i = 0; i < n_threads; i++)
     {
       struct thread_pool_node * const node = (struct thread_pool_node * const) malloc(1 * sizeof(struct thread_pool_node));
@@ -90,7 +92,6 @@ thread_pool_t * thread_pool_new(const size_t n_threads)
       
       STAILQ_INSERT_TAIL(&instance->threads, node, thread_pool_nodes);
     }
-  STAILQ_INIT(&instance->job_queue);
 
   return instance;
 }
