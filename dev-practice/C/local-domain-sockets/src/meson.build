@@ -1,4 +1,4 @@
-project('unix-sockets', 'c',
+project('local-domain-sockets', 'c',
   version : '0.1',
   default_options : ['warning_level=3']
 )
