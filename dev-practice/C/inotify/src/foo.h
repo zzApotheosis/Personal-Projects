@@ -4,7 +4,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-  void library_function(const int);
+  void do_inotify_example(int, char **);
 #ifdef __cplusplus
 }
 #endif
