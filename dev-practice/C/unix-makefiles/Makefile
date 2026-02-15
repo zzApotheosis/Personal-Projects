@@ -7,7 +7,7 @@ OBJECTS = main.o app.o
 all: $(TARGET)
 
 clean:
-	@rm -f $(TARGET) $(OBJECTS)
+	rm -fv $(TARGET) $(OBJECTS)
 
 $(TARGET): $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(LDFLAGS)
