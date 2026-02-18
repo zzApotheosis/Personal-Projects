@@ -4,6 +4,8 @@ LDLIBS = # Put libraries here, such as -lssl -lcrypto -lwhatever
 
 OBJECTS = main.o app.o
 
+#.PHONY: clean all
+
 all: $(TARGET)
 
 clean:
