@@ -1,9 +1,8 @@
 JC = javac
 TARGET = app
 MAINCLASS = App.Main
-SRCDIR = src
-OBJS = $(SRCDIR)/App/Main.class \
-	$(SRCDIR)/App/util/Util.class
+OBJS = App/Main.class \
+	App/util/Util.class
 JAR = $(TARGET).jar
 
 .PHONY: clean all
@@ -15,8 +14,7 @@ clean:
 	rm -rfv $(JAR)
 
 jar: all
-	cd $(SRCDIR) && find -type f -iname '*.class' | xargs jar cvfe $(JAR) $(MAINCLASS)
-	mv -fv "$(SRCDIR)/$(JAR)" .
+	find -type f -iname '*.class' | xargs jar cvfe $(JAR) $(MAINCLASS)
 
 $(OBJS): %.class: %.java
 	$(JC) $<
