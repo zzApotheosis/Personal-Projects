@@ -14,7 +14,7 @@ clean:
 	rm -rfv $(OBJS)
 	rm -rfv $(JAR)
 
-run:
+run: all
 	@$(JAVA) $(MAINCLASS)
 
 jar: all
