@@ -1,20 +1,16 @@
-TARGET = my-app
-CFLAGS = -Wall -g
-LDLIBS = # Put libraries here, such as -lssl -lcrypto -lwhatever
+SUBDIRS = src
 
-OBJECTS = main.o app.o
+# Phony target for building all subdirectories
+.PHONY: subdirs $(SUBDIRS)
 
-#.PHONY: clean all
+subdirs: $(SUBDIRS)
 
-all: $(TARGET)
+# Rule to enter each subdirectory and run make
+$(SUBDIRS):
+	$(MAKE) -C $@
 
+# Example of a 'clean' target that also recurses
 clean:
-	rm -fv $(TARGET) $(OBJECTS)
-
-$(TARGET): $(OBJECTS)
-	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(LDFLAGS)
-
-$(OBJECTS): %.o: %.c
-	$(CC) $(CFLAGS) -o $@ -c $<
-
-
+	for dir in $(SUBDIRS); do \
+		$(MAKE) -C $$dir clean; \
+	done

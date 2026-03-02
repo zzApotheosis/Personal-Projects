@@ -1,7 +1,5 @@
 *
-
 !/.gitignore
 !/Makefile
-!/main.c
-!/app.c
-!/app.h
+!/src/
+!/src/**
