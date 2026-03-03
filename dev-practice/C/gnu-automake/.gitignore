@@ -3,4 +3,5 @@
 
 # Exceptions
 !/.gitignore
+!/README.md
 !/amhello.tar.gz
