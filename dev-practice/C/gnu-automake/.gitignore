@@ -4,4 +4,8 @@
 # Exceptions
 !/.gitignore
 !/README.md
-!/amhello.tar.gz
+#!/amhello.tar.gz
+!/configure.ac
+!/Makefile.am
+!/src/
+!/src/**
