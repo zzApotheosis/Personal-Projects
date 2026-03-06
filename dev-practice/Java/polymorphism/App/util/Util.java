@@ -12,7 +12,7 @@ public class Util
     shapes.add(new Circle(2.5));
     shapes.add(new Rectangle(5.0, 3.0));
     shapes.add(new Square(4.0));
-    shapes.add(new Triangle(3.0, 6.0, 5.0));
+    shapes.add(new Triangle(3.0, 4.0, 5.0));
 
     for (final Shape shape : shapes)
       {
