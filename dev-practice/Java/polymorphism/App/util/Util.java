@@ -149,10 +149,14 @@ class Rectangle extends Shape
   }
 }
 
-class Square extends Rectangle
+class Square extends Shape
 {
+  private double side;
+  
   /*
    * A square is a rectangle by definition with extra properties.
+   *
+   * However, we CANNOT extend the Rectangle class because that would violate the Liskov Substitution Principle.
    *
    * All four sides of a square must be equal in length.
    */
@@ -166,7 +170,28 @@ class Square extends Rectangle
    */
   Square(final double side)
   {
-    super("Square", side, side);
+    super("Square", 4);
+    this.side = side;
+  }
+
+  @Override
+  public double area()
+  {
+    return Math.pow(this.side, 2.0);
+  }
+
+  @Override
+  public double perimeter()
+  {
+    return 4 * this.side;
+  }
+
+  @Override
+  public void showMe()
+  {
+    super.showMe();
+    System.out.println("Side length: " + String.valueOf(this.side));
+    System.out.println("Perimeter: " + String.valueOf(this.perimeter()));
   }
 }
 
