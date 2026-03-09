@@ -21,33 +21,46 @@ public class Util
    */
   private static void otherFunction(final Iface iface)
   {
-    iface.do_work();
+    iface.do_work(10);
   }
 }
 
-class ClassA implements Iface
+abstract class BaseClass
 {
-  ClassA()
-  {}
+  protected int amountWorked = 0;
+}
 
-  public void do_work()
+class ClassA extends BaseClass implements Iface
+{
+  public void do_work(final int amount)
   {
-    System.err.println("ClassA object just did work!");
+    this.amountWorked += amount;
+    System.err.println("ClassA object just did work! Amount worked: " + String.valueOf(this.amountWorked));
   }
 }
 
-class ClassB implements Iface
+class ClassB extends BaseClass implements Iface
 {
+  private int workDivisor;
+
   ClassB()
-  {}
-
-  public void do_work()
   {
-    System.err.println("ClassB is barely working tbh...");
+    this(10);
+  }
+
+  ClassB(final int workDivisor)
+  {
+    this.workDivisor = workDivisor;
+  }
+  
+  public void do_work(final int amount)
+  {
+    this.amountWorked += (amount / this.workDivisor);
+    System.err.println("ClassB is barely working tbh... Amount worked: " + String.valueOf(this.amountWorked));
   }
 }
 
 abstract interface Iface
 {
-  abstract public void do_work();
+  abstract public void do_work(final int amount);
 }
