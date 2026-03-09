@@ -19,7 +19,7 @@ public class Util
    * that implements the interface even if the object is instantiated from different
    * classes.
    */
-  private static void otherFunction(Iface iface)
+  private static void otherFunction(final Iface iface)
   {
     iface.do_work();
   }
