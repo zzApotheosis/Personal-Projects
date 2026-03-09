@@ -5,7 +5,11 @@
 (in-package :common-lisp-user) ;; NOTE, :cl-user is an alias for :common-lisp-user
 
 ;; Use the loaded function from my-package
-(format t "~a~%" (my-package::my-function 5))
+(let ((n))
+  (setq n 5)
+  (format t "(my-package::my-function ~a) = ~a~%" n (my-package::my-function n))
+  (setq n 10)
+  ;; This will only work if my-function is exported from my-package!
+  (format t "(my-package:my-function ~a) = ~a~%" n (my-package::my-function n))
+  )
 
-;; This will only work if my-function is exported from my-package!
-(format t "~a~%" (my-package:my-function 10))
