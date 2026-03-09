@@ -49,5 +49,5 @@ class ClassB implements Iface
 
 abstract interface Iface
 {
-  public void do_work();
+  abstract public void do_work();
 }
