@@ -21,13 +21,19 @@ public class Util
    */
   private static void otherFunction(final Iface iface)
   {
-    iface.do_work(10);
+    iface.do_work(69);
   }
 }
 
 abstract class BaseClass
 {
+  /*
+   * Technically since the amountWorked is in the same package, the `protected` keyword
+   * is unneeded. If these classes were defined (and referenced) from different packages,
+   * we would need the `protected` keyword to "open" the visibility of this attribute.
+   */
   protected int amountWorked = 0;
+  //int amountWorked = 0; // This would work too
 }
 
 class ClassA extends BaseClass implements Iface
