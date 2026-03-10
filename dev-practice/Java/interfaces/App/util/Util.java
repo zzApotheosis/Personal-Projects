@@ -35,8 +35,8 @@ abstract class BaseClass
    * is unneeded. If these classes were defined (and referenced) from different packages,
    * we would need the `protected` keyword to "open" the visibility of this attribute.
    */
-  protected int amountWorked = 0;
-  //int amountWorked = 0; // This would work too
+  int amountWorked = 0;
+  //protected int amountWorked = 0; // This would work too
 }
 
 class ClassA extends BaseClass implements Workable
