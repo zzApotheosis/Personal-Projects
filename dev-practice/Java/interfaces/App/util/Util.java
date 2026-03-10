@@ -12,6 +12,9 @@ public class Util
     ClassB classb = new ClassB();
     Util.otherFunction(classa);
     Util.otherFunction(classb);
+
+    Succeedable s = classb;
+    s.succeed(0);
   }
 
   /*
@@ -19,9 +22,9 @@ public class Util
    * that implements the interface even if the object is instantiated from different
    * classes.
    */
-  private static void otherFunction(final Iface iface)
+  private static void otherFunction(final Workable iface)
   {
-    iface.do_work(69);
+    iface.work(69);
   }
 }
 
@@ -36,16 +39,16 @@ abstract class BaseClass
   //int amountWorked = 0; // This would work too
 }
 
-class ClassA extends BaseClass implements Iface
+class ClassA extends BaseClass implements Workable
 {
-  public void do_work(final int amount)
+  public void work(final int amount)
   {
     this.amountWorked += amount;
-    System.err.println("ClassA object just did work! Amount worked: " + String.valueOf(this.amountWorked));
+    System.err.println(String.valueOf(this.getClass()) + " just did work! Amount worked: " + String.valueOf(this.amountWorked));
   }
 }
 
-class ClassB extends BaseClass implements Iface
+class ClassB extends BaseClass implements Workable, Succeedable
 {
   private int workDivisor;
 
@@ -59,14 +62,24 @@ class ClassB extends BaseClass implements Iface
     this.workDivisor = workDivisor;
   }
   
-  public void do_work(final int amount)
+  public void work(final int amount)
   {
     this.amountWorked += (amount / this.workDivisor);
-    System.err.println("ClassB is barely working tbh... Amount worked: " + String.valueOf(this.amountWorked));
+    System.err.println(String.valueOf(this.getClass()) + " is barely working tbh... Amount worked: " + String.valueOf(this.amountWorked));
+  }
+
+  public void succeed(final int status)
+  {
+    System.err.println(String.valueOf(this.getClass()) + " has succeeded! (status=" + String.valueOf(status) + ")");
   }
 }
 
-abstract interface Iface
+abstract interface Workable
 {
-  abstract public void do_work(final int amount);
+  abstract public void work(final int amount);
+}
+
+abstract interface Succeedable
+{
+  abstract public void succeed(final int status);
 }
