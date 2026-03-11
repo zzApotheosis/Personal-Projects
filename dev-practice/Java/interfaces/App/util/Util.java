@@ -15,6 +15,8 @@ public class Util
 
     Succeedable s = classb;
     s.succeed(0);
+    //s.work(10); // Succeedable does not know what work() means, even if s refers to a ClassB object that implements work()
+    classb.succeed(1);
   }
 
   /*
