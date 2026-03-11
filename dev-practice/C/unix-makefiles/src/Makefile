@@ -12,7 +12,7 @@ clean:
 	rm -fv $(TARGET) $(OBJECTS)
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(LDFLAGS) $(LDLIBS)
 
 $(OBJECTS): %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<
