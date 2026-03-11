@@ -32,6 +32,15 @@
             )
   )
 
+;; Define hook for python-mode
+(add-hook 'python-mode-hook
+          (lambda ()
+            (when pkg-installed-eglot-p
+              (eglot-ensure)
+              )
+            )
+          )
+
 ;; Define hook for zig-mode
 (when pkg-installed-zig-mode-p
   (add-hook 'zig-mode-hook
