@@ -1,4 +1,4 @@
-TARGET = my-app
+TARGET = openssl-pbkdf2-example
 CFLAGS = -Wall -g
 LDLIBS = -lssl -lcrypto # Put libraries here, such as -lssl -lcrypto -lwhatever
 
