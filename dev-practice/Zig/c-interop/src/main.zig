@@ -30,12 +30,12 @@ const POINT_MAX_RANGE: i32 = 5000;
 const POINT_MIN_RANGE: i32 = -POINT_MAX_RANGE;
 
 fn call_c_foo() void {
-    const stdout = std.io.getStdOut();
-    stdout.writer().print("This is the main function in Zig!\n", .{}) catch |e| {
+    const stdout = std.fs.File.stdout();
+    stdout.writeAll("This is the main function in Zig!\n") catch |e| {
         std.log.err("{}", .{e});
         return;
     };
-    var prng = std.rand.DefaultPrng.init(blk: {
+    var prng = std.Random.init std.rand.DefaultPrng.init(blk: {
         var seed: u64 = undefined;
         std.posix.getrandom(std.mem.asBytes(&seed)) catch |e| {
             std.log.err("error: {}", .{e});
@@ -47,7 +47,7 @@ fn call_c_foo() void {
     const num: u32 = rand.intRangeAtMost(u32, 0, 110);
     c_foo.c_foo(num);
 
-    std.io.getStdErr().writer().print("Generating dataset: {} randomized Points\n", .{POINT_COUNT}) catch {};
+    std.fs.File.stdout().writeAll();
 
     // Let's make some objects with C functions
     var points: [POINT_COUNT]?*Point = undefined;
@@ -93,9 +93,9 @@ fn call_c_foo() void {
     // TODO: maybe gather statistical data
 
     // Announce points
-    std.io.getStdOut().writer().print("Closest point to the origin ({d:.3}):\n", .{closest_distance}) catch {};
+    std.Io.File.stdout().writer().print("Closest point to the origin ({d:.3}):\n", .{closest_distance}) catch {};
     Point_dump(closest_point);
-    std.io.getStdOut().writer().print("Furthest point from the origin ({d:.3}):\n", .{furthest_distance}) catch {};
+    std.Io.File.stdout().writer().print("Furthest point from the origin ({d:.3}):\n", .{furthest_distance}) catch {};
     Point_dump(furthest_point);
 
     // Free the memory allocated to the Point objects
@@ -104,7 +104,7 @@ fn call_c_foo() void {
     }
 
     const max_distance: f64 = 20.0;
-    std.io.getStdOut().writer().print("Searching for a randomized point that is less than {d:.3} distance from the origin...\n", .{max_distance}) catch {};
+    std.Io.File.stdout().writer().print("Searching for a randomized point that is less than {d:.3} distance from the origin...\n", .{max_distance}) catch {};
     l: while (true) {
         var point = ZigPoint{};
         point.x = rand.intRangeAtMost(i32, POINT_MIN_RANGE, POINT_MAX_RANGE);
@@ -123,7 +123,7 @@ fn call_c_foo() void {
 fn Point_dump(p: ?*Point) void {
     if (p == null)
         return;
-    std.io.getStdErr().writer().print("Point({}, {}, {})\n", .{ Point_get_x(p), Point_get_y(p), Point_get_z(p) }) catch {};
+    std.Io.File.stderr().writer().print("Point({}, {}, {})\n", .{ Point_get_x(p), Point_get_y(p), Point_get_z(p) }) catch {};
 }
 
 fn Point_distance(p1: ?*Point, p2: ?*Point) f64 {
