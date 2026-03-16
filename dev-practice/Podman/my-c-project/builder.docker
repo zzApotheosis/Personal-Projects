@@ -10,10 +10,10 @@ RUN dnf install -y \
 
 WORKDIR /build
 
-COPY . .
+COPY my-c-project .
 
-RUN meson setup builddir
-RUN meson compile -C builddir
+RUN meson setup .build my-app
+RUN meson compile -C .build
 
 RUN mkdir -p /output
-RUN cp -rf builddir/my-c-project /output
+RUN cp -rf ./build/my-c-project /output

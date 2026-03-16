@@ -3,7 +3,6 @@
 !/README.md
 !/builder.docker
 !/runtime.docker
-!/meson.build
 
-!/src/
-!/src/**
+!/my-app/
+!/my-app/**
