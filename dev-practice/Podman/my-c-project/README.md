@@ -1,8 +1,8 @@
 # Meson and Podman Example
 
 > $ podman system reset  
-> $ podman build -t my-c-project-builder -f builder.docker --env 'CC=clang'  
-> $ podman build -t my-c-project-runtime -f runtime.docker  
+> $ podman build --file builder.docker --tag my-c-project-builder --env 'CC=clang'  
+> $ podman build --file runtime.docker --tag my-c-project-runtime  
 > $ podman image list --all  
 > $ podman run --rm localhost/my-c-project-runtime
 
