@@ -3,21 +3,22 @@ TARGET = rust-app
 CFLAGS = -Wall -g
 LDLIBS = # Put libraries here, such as -lssl -lcrypto -lwhatever
 
-OBJECTS = main.o foo.o
+OBJECTS = main.o
+RUST_ARCHIVES = foo.a
 
-#.PHONY: clean all
+.PHONY: clean all
 
 all: $(TARGET)
 
 clean:
 	rm -fv $(TARGET) $(OBJECTS)
 
-$(TARGET): $(OBJECTS)
-	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(LDFLAGS) $(LDLIBS)
+$(TARGET): $(OBJECTS) $(RUST_ARCHIVES)
+	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(RUST_ARCHIVES) $(LDFLAGS) $(LDLIBS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<
 
-%.o: %.rs
+%.a: %.rs
 	$(RUSTC) --crate-type staticlib -o $@ $<
 
