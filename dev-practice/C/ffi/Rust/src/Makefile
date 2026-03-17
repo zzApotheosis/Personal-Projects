@@ -1,5 +1,5 @@
 RUSTC = rustc
-TARGET = rust-app
+TARGET = c-rust-example
 CFLAGS = -Wall -g
 LDLIBS = # Put libraries here, such as -lssl -lcrypto -lwhatever
 

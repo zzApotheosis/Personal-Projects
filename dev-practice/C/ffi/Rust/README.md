@@ -5,4 +5,4 @@ Rust is capable of exporting functions with a C-style ABI. This example shows ho
 # Building this example
 
 > $ `make`  
-> $ `./src/rust-app`
+> $ `./src/c-rust-example`
