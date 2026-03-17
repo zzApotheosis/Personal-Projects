@@ -11,7 +11,7 @@ RUST_ARCHIVES = foo.a
 all: $(TARGET)
 
 clean:
-	rm -fv $(TARGET) $(OBJECTS)
+	rm -fv $(TARGET) $(OBJECTS) $(RUST_ARCHIVES)
 
 $(TARGET): $(OBJECTS) $(RUST_ARCHIVES)
 	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(RUST_ARCHIVES) $(LDFLAGS) $(LDLIBS)
