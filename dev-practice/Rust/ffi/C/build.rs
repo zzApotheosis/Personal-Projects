@@ -1,3 +1,5 @@
+use cc;
+
 fn main() -> Result<(), i32> {
     // Tell Cargo that if the given file changes, to rerun this build script.
     println!("cargo:rerun-if-changed=src/cool.c");
