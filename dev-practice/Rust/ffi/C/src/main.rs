@@ -100,8 +100,9 @@ fn main() -> Result<(), i32> {
     println!("After destroy: s3 = {s3:?}");
 
     /* Use GMP to print a huge number */
+    let huge_num: String = String::from("135792468000000690000004206900000133700000001\0");
+    println!("huge_num length: {}", huge_num.len());
     unsafe {
-        let huge_num: String = String::from("135792468000000690000004206900000133700000001\0");
         print_bignum(huge_num.as_ptr());
     }
 
@@ -148,7 +149,7 @@ trait SpongeBob {
 
 impl CoolTrait for CoolStruct {
     fn hi(&self, name: &str) -> Result<(), i32> {
-        println!("Why hello there, {name}!");
+        println!("Why hello there, {}!", name);
         Ok(())
     }
 
@@ -163,11 +164,10 @@ impl CoolTrait for CoolStruct {
 impl GuardianOfTheGalaxy for CoolStruct {
     fn forty_two(&self) {
         print!("The answer to life, the universe, and everything is ");
-        if self.x == 42 {
-            println!("{}", self.x);
-        } else {
-            println!("definitely not {}", self.x);
+        if self.x != 42 {
+            print!("definitely not ");
         }
+        println!("{}", self.x);
     }
 }
 
