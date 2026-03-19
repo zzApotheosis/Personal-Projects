@@ -4,3 +4,5 @@ project('linked-list', 'c',
 )
 
 executable('linked-list', ['main.c'])
+
+executable('stailq-example', ['stailq.c'])
