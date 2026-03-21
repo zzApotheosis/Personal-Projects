@@ -9,7 +9,6 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <unistd.h>
 #include <sys/queue.h>
 
 /* User-defined struct for the nodes in the slist */
@@ -21,16 +20,18 @@ struct node {
 /* Utilizing a macro to define slisthead as a struct to represent the head of the slist */
 SLIST_HEAD(slisthead, node);
 
-/* Main function */
-int main(void) {
+void do_slist_example(const int argc, char * argv[])
+{
+  (void) argc;
+  (void) argv;
+  
   /* Define some variables */
   struct node * n = NULL;
   struct slisthead list;
-  int num_nodes = 10;
   SLIST_INIT(&list);
 
   /* Create nodes for the slist */
-  for (int i = 0; i < num_nodes; i++) {
+  for (int i = 0; i < NUM_NODES; i++) {
     n = (struct node *) malloc(1 * sizeof(struct node));
     n->data = (i + 1) * 100;
     SLIST_INSERT_HEAD(&list, n, nodes);
@@ -56,12 +57,9 @@ int main(void) {
    * Second, use the macro to remove the head of the slist. Third and finally, free the memory pointed
    * to by the pointer from the first step. Swapping the second and third step will cause a segfault.
    */
-  while (!SLIST_EMPTY(&list)) {
+  for (;!SLIST_EMPTY(&list);) {
     n = SLIST_FIRST(&list);
     SLIST_REMOVE_HEAD(&list, nodes);
     free(n);
   }
-  
-  /* Done :) */
-  return EXIT_SUCCESS;
 }

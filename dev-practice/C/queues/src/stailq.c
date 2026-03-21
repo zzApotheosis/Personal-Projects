@@ -5,7 +5,6 @@
 
 #include "stailq.h"
 
-#define NUM_ENTRIES 8
 #define EXAMPLE_INDEX 5
 
 struct list_entry {
@@ -38,15 +37,16 @@ void do_stailq_example(const int argc, char * argv[])
 {
   (void) argc;
   (void) argv;
+  
   struct list_entry * entry = NULL;
   struct list_head head;
 
-  assert(EXAMPLE_INDEX < NUM_ENTRIES);
+  assert(EXAMPLE_INDEX < NUM_NODES);
 
   STAILQ_INIT(&head);
 
   /* Adding dummy data to the list */
-  for (unsigned long int i = 0; i < NUM_ENTRIES; i++)
+  for (unsigned long int i = 0; i < NUM_NODES; i++)
     {
       entry = list_entry_new((void * const) i);
       STAILQ_INSERT_TAIL(&head, entry, list_entries);
@@ -70,9 +70,4 @@ void do_stailq_example(const int argc, char * argv[])
 
   /* Initialize the list before exiting (I think this is good practice? They do it in the example code) */
   STAILQ_INIT(&head);
-}
-
-int main(int argc, char * argv[])
-{
-  do_stailq_example(argc, argv);
 }
