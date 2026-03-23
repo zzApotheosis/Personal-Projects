@@ -10,7 +10,7 @@
 (show-paren-mode t)
 (global-ede-mode t)
 ;;(global-hl-line-mode)
-(evil-mode)
+;;(evil-mode) ;; Moved to pkg-setup file because this is not a basic setting
 
 ;; Confirm when quitting emacs
 (setq-default confirm-kill-emacs #'y-or-n-p)

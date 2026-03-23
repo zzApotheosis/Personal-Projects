@@ -85,6 +85,11 @@ sub init
     # Define subroutine variables
     my $status = 0;
 
+    {
+        my $separator = "*******************************************************************************************************************";
+        STDERR->write("$separator\n\nTODO: Please integrate this logic into the Emacs initialization and translate this code into Emacs Lisp.\n\n$separator\n\n");
+    }
+
     # Check OS type
     if ($^O eq 'linux'   ||
 	$^O eq 'unix'    ||
