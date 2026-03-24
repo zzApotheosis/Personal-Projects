@@ -9,28 +9,28 @@
  * See the sigaction(3P) man page for more information.
  */
 
-static void signal_handler(int s) {
-  fprintf(stdout, "\n");
-  switch(s) {
+static void signal_handler(int signo, siginfo_t * info, void * context) {
+  (void) info;
+  (void) context;
+  switch(signo) {
     case SIGINT:
-      fprintf(stdout, "Caught SIGINT!\n");
+      write(STDOUT_FILENO, "Caught SIGINT!\n", 15);
       break;
     case SIGTERM:
-      fprintf(stdout, "Caught SIGTERM!\n");
+      write(STDOUT_FILENO, "Caught SIGTERM!\n", 16);
       break;
     default:
-      fprintf(stdout, "Caught some signal (%d)\n", s);
+      write(STDOUT_FILENO, "Caught some signal\n", 19);
       break;
   }
-  exit(EXIT_SUCCESS);
+  _exit(EXIT_SUCCESS);
 }
 
 int main(void) {
   struct sigaction s;
-  s.sa_handler = signal_handler;
-  sigemptyset(&(s.sa_mask));
-  //sigemptyset(&s.sa_mask); // This is valid too
-  s.sa_flags = SA_RESTART;
+  sigemptyset(&s.sa_mask);
+  s.sa_sigaction = signal_handler;
+  s.sa_flags = SA_SIGINFO;
 
   if (sigaction(SIGINT, &s, NULL) != 0) {
     fprintf(stderr, "ERROR: Unable to assign SIGINT handler\n");
