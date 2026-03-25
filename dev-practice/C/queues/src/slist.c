@@ -2,17 +2,18 @@
  * This example of a singly linked list does NOT implement any linked list from scratch.
  * Instead, this example uses the sys/queue.h library already provided on *nix systems.
  * It achieves the same concept of a linked list without reinventing the wheel.
- * 
+ *
  * See slist(3).
  * https://man.archlinux.org/man/slist.3
  */
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/queue.h>
 
 /* User-defined struct for the nodes in the slist */
-struct node {
+struct node
+{
   int data;
   SLIST_ENTRY(node) nodes;
 };
@@ -20,22 +21,24 @@ struct node {
 /* Utilizing a macro to define slisthead as a struct to represent the head of the slist */
 SLIST_HEAD(slisthead, node);
 
-void do_slist_example(const int argc, char * argv[])
+void
+do_slist_example(const int argc, char * argv[])
 {
   (void) argc;
   (void) argv;
-  
+
   /* Define some variables */
   struct node * n = NULL;
   struct slisthead list;
   SLIST_INIT(&list);
 
   /* Create nodes for the slist */
-  for (int i = 0; i < NUM_NODES; i++) {
-    n = (struct node *) malloc(1 * sizeof(struct node));
-    n->data = (i + 1) * 100;
-    SLIST_INSERT_HEAD(&list, n, nodes);
-  }
+  for (int i = 0; i < NUM_NODES; i++)
+    {
+      n = (struct node *) malloc(1 * sizeof(struct node));
+      n->data = (i + 1) * 100;
+      SLIST_INSERT_HEAD(&list, n, nodes);
+    }
 
   /*
    * Do something with the slist to show that it is properly holding data in memory.
@@ -45,10 +48,11 @@ void do_slist_example(const int argc, char * argv[])
    * An insertion operation has a time complexity of O(1).
    */
   n = SLIST_FIRST(&list);
-  while (n != NULL) {
-    fprintf(stdout, "Node contains: %d\n", n->data);
-    n = SLIST_NEXT(n, nodes);
-  }
+  while (n != NULL)
+    {
+      fprintf(stdout, "Node contains: %d\n", n->data);
+      n = SLIST_NEXT(n, nodes);
+    }
   fflush(stdout);
 
   /*
@@ -57,9 +61,10 @@ void do_slist_example(const int argc, char * argv[])
    * Second, use the macro to remove the head of the slist. Third and finally, free the memory pointed
    * to by the pointer from the first step. Swapping the second and third step will cause a segfault.
    */
-  for (;!SLIST_EMPTY(&list);) {
-    n = SLIST_FIRST(&list);
-    SLIST_REMOVE_HEAD(&list, nodes);
-    free(n);
-  }
+  for (; !SLIST_EMPTY(&list);)
+    {
+      n = SLIST_FIRST(&list);
+      SLIST_REMOVE_HEAD(&list, nodes);
+      free(n);
+    }
 }

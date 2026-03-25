@@ -1,20 +1,22 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <sys/queue.h>
 
 #include "stailq.h"
 
 #define EXAMPLE_INDEX 5
 
-struct list_entry {
+struct list_entry
+{
   void * data;
   STAILQ_ENTRY(list_entry) list_entries;
 };
 
 STAILQ_HEAD(list_head, list_entry);
 
-static struct list_entry * list_entry_new(void * const data)
+static struct list_entry *
+list_entry_new(void * const data)
 {
   struct list_entry * const new_entry = (struct list_entry * const) calloc(1, sizeof(struct list_entry));
   if (new_entry == NULL)
@@ -23,7 +25,8 @@ static struct list_entry * list_entry_new(void * const data)
   return new_entry;
 }
 
-static struct list_entry * list_entry_at(const struct list_head * const head, const size_t index)
+static struct list_entry *
+list_entry_at(const struct list_head * const head, const size_t index)
 {
   if (head == NULL)
     abort();
@@ -33,11 +36,12 @@ static struct list_entry * list_entry_at(const struct list_head * const head, co
   return list_entry;
 }
 
-void do_stailq_example(const int argc, char * argv[])
+void
+do_stailq_example(const int argc, char * argv[])
 {
   (void) argc;
   (void) argv;
-  
+
   struct list_entry * entry = NULL;
   struct list_head head;
 
@@ -54,14 +58,14 @@ void do_stailq_example(const int argc, char * argv[])
 
   /* Iterating over the list */
   STAILQ_FOREACH(entry, &head, list_entries)
-    fprintf(stderr, "Node data: [%p]\n", entry->data);
+  fprintf(stderr, "Node data: [%p]\n", entry->data);
 
   /* Accessing specific indexes in the list */
   entry = list_entry_at(&head, EXAMPLE_INDEX);
   fprintf(stderr, "Node[%u] data = [%p]\n", EXAMPLE_INDEX, entry->data);
 
   /* Freeing the list */
-  for (;!STAILQ_EMPTY(&head);)
+  for (; !STAILQ_EMPTY(&head);)
     {
       entry = STAILQ_FIRST(&head);
       STAILQ_REMOVE_HEAD(&head, list_entries);
