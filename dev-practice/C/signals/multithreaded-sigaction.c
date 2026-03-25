@@ -47,8 +47,7 @@ static const char * shutdown_signals_str[] = {
   "HUP",
 };
 
-#define SHUTDOWN_SIGNALS_COUNT                                                \
-  (sizeof(shutdown_signals) / sizeof(shutdown_signals[0]))
+#define SHUTDOWN_SIGNALS_COUNT (sizeof(shutdown_signals) / sizeof(shutdown_signals[0]))
 
 // ============================================================================
 // Helper Functions
@@ -82,24 +81,13 @@ print_signal_info(int sig)
   const char * action = get_signal_action(sig);
 
   fprintf(stderr, "\n");
-  fprintf(
-      stderr,
-      "╔══════════════════════════════════════════════════════════════╗\n");
-  fprintf(
-      stderr,
-      "║  SIGNAL CAUGHT                                               ║\n");
-  fprintf(
-      stderr,
-      "╠══════════════════════════════════════════════════════════════╣\n");
-  fprintf(
-      stderr,
-      "║  Number:      %03d                                            ║\n",
-      sig);
+  fprintf(stderr, "╔══════════════════════════════════════════════════════════════╗\n");
+  fprintf(stderr, "║  SIGNAL CAUGHT                                               ║\n");
+  fprintf(stderr, "╠══════════════════════════════════════════════════════════════╣\n");
+  fprintf(stderr, "║  Number:      %03d                                            ║\n", sig);
   fprintf(stderr, "║  Name:        %-46s ║\n", name);
   fprintf(stderr, "║  Action:      %-46s ║\n", action);
-  fprintf(
-      stderr,
-      "╚══════════════════════════════════════════════════════════════╝\n");
+  fprintf(stderr, "╚══════════════════════════════════════════════════════════════╝\n");
   fprintf(stderr, "\n");
 }
 
@@ -118,13 +106,11 @@ worker_thread(void * arg)
   for (; running;)
     {
       iteration++;
-      fprintf(stderr, "[Worker %d] Iteration %d - working...\n", thread_id,
-              iteration);
+      fprintf(stderr, "[Worker %d] Iteration %d - working...\n", thread_id, iteration);
       sleep(3);
     }
 
-  fprintf(stderr, "[Worker %d] Received shutdown signal, exiting gracefully\n",
-          thread_id);
+  fprintf(stderr, "[Worker %d] Received shutdown signal, exiting gracefully\n", thread_id);
   return NULL;
 }
 
@@ -141,9 +127,7 @@ signal_handler_thread(void * arg)
 
   fprintf(stderr, "[Signal Handler] Thread started\n");
   fprintf(stderr, "[Signal Handler] Ready to catch ALL possible signals\n");
-  fprintf(stderr,
-          "[Signal Handler] Send any signal using: kill -<signal> %d\n\n",
-          getpid());
+  fprintf(stderr, "[Signal Handler] Send any signal using: kill -<signal> %d\n\n", getpid());
 
   for (; running;)
     {
@@ -152,8 +136,7 @@ signal_handler_thread(void * arg)
 
       if (err != 0)
         {
-          fprintf(stderr, "[Signal Handler] sigwait error: %s\n",
-                  strerror(err));
+          fprintf(stderr, "[Signal Handler] sigwait error: %s\n", strerror(err));
           continue;
         }
 
@@ -168,10 +151,8 @@ signal_handler_thread(void * arg)
       if (is_in_array(sig, shutdown_signals, SHUTDOWN_SIGNALS_COUNT))
         {
           // Graceful shutdown signals
-          fprintf(stderr,
-                  "[Signal Handler] Initiating graceful shutdown...\n");
-          fprintf(stderr, "[Signal Handler] Total signals handled: %d\n",
-                  signal_count);
+          fprintf(stderr, "[Signal Handler] Initiating graceful shutdown...\n");
+          fprintf(stderr, "[Signal Handler] Total signals handled: %d\n", signal_count);
           running = 0;
 
           // In a real application, you might:
@@ -186,11 +167,8 @@ signal_handler_thread(void * arg)
         {
           // Fatal signals - we caught it, but we should still exit
           fprintf(stderr, "[Signal Handler] Fatal signal received!\n");
-          fprintf(stderr,
-                  "[Signal Handler] Dumping diagnostic info and exiting...\n");
-          fprintf(stderr,
-                  "[Signal Handler] Total signals handled before crash: %d\n",
-                  signal_count);
+          fprintf(stderr, "[Signal Handler] Dumping diagnostic info and exiting...\n");
+          fprintf(stderr, "[Signal Handler] Total signals handled before crash: %d\n", signal_count);
 
           // You could do cleanup here, but be careful with fatal signals
           // The program state might be corrupted
@@ -203,10 +181,8 @@ signal_handler_thread(void * arg)
       else
         {
           // Informational/ignorable signals
-          fprintf(stderr,
-                  "[Signal Handler] Signal %d logged and acknowledged\n", sig);
-          fprintf(stderr,
-                  "[Signal Handler] Continuing normal operation...\n\n");
+          fprintf(stderr, "[Signal Handler] Signal %d logged and acknowledged\n", sig);
+          fprintf(stderr, "[Signal Handler] Continuing normal operation...\n\n");
         }
     }
 
@@ -249,15 +225,13 @@ print_signal_list(void)
 
   fprintf(stderr, "  FATAL SIGNALS (Will cause termination after logging):\n");
   for (size_t i = 0; i < FATAL_SIGNALS_COUNT; i++)
-    fprintf(stderr, "    %2d  SIG%-8s  %s\n", fatal_signals[i],
-            strsignal(fatal_signals[i]) ? fatal_signals_str[i] : "",
+    fprintf(stderr, "    %2d  SIG%-8s  %s\n", fatal_signals[i], strsignal(fatal_signals[i]) ? fatal_signals_str[i] : "",
             strsignal(fatal_signals[i]));
 
   fprintf(stderr, "\n  SHUTDOWN SIGNALS (Graceful termination):\n");
   for (size_t i = 0; i < SHUTDOWN_SIGNALS_COUNT; i++)
     fprintf(stderr, "    %2d  SIG%-8s  %s\n", shutdown_signals[i],
-            strsignal(shutdown_signals[i]) ? shutdown_signals_str[i] : "",
-            strsignal(shutdown_signals[i]));
+            strsignal(shutdown_signals[i]) ? shutdown_signals_str[i] : "", strsignal(shutdown_signals[i]));
 
   fprintf(stderr, "\n  UNCATCHABLE SIGNALS:\n");
   fprintf(stderr, "    %2d  SIGKILL     Kill (cannot be caught)\n", SIGKILL);
@@ -309,8 +283,7 @@ main(int argc, char * argv[])
     if (sigismember(&full_mask, s))
       signal_count++;
 
-  fprintf(stderr, "[Main] Created signal mask with %d catchable signals\n",
-          signal_count);
+  fprintf(stderr, "[Main] Created signal mask with %d catchable signals\n", signal_count);
 
   // ========================================================================
   // STEP 2: Block ALL signals in the main thread
@@ -334,8 +307,7 @@ main(int argc, char * argv[])
   fprintf(stderr, "  kill -SIGALRM  %d   # Test alarm signal\n", getpid());
   fprintf(stderr, "  kill -SIGTERM  %d   # Graceful shutdown\n", getpid());
   fprintf(stderr, "  kill -SIGINT   %d   # Ctrl+C simulation\n", getpid());
-  fprintf(stderr, "  kill -SIGKILL  %d   # Uncatchable - immediate death!\n",
-          getpid());
+  fprintf(stderr, "  kill -SIGKILL  %d   # Uncatchable - immediate death!\n", getpid());
   fprintf(stderr, "──────────────────────────────────────────────────────────"
                   "─────────────\n");
   fprintf(stderr, "\n");
@@ -349,15 +321,12 @@ main(int argc, char * argv[])
         perror("pthread_create worker");
         exit(EXIT_FAILURE);
       }
-  fprintf(stderr,
-          "[Main] Created %d worker threads (signals blocked in all)\n",
-          N_THREADS);
+  fprintf(stderr, "[Main] Created %d worker threads (signals blocked in all)\n", N_THREADS);
 
   // ========================================================================
   // STEP 4: Create the dedicated signal handler thread
   // ========================================================================
-  if (pthread_create(&signal_thread, NULL, signal_handler_thread, &full_mask)
-      != 0)
+  if (pthread_create(&signal_thread, NULL, signal_handler_thread, &full_mask) != 0)
     {
       perror("pthread_create signal thread");
       exit(EXIT_FAILURE);
