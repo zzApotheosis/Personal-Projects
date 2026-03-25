@@ -28,6 +28,19 @@ static const int fatal_signals[] = {
   SIGXFSZ,			// File size limit exceeded
 };
 
+static const char *fatal_signals_str[] = {
+  "ABRT",
+  "BUS",
+  "FPE",
+  "ILL",
+  "QUIT",
+  "SEGV",
+  "SYS",
+  "TRAP",
+  "XCPU",
+  "XFSZ",
+};
+
 #define FATAL_SIGNALS_COUNT                                                   \
   (sizeof (fatal_signals) / sizeof (fatal_signals[0]))
 
@@ -36,6 +49,12 @@ static const int shutdown_signals[] = {
   SIGINT,			// Ctrl+C
   SIGTERM,			// Default kill signal
   SIGHUP,			// Hangup (often used for config reload, but also termination)
+};
+
+static const char *shutdown_signals_str[] = {
+  "INT",
+  "TERM",
+  "HUP",
 };
 
 #define SHUTDOWN_SIGNALS_COUNT                                                \
@@ -241,13 +260,13 @@ print_signal_list (void)
 	   "  FATAL SIGNALS (Will cause termination after logging):\n");
   for (size_t i = 0; i < FATAL_SIGNALS_COUNT; i++)
     fprintf (stderr, "    %2d  SIG%-8s  %s\n", fatal_signals[i],
-	     strsignal (fatal_signals[i]) ? "" : "",
+	     strsignal (fatal_signals[i]) ? fatal_signals_str[i] : "",
 	     strsignal (fatal_signals[i]));
 
   fprintf (stderr, "\n  SHUTDOWN SIGNALS (Graceful termination):\n");
   for (size_t i = 0; i < SHUTDOWN_SIGNALS_COUNT; i++)
     fprintf (stderr, "    %2d  SIG%-8s  %s\n", shutdown_signals[i],
-	     strsignal (shutdown_signals[i]) ? "" : "",
+	     strsignal (shutdown_signals[i]) ? shutdown_signals_str[i] : "",
 	     strsignal (shutdown_signals[i]));
 
   fprintf (stderr, "\n  UNCATCHABLE SIGNALS:\n");
