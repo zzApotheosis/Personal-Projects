@@ -1,0 +1,5 @@
+*
+!/.gitignore
+!/multithreaded-sigaction.c
+!/sigaction.c
+!/signal.c
