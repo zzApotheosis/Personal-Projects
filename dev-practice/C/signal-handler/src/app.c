@@ -59,7 +59,7 @@ signal_handler_impl(const int argc, char * argv[])
   pthread_mutex_init(&app.mutex, NULL);
   pthread_cond_init(&app.cond, NULL);
 
-  signal_handler_t * const handler = signal_handler_get();
+  signal_handler_t * handler = signal_handler_get();
   signal_handler_set_full_signal_mask(handler);
   signal_handler_set_callback(handler, signal_handler_callback);
   signal_handler_set_callback_arg(handler, &app);
@@ -75,6 +75,7 @@ signal_handler_impl(const int argc, char * argv[])
   if (pthread_join(app.worker_thread, NULL) < 0)
     abort();
   signal_handler_join(handler);
+  signal_handler_free(&handler);
 
   fprintf(stderr, "All threads finished!\n");
 }
