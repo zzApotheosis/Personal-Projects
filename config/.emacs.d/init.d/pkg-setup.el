@@ -24,6 +24,7 @@
               pkg-installed-zig-mode-p nil
               pkg-installed-markdown-mode-p nil
 	      pkg-installed-cmake-mode-p nil
+              pkg-installed-fish-mode-p nil
               
               pkg-installed-fakepkg-p nil)
 
@@ -71,4 +72,5 @@
   (load-file (concat pkg-setup-dir "/setup-protobuf.el"))
   (load-file (concat pkg-setup-dir "/setup-eldoc-box.el"))
   (load-file (concat pkg-setup-dir "/setup-nim-mode.el"))
+  (load-file (concat pkg-setup-dir "/setup-fish-mode.el"))
   )
