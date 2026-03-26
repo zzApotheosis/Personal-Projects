@@ -75,6 +75,7 @@ signal_handler_impl(const int argc, char * argv[])
     abort();
 
   fprintf(stderr, "PID: %d\n", getpid());
+  fprintf(stderr, "Application will terminate when %d signals are received\n", SIGNAL_LIMIT);
 
   if (pthread_join(app.worker_thread, NULL) < 0)
     abort();
