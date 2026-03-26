@@ -1,0 +1,28 @@
+default_mode "locked"
+
+keybinds {
+    unbind "Ctrl g"
+    unbind "Ctrl b"
+
+    normal {
+        bind "`" {
+            SwitchToMode "Tmux";
+        }
+    }
+
+    tmux {
+        bind "`" {
+            WriteChars "`";
+            SwitchToMode "Normal";
+        }
+        bind "Backspace" {
+            SwitchToMode "Locked";
+        }
+    }
+
+    locked {
+        bind "Alt Backspace" {
+            SwitchToMode "Normal";
+        }
+    }
+}
