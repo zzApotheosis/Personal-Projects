@@ -1,15 +1,16 @@
+#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
-#include <pthread.h>
 
 #include "app.h"
 #include "signal-handler.h"
 
 #define SIGNAL_LIMIT 3
 
-typedef struct app_t {
+typedef struct app_t
+{
   pthread_t worker_thread;
 
   int num_signals;
@@ -18,7 +19,8 @@ typedef struct app_t {
   pthread_cond_t cond;
 } app_t;
 
-static void signal_handler_callback(const int s, void * const arg)
+static void
+signal_handler_callback(const int s, void * const arg)
 {
   app_t * const app = (app_t * const) arg;
 
@@ -28,24 +30,26 @@ static void signal_handler_callback(const int s, void * const arg)
   pthread_cond_signal(&app->cond);
 }
 
-static int signal_handler_condition(void * const arg)
+static int
+signal_handler_condition(void * const arg)
 {
   app_t * const app = (app_t * const) arg;
   return app->num_signals < SIGNAL_LIMIT;
 }
 
-static void * worker_thread_main(void * arg)
+static void *
+worker_thread_main(void * arg)
 {
   app_t * const app = (app_t * const) arg;
 
   pthread_mutex_lock(&app->mutex);
-  for (;app->num_signals < SIGNAL_LIMIT;)
+  for (; app->num_signals < SIGNAL_LIMIT;)
     {
       pthread_cond_wait(&app->cond, &app->mutex);
       fprintf(stderr, "[worker] Signals caught: %d\n", app->num_signals);
     }
   pthread_mutex_unlock(&app->mutex);
-  
+
   return NULL;
 }
 

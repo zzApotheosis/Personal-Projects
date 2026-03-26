@@ -25,7 +25,6 @@ extern "C"
   void signal_handler_start(signal_handler_t * const);
   void signal_handler_join(signal_handler_t * const);
 
-
 #ifdef __cplusplus
 }
 #endif
