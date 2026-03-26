@@ -13,6 +13,9 @@ compinit
 
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z} r:|[._-]=* r:|=* l:|=*'
 
+bindkey '\e[A' history-search-backward
+bindkey '\e[B' history-search-forward
+
 # Personal aliases
 if [ -z "$(alias c       > /dev/null 2>&1)" ]; then alias c="clear"; fi
 if [ -z "$(alias ls      > /dev/null 2>&1)" ]; then alias ls="ls --color=auto"; fi
