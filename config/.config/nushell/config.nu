@@ -17,11 +17,42 @@
 # options using:
 #     config nu --doc | nu-highlight | less -R
 
-$env.PATH ++= ["~/.local/bin"]
-$env.PATH ++= ["~/.cargo/bin"]
+
+
+
 $env.EDITOR = "nvim"
 
+$env.PATH ++= ["~/.local/bin"]
+$env.PATH ++= ["~/.cargo/bin"]
+
+# C Compiler
+$env.CC = "clang"
+$env.CXX = "clang++"
+#$env.LD = "lld"
+$env.LD = "ld.lld"
+$env.AR = "llvm-ar"
+$env.NM = "llvm-nm"
+$env.STRIP = "llvm-strip"
+$env.OBJCOPY = "llvm-objcopy"
+$env.OBJDUMP = "llvm-objdump"
+$env.READELF = "llvm-readelf"
+$env.HOSTCC = "clang"
+$env.HOSTCXX = "clang++"
+$env.HOSTAR = "llvm-ar"
+$env.HOSTLD = "lld"
+$env.HOSTLD = "ld.lld"
+
+$env.GPG_TTY = (^tty | into string)
+
+let agents = ps | where name == 'ssh-agent' | first
+let sockets = ls /tmp/ssh*/* | where type == 'socket' | first
+if $agents != null {
+    $env.SSH_AGENT_PID = ($agents.pid | into string)
+    $env.SSH_AUTH_SOCK = ($sockets.name | into string)
+}
 
 # Set custom aliases
 alias c = clear
 alias l = ls -a
+alias ec = emacsclient -c
+alias ecnw = emacsclient -c -nw
