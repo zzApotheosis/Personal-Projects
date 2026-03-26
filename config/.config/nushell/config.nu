@@ -44,11 +44,13 @@ $env.HOSTLD = "ld.lld"
 
 $env.GPG_TTY = (^tty | into string)
 
-let agents = ps | where name == 'ssh-agent' | first
-let sockets = ls /tmp/ssh*/* | where type == 'socket' | first
-if $agents != null {
-    $env.SSH_AGENT_PID = ($agents.pid | into string)
-    $env.SSH_AUTH_SOCK = ($sockets.name | into string)
+try {
+    let agents = ps | where name == 'ssh-agent' | first
+    let sockets = ls /tmp/ssh*/* | where type == 'socket' | first
+    if $agents != null {
+        $env.SSH_AGENT_PID = ($agents.pid | into string)
+        $env.SSH_AUTH_SOCK = ($sockets.name | into string)
+    }
 }
 
 # Set custom aliases
