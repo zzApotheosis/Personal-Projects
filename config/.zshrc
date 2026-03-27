@@ -33,4 +33,4 @@ if [ $? -eq 0 ]; then
 fi
 
 # Starship!
-eval "$(starship init zsh)"
+#eval "$(starship init zsh)"
