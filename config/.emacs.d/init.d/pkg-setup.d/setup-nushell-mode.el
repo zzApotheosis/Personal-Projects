@@ -1,0 +1,4 @@
+(load-file (concat user-pkgs-dir "/nushell-mode/nushell-mode.el"))
+(add-to-list 'auto-mode-alist '("\\.nu\\'" . nushell-mode))
+
+(setq-default pkg-installed-nushell-mode-p t)
