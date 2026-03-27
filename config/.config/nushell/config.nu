@@ -52,6 +52,12 @@ try {
     }
 }
 
+# Starship!
+try {
+    mkdir ($nu.data-dir | path join "vendor/autoload")
+    starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+}
+
 # Set custom aliases
 alias c = clear
 alias l = ls -a
