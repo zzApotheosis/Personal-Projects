@@ -2,9 +2,10 @@
 #define TEMPLATE_H
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
-  
+
   int foo(const int, const int);
 
 #ifdef __cplusplus
