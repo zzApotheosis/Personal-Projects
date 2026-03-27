@@ -58,6 +58,16 @@ try {
     starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
 }
 
+# Interface to the system-wide lsd command
+def --wrapped lsd [...args] {
+     if ($args | length) > 0 {
+        ^lsd ...$args
+        return
+     }
+
+     ^lsd -lah
+}
+
 # Set custom aliases
 alias c = clear
 alias l = ls -a
