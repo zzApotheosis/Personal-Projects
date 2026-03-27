@@ -17,9 +17,6 @@
 # options using:
 #     config nu --doc | nu-highlight | less -R
 
-
-
-
 $env.EDITOR = "nvim"
 
 $env.PATH ++= ["~/.local/bin"]
