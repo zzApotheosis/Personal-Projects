@@ -1,8 +1,7 @@
-default_mode "locked"
+//default_mode "locked"
 default_shell "nu"
 
 keybinds {
-    unbind "Ctrl g"
     unbind "Ctrl b"
 
     normal {
@@ -16,12 +15,10 @@ keybinds {
             WriteChars "`";
             SwitchToMode "Normal";
         }
-        bind "Backspace" {
-            SwitchToMode "Locked";
-        }
     }
 
     locked {
+        unbind "Ctrl g"
         bind "Alt Backspace" {
             SwitchToMode "Normal";
         }
