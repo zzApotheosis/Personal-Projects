@@ -76,5 +76,6 @@ def --wrapped lsd [...args] {
 # Set custom aliases
 alias c = clear
 alias l = ls -a
+alias ll = ls -al
 alias ec = emacsclient -c
 alias ecnw = emacsclient -c -nw
