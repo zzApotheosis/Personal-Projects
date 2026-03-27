@@ -53,9 +53,14 @@ try {
 }
 
 # Starship!
+#try {
+#    mkdir ($nu.data-dir | path join "vendor/autoload")
+#    starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+#}
+
+# oh-my-posh
 try {
-    mkdir ($nu.data-dir | path join "vendor/autoload")
-    starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+    oh-my-posh init nu --config https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/atomic.omp.json
 }
 
 # Interface to the system-wide lsd command
