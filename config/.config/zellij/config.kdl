@@ -1,5 +1,5 @@
 default_mode "locked"
-default_shell "nu"
+#default_shell "nu"
 
 keybinds {
     unbind "Ctrl g"
