@@ -22,7 +22,9 @@ $env.EDITOR = "nvim"
 $env.PATH ++= ["~/.local/bin"]
 $env.PATH ++= ["~/.cargo/bin"]
 
-#$env.LANG = 'en_US.UTF-8'
+if not ('LANG' in $env) {
+   $env.LANG = 'en_US.UTF-8'
+}
 
 # C Compiler
 $env.CC = "clang"
