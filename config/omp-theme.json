@@ -3,6 +3,7 @@
     "blocks": [
         {
             "alignment": "left",
+            "newline": true,
             "segments": [
                 {
                     "background": "#2f2f2f",
@@ -33,7 +34,7 @@
                     "background": "#2f2f2f",
                     "foreground": "#fafafa",
                     "style": "diamond",
-                    "template": " {{ if ne .Env.POSH_SESSION_DEFAULT_USER .UserName }}<#dddddd>{{ .UserName }}</><#cccccc>\uf1fa</>{{ end }}<#8888ff>{{ .HostName }}</><#7a7a7a> \ue0b1</>",
+                    "template": " {{ if .Root }}<#ff8888>{{ else }}<#dddddd>{{ end }}{{ .UserName }}<#cccccc>\uf1fa<#8888ff>{{ .HostName }}<#7a7a7a> \ue0b1</>",
                     "type": "session"
                 },
                 {
@@ -51,7 +52,8 @@
                         "style": "full"
                     },
                     "style": "diamond",
-                    "template": "<#f2f200> \ue5ff </>{{ .Path }} ",
+                    //"template": "<#f2f200> \ue5ff </>{{ .Path }} ",
+                    "template": "<#f2f200> \ue5ff {{ .Folder }} ",
                     "type": "path"
                 },
                 {
@@ -132,7 +134,8 @@
                 {
                     "foreground": "#7a7a7a",
                     "style": "plain",
-                    "template": " ~#@\u276f ",
+                    //"template": " ~#@\u276f ",
+                    "template": "\u276f",
                     "type": "text"
                 }
             ],
@@ -178,7 +181,8 @@
     "transient_prompt": {
         "background": "transparent",
         "foreground": "#7a7a7a",
-        "template": " ~#@\u276f "
+        //"template": " ~#@\u276f "
+        "template": "\u276f "
     },
     "version": 4
 }
