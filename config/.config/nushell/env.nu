@@ -55,9 +55,9 @@ try {
 }
 
 try {
-    $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
+    $env.CARAPACE_BRIDGES = 'zsh,fish,bash' # optional
     mkdir $"($nu.cache-dir)"
     carapace _carapace nushell | save --force $"($nu.cache-dir)/carapace.nu"
 }
 
-if ( '~/.inshellisense/init/nu/init.nu' | path exists ) { source ~/.inshellisense/init/nu/init.nu }
+#if ( '~/.inshellisense/init/nu/init.nu' | path exists ) { source ~/.inshellisense/init/nu/init.nu }
