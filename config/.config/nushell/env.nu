@@ -19,8 +19,8 @@
 
 $env.EDITOR = "nvim"
 
-$env.PATH ++= ["~/.local/bin"]
-$env.PATH ++= ["~/.cargo/bin"]
+$env.PATH = ($env.PATH | prepend "~/.local/bin")
+$env.PATH = ($env.PATH | prepend "~/.cargo/bin")
 
 if not ('LANG' in $env) {
    $env.LANG = 'en_US.UTF-8'
