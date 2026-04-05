@@ -17,7 +17,8 @@
 # You can remove these comments if you want or leave
 # them for future reference.
 
-$env.EDITOR = "nvim"
+#$env.EDITOR = "nvim"
+$env.EDITOR = 'hx'
 
 $env.PATH = ($env.PATH | prepend "~/.local/bin")
 $env.PATH = ($env.PATH | prepend "~/.cargo/bin")
