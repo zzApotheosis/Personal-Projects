@@ -20,8 +20,24 @@
 #$env.EDITOR = "nvim"
 $env.EDITOR = 'hx'
 
-$env.PATH = ($env.PATH | prepend "~/.local/bin")
-$env.PATH = ($env.PATH | prepend "~/.cargo/bin")
+let paths = [
+    ($env.HOME | path join ".local/bin"),
+    ($env.HOME | path join ".cargo/bin")
+]
+$env.PATH = ($env.PATH | split row (char esep) | append $paths | uniq)
+unlet $paths
+
+# let paths = [$"($env.HOME | path join '.local/bin')", $"($env.HOME) | path join '.cargo/bin'"]
+# $paths | each {|e|
+#     if $e not in $env.PATH {
+#         $env.PATH = ($env.PATH | prepend $e)
+#     }
+# }
+#if $path not in $env.PATH {
+#    $env.PATH = ($env.PATH | prepend $path)
+#}
+#$env.PATH = ($env.PATH | prepend "~/.local/bin")
+#$env.PATH = ($env.PATH | prepend "~/.cargo/bin")
 
 if not ('LANG' in $env) {
    $env.LANG = 'en_US.UTF-8'
