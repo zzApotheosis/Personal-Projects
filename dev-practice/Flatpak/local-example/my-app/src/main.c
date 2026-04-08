@@ -2,5 +2,5 @@
 
 int main(int argc, char * argv[])
 {
-  fprintf(stderr, "Hello from sandboxed Flatpak!\n");
+  fprintf(stdout, "Hello from sandboxed Flatpak!\n");
 }
