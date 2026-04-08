@@ -1,19 +1,19 @@
 #!/bin/sh
 
 _app_name='my-app'
-_app_id="org.example.${_app_name}"
+_app_id="io.example.${_app_name}"
 _flatpak_yaml="${_app_id}.yml"
 _build_dir='.build-dir'
 _local_repo='.local-repo'
 
 # Installing build dependencies for Flatpak
-flatpak install flathub org.freedesktop.Platform//25.08 org.freedesktop.Sdk//25.08
+#flatpak install flathub org.freedesktop.Platform//25.08 org.freedesktop.Sdk//25.08
 
 # Invoking the Flatpak builder to build the package
-flatpak-builder "${_build_dir}" "${_flatpak_yaml}" --force-clean
+#flatpak-builder "${_build_dir}" "${_flatpak_yaml}" --force-clean
 
 # Run the application
-flatpak-builder --run "${_build_dir}" "${_app_name}"
+#flatpak-builder --run "${_build_dir}" "${_app_name}"
 
 # If you want to install it locally
 #flatpak-builder --user --install --force-clean "${_build_dir}" "${_flatpak_yaml}"
