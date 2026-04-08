@@ -1,0 +1,12 @@
+app-id: org.example.my-app
+runtime: org.freedesktop.Platform
+runtime-version: '25.08'
+sdk: org.freedesktop.Sdk
+command: my-app
+
+modules:
+  - name: my-module
+    buildsystem: meson
+    sources:
+      - type: dir
+        path: my-app
