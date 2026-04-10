@@ -1,0 +1,8 @@
+*
+!/.gitignore
+!/config.fish
+
+!/conf.d/
+!/conf.d/**
+!/functions/
+!/functions/**
