@@ -1,11 +1,6 @@
 # Environment setup
-if test -d "$HOME/.local/bin"
-    prepend_path "$HOME/.local/bin"
-end
-
-if test -d "$HOME/.cargo/bin"
-    prepend_path "$HOME/.cargo/bin"
-end
+prepend_path "$HOME/.local/bin"
+prepend_path "$HOME/.cargo/bin"
 
 # C Compiler
 set -gx CC clang
