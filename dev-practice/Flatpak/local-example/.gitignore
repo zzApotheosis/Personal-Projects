@@ -2,7 +2,7 @@
 !/.gitignore
 !/README.md
 !/build.sh
-!/io.example.my-app.yml
+!/manifest.json
 
 !/my-app/
 !/my-app/**

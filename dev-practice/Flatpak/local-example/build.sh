@@ -2,7 +2,7 @@
 
 _app_name='my-app'
 _app_id="io.example.${_app_name}"
-_flatpak_yaml="${_app_id}.yml"
+_flatpak_manifest="manifest.json"
 _build_dir='.build-dir'
 _local_repo='.local-repo'
 
@@ -10,16 +10,16 @@ _local_repo='.local-repo'
 #flatpak install flathub org.freedesktop.Platform//25.08 org.freedesktop.Sdk//25.08
 
 # Invoking the Flatpak builder to build the package
-#flatpak-builder "${_build_dir}" "${_flatpak_yaml}" --force-clean
+#flatpak-builder "${_build_dir}" "${_flatpak_manifest}" --force-clean
 
 # Run the application
 #flatpak-builder --run "${_build_dir}" "${_app_name}"
 
 # If you want to install it locally
-#flatpak-builder --user --install --force-clean "${_build_dir}" "${_flatpak_yaml}"
+#flatpak-builder --user --install --force-clean "${_build_dir}" "${_flatpak_manifest}"
 
 # Exporting the Flatpak to a file that can be moved around
-flatpak-builder --force-clean --repo "${_local_repo}" "${_build_dir}" "${_flatpak_yaml}"
+flatpak-builder --force-clean --repo "${_local_repo}" "${_build_dir}" "${_flatpak_manifest}"
 flatpak build-bundle "${_local_repo}" "${_app_name}.flatpak" "${_app_id}"
 
 # Importing the Flatpak
