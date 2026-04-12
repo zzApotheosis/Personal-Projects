@@ -1,3 +1,3 @@
 function c
-    clear
+    clear $argv
 end
