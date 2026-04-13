@@ -40,5 +40,7 @@ set -e _ssh_agent_pid
 if status is-interactive
     # Commands to run in interactive sessions can go here
     #starship init fish | source
-    oh-my-posh init fish --config "$HOME/.config/omp-theme.json" | source
+    if test -q oh-my-posh
+        oh-my-posh init fish --config "$HOME/.config/omp-theme.json" | source
+    end
 end
