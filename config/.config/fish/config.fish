@@ -32,16 +32,7 @@ set -gx EDITOR hx
 set _ssh_agent_pid "$(pidof ssh-agent)"
 if test -n "$_ssh_agent_pid"
     set -gx SSH_AGENT_PID "$_ssh_agent_pid"
-    if test -z "$SSH_AUTH_SOCK"
-        set -gx SSH_AUTH_SOCK $(find $HOME/.ssh -type s -print -quit 2> /dev/null)
-    end
-    if test -z "$SSH_AUTH_SOCK"
-        set -gx SSH_AUTH_SOCK $(find /tmp -name 'agent.*' -print -quit 2> /dev/null)
-    end
-
-    if test -z "$SSH_AUTH_SOCK"
-        warn (status current-line-number) "SSH_AUTH_SOCK not set!"
-    end
+    find_ssh_auth_sock or warn (status current-filename) (status current-line-number) "Unable to find SSH_AUTH_SOCK"
 end
 set -e _ssh_agent_pid
 
