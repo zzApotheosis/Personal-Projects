@@ -32,7 +32,7 @@ set -gx EDITOR hx
 set _ssh_agent_pid "$(pidof ssh-agent)"
 if test -n "$_ssh_agent_pid"
     set -gx SSH_AGENT_PID "$_ssh_agent_pid"
-    set -gx SSH_AUTH_SOCK $(find /tmp/ssh* -name 'agent.*' -print -quit)
+    set -gx SSH_AUTH_SOCK $(find $HOME/.ssh /tmp -name 'agent.*' -print -quit 2> /dev/null)
 end
 set -e _ssh_agent_pid
 
