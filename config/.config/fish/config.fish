@@ -36,6 +36,9 @@ if test -n "$_ssh_agent_pid"
 end
 set -e _ssh_agent_pid
 
+# Set umask
+umask 0077
+
 # Interactive sessions only
 if status is-interactive
     # Commands to run in interactive sessions can go here
