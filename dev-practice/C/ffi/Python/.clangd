@@ -1,2 +1,2 @@
 CompileFlags:
-  Add: [-I/usr/include/python3.9]
+  Add: [-I/usr/include/python3.12]
