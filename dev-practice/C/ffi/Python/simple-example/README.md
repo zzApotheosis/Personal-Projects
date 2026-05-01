@@ -2,5 +2,5 @@
 
 ## Building this example
 
-> $ clang main.c \`pkg-config --cflags --libs python3-embed\` -o main  
+> $ clang -o main $(pkg-config --cflags python) main.c $(pkg-config --libs python3-embed)  
 > $ ./main
