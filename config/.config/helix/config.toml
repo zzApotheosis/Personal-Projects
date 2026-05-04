@@ -16,3 +16,6 @@ C-e = "scroll_down"
 [keys.select]
 C-y = "scroll_up"
 C-e = "scroll_down"
+
+[keys.insert]
+"C-y" = ["move_line_up", "yank", "move_line_down", "paste_before"] # This emulates the Vim behavior; Remove this if Helix ever implements it by default!
