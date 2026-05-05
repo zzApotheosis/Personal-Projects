@@ -1,0 +1,9 @@
+# Ignore all
+*
+
+# Except this
+!/.gitignore
+!/README.md
+!/build.sh
+!/src/
+!/src/**
