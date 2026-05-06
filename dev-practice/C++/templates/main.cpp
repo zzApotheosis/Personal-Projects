@@ -26,9 +26,7 @@ public:
   pop (void)
   {
     if (isEmpty ())
-      {
-        throw std::out_of_range ("Stack is empty");
-      }
+      throw std::out_of_range ("Stack is empty");
     T e = stack.back ();
     stack.pop_back ();
     return e;
@@ -44,9 +42,7 @@ public:
   top () const
   {
     if (isEmpty ())
-      {
-        throw std::out_of_range ("Stack is empty");
-      }
+      throw std::out_of_range ("Stack is empty");
     return stack.back ();
   }
 };
