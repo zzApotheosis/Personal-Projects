@@ -45,7 +45,7 @@
 static int
 pskfunc (gnutls_session_t session, const char *username, gnutls_datum_t *key)
 {
-  printf ("psk: username %s\n", username);
+  fprintf (stderr, "psk: username %s\n", username);
   key->data = gnutls_malloc (4);
   key->data[0] = 0xDE;
   key->data[1] = 0xAD;
@@ -228,31 +228,35 @@ bad_usage:
   return -1;
 }
 
-static int tcp_connect (const char * const addr_str, const char * const port_str)
+static int
+tcp_connect (const char *const addr_str, const char *const port_str)
 {
-  int fd = socket(AF_INET, SOCK_STREAM, 0);
+  int fd = socket (AF_INET, SOCK_STREAM, 0);
   if (fd < 0)
-    ERROR_GOTO("Bad socket", bad_socket);
+    ERROR_GOTO ("Bad socket", bad_socket);
 
-  struct sockaddr_in server_addr = {0};
+  struct sockaddr_in server_addr = { 0 };
   server_addr.sin_family = AF_INET;
-  server_addr.sin_port = htons(atoi(port_str));
-  server_addr.sin_addr.s_addr = inet_addr(addr_str);
+  server_addr.sin_port = htons (atoi (port_str));
+  server_addr.sin_addr.s_addr = inet_addr (addr_str);
 
-  if (connect(fd, (const struct sockaddr *) &server_addr, sizeof(struct sockaddr_in)) < 0)
-    ERROR_GOTO("Bad connect", bad_connect);
+  if (connect (fd, (const struct sockaddr *)&server_addr,
+               sizeof (struct sockaddr_in))
+      < 0)
+    ERROR_GOTO ("Bad connect", bad_connect);
 
   return fd;
 
 bad_connect:
-  close(fd);
+  close (fd);
 bad_socket:
   return -1;
 }
 
-static void tcp_close(const int fd)
+static void
+tcp_close (const int fd)
 {
-  close(fd);
+  close (fd);
 }
 
 int
@@ -308,7 +312,7 @@ echo_client (const int argc, char *argv[])
    */
   sd = tcp_connect (argv[1], argv[2]);
   if (sd < 0)
-    abort();
+    abort ();
 
   gnutls_transport_set_int (session, sd);
   gnutls_handshake_set_timeout (session, GNUTLS_DEFAULT_HANDSHAKE_TIMEOUT);
@@ -332,36 +336,45 @@ echo_client (const int argc, char *argv[])
       char *desc;
 
       desc = gnutls_session_get_desc (session);
-      printf ("- Session info: %s\n", desc);
+      fprintf (stderr, "- Session info: %s\n", desc);
       gnutls_free (desc);
     }
 
-  LOOP_CHECK (ret, gnutls_record_send (session, MSG, strlen (MSG)));
+  for (;;)
+    {
+      memset (buffer, 0, sizeof (buffer));
+      fprintf(stderr, "> ");
+      if (fgets (buffer, sizeof (buffer), stdin) == NULL && feof(stdin))
+        break;
 
-  LOOP_CHECK (ret, gnutls_record_recv (session, buffer, MAX_BUF));
-  if (ret == 0)
-    {
-      printf ("- Peer has closed the TLS connection\n");
-      goto end;
-    }
-  else if (ret < 0 && gnutls_error_is_fatal (ret) == 0)
-    {
-      fprintf (stderr, "*** Warning: %s\n", gnutls_strerror (ret));
-    }
-  else if (ret < 0)
-    {
-      fprintf (stderr, "*** Error: %s\n", gnutls_strerror (ret));
-      goto end;
-    }
+      LOOP_CHECK (ret, gnutls_record_send (session, buffer,
+                                           strnlen (buffer, MAX_BUF)));
 
-  if (ret > 0)
-    {
-      printf ("- Received %d bytes: ", ret);
-      for (ii = 0; ii < ret; ii++)
+      LOOP_CHECK (ret, gnutls_record_recv (session, buffer, MAX_BUF));
+      if (ret == 0)
         {
-          fputc (buffer[ii], stdout);
+          fprintf (stderr, "- Peer has closed the TLS connection\n");
+          goto end;
         }
-      fputs ("\n", stdout);
+      else if (ret < 0 && gnutls_error_is_fatal (ret) == 0)
+        {
+          fprintf (stderr, "*** Warning: %s\n", gnutls_strerror (ret));
+        }
+      else if (ret < 0)
+        {
+          fprintf (stderr, "*** Error: %s\n", gnutls_strerror (ret));
+          goto end;
+        }
+
+      if (ret > 0)
+        {
+          fprintf (stderr, "- Received %d bytes: ", ret);
+          for (ii = 0; ii < ret; ii++)
+            {
+              fputc (buffer[ii], stderr);
+            }
+          fputs ("\n", stderr);
+        }
     }
 
   CHECK (gnutls_bye (session, GNUTLS_SHUT_RDWR));
