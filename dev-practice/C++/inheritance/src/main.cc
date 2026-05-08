@@ -8,6 +8,7 @@ int main(void)
 
   Bar<int> bar;
   bar.do_something();
+  bar.set_data(-1);
   bar.set_more_data(1);
   bar.do_something();
 }

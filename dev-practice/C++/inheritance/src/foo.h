@@ -17,6 +17,7 @@ public:
   Foo (void);
   virtual ~Foo (void);
   virtual void do_something (void) = 0;
+  virtual void set_data(D const &);
 
 protected:
 

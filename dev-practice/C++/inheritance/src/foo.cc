@@ -18,4 +18,8 @@ template <typename D> Foo<D>::~Foo (void)
   std::cerr << "Destroying Foo object" << std::endl;
 }
 
+template <typename D> void Foo<D>::set_data(D const & data) {
+  this->data = data;
+}
+
 template class Foo<int>;
