@@ -93,8 +93,9 @@ impl Worker {
 }
 
 fn main() {
-    const N_JOBS: u32 = 32;
-    const POOL_SIZE: u32 = 1;
+    type T = u32;
+    const N_JOBS: T = 32;
+    const POOL_SIZE: T = 4;
     let mut pool = ThreadPool::new(POOL_SIZE);
 
     for i in 0..N_JOBS {
