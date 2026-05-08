@@ -1,3 +1,8 @@
+/*
+ * I had AI help me write this... So I will need to come back and
+ * get a better understanding of how everything works here.
+ */
+
 use std::{
     sync::{Arc, Mutex, mpsc},
     thread::JoinHandle,
