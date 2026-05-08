@@ -33,7 +33,7 @@ impl ThreadPool {
         Self { workers, sender }
     }
 
-    pub fn execute<F>(&self, f: F)
+    pub fn queue<F>(&self, f: F)
     where
         F: FnOnce() + Send + 'static,
     {
@@ -76,7 +76,10 @@ impl Worker {
                     .expect("Channel disconnected");
 
                 match message {
-                    Message::NewJob(job) => job(),
+                    Message::NewJob(job) => {
+                        eprintln!("[{id}] Running job...");
+                        job();
+                    }
                     Message::Terminate => break,
                 }
             }
@@ -90,17 +93,17 @@ impl Worker {
 }
 
 fn main() {
-    let pool = ThreadPool::new(4);
+    const N_JOBS: u32 = 32;
+    const POOL_SIZE: u32 = 1;
+    let mut pool = ThreadPool::new(POOL_SIZE);
 
-    for i in 0..8 {
-        pool.execute(move || {
-            eprintln!("[job {i}] executing on some thread");
+    for i in 0..N_JOBS {
+        pool.queue(move || {
+            eprintln!("This is job {i}!");
             std::thread::sleep(std::time::Duration::from_millis(500));
-            eprintln!("[job {i}] done");
+            eprintln!("Job {i} finished");
         });
     }
 
-    // Give jobs time to run, then shut down
-    std::thread::sleep(std::time::Duration::from_secs(5));
-    // pool.join() would be called on &mut pool when you're done
+    pool.join();
 }
