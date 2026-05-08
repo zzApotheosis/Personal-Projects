@@ -42,8 +42,8 @@ umask 0077
 # Interactive sessions only
 if status is-interactive
     # Commands to run in interactive sessions can go here
-    #starship init fish | source
-    if type -q oh-my-posh
-        oh-my-posh init fish --config "$HOME/.config/omp-theme.json" | source
-    end
+    starship init fish | source
+    # if type -q oh-my-posh
+    #     oh-my-posh init fish --config "$HOME/.config/omp-theme.json" | source
+    # end
 end
