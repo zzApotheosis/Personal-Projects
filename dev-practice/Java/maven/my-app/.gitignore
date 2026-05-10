@@ -1,0 +1,7 @@
+*
+!/.gitignore
+!/pom.xml
+!/build.sh
+!/run.sh
+!/src/
+!/src/**

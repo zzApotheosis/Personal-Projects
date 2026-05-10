@@ -1,3 +1,5 @@
 *
 !/.gitignore
 !/create-template-project.sh
+!/my-app/
+!/my-app/**
