@@ -14,6 +14,6 @@ chmod 700 "${_project_dir}"/build.sh
 
 cat > "${_project_dir}"/run.sh << 'EOF'
 #!/bin/sh
-java -jar target/my-app-1.0-SNAPSHOT-jar-with-dependencies.jar
+java -jar target/my-app-1.0-SNAPSHOT-jar-with-dependencies.jar $@
 EOF
 chmod 700 "${_project_dir}"/run.sh
