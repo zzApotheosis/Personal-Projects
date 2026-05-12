@@ -1,9 +1,0 @@
-# Ignore all by default
-*
-
-# Exceptions
-!/.gitignore
-!/Cargo.toml
-!/build.rs
-!/src**
-!/README.md
