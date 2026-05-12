@@ -294,6 +294,7 @@ default_mode "locked"
 // Default: $SHELL
 // 
 // default_shell "fish"
+default_shell "nu"
  
 // Choose the path to override cwd that zellij will use for opening new panes
 // 
