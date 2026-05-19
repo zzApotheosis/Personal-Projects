@@ -26,11 +26,6 @@ try {
     starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
 }
 
-# oh-my-posh
-# try {
-#     oh-my-posh init nu --config ($env.HOME | path join '.config/omp-theme.json')
-# }
-
 # carapace-bin
 try {
     source $"($nu.cache-dir)/carapace.nu"
