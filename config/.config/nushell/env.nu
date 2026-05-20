@@ -17,6 +17,33 @@
 # You can remove these comments if you want or leave
 # them for future reference.
 
+# Update the PATH environment variable by prepending or appending a new directory
+def --env update-path [
+    new_path: string
+    --append (-a) # Append instead of prepend (default is prepend)
+] {
+    # Convert the string to an absolute path immediately
+    let absolute_path = ($new_path | path expand)
+
+    # 1. Early exit if the path doesn't actually exist on disk
+    if not ($absolute_path | path exists) {
+        print -e $"Warning: Path ($absolute_path) does not exist."
+        return
+    }
+
+    # 2. Early exit if it's already a member of the PATH list
+    if $absolute_path in $env.PATH {
+        return
+    }
+
+    # 3. Flat scope execution: perform the list mutation
+    if $append {
+        $env.PATH = ($env.PATH | append $absolute_path)
+    } else {
+        $env.PATH = ($env.PATH | prepend $absolute_path)
+    }
+}
+
 #$env.EDITOR = "nvim"
 $env.EDITOR = 'hx'
 
@@ -24,20 +51,10 @@ let paths = [
     ($env.HOME | path join ".local/bin"),
     ($env.HOME | path join ".cargo/bin")
 ]
-$env.PATH = ($env.PATH | split row (char esep) | append $paths | uniq)
-unlet $paths
+for path in $paths {
+    update-path $path
+}
 
-# let paths = [$"($env.HOME | path join '.local/bin')", $"($env.HOME) | path join '.cargo/bin'"]
-# $paths | each {|e|
-#     if $e not in $env.PATH {
-#         $env.PATH = ($env.PATH | prepend $e)
-#     }
-# }
-#if $path not in $env.PATH {
-#    $env.PATH = ($env.PATH | prepend $path)
-#}
-#$env.PATH = ($env.PATH | prepend "~/.local/bin")
-#$env.PATH = ($env.PATH | prepend "~/.cargo/bin")
 
 if not ('LANG' in $env) {
    $env.LANG = 'en_US.UTF-8'
@@ -62,12 +79,12 @@ $env.HOSTLD = "ld.lld"
 
 $env.GPG_TTY = (^tty | into string)
 
-try {
-    let agents = ps | where name == 'ssh-agent' | first
-    let sockets = ls /tmp/ssh*/* | where type == 'socket' | first
-    if $agents != null {
-        $env.SSH_AGENT_PID = ($agents.pid | into string)
-        $env.SSH_AUTH_SOCK = ($sockets.name | into string)
+if not ('SSH_AUTH_SOCK' in $env) {
+    try {
+        let socket = ls /tmp/ssh*/* | where type == 'socket' | first
+        if $socket != null {
+            $env.SSH_AUTH_SOCK = ($socket.name | into string)
+        }
     }
 }
 
