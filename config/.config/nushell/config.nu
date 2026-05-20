@@ -21,14 +21,16 @@
 umask rwx------
 
 # Starship!
-try {
+if (which starship | is-not-empty) {
     mkdir ($nu.data-dir | path join "vendor/autoload")
     starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
 }
 
 # carapace-bin
-try {
-    source $"($nu.cache-dir)/carapace.nu"
+if (which carapace | is-not-empty) {
+    try {
+        source $"($nu.cache-dir)/carapace.nu"
+    }
 }
 
 # Interface to the system-wide lsd command
