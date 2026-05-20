@@ -104,8 +104,12 @@ $env.GPG_TTY = (^tty | into string)
 # I really want there to be an SSH agent running
 find-ssh-auth-sock
 
+let carapace_cache_file = ($nu.cache-dir | path join "carapace.nu")
 if (which carapace | is-not-empty) {
     $env.CARAPACE_BRIDGES = 'zsh,fish,bash' # optional
     mkdir $"($nu.cache-dir)"
-    carapace _carapace nushell | save --force $"($nu.cache-dir)/carapace.nu"
+    carapace _carapace nushell | save --force $carapace_cache_file
+} else {
+    # Touch an empty file if not available
+    "" | save --force $carapace_cache_file
 }
