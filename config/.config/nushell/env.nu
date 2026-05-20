@@ -44,6 +44,28 @@ def --env update-path [
     }
 }
 
+def --env find-ssh-auth-sock [] {
+    # Find SSH_AUTH_SOCK in ~/.ssh
+    if not ('SSH_AUTH_SOCK' in $env) {
+        try {
+            let socket = (^find $"($env.HOME)/.ssh" -type s -print -quit)
+            if ($socket | is-not-empty) {
+                $env.SSH_AUTH_SOCK = ($socket | into string)
+            }
+        }
+    }
+    
+    # Fallback to find SSH_AUTH_SOCK in /tmp
+    if not ('SSH_AUTH_SOCK' in $env) {
+        try {
+            let socket = ls /tmp/ssh*/* | where type == 'socket' | first
+            if $socket != null {
+                $env.SSH_AUTH_SOCK = ($socket.name | into string)
+            }
+        }
+    }
+}
+
 #$env.EDITOR = "nvim"
 $env.EDITOR = 'hx'
 
@@ -79,14 +101,8 @@ $env.HOSTLD = "ld.lld"
 
 $env.GPG_TTY = (^tty | into string)
 
-if not ('SSH_AUTH_SOCK' in $env) {
-    try {
-        let socket = ls /tmp/ssh*/* | where type == 'socket' | first
-        if $socket != null {
-            $env.SSH_AUTH_SOCK = ($socket.name | into string)
-        }
-    }
-}
+# I really want there to be an SSH agent running
+find-ssh-auth-sock
 
 if (which carapace | is-not-empty) {
     $env.CARAPACE_BRIDGES = 'zsh,fish,bash' # optional
