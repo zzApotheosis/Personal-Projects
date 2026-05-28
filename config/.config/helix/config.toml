@@ -1,4 +1,5 @@
-theme = "term16_dark"
+#theme = "term16_dark"
+theme = "ayu_dark"
 
 [editor]
 line-number = "relative"
