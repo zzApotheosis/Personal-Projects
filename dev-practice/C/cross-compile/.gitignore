@@ -1,0 +1,9 @@
+# Ignore all
+*
+
+# Except this
+!/.gitignore
+!/build.sh
+!/x86_64-w64-mingw32.txt
+!/src/
+!/src/**
