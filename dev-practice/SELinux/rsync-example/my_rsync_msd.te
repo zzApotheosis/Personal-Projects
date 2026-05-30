@@ -1,23 +1,27 @@
-policy_module(my_rsync_msd, 1.0)
+policy_module(my_rsync_msd, 2.0)
 
 # Declare that we are interacting with these existing types
 gen_require(`
     type rsync_t;
-    type public_content_rw_t;
+    class capability { dac_override dac_read_search };
 ')
+
+# Declare your custom type and register it as a valid filesystem object type
+type msd_storage_t;
+files_type(msd_storage_t)
 
 #============= rsync_t ==============
 
 # Directories and Standard Files
-allow rsync_t public_content_rw_t:dir all_dir_perms;
-allow rsync_t public_content_rw_t:file all_file_perms;
+allow rsync_t msd_storage_t:dir all_dir_perms;
+allow rsync_t msd_storage_t:file all_file_perms;
 
 # Symlinks and Special Files
-allow rsync_t public_content_rw_t:lnk_file all_lnk_file_perms;
-allow rsync_t public_content_rw_t:chr_file all_chr_file_perms;
-allow rsync_t public_content_rw_t:blk_file all_blk_file_perms;
-allow rsync_t public_content_rw_t:sock_file all_sock_file_perms;
-allow rsync_t public_content_rw_t:fifo_file all_fifo_file_perms;
+allow rsync_t msd_storage_t:lnk_file all_lnk_file_perms;
+allow rsync_t msd_storage_t:chr_file all_chr_file_perms;
+allow rsync_t msd_storage_t:blk_file all_blk_file_perms;
+allow rsync_t msd_storage_t:sock_file all_sock_file_perms;
+allow rsync_t msd_storage_t:fifo_file all_fifo_file_perms;
 
 # Allow certain capabilities
 allow rsync_t self:capability { dac_override dac_read_search };
