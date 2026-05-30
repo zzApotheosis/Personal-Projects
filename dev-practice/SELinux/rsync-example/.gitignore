@@ -1,0 +1,4 @@
+*
+!/.gitignore
+!/build.sh
+!/my_rsync_msd.te
