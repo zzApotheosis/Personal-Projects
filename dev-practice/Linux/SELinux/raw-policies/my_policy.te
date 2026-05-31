@@ -1,42 +1,136 @@
-# 1. Declare the policy module and version
 module my_policy 1.0;
 
-# 2. Require the core classes and permissions from the kernel
-# Since we aren't using macros, we must explicitly state what we are using.
 require {
     type unconfined_t;
-    class process { transition sigchld };
+    attribute file_type;
+
+    class process { transition sigchld noatsecure rlimitinh siginh };
     class dir { read write search add_name remove_name };
-    class file { execute read write open getattr create setattr unlink entrypoint };
+    class file { execute read write open getattr create setattr unlink entrypoint relabelfrom relabelto map };
+    
+    class fd use;
+    class chr_file { read write getattr ioctl };
+    type devpts_t;
+
+    type user_home_t; 
+    type tmp_t;
+    type ld_so_t;
+    type lib_t;
 }
 
-# 3. Define the Types
 type my_type_t;
 type my_type_exec_t;
 type my_type_data_t;
 
-# 4. Domain Transition Setup
-# Allow a process (e.g., init or unconfined_t) to execute the binary
-allow unconfined_t my_type_exec_t : file { read execute open };
+typeattribute my_type_exec_t file_type;
+typeattribute my_type_data_t file_type;
 
-# Tell the kernel that executing my_type_exec_t transitions the process to my_type_t
+# --- Relabeling Rules ---
+allow unconfined_t { user_home_t tmp_t } : file relabelfrom;
+allow unconfined_t my_type_exec_t : file relabelto;
+
+# --- Domain Transition Rules ---
+allow unconfined_t my_type_exec_t : file { read execute open getattr map };
 type_transition unconfined_t my_type_exec_t : process my_type_t;
-
-# Allow the actual transition to happen
 allow unconfined_t my_type_t : process transition;
-allow my_type_t my_type_exec_t : file entrypoint;
+allow my_type_t my_type_exec_t : file { entrypoint read map };
 
-# 5. Restrict my_type_t to ONLY my_type_data_t
-# Grant full access to files of type my_type_data_t
+# --- Kernel Process Handshakes (The Missing Link for OS Error 13) ---
+# Allow the domain transition to happen without the kernel blocking 
+# variable environment changes, resource limits, or signals.
+allow unconfined_t my_type_t : process { noatsecure rlimitinh siginh };
+
+# --- Library Access Rules ---
+allow my_type_t ld_so_t : file { execute read open getattr map };
+allow my_type_t lib_t : file { read open getattr map };
+
+# --- Terminal and Inter-Process Communication ---
+allow my_type_t unconfined_t : fd use;
+allow my_type_t devpts_t : chr_file { read write getattr ioctl };
+
+# --- Strict Isolation Rules ---
 allow my_type_t my_type_data_t : file { read write open getattr create setattr unlink };
-
-# Grant full access to directories of type my_type_data_t (so it can manage files inside)
 allow my_type_t my_type_data_t : dir { read write search add_name remove_name };
-
-# Allow the child domain to communicate back to its parent descriptor if needed
 allow my_type_t unconfined_t : process sigchld;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 1. Declare the policy module and version
+#module my_policy 1.0;
+#
+## 2. Require the core classes and permissions from the kernel
+## Since we aren't using macros, we must explicitly state what we are using.
+#require {
+#    type unconfined_t;
+#    attribute file_type;
+#
+#    class process { transition sigchld };
+#    class dir { read write search add_name remove_name };
+#    class file { execute read write open getattr create setattr unlink entrypoint relabelfrom relabelto map };
+#
+#    class fd use;
+#    class chr_file { read write getattr ioctl };
+#    type devpts_t;
+#
+#    type user_home_t;
+#    type tmp_t;
+#    type ld_so_t;
+#    type lib_t;
+#}
+#
+## 3. Define the Types
+#type my_type_t;
+#type my_type_exec_t;
+#type my_type_data_t;
+#
+#typeattribute my_type_exec_t file_type;
+#typeattribute my_type_data_t file_type;
+#
+## Allow the chcon command to relabel to/from these types
+#allow unconfined_t { user_home_t tmp_t } : file relabelfrom;
+#allow unconfined_t my_type_exec_t : file relabelto;
+#
+## 4. Domain Transition Setup
+## Allow a process (e.g., init or unconfined_t) to execute the binary
+#allow unconfined_t my_type_exec_t : file { read execute open getattr map };
+#
+## Tell the kernel that executing my_type_exec_t transitions the process to my_type_t
+#type_transition unconfined_t my_type_exec_t : process my_type_t;
+#
+## Allow the actual transition to happen
+#allow unconfined_t my_type_t : process transition;
+#allow my_type_t my_type_exec_t : file entrypoint;
+#
+## 5. Restrict my_type_t to ONLY my_type_data_t
+## Grant full access to files of type my_type_data_t
+#allow my_type_t my_type_data_t : file { read write open getattr create setattr unlink };
+#allow my_type_t ld_so_t : file { execute read open getattr map };
+#allow my_type_t lib_t : file { read open getattr map };
+#
+## Grant full access to directories of type my_type_data_t (so it can manage files inside)
+#allow my_type_t my_type_data_t : dir { read write search add_name remove_name };
+#
+## Allow the child domain to communicate back to its parent descriptor if needed
+#allow my_type_t unconfined_t : process sigchld;
+#
+#
 #module my_policy 1.0;
 #
 #require {
