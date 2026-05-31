@@ -1,0 +1,6 @@
+*
+!/.gitignore
+!/README.md
+!/my_policy.te
+!/app/
+!/app/**
