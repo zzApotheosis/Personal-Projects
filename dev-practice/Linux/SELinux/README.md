@@ -25,7 +25,7 @@ the Linux kernel, with GNU/Linux userspace utilities.
     <td>This is the command used to package an SELinux module produced by <code>checkmodule</code>.<br>Example: <code>semodule_package -o my-module.pp -m my-module.mod</code><br><b>NOTE</b>: This is only used in low-level SELinux policies. It is highly recommended to use M4 macros and the SELinux-provided Makefile instead.</td>
   </tr>
   <tr>
-    <td colspan=2><code>/usr/share/selinux/devel/Makefile</code> is the file that should be used (with GNU <code>make</code>) when producing a policy package that may or may not use M4 macros.</td>
+    <td colspan=2><code>/usr/share/selinux/devel/Makefile</code> is the file that should be used (with GNU <code>make</code>) when producing a policy package that may or may not use M4 macros.<br>Example: <code>make -f /usr/share/selinux/devel/Makefile my-policy.pp</code><br>It is assumed that <code>my-policy.te</code>, <code>my-policy.fc</code>, and <code>my-policy.if</code> all exist.</td>
   </tr>
 </table>
 
