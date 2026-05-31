@@ -1,0 +1,20 @@
+## <summary>My custom application domain policy.</summary>
+
+########################################
+## <summary>
+##      Execute my_custom_app in the my_type domain.
+## </summary>
+## <param name="domain">
+##      <summary>
+##      Domain allowed to transition.
+##      </summary>
+## </param>
+#
+interface(`my_policy_domtrans',`
+        gen_require(`
+                type my_type_t, my_type_exec_t;
+        ')
+
+        corecmd_search_bin($1)
+        domtrans_pattern($1, my_type_exec_t, my_type_t)
+')

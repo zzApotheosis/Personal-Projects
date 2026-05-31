@@ -2,3 +2,7 @@
 !/.gitignore
 !/README.md
 !/my-policy.te
+!/my-policy.fc
+!/my-policy.if
+!/app/
+!/app/**

@@ -1,0 +1,65 @@
+policy_module(my-policy, 1.0)
+
+########################################
+#
+# Declarations
+#
+
+# Define the domain (process context)
+type my_type_t;
+domain_type(my_type_t)
+
+# Define the executable type
+type my_type_exec_t;
+files_config_file(my_type_exec_t) # Marks it as a file type
+
+# Define the data type
+type my_type_data_t;
+files_type(my_type_data_t)
+
+# Associate the domain with the unconfined role
+gen_require(`
+    role unconfined_r;
+')
+role unconfined_r types my_type_t;
+
+########################################
+#
+# Domain Transition (Unconfined -> my_type_t)
+#
+
+gen_require(`
+    type unconfined_t;
+')
+
+# Macro that handles the entire domain transition structure
+domtrans_pattern(unconfined_t, my_type_exec_t, my_type_t)
+
+# Handshakes, signal handling, and memory permissions
+allow unconfined_t my_type_t:process { noatsecure rlimitinh siginh getattr getpgid };
+allow my_type_t unconfined_t:process sigchld;
+allow my_type_t self:process execmem;
+
+########################################
+#
+# Local Policy Rules (my_type_t)
+#
+
+# Access to its own data directory and files
+manage_dirs_pattern(my_type_t, my_type_data_t, my_type_data_t)
+manage_files_pattern(my_type_t, my_type_data_t, my_type_data_t)
+
+# Path Traversal & System Configurations (Replaces manual /etc, /usr, /lib traversal)
+files_search_home(my_type_t)
+files_search_etc(my_type_t)
+files_read_etc_files(my_type_t)
+
+# Library Access (Replaces ld_so_t, ld_so_cache_t, lib_t manual rules)
+libs_read_lib_files(my_type_t)
+libs_use_ld_so(my_type_t)
+libs_use_shared_libs(my_type_t)
+
+# Terminal and Devpts Interaction (Replaces manual devpts_t, user_devpts_t, fd use)
+userdom_use_user_terminals(my_type_t)
+dev_read_sysfs(my_type_t) # Frequently required for hardware/basic pathing
+dev_rw_null(my_type_t)    # Replaces manual null_device_t rules
