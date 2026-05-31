@@ -1,3 +1,3 @@
 #!/bin/sh
-checkmodule -M -m -o my_policy.mod my_policy.te
-semodule_package -o my_policy.pp -m my_policy.mod
+checkmodule -M -m -o my-policy.mod my-policy.te
+semodule_package -o my-policy.pp -m my-policy.mod

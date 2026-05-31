@@ -2,6 +2,6 @@
 !/.gitignore
 !/README.md
 !/build.sh
-!/my_policy.te
+!/my-policy.te
 !/app/
 !/app/**

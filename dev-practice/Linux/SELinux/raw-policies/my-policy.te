@@ -1,0 +1,84 @@
+module my-policy 1.0;
+
+require {
+    type unconfined_t;
+    attribute file_type;
+    role unconfined_r;
+
+    class process { transition sigchld noatsecure rlimitinh siginh getattr getpgid execmem };
+    class dir { read write search add_name remove_name getattr };
+    class file { execute read write open getattr create setattr unlink entrypoint relabelfrom relabelto map };
+    class lnk_file { read getattr };
+    
+    class fd use;
+    class chr_file { read write getattr ioctl open };
+    type devpts_t;
+    type user_devpts_t;
+    type unconfined_devpts_t;
+    type null_device_t;
+
+    type user_home_t; 
+    type tmp_t;
+    type ld_so_t;
+    type lib_t;
+
+    type root_t;
+    type home_root_t;
+    type user_home_dir_t;
+    type etc_t;
+    type usr_t;
+    type proc_t;
+    
+    # 1. Add the explicit linker cache type to your required definitions
+    type ld_so_cache_t;
+}
+
+type my_type_t;
+type my_type_exec_t;
+type my_type_data_t;
+
+typeattribute my_type_exec_t file_type;
+typeattribute my_type_data_t file_type;
+
+role unconfined_r types my_type_t;
+
+# --- Relabeling Rules ---
+allow unconfined_t { user_home_t tmp_t } : file relabelfrom;
+allow unconfined_t my_type_exec_t : file relabelto;
+
+# --- Domain Transition Rules ---
+allow unconfined_t my_type_exec_t : file { read execute open getattr map };
+type_transition unconfined_t my_type_exec_t : process my_type_t;
+allow unconfined_t my_type_t : process transition;
+allow my_type_t my_type_exec_t : file { entrypoint read map execute open getattr };
+
+# --- Path Traversal and Configuration Rules ---
+allow my_type_t { root_t home_root_t user_home_dir_t user_home_t etc_t usr_t lib_t proc_t } : dir search;
+allow my_type_t lib_t : dir getattr;
+allow my_type_t lib_t : lnk_file { read getattr };
+allow my_type_t etc_t : file { read open getattr };
+allow my_type_t self : lnk_file { read getattr };
+
+# 2. Grant explicit access to read the true type assigned to /etc/ld.so.cache
+allow my_type_t ld_so_cache_t : file { read open getattr };
+
+# --- Kernel Process Handshakes ---
+allow unconfined_t my_type_t : process { noatsecure rlimitinh siginh };
+allow unconfined_t my_type_t : process { getattr getpgid };
+allow my_type_t self : process execmem;
+
+# --- Library Access Rules ---
+allow my_type_t ld_so_t : file { execute read open getattr map };
+allow my_type_t lib_t : file { read open getattr map };
+
+# --- Terminal and Inter-Process Communication ---
+allow my_type_t unconfined_t : fd use;
+allow my_type_t devpts_t : chr_file { read write getattr ioctl open };
+allow unconfined_t devpts_t : chr_file open;
+allow my_type_t { user_devpts_t unconfined_devpts_t } : chr_file { read write getattr ioctl open };
+allow my_type_t null_device_t : chr_file { read write open getattr };
+
+# --- Strict Isolation Rules ---
+allow my_type_t my_type_data_t : file { read write open getattr create setattr unlink };
+allow my_type_t my_type_data_t : dir { read write search add_name remove_name };
+allow my_type_t unconfined_t : process sigchld;
