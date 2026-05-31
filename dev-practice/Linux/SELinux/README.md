@@ -7,7 +7,7 @@ the Linux kernel, with GNU/Linux userspace utilities.
 
 <table>
   <tr>
-    <th colspan=2>Useful Notes</th>
+    <th colspan=2 align="center">Useful Notes</th>
   </tr>
   <tr>
     <td colspan=2>SELinux has its own "raw" language to specify policy data. But it uses M4 macros to simplify the underlying language.</td>
