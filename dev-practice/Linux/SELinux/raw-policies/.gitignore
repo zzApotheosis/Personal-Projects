@@ -1,6 +1,7 @@
 *
 !/.gitignore
 !/README.md
+!/build.sh
 !/my_policy.te
 !/app/
 !/app/**
