@@ -1,6 +1,7 @@
 # theme = "term16_dark"
 # theme = "ayu_dark"
-theme = "carbon"
+# theme = "carbon"
+theme = "starlight"
 
 [editor]
 line-number = "relative"
