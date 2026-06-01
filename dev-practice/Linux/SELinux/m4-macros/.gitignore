@@ -4,5 +4,6 @@
 !/my-policy.te
 !/my-policy.fc
 !/my-policy.if
+!/do-example.py
 !/app/
 !/app/**
