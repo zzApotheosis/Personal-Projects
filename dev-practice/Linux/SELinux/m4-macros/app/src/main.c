@@ -18,7 +18,7 @@ static int do_app(int argc, char * argv[]) {
   }
 
   for (int i = 2; i < argc; i++) {
-    FILE *fp = fopen(argv[i], "w");
+    FILE *fp = fopen(argv[i], "a+");
     if (fp == NULL) {
       fprintf(stderr, "Failed to open file: %s, %s\n", argv[i],
               strerror(errno));
