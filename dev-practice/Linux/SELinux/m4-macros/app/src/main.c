@@ -27,6 +27,7 @@ static int do_app(int argc, char * argv[]) {
 
     fwrite(argv[1], 1, strlen(argv[1]),
            fp); // Don't care about errors here (but probably should)
+    fwrite("\n", 1, 1, fp);
 
     fclose(fp);
   }
