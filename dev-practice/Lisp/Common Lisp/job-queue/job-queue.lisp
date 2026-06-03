@@ -1,3 +1,4 @@
+#!/bin/env -S sbcl --script
 (defstruct job-queue
   (jobs nil :type list))
 
