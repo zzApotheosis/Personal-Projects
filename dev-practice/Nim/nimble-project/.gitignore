@@ -1,0 +1,5 @@
+*
+!/.gitignore
+!/nimble_project.nimble
+!/src/
+!/src/**
