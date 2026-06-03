@@ -70,8 +70,9 @@ def --env find-ssh-auth-sock [] {
 $env.EDITOR = 'hx'
 
 let paths = [
-    ($env.HOME | path join ".local/bin"),
-    ($env.HOME | path join ".cargo/bin")
+    ($env.HOME | path join ".local/bin"), # User-local installed binaries
+    ($env.HOME | path join ".cargo/bin"), # User-installed Cargo/Rust binaries
+    ($env.HOME | path join ".nimble/bin") # User-installed Nim binaries
 ]
 for path in $paths {
     update-path $path
@@ -99,6 +100,7 @@ $env.HOSTAR = "llvm-ar"
 $env.HOSTLD = "lld"
 $env.HOSTLD = "ld.lld"
 
+# Set the GPG_TTY so gpg commands can be used in the terminal
 $env.GPG_TTY = (^tty | into string)
 
 # I really want there to be an SSH agent running
