@@ -1,6 +1,6 @@
 # SELinux
 
-This is a collection of my notes regarding SELinux.
+This is a collection of my notes regarding SELinux. Red Hat has a nice [tutorial](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/using_selinux/writing-a-custom-selinux-policy) for a straightforward SELinux example setup.
 
 [SELinux](https://github.com/SELinuxProject) is a notoriously complex security enhancement application specifically intended for
 the Linux kernel, with GNU/Linux userspace utilities.
