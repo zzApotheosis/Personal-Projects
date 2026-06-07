@@ -59,21 +59,21 @@ if not ('LANG' in $env) {
 }
 
 # C Compiler
-$env.CC = "clang"
-$env.CXX = "clang++"
-#$env.LD = "lld"
-$env.LD = "ld.lld"
-$env.AR = "llvm-ar"
-$env.NM = "llvm-nm"
-$env.STRIP = "llvm-strip"
-$env.OBJCOPY = "llvm-objcopy"
-$env.OBJDUMP = "llvm-objdump"
-$env.READELF = "llvm-readelf"
-$env.HOSTCC = "clang"
-$env.HOSTCXX = "clang++"
-$env.HOSTAR = "llvm-ar"
-$env.HOSTLD = "lld"
-$env.HOSTLD = "ld.lld"
+$env.CC = 'clang'
+$env.CXX = 'clang++'
+#$env.LD = 'lld'
+$env.LD = 'ld.lld'
+$env.AR = 'llvm-ar'
+$env.NM = 'llvm-nm'
+$env.STRIP = 'llvm-strip'
+$env.OBJCOPY = 'llvm-objcopy'
+$env.OBJDUMP = 'llvm-objdump'
+$env.READELF = 'llvm-readelf'
+$env.HOSTCC = 'clang'
+$env.HOSTCXX = 'clang++'
+$env.HOSTAR = 'llvm-ar'
+$env.HOSTLD = 'lld'
+$env.HOSTLD = 'ld.lld'
 
 # Set the GPG_TTY so gpg commands can be used in the terminal
 $env.GPG_TTY = (^tty | into string)
@@ -82,14 +82,14 @@ $env.GPG_TTY = (^tty | into string)
 find-ssh-auth-sock
 
 # carapace-bin stuff
-const carapace_cache_file = ($nu.cache-dir | path join "carapace.nu")
+const carapace_cache_file = ($nu.cache-dir | path join 'carapace.nu')
 if (which carapace | is-not-empty) {
     $env.CARAPACE_BRIDGES = 'zsh,fish,bash' # optional
     mkdir $"($nu.cache-dir)"
     carapace _carapace nushell | save --force $carapace_cache_file
 } else {
     # Touch an empty file if not available
-    "" | save --force $carapace_cache_file
+    '' | save --force $carapace_cache_file
 }
 
 # Zoxide stuff
@@ -99,7 +99,7 @@ if (which zoxide | is-not-empty) {
     zoxide init nushell | save --force $zoxide_file
 } else {
     # Touch an empty file if not available
-    "" | save --force $zoxide_file
+    '' | save --force $zoxide_file
 }
 
 # fzf stuff
@@ -109,5 +109,5 @@ if (which fzf | is-not-empty) {
     fzf --nushell | save --force $fzf_file
 } else {
     # Touch an empty file if not available
-    "" | save --force $fzf_file
+    '' | save --force $fzf_file
 }
