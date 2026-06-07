@@ -17,32 +17,7 @@
 # You can remove these comments if you want or leave
 # them for future reference.
 
-# Update the PATH environment variable by prepending or appending a new directory
-def --env update-path [
-    new_path: string
-    --append (-a) # Append instead of prepend (default is prepend)
-] {
-    # Convert the string to an absolute path immediately
-    let absolute_path = ($new_path | path expand)
-
-    # 1. Early exit if the path doesn't actually exist on disk
-    if not ($absolute_path | path exists) {
-        print -e $"Warning: Path ($absolute_path) does not exist."
-        return
-    }
-
-    # 2. Early exit if it's already a member of the PATH list
-    if $absolute_path in $env.PATH {
-        return
-    }
-
-    # 3. Flat scope execution: perform the list mutation
-    if $append {
-        $env.PATH = ($env.PATH | append $absolute_path)
-    } else {
-        $env.PATH = ($env.PATH | prepend $absolute_path)
-    }
-}
+use std/util 'path add'
 
 def --env find-ssh-auth-sock [] {
     # Find SSH_AUTH_SOCK in ~/.ssh
@@ -70,12 +45,12 @@ def --env find-ssh-auth-sock [] {
 $env.EDITOR = 'hx'
 
 let paths = [
-    ($env.HOME | path join ".local/bin"), # User-local installed binaries
-    ($env.HOME | path join ".cargo/bin"), # User-installed Cargo/Rust binaries
-    ($env.HOME | path join ".nimble/bin") # User-installed Nim binaries
+    ($nu.home-dir | path join ".local/bin"), # User-local installed binaries
+    ($nu.home-dir | path join ".cargo/bin"), # User-installed Cargo/Rust binaries
+    ($nu.home-dir | path join ".nimble/bin") # User-installed Nim binaries
 ]
 for path in $paths {
-    update-path $path
+    path add $path
 }
 
 
@@ -106,7 +81,8 @@ $env.GPG_TTY = (^tty | into string)
 # I really want there to be an SSH agent running
 find-ssh-auth-sock
 
-let carapace_cache_file = ($nu.cache-dir | path join "carapace.nu")
+# carapace-bin stuff
+const carapace_cache_file = ($nu.cache-dir | path join "carapace.nu")
 if (which carapace | is-not-empty) {
     $env.CARAPACE_BRIDGES = 'zsh,fish,bash' # optional
     mkdir $"($nu.cache-dir)"
@@ -114,4 +90,24 @@ if (which carapace | is-not-empty) {
 } else {
     # Touch an empty file if not available
     "" | save --force $carapace_cache_file
+}
+
+# Zoxide stuff
+const zoxide_file = ($nu.cache-dir | path join 'zoxide.nu')
+if (which zoxide | is-not-empty) {
+    mkdir $"($nu.cache-dir)"
+    zoxide init nushell | save --force $zoxide_file
+} else {
+    # Touch an empty file if not available
+    "" | save --force $zoxide_file
+}
+
+# fzf stuff
+const fzf_file = ($nu.default-config-dir | path join 'autoload' 'fzf_integration.nu')
+if (which fzf | is-not-empty) {
+    mkdir ($nu.default-config-dir | path join 'autoload')
+    fzf --nushell | save --force $fzf_file
+} else {
+    # Touch an empty file if not available
+    "" | save --force $fzf_file
 }
