@@ -42,9 +42,17 @@ def --wrapped lsd [...args] {
      ^lsd -lah
 }
 
-# Set custom aliases
+# Shorthand for 'clear'
 alias c = clear
+
+# Shorthand for 'ls -a'
 alias l = ls -a
+
+# Shorthand for 'ls -al'
 alias ll = ls -al
+
+# Shorthand for 'emacsclient -c'
 alias ec = emacsclient -c
+
+# Shorthand for 'emacsclient -c -nw'
 alias ecnw = emacsclient -c -nw
