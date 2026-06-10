@@ -81,9 +81,31 @@ $env.GPG_TTY = (^tty | into string)
 # I really want there to be an SSH agent running
 find-ssh-auth-sock
 
+# Make sure the Nushell cache directory exists
+mkdir $"($nu.cache-dir)"
+
+# Setup basic aliases
+const alias_data = "# Shorthand for 'clear'
+alias c = clear
+
+# Shorthand for 'ls -a'
+alias l = ls -a
+
+# Shorthand for 'ls -al'
+alias ll = ls -al
+
+# Shorthand for 'emacsclient -c'
+alias ec = emacsclient -c
+
+# Shorthand for 'emacsclient -c -nw'
+alias ecnw = emacsclient -c -nw
+"
+
+const aliases_file = ($nu.cache-dir | path join 'custom-aliases.nu')
+$alias_data | save --force $aliases_file
+
 # carapace-bin stuff
 const carapace_cache_file = ($nu.cache-dir | path join 'carapace.nu')
-mkdir $"($nu.cache-dir)"
 if (which carapace | is-not-empty) {
     $env.CARAPACE_BRIDGES = 'zsh,fish,bash' # optional
     carapace _carapace nushell | save --force $carapace_cache_file
@@ -96,6 +118,7 @@ if (which carapace | is-not-empty) {
 const zoxide_file = ($nu.cache-dir | path join 'zoxide.nu')
 if (which zoxide | is-not-empty) {
     zoxide init nushell | save --force $zoxide_file
+    "# Shorthand for 'z'\nalias cd = z\n" | save --append $aliases_file
 } else {
     # Touch an empty file if not available
     '' | save --force $zoxide_file
@@ -110,3 +133,4 @@ if (which fzf | is-not-empty) {
     # Touch an empty file if not available
     '' | save --force $fzf_file
 }
+
