@@ -83,9 +83,9 @@ find-ssh-auth-sock
 
 # carapace-bin stuff
 const carapace_cache_file = ($nu.cache-dir | path join 'carapace.nu')
+mkdir $"($nu.cache-dir)"
 if (which carapace | is-not-empty) {
     $env.CARAPACE_BRIDGES = 'zsh,fish,bash' # optional
-    mkdir $"($nu.cache-dir)"
     carapace _carapace nushell | save --force $carapace_cache_file
 } else {
     # Touch an empty file if not available
@@ -95,7 +95,6 @@ if (which carapace | is-not-empty) {
 # Zoxide stuff
 const zoxide_file = ($nu.cache-dir | path join 'zoxide.nu')
 if (which zoxide | is-not-empty) {
-    mkdir $"($nu.cache-dir)"
     zoxide init nushell | save --force $zoxide_file
 } else {
     # Touch an empty file if not available
@@ -104,8 +103,8 @@ if (which zoxide | is-not-empty) {
 
 # fzf stuff
 const fzf_file = ($nu.default-config-dir | path join 'autoload' 'fzf_integration.nu')
+mkdir ($nu.default-config-dir | path join 'autoload')
 if (which fzf | is-not-empty) {
-    mkdir ($nu.default-config-dir | path join 'autoload')
     fzf --nushell | save --force $fzf_file
 } else {
     # Touch an empty file if not available
