@@ -118,7 +118,9 @@ if (which carapace | is-not-empty) {
 const zoxide_file = ($nu.cache-dir | path join 'zoxide.nu')
 if (which zoxide | is-not-empty) {
     zoxide init nushell | save --force $zoxide_file
-    "# Shorthand for 'z'\nalias cd = z\n" | save --append $aliases_file
+
+    # Update the custom aliases
+    "# Shorthand for 'z'\nalias cd = z\n\n# Shorthand for 'zi'\nalias cdi = zi\n" | save --append $aliases_file
 } else {
     # Touch an empty file if not available
     '' | save --force $zoxide_file
