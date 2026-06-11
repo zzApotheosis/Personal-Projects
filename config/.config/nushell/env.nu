@@ -45,7 +45,7 @@ def --env find-ssh-auth-sock [] {
 $env.EDITOR = 'hx'
 
 let paths = [
-    ($nu.home-dir | path join ".local/bin"), # User-local installed binaries
+    ($nu.home-dir | path join ".local/bin"), # User-installed local binaries
     ($nu.home-dir | path join ".cargo/bin"), # User-installed Cargo/Rust binaries
     ($nu.home-dir | path join ".nimble/bin") # User-installed Nim binaries
 ]
@@ -99,6 +99,7 @@ alias ec = emacsclient -c
 
 # Shorthand for 'emacsclient -c -nw'
 alias ecnw = emacsclient -c -nw
+
 "
 
 const aliases_file = ($nu.cache-dir | path join 'custom-aliases.nu')
@@ -120,7 +121,7 @@ if (which zoxide | is-not-empty) {
     zoxide init nushell | save --force $zoxide_file
 
     # Update the custom aliases
-    "# Shorthand for 'z'\nalias cd = z\n\n# Shorthand for 'zi'\nalias cdi = zi\n" | save --append $aliases_file
+    "# Shorthand for 'z'\nalias cd = z\n\n# Shorthand for 'zi'\nalias cdi = zi\n\n" | save --append $aliases_file
 } else {
     # Touch an empty file if not available
     '' | save --force $zoxide_file
