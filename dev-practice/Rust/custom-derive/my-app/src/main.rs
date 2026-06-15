@@ -1,4 +1,4 @@
-use my_derive::Describe;
+use my_macros::Describe;
 
 #[derive(Describe)]
 struct User {
@@ -6,6 +6,9 @@ struct User {
     email: String,
     age: u32,
 }
+
+#[derive(Describe)]
+struct EmptyStruct;
 
 fn main() {
     let user = User {
@@ -16,4 +19,7 @@ fn main() {
 
     // Call the manually-generated method
     user.describe();
+
+    let empty = EmptyStruct;
+    empty.describe();
 }

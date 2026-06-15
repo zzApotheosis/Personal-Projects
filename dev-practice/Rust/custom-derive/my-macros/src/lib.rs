@@ -29,7 +29,9 @@ fn extract_struct_name(input: &str) -> Option<&str> {
     for i in 0..words.len() {
         if words[i] == "struct" && i + 1 < words.len() {
             // Get the word after 'struct', stripping any trailing braces or whitespace
-            return Some(words[i + 1].trim_end_matches('{'));
+            let name = words[i + 1].trim_end_matches('{');
+            let name = name.trim_end_matches(';');
+            return Some(name);
         }
     }
     None
