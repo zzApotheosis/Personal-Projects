@@ -115,18 +115,6 @@ if (which carapace | is-not-empty) {
     '' | save --force $carapace_cache_file
 }
 
-# Zoxide stuff
-const zoxide_file = ($nu.cache-dir | path join 'zoxide.nu')
-if (which zoxide | is-not-empty) {
-    zoxide init nushell | save --force $zoxide_file
-
-    # Update the custom aliases
-    "# Shorthand for 'z'\nalias cd = z\n\n# Shorthand for 'zi'\nalias cdi = zi\n\n" | save --append $aliases_file
-} else {
-    # Touch an empty file if not available
-    '' | save --force $zoxide_file
-}
-
 # fzf stuff
 const fzf_file = ($nu.default-config-dir | path join 'autoload' 'fzf_integration.nu')
 mkdir ($nu.default-config-dir | path join 'autoload')

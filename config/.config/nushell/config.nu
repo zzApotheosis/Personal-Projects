@@ -29,9 +29,6 @@ if (which starship | is-not-empty) {
 # carapace-bin
 source ($nu.cache-dir | path join 'carapace.nu')
 
-# Zoxide
-source ($nu.cache-dir | path join 'zoxide.nu')
-
 # Interface to the system-wide lsd command
 def --wrapped lsd [...args] {
      if ($args | length) > 0 {
