@@ -115,13 +115,3 @@ if (which carapace | is-not-empty) {
     '' | save --force $carapace_cache_file
 }
 
-# fzf stuff
-const fzf_file = ($nu.default-config-dir | path join 'autoload' 'fzf_integration.nu')
-mkdir ($nu.default-config-dir | path join 'autoload')
-if (which fzf | is-not-empty) {
-    fzf --nushell | save --force $fzf_file
-} else {
-    # Touch an empty file if not available
-    '' | save --force $fzf_file
-}
-
