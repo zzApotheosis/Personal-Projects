@@ -17,6 +17,7 @@
 
 ;; Set smooth scrolling
 (setq-default scroll-step 1)
+(setq-default mouse-wheel-progressive-speed nil)
 
 ;; Define tab-stop-list
 (let ((limit 120)
