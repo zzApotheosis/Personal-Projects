@@ -86,7 +86,7 @@ mkdir $"($nu.cache-dir)"
 
 # Setup basic aliases
 const alias_data = "# Shorthand for 'clear'
-alias c = clear
+alias c = printf '\\033c'
 
 # Shorthand for 'ls -a'
 alias l = ls -a
