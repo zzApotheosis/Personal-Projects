@@ -1,3 +1,3 @@
 function c
-    clear $argv
+    printf '\033c'
 end
