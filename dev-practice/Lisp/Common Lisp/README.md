@@ -10,20 +10,22 @@ means to learn and understand more about Lisp so that I may one day reach that s
 
 # Resources
 
-[Common Lisp](https://lisp-lang.org/)  
-[Practical Common Lisp](https://gigamonkeys.com/book/)  
-[ANSI Common Lisp](https://paulgraham.com/acl.html)  
-[On Lisp](https://paulgraham.com/onlisp.html)  
-[Let Over Lambda](https://letoverlambda.com/)  
-[SBCL Manual](https://www.sbcl.org/manual/)  
-[CLiki](https://www.cliki.net/)
+- [Common Lisp](https://lisp-lang.org/)  
+- [Practical Common Lisp](https://gigamonkeys.com/book/)  
+- [ANSI Common Lisp](https://paulgraham.com/acl.html)  
+- [On Lisp](https://paulgraham.com/onlisp.html)  
+- [Let Over Lambda](https://letoverlambda.com/)  
+- [SBCL Manual](https://www.sbcl.org/manual/)  
+- [CLiki](https://www.cliki.net/)
 
 # Reference
 
-[Common Lisp the Language, 2nd Edition](https://www.cs.cmu.edu/Groups/AI/html/cltl/cltl2.html)  
-[Common Lisp the Language, 2nd Edition (2)](https://filonenko-mikhail.github.io/cltl2-doc/enpdf/cltl2.pdf)  
-[Common Lisp HyperSpec](https://www.lispworks.com/documentation/HyperSpec/Front/index.htm)  
-[Lisp Docs](https://lisp-docs.github.io/)
+- [Common Lisp the Language, 2nd Edition](https://www.cs.cmu.edu/Groups/AI/html/cltl/cltl2.html)  
+- [Common Lisp the Language, 2nd Edition (2)](https://filonenko-mikhail.github.io/cltl2-doc/enpdf/cltl2.pdf)  
+- [Common Lisp HyperSpec](https://www.lispworks.com/documentation/HyperSpec/Front/index.htm)  
+- [Lisp Docs](https://lisp-docs.github.io/)  
+- [Common Lisp Cookbook](https://lispcookbook.github.io/cl-cookbook/)
+
 
 # Tips
 
