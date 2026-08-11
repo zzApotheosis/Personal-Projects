@@ -22,7 +22,7 @@ means to learn and understand more about Lisp so that I may one day reach that s
 
 - [Common Lisp the Language, 2nd Edition](https://www.cs.cmu.edu/Groups/AI/html/cltl/cltl2.html)  
 - [Common Lisp the Language, 2nd Edition (2)](https://filonenko-mikhail.github.io/cltl2-doc/enpdf/cltl2.pdf)  
-- [Common Lisp HyperSpec](https://www.lispworks.com/documentation/HyperSpec/Front/index.htm)  
+- [Common Lisp HyperSpec](https://www.lispworks.com/documentation/common-lisp.html)  
 - [Lisp Docs](https://lisp-docs.github.io/)  
 - [Common Lisp Cookbook](https://lispcookbook.github.io/cl-cookbook/)
 
