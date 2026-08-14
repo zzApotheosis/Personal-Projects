@@ -19,10 +19,11 @@
   )
 
 (defun solution ()
-  (assert (=
-           (largest-prime-factor 600851475143)
-           6857
-           )
-          )
+  (let* ((n 600851475143)
+         (expected 6857)
+         (actual (largest-prime-factor n)))
+    (assert (= expected actual))
+    actual
+    )
   )
 

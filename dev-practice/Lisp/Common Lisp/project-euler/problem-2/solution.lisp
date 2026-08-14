@@ -9,8 +9,10 @@
              (setf current next))))
 
 (defun solution ()
-  (assert (= (apply #'+ (even-fibonacci 4000000))
-             4613732
-             )
-          )
+  (let* ((n 4000000)
+         (expected 4613732)
+         (actual (apply #'+ (even-fibonacci n))))
+    (assert (= expected actual))
+    actual
+    )
   )
