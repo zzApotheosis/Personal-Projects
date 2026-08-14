@@ -1,6 +1,6 @@
 (defun prime-list (n)
   (let ((value-list))
-    (loop with test-value = 1
+    (loop with test-value = 2
           with current-value = n
           do (loop while (= 0 (mod current-value test-value))
                    do (push test-value value-list)
