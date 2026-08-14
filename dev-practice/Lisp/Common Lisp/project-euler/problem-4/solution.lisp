@@ -28,7 +28,7 @@
     (loop with x = 1
           while (<= (digit-length x 10) n)
           do
-          (loop with y = 1
+          (loop with y = x
                 while (<= (digit-length y 10) n)
                 do
                 (let ((n (* x y)))
