@@ -4,9 +4,7 @@
           for i from 2 to (sqrt n)
           do
           (when (= (mod n i) 0)
-            (progn
-              (return nil)
-              )
+            (return nil)
             )
           )
     (return t)
