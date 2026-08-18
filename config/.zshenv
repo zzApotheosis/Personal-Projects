@@ -31,14 +31,19 @@ export EDITOR="hx"
 #export EDITOR="emacsclient -s ${HOME}/.emacs.d/.socket -c"
 
 # If we have an ssh-agent running, let's automatically set up our environment to use it
-#_ssh_agent_pid=`pidof ssh-agent`
-if [ "${SSH_AUTH_SOCK}" = "" ]; then
-  #export SSH_AGENT_PID="${_ssh_agent_pid}"
-  export SSH_AUTH_SOCK=`find "${HOME}/.ssh" -type s -name '*agent*' -print -quit`
+if [ -z "${SSH_AUTH_SOCK}" ]; then
+  SSH_AUTH_SOCK=$(find "${HOME}/.ssh" -type s -name '*agent*' -print -quit)
+  if [ -S "${SSH_AUTH_SOCK}" ]; then
+    export SSH_AUTH_SOCK
+  else
+    unset SSH_AUTH_SOCK
+  fi
 fi
-if [ "${SSH_AUTH_SOCK}" = "" ]; then
-  _ssh_dir=`find /tmp -mindepth 1 -maxdepth 1 -type d -name 'ssh*' -print -quit`
-  if [ -d "${_ssh_dir}" ]; then
-    export SSH_AUTH_SOCK=`find "${_ssh_dir}" -type s -name 'agent.*' -print -quit`
+if [ -z "${SSH_AUTH_SOCK}" ]; then
+  SSH_AUTH_SOCK=$(find /tmp -type s -name '*agent*' -print -quit)
+  if [ -S "${SSH_AUTH_SOCK}" ]; then
+    export SSH_AUTH_SOCK
+  else
+    unset SSH_AUTH_SOCK
   fi
 fi
