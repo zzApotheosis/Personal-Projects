@@ -26,13 +26,16 @@ export GPG_TTY=${TTY}
 
 # Declare Preferred Editor
 #export EDITOR="emacs"
-export EDITOR="nvim"
-#export EDITOR="hx"
+#export EDITOR="nvim"
+export EDITOR="hx"
 #export EDITOR="emacsclient -s ${HOME}/.emacs.d/.socket -c"
 
 # If we have an ssh-agent running, let's automatically set up our environment to use it
-_ssh_agent_pid=`pidof ssh-agent`
-if [ ! -z "${_ssh_agent_pid}" ]; then
-  export SSH_AGENT_PID="${_ssh_agent_pid}"
+#_ssh_agent_pid=`pidof ssh-agent`
+if [ "${SSH_AUTH_SOCK}" = "" ]; then
+  #export SSH_AGENT_PID="${_ssh_agent_pid}"
+  export SSH_AUTH_SOCK=`find "${HOME}/.ssh" -type s -name '*agent*' -print -quit`
+fi
+if [ "${SSH_AUTH_SOCK}" = "" ]; then
   export SSH_AUTH_SOCK=`find /tmp/ssh* -name 'agent.*' -print -quit`
 fi
