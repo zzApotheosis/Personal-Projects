@@ -41,7 +41,7 @@
          (xorshifted (logand (ash (logxor (ash oldstate -18)) -27) (n-bit-mask 32)))
          (rot (logand (ash oldstate -59) (n-bit-mask 32)))
          (result
-          (logior (ash xorshifted (- rot)) (ash xorshifted (logand (- rot) (n-bit-mask 5))))
+          (logand (logior (ash xorshifted (- rot)) (ash xorshifted (logand (- rot) (n-bit-mask 5)))) (n-bit-mask 32))
           )
          )
     (setf (rng-pcg-state rng) (logand (+ (* (rng-pcg-multiplier rng) oldstate) (logior 1 (rng-pcg-increment rng))) (n-bit-mask 64)))
