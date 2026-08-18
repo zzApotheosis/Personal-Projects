@@ -37,5 +37,8 @@ if [ "${SSH_AUTH_SOCK}" = "" ]; then
   export SSH_AUTH_SOCK=`find "${HOME}/.ssh" -type s -name '*agent*' -print -quit`
 fi
 if [ "${SSH_AUTH_SOCK}" = "" ]; then
-  export SSH_AUTH_SOCK=`find /tmp/ssh* -name 'agent.*' -print -quit`
+  _ssh_dir=`find /tmp -mindepth 1 -maxdepth 1 -type d -name 'ssh*' -print -quit`
+  if [ -d "${_ssh_dir}" ]; then
+    export SSH_AUTH_SOCK=`find "${_ssh_dir}" -type s -name 'agent.*' -print -quit`
+  fi
 fi
