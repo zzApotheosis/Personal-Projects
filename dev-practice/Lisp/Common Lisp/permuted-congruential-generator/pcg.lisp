@@ -32,10 +32,8 @@
   )
 
 (defun pcg32-random (rng)
-  ;; If an invalid instance is passed into this function...
-  ;; Tell the user they are a fuckin idiot.
   (when (not (rng-pcg-p rng))
-    (error "You fuckin idiot.")
+    (error "Not a rng-pcg object.")
     )
   (let* ((oldstate (rng-pcg-state rng))
          (xorshifted (logand (ash (logxor (ash oldstate -18)) -27) (n-bit-mask 32)))
