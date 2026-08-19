@@ -88,3 +88,39 @@
     (format t "Error: ~a~%" e)
     )
   )
+
+;; These are macros that other languages provide, but
+;; Common Lisp leaves the implementation to the programmer
+(defmacro += (var &rest args)
+  (if (= 0 (length args))
+      var
+      `(setf ,var (+ ,var ,@args))
+      )
+  )
+#|
+Usage:
+(let ((n 0))
+(+= n 1)
+(assert (= 1 n))
+(+= n)
+(assert (= 1 n))
+)
+|#
+
+
+(defmacro -= (var &rest args)
+  (if (= 0 (length args))
+      var
+      `(setf ,var (- ,var ,@args))
+      )
+  )
+#|
+Usage:
+(let ((n 7))
+(-= n 1)
+(assert (= 6 n))
+(-= n)
+(assert (= 6 n))
+)
+|#
+
