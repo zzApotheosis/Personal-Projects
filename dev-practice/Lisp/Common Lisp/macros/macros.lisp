@@ -89,24 +89,40 @@
     )
   )
 
-;; These are macros that other languages provide, but
-;; Common Lisp leaves the implementation to the programmer
+#|
+These are macros that other languages provide, but
+Common Lisp leaves the implementation to the programmer
+
+For example, this would be the equivalent in C:
+
+unsigned int i = 0;
+i += 1;
+
+And this macro in Common Lisp:
+(let ((i 0))
+(+= i 1))
+
+The Common Lisp macro, which didn't exist before defining it,
+expands to this code:
+(let ((i 0))
+(setf i (+ i 1)))
+
+But the powerful part of the Common Lisp macro is that
+it is not limited to a single operand. We can pass as
+many arguments to the += macro as we want, and they can
+even be function calls themselves.
+
+(let ((i 0))
+(+= i 1 2 3 (expt 2 8))
+(assert (= 262 i)))
+|#
+
 (defmacro += (var &rest args)
   (if (= 0 (length args))
       var
       `(setf ,var (+ ,var ,@args))
       )
   )
-#|
-Usage:
-(let ((n 0))
-(+= n 1)
-(assert (= 1 n))
-(+= n)
-(assert (= 1 n))
-)
-|#
-
 
 (defmacro -= (var &rest args)
   (if (= 0 (length args))
@@ -114,13 +130,4 @@ Usage:
       `(setf ,var (- ,var ,@args))
       )
   )
-#|
-Usage:
-(let ((n 7))
-(-= n 1)
-(assert (= 6 n))
-(-= n)
-(assert (= 6 n))
-)
-|#
 
