@@ -3,8 +3,6 @@
   (:export
    #:rng-pcg-with
    #:pcg32-random
-   ;;#'pcg32
-   ;;#'pcg-init
    )
   )
 
@@ -21,7 +19,7 @@
   )
 
 (defun rng-pcg-with (&key state multiplier increment)
-  (make-rng-pcg :state (if state state +default-state+)
+  (make-rng-pcg :state (if state state (+ (if increment increment +default-increment+) +default-state+))
                 :multiplier (if multiplier multiplier +default-multiplier+)
                 :increment (if increment increment +default-increment+)
                 )
@@ -32,17 +30,28 @@
   )
 
 (defun pcg32-random (rng)
-  (when (not (rng-pcg-p rng))
+  (unless (rng-pcg-p rng)
     (error "Not a rng-pcg object.")
     )
   (let* ((oldstate (rng-pcg-state rng))
-         (xorshifted (logand (ash (logxor (ash oldstate -18)) -27) (n-bit-mask 32)))
+         (xorshifted (logand (ash (logxor (ash oldstate -18) oldstate) -27) (n-bit-mask 32)))
          (rot (logand (ash oldstate -59) (n-bit-mask 32)))
          (result
-          (logand (logior (ash xorshifted (- rot)) (ash xorshifted (logand (- rot) (n-bit-mask 5)))) (n-bit-mask 32))
+          (logand
+           (logior
+            (ash xorshifted (- rot))
+            (ash xorshifted (logand
+                             (- (ash 1 32) rot)
+                             (n-bit-mask 5))))
+           (n-bit-mask 32)
+           )
           )
          )
-    (setf (rng-pcg-state rng) (logand (+ (* (rng-pcg-multiplier rng) oldstate) (logior 1 (rng-pcg-increment rng))) (n-bit-mask 64)))
+    (setf (rng-pcg-state rng) (logand
+                               (+ (* (rng-pcg-multiplier rng)
+                                     oldstate)
+                                  (logior 1 (rng-pcg-increment rng)))
+                               (n-bit-mask 64)))
     result
     )
   )
