@@ -10,9 +10,9 @@
 
 (in-package #:pcg)
 
-(defparameter +default-state+ 0) ;; This can be any number
-(defparameter +default-multiplier+ 6364136223846793005) ;; This must be congruent to 1 mod 4
-(defparameter +default-increment+ 1442695040888963407)  ;; This must be an odd number
+(defconstant +default-state+ 0) ;; This can be any number
+(defconstant +default-multiplier+ 6364136223846793005) ;; This must be congruent to 1 mod 4
+(defconstant +default-increment+ 1442695040888963407)  ;; This must be an odd number
 
 (defstruct rng-pcg
   state
