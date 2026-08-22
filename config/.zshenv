@@ -107,3 +107,6 @@ if [ -z "${SSH_AUTH_SOCK-}" ]; then
         unset SSH_AUTH_SOCK
     fi
 fi
+
+# Declare umask
+umask 0077
