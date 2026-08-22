@@ -1,0 +1,24 @@
+;; This file is evaluated when SBCL starts!
+
+(defmacro += (n &rest args)
+  "Adds the arguments to n in-place."
+  `(setf ,n (+ ,n ,@args))
+  )
+
+(defmacro -= (n &rest args)
+  "Subtracts the arguments from n in-place."
+  (if (= 0 (length args))
+      n
+      `(setf ,n (- ,n ,@args))
+      )
+  )
+
+(defmacro with-bit-mask (bit-mask expr)
+  "Applies a bit mask to the given expression."
+  `(logand ,bit-mask ,expr)
+  )
+
+(defmacro with-n-bit-mask (n expr)
+  "Applies an n-bit mask to the given expression."
+  `(with-bit-mask (1- (ash 1 ,n)) ,expr)
+  )
