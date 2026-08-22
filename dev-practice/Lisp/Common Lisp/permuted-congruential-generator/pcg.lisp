@@ -3,16 +3,14 @@
   (:export
    #:rng-pcg-with
    #:pcg32-random
-   #:with-n-bit-mask
-   #:with-bit-mask
    )
   )
 
 (in-package #:pcg)
 
-(defconstant +default-state+ 0) ;; This can be any number
+(defconstant +default-state+      8890130078224868686) ;; This can be any number
 (defconstant +default-multiplier+ 6364136223846793005) ;; This must be congruent to 1 mod 4
-(defconstant +default-increment+ 1442695040888963407)  ;; This must be an odd number
+(defconstant +default-increment+  1442695040888963407) ;; This must be an odd number
 
 (defstruct rng-pcg
   state
@@ -27,24 +25,19 @@
                 )
   )
 
-(defun n-bit-mask (n)
-  (1- (expt 2 n))
-  )
-
-(defmacro with-n-bit-mask (n expr)
-  "Applies an N bit mask to the result of the expression."
-  `(logand (n-bit-mask ,n) ,expr)
-  )
-
 (defmacro with-bit-mask (bit-mask expr)
   "Applies a bit mask to the result of the expression."
   `(logand ,bit-mask ,expr)
   )
 
+(defmacro with-n-bit-mask (n expr)
+  "Applies an N bit mask to the result of the expression."
+  `(with-bit-mask (1- (ash 1 ,n)) ,expr)
+  )
+
 (defun pcg32-random (rng)
   (unless (rng-pcg-p rng)
-    (error "Not a rng-pcg object.")
-    )
+    (error "Not a rng-pcg object."))
   (let* ((oldstate (rng-pcg-state rng))
          (xorshifted (with-n-bit-mask 32 (ash (logxor (ash oldstate -18) oldstate) -27)))
          (rot (with-n-bit-mask 32 (ash oldstate -59)))
