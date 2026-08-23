@@ -22,3 +22,13 @@
   "Applies an n-bit mask to the given expression."
   `(with-bit-mask (1- (ash 1 ,n)) ,expr)
   )
+
+(defmacro unlet (&rest args)
+  "Unbinds the given variables and removes their symbols from the current package."
+  `(dolist (item ',args)
+     (when (boundp item)
+       (makunbound item) ; Unbind symbol
+       (unintern item)   ; Remove symbol
+       )
+     )
+  )
