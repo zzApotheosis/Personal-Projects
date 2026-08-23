@@ -6,7 +6,6 @@
               pkg-installed-eldoc-p nil
               pkg-installed-erc-p nil
               pkg-installed-evil-p nil
-              pkg-installed-flycheck-p nil
               pkg-installed-goto-chg-p nil
               pkg-installed-magit-p nil
               pkg-installed-multishell-p nil
@@ -37,7 +36,6 @@
 		     "setup-dash.el"
                      "setup-eglot.el"
 		     "setup-evil.el"
-		     "setup-flycheck.el"
 		     "setup-goto-chg.el"
 		     "setup-magit.el"
 		     "setup-multishell.el"

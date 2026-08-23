@@ -15,8 +15,6 @@
               (eglot-ensure))
             (when pkg-installed-yasnippet-p
               (yas-minor-mode t))
-            (when pkg-installed-flycheck-p
-              (flycheck-mode t))
             (when pkg-installed-eldoc-box-p
               (eldoc-box-hover-at-point-mode t))
             ))
