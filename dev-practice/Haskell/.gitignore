@@ -1,0 +1,12 @@
+# Ignore everything by default
+*
+
+# Do not ignore this file
+!/.gitignore
+
+# Do not ignore Haskell source code
+!*.hs
+
+# Do not ignore directories
+!*/
+
