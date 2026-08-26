@@ -11,7 +11,8 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z} r:|[._-]=* r:|=* l:|=*'
+#zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z} r:|[._-]=* r:|=* l:|=*'
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 bindkey '\e[A' history-search-backward
 bindkey '\e[B' history-search-forward
