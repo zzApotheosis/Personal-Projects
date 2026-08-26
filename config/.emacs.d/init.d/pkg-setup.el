@@ -25,6 +25,7 @@
 	      pkg-installed-cmake-mode-p nil
               pkg-installed-fish-mode-p nil
               pkg-installed-nushell-mode-p nil
+              pkg-installed-haskell-mode-p nil
               
               pkg-installed-fakepkg-p nil)
 
@@ -49,6 +50,7 @@
 		     "setup-d-mode.el"
 		     "setup-zig-mode.el"
 		     "setup-markdown-mode.el"
+                     "setup-haskell-mode.el"
 		     ))
       )
 
