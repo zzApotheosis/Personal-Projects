@@ -13,7 +13,6 @@
               pkg-installed-org-p nil
               pkg-installed-protobuf-p nil
               pkg-installed-rust-mode-p nil
-              pkg-installed-spacemacs-common-p nil
               pkg-installed-vertico-p nil
               pkg-installed-vterm-p nil
               pkg-installed-yasnippet-p nil
@@ -32,8 +31,7 @@
 (let (
       (pkg-setup-dir (concat user-emacs-directory "/init.d/pkg-setup.d/"))
       (user-pkgs-dir (concat user-emacs-directory "/pkgs/"))
-      (setup-files '("setup-spacemacs-theme.el"
-		     "setup-company.el"
+      (setup-files '("setup-company.el"
 		     "setup-dash.el"
                      "setup-eglot.el"
 		     "setup-evil.el"
