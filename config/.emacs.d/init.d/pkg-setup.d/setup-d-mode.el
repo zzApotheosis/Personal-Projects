@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package d-mode
   :ensure t)
 

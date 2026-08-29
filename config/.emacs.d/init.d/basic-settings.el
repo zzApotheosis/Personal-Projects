@@ -1,4 +1,4 @@
-;; These are the basic settings
+;; These are the basic settings  -*- lexical-binding: t; -*-
 (unless (display-graphic-p) (xterm-mouse-mode t))
 (setq-default inhibit-startup-screen t)
 (setq-default indent-tabs-mode nil)

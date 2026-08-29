@@ -1,4 +1,4 @@
-;; Create personal keybindings
+;; Create personal keybindings  -*- lexical-binding: t; -*-
 
 ;; All Evil related keybindings
 (when pkg-installed-evil-p

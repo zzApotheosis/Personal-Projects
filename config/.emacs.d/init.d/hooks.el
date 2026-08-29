@@ -1,4 +1,4 @@
-;; Define common hook for text-based buffers
+;; Define common hook for text-based buffers  -*- lexical-binding: t; -*-
 (add-hook 'text-mode-hook
           (lambda ()
             (when (display-graphic-p)

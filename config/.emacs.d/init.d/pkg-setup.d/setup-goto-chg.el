@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package goto-chg
   :ensure t)
 

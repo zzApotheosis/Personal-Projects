@@ -1,4 +1,5 @@
-(with-cd user-pkgs-dir
+;; -*- lexical-binding: t; -*-
+(with-cd (concat user-emacs-directory "/pkgs/")
 	 ;; Check for nim-mode
 	 (let (
 	       (repo-dir "nim-mode")
@@ -20,8 +21,8 @@
 	   )
 	 )
 
-(add-to-list 'load-path (concat user-pkgs-dir "/nim-mode/"))
-(add-to-list 'load-path (concat user-pkgs-dir "/commenter/"))
+(add-to-list 'load-path (concat user-emacs-directory "/pkgs/nim-mode/"))
+(add-to-list 'load-path (concat user-emacs-directory "/pkgs/commenter/"))
 
 (load "nim-mode")
 

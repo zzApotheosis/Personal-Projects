@@ -1,4 +1,4 @@
-;; Add C style, but default to gnu
+;; Add C style, but default to gnu  -*- lexical-binding: t; -*-
 (c-add-style "z"
 	     '("gnu"
 	       (c-basic-offset . 4)

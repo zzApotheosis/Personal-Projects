@@ -1,4 +1,4 @@
-;; Initialize GNU Emacs
+;; Initialize GNU Emacs  -*- lexical-binding: t; -*-
 (let (
       (init-dir (concat user-emacs-directory "/init.d/"))
       )

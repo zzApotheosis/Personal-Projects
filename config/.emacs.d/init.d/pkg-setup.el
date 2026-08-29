@@ -1,4 +1,4 @@
-;; Define variables to use later
+;; Define variables to use later  -*- lexical-binding: t; -*-
 (setq-default pkg-installed-company-p nil
               pkg-installed-compat-p nil
               pkg-installed-dash-p nil

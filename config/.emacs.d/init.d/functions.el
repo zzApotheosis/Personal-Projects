@@ -1,4 +1,4 @@
-;; A function to toggle-off all recognized themes
+;; A function to toggle-off all recognized themes  -*- lexical-binding: t; -*-
 (defun disable-all-themes ()
   "A function to disable all currently recognized themes."
   (interactive)
