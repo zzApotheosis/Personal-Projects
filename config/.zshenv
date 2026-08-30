@@ -110,3 +110,8 @@ fi
 
 # Declare umask
 umask 0077
+
+# Set up FNM if available
+if command -v fnm > /dev/null 2>&1; then
+    eval $(fnm env)
+fi
