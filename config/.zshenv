@@ -54,6 +54,7 @@ path_add()
 
 
 # Customize PATH
+path_add prepend "${HOME-}/node_modules/.bin"
 path_add prepend "${HOME-}/.cargo/bin"
 path_add prepend "${HOME-}/.local/bin"
 unset -f path_add
