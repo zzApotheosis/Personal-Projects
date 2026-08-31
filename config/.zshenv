@@ -77,12 +77,8 @@ export HOSTLD="lld"
 export HOSTLD="ld.lld"
 
 # GnuPG TTY
-if [ -z "${GPG_TTY-}" ] && [ -n "${TTY-}" ]; then
-    export GPG_TTY="${TTY}"
-fi
-if [ -z "${GPG_TTY-}" ]; then
-    export GPG_TTY="$(tty)"
-fi
+[ -z "${GPG_TTY-}" ] && [ -n "${TTY-}" ] && export GPG_TTY="${TTY}"
+[ -z "${GPG_TTY-}" ] && export GPG_TTY="$(tty)"
 
 # Declare Preferred Editor
 #export EDITOR="emacs"
@@ -113,6 +109,4 @@ fi
 umask 0077
 
 # Set up FNM if available
-if command -v fnm > /dev/null 2>&1; then
-    eval $(fnm env)
-fi
+command -v fnm > /dev/null 2>&1 && eval $(fnm env)
