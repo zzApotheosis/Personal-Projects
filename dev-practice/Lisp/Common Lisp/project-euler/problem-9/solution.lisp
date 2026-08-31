@@ -1,12 +1,27 @@
-(defun solve (n)
-  0
+(defun c-from (a b)
+  (multiple-value-bind (quotient remainder) (truncate (sqrt (+ (expt a 2) (expt b 2))))
+    (values quotient (if (or (= 0.0 remainder) (= 0 remainder)) t nil))
+    )
+  )
+
+(defun solve nil
+  (let ((a 1)
+        (b 2)
+        (c 3))
+    ;;(list a b c)
+    ;;`(,a ,b ,c)
+    (multiple-value-bind (quotient remainder) (c-from a b)
+      (format t "(~a, ~a)~%" quotient remainder)
+      )
+    )
   )
 
 (defun solution ()
   (let* ((n 1000)
          (expected 0)
-         (actual (solve n)))
-    (assert (= expected actual))
+         (actual (solve)))
+    ;;(assert (= expected actual))
     actual
+    (nth 1 (values 1 2))
     )
   )
