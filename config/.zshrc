@@ -18,20 +18,18 @@ bindkey '\e[A' history-search-backward
 bindkey '\e[B' history-search-forward
 
 # Personal aliases
-if [ -z "$(alias c       > /dev/null 2>&1)" ]; then alias c="clear"; fi
-if [ -z "$(alias ls      > /dev/null 2>&1)" ]; then alias ls="ls --color=auto"; fi
-if [ -z "$(alias l       > /dev/null 2>&1)" ]; then alias l="ls -lah"; fi
-if [ -z "$(alias grep    > /dev/null 2>&1)" ]; then alias grep="grep --color=auto"; fi
-if [ -z "$(alias edit    > /dev/null 2>&1)" ]; then alias edit="${EDITOR}"; fi
-if [ -z "$(alias e       > /dev/null 2>&1)" ]; then alias e="edit"; fi
-if [ -z "$(alias ec      > /dev/null 2>&1)" ]; then alias ec="emacsclient -c"; fi
-if [ -z "$(alias ecnw    > /dev/null 2>&1)" ]; then alias ecnw="emacsclient -c -nw"; fi
+alias c > /dev/null 2>&1 || alias c='clear'
+alias ls > /dev/null 2>&1 || alias ls="ls --color=auto"
+alias l > /dev/null 2>&1 || alias l="ls -lah"
+alias grep > /dev/null 2>&1 || alias grep="grep --color=auto"
+alias edit > /dev/null 2>&1 || alias edit="${EDITOR}"
+alias e > /dev/null 2>&1 || alias e="edit"
+alias ec > /dev/null 2>&1 || alias ec="emacsclient -c"
+alias ecnw > /dev/null 2>&1 || alias ecnw="emacsclient -c -nw"
 
-# Update alias if lsd is installed
-lsd --version &> /dev/null
-if [ $? -eq 0 ]; then
-    alias l="lsd -lah"
-fi
+# Set aliases if utilities/commands are available
+command -v lsd > /dev/null 2>&1 && alias l='lsd -lah'
+command -v rlwrap > /dev/null 2>&1 && command -v sbcl > /dev/null 2>&1 && alias sbcl='rlwrap sbcl'
 
 # Starship!
-eval "$(starship init zsh)"
+command -v starship > /dev/null 2>&1 && eval "$(starship init zsh)"
