@@ -1,1 +1,1 @@
-(.println System/out "Hello, world! This is Clojure!")
+(println "Hello, world! This is Clojure!")
