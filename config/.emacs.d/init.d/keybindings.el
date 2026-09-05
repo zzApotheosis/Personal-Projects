@@ -47,3 +47,13 @@
                            (scroll-down-line 1)
                            (previous-line 1)
                            ))
+
+(keymap-global-set "C-M-y" (lambda ()
+                             "Emulate Vim's Ctrl-Y character insertion"
+                             (interactive)
+                             (insert-char (let ((col (current-column)))
+                                            (save-excursion
+                                              (forward-line -1)
+                                              (move-to-column col t)
+                                              (char-after (point))))))
+                   )

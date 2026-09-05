@@ -1,3 +1,18 @@
+# Oh My Zsh setup
+ZSH="$HOME/.oh-my-zsh"
+if [ -e $ZSH/oh-my-zsh.sh ]; then
+    export ZSH
+    plugins=(
+        git
+        zsh-autosuggestions
+        zsh-syntax-highlighting
+    )
+    source $ZSH/oh-my-zsh.sh
+else
+    # If Oh My Zsh is unavailable, let's set up the built-in zstyle matching regex
+    zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+fi
+
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=10000
@@ -10,9 +25,6 @@ zstyle :compinstall filename '/home/zzapotheosis/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
-
-#zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z} r:|[._-]=* r:|=* l:|=*'
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 bindkey '\e[A' history-search-backward
 bindkey '\e[B' history-search-forward
@@ -33,3 +45,4 @@ command -v rlwrap > /dev/null 2>&1 && command -v sbcl > /dev/null 2>&1 && alias 
 
 # Starship!
 command -v starship > /dev/null 2>&1 && eval "$(starship init zsh)"
+
