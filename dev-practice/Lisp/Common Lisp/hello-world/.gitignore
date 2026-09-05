@@ -1,4 +1,0 @@
-# Ignore all in this directory except the source file
-*
-!/.gitignore
-!/hello.lisp
