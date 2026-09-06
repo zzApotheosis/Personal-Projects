@@ -13,6 +13,14 @@ else
     zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 fi
 
+# SDKMAN!
+if [ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]; then
+    export SDKMAN_DIR="${HOME}/.sdkman"
+    source "$HOME/.sdkman/bin/sdkman-init.sh"
+else
+    printf "TODO\n" 1>&2
+fi
+
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=10000
