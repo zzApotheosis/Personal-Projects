@@ -108,5 +108,5 @@ fi
 # Declare umask
 umask 0077
 
-# Set up FNM if available
-command -v fnm > /dev/null 2>&1 && eval $(fnm env)
+# Set up Mise if available
+command -v mise > /dev/null 2>&1 && eval "$(mise activate zsh)"
