@@ -109,4 +109,4 @@ fi
 umask 0077
 
 # Set up Mise if available
-command -v mise > /dev/null 2>&1 && eval "$(mise activate zsh)"
+command -v mise > /dev/null 2>&1 && eval "$(mise activate)"
