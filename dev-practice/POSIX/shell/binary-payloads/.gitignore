@@ -1,0 +1,5 @@
+*
+!/.gitignore
+!/make-script.sh
+!/src/
+!/src/**
