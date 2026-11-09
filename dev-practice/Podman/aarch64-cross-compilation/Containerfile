@@ -1,0 +1,20 @@
+FROM docker.io/library/debian:stable
+
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends \
+      crossbuild-essential-arm64 \
+      gcc-aarch64-linux-gnu \
+      g++-aarch64-linux-gnu \
+      binutils-aarch64-linux-gnu \
+      libc6-dev-arm64-cross \
+      qemu-user \
+      make \
+      cmake \
+      ninja-build \
+      pkg-config \
+      ca-certificates \
+      file && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /work
