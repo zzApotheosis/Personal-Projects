@@ -55,10 +55,14 @@ main (int argc, char **argv)
           else
             {
               perror ("write error");
-              return EXIT_FAILURE;
+              goto fail;
             }
         }
     }
 
   return EXIT_SUCCESS;
+
+ fail:
+  close(fd);
+  return EXIT_FAILURE;
 }
