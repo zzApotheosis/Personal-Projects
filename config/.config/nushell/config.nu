@@ -21,13 +21,13 @@
 umask rwx------
 
 # Starship!
-if (which starship | is-not-empty) {
-    mkdir ($nu.data-dir | path join "vendor" "autoload")
-    starship init nu | save -f ($nu.data-dir | path join "vendor" "autoload" "starship.nu")
-}
+# if (which starship | is-not-empty) {
+#     mkdir ($nu.data-dir | path join "vendor" "autoload")
+#     starship init nu | save -f ($nu.data-dir | path join "vendor" "autoload" "starship.nu")
+# }
 
 # carapace-bin
-source ($nu.cache-dir | path join 'carapace.nu')
+# source ($nu.cache-dir | path join 'carapace.nu')
 
 # Interface to the system-wide lsd command
 def --wrapped lsd [...args] {
@@ -43,14 +43,14 @@ def --wrapped lsd [...args] {
 source ($nu.cache-dir | path join 'custom-aliases.nu')
 
 # Setup fnm environment (if installed)
-if (which fnm | is-not-empty) {
-    ^fnm env --json | from json | load-env
+# if (which fnm | is-not-empty) {
+#     ^fnm env --json | from json | load-env
 
-    $env.PATH = $env.PATH | prepend ($env.FNM_MULTISHELL_PATH | path join (if $nu.os-info.name == 'windows' {''} else {'bin'}))
-    $env.config.hooks.env_change.PWD = (
-        $env.config.hooks.env_change.PWD? | append {
-            condition: {|| ['.nvmrc' '.node-version', 'package.json'] | any {|el| $el | path exists}}
-            code: {|| ^fnm use --install-if-missing --silent-if-unchanged}
-        }
-    )
-}
+#     $env.PATH = $env.PATH | prepend ($env.FNM_MULTISHELL_PATH | path join (if $nu.os-info.name == 'windows' {''} else {'bin'}))
+#     $env.config.hooks.env_change.PWD = (
+#         $env.config.hooks.env_change.PWD? | append {
+#             condition: {|| ['.nvmrc' '.node-version', 'package.json'] | any {|el| $el | path exists}}
+#             code: {|| ^fnm use --install-if-missing --silent-if-unchanged}
+#         }
+#     )
+# }

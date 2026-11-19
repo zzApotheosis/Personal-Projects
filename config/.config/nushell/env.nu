@@ -59,21 +59,21 @@ if not ('LANG' in $env) {
 }
 
 # C Compiler
-$env.CC = 'clang'
-$env.CXX = 'clang++'
-#$env.LD = 'lld'
-$env.LD = 'ld.lld'
-$env.AR = 'llvm-ar'
-$env.NM = 'llvm-nm'
-$env.STRIP = 'llvm-strip'
-$env.OBJCOPY = 'llvm-objcopy'
-$env.OBJDUMP = 'llvm-objdump'
-$env.READELF = 'llvm-readelf'
-$env.HOSTCC = 'clang'
-$env.HOSTCXX = 'clang++'
-$env.HOSTAR = 'llvm-ar'
-$env.HOSTLD = 'lld'
-$env.HOSTLD = 'ld.lld'
+# $env.CC = 'clang'
+# $env.CXX = 'clang++'
+# $env.LD = 'lld'
+# $env.LD = 'ld.lld'
+# $env.AR = 'llvm-ar'
+# $env.NM = 'llvm-nm'
+# $env.STRIP = 'llvm-strip'
+# $env.OBJCOPY = 'llvm-objcopy'
+# $env.OBJDUMP = 'llvm-objdump'
+# $env.READELF = 'llvm-readelf'
+# $env.HOSTCC = 'clang'
+# $env.HOSTCXX = 'clang++'
+# $env.HOSTAR = 'llvm-ar'
+# $env.HOSTLD = 'lld'
+# $env.HOSTLD = 'ld.lld'
 
 # Set the GPG_TTY so gpg commands can be used in the terminal
 $env.GPG_TTY = (^tty | into string)
@@ -106,12 +106,12 @@ const aliases_file = ($nu.cache-dir | path join 'custom-aliases.nu')
 $alias_data | save --force $aliases_file
 
 # carapace-bin stuff
-const carapace_cache_file = ($nu.cache-dir | path join 'carapace.nu')
-if (which carapace | is-not-empty) {
-    $env.CARAPACE_BRIDGES = 'zsh,fish,bash' # optional
-    carapace _carapace nushell | save --force $carapace_cache_file
-} else {
-    # Touch an empty file if not available
-    '' | save --force $carapace_cache_file
-}
+# const carapace_cache_file = ($nu.cache-dir | path join 'carapace.nu')
+# if (which carapace | is-not-empty) {
+#     $env.CARAPACE_BRIDGES = 'zsh,fish,bash' # optional
+#     carapace _carapace nushell | save --force $carapace_cache_file
+# } else {
+#     # Touch an empty file if not available
+#     '' | save --force $carapace_cache_file
+# }
 
