@@ -45,9 +45,9 @@ def --env find-ssh-auth-sock [] {
 $env.EDITOR = 'hx'
 
 let paths = [
-    ($nu.home-dir | path join ".local/bin"), # User-installed local binaries
-    ($nu.home-dir | path join ".cargo/bin"), # User-installed Cargo/Rust binaries
     ($nu.home-dir | path join ".nimble/bin") # User-installed Nim binaries
+    ($nu.home-dir | path join ".cargo/bin"), # User-installed Cargo/Rust binaries
+    ($nu.home-dir | path join ".local/bin"), # User-installed local binaries
 ]
 for path in $paths {
     path add $path
