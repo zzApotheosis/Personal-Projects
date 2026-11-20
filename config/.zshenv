@@ -60,21 +60,21 @@ path_add prepend "${HOME-}/.local/bin"
 unset -f path_add
 
 # C Compiler
-export CC="clang"
-export CXX="clang++"
+# export CC="clang"
+# export CXX="clang++"
 #export LD="lld"
-export LD="ld.lld"
-export AR="llvm-ar"
-export NM="llvm-nm"
-export STRIP="llvm-strip"
-export OBJCOPY="llvm-objcopy"
-export OBJDUMP="llvm-objdump"
-export READELF="llvm-readelf"
-export HOSTCC="clang"
-export HOSTCXX="clang++"
-export HOSTAR="llvm-ar"
-export HOSTLD="lld"
-export HOSTLD="ld.lld"
+# export LD="ld.lld"
+# export AR="llvm-ar"
+# export NM="llvm-nm"
+# export STRIP="llvm-strip"
+# export OBJCOPY="llvm-objcopy"
+# export OBJDUMP="llvm-objdump"
+# export READELF="llvm-readelf"
+# export HOSTCC="clang"
+# export HOSTCXX="clang++"
+# export HOSTAR="llvm-ar"
+# export HOSTLD="lld"
+# export HOSTLD="ld.lld"
 
 # GnuPG TTY
 [ -z "${GPG_TTY-}" ] && [ -n "${TTY-}" ] && export GPG_TTY="${TTY}"
@@ -109,4 +109,4 @@ fi
 umask 0077
 
 # Set up Mise if available
-command -v mise > /dev/null 2>&1 && eval "$(mise activate)"
+# command -v mise > /dev/null 2>&1 && eval "$(mise activate)"
