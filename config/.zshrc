@@ -23,7 +23,8 @@ bindkey -e
 zstyle :compinstall filename '/home/zzapotheosis/.zshrc'
 
 autoload -Uz compinit
-compinit
+# The -i flag tells Zsh to silently ignore compinit failures
+compinit -i
 # End of lines added by compinstall
 
 bindkey '\e[A' history-search-backward
